@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto&display=swap" rel="stylesheet">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            font-family: 'Quicksand', 'Roboto';
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+            color: #212121;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
+        p {
+            font-family: 'Roboto';
+        }
+
+        .btn-large {
+            text-transform: none;
+            border-radius: 50px;
+            background-color: #0b6f8a;
+        }
+
+        .btn-nav {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: none;
+            border-radius: 50px;
+            height: 54px;
+            line-height: 50px;
+            padding: 0 28px;
+            border: #0b6f8a solid 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav style="background-color: white; height: 8rem;" class="z-depth-0">
+            <div class="nav-wrapper">
+                <a href="index.html" class="brand-logo"><img src="logo_black.svg" alt="" height="100%"></a>
+                <a href="#" data-target="mobile-sidenav" class="sidenav-trigger grey-text text-darken-4"
+                    style="margin: 40px 0 0 30px;"><i style="font-size: 40px;" class="material-icons">menu</i></a>
+                <ul class="left hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-left: 18rem;">
+                    <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;"
+                            href="prevozi.html">Poišči prevoz</a></li>
+                </ul>
+                <ul class="right hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-right: 4rem;">
+                    <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;"
+                            href="prevozi.html">Prijava</a></li>
+                    <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;"
+                            href="prevozi.html">Registracija</a></li>
+                </ul>
+            </div>
+        </nav>
+        <ul id="mobile-sidenav" class="sidenav">
+            <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;" href="">Prevozi</a></li>
+            <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;" href="">Prijava</a>
+            </li>
+            <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;" href="">O nas</a>
+            </li>
+        </ul>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <h5>Omejitve</h5>
+                <div class="chip" style="font-family: Roboto;">Posamezni izdelki</div>
+                <div class="chip" style="font-family: Roboto;">Količina: 10</div>
+                <div class="chip" style="font-family: Roboto;">Dolžina poti: 50km</div>
+                <div class="chip" style="font-family: Roboto;">Maksimalna cena: 10€/km</div>
+                <div class="chip" style="font-family: Roboto;">Datum naložitve: 25.6.2020</div>
+                <div class="chip" style="font-family: Roboto;">Čas naložitve: 8:00</div>
+                <div class="chip" style="font-family: Roboto;">Tip vozila: Dostavni kombi</div>
+            </div>
+            <div class="row">
+                <hr>
+            </div>
+            <div class="row">
+                <a href="" class="grey-text text-darken-4">
+                    <div class="col s12 grey lighten-3" style="padding: 15px; border-radius: 10px; margin-top: 10px;">
+                        <div class="row" style="margin-bottom: 0;">
+                            <div class="col m4 s12">
+                                <img src="https://picsum.photos/500/350?random=1" alt="" class="responsive-img">
+                            </div>
+                            <div class="col m8 s12">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h5>Podjetje d.o.o.</h5>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-family: Roboto;">
+                                    <div class="col m4 s6">
+                                        <span>Cena: 9,3€/km</span>
+                                    </div>
+                                    <div class="col m4 s6">
+                                        <span>Vozilo: Ford Transit</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-family: Roboto;">
+                                    <div class="col s12">
+                                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                                            doloremque recusandae impedit qui quia adipisci? Mollitia, vitae quam ad
+                                            laborum et vel sequi labore cupiditate provident, esse magni omnis
+                                            aspernatur?</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="grey-text text-darken-4">
+                    <div class="col s12 grey lighten-3" style="padding: 15px; border-radius: 10px; margin-top: 10px;">
+                        <div class="row" style="margin-bottom: 0;">
+                            <div class="col m4 s12">
+                                <img src="https://picsum.photos/500/350?random=2" alt="" class="responsive-img">
+                            </div>
+                            <div class="col m8 s12">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h5>Podjetje d.o.o.</h5>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-family: Roboto;">
+                                    <div class="col m4 s6">
+                                        <span>Cena: 9,3€/km</span>
+                                    </div>
+                                    <div class="col m4 s6">
+                                        <span>Vozilo: Ford Transit</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-family: Roboto;">
+                                    <div class="col s12">
+                                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                                            doloremque recusandae impedit qui quia adipisci? Mollitia, vitae quam ad
+                                            laborum et vel sequi labore cupiditate provident, esse magni omnis
+                                            aspernatur?</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="" class="grey-text text-darken-4">
+                    <div class="col s12 grey lighten-3" style="padding: 15px; border-radius: 10px; margin-top: 10px;">
+                        <div class="row" style="margin-bottom: 0;">
+                            <div class="col m4 s12">
+                                <img src="https://picsum.photos/500/350?random=3" alt="" class="responsive-img">
+                            </div>
+                            <div class="col m8 s12">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <h5>Podjetje d.o.o.</h5>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-family: Roboto;">
+                                    <div class="col m4 s6">
+                                        <span>Cena: 9,3€/km</span>
+                                    </div>
+                                    <div class="col m4 s6">
+                                        <span>Vozilo: Ford Transit</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-family: Roboto;">
+                                    <div class="col s12">
+                                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
+                                            doloremque recusandae impedit qui quia adipisci? Mollitia, vitae quam ad
+                                            laborum et vel sequi labore cupiditate provident, esse magni omnis
+                                            aspernatur?</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="row">
+                <div class="col s12 center-align">
+                    <span style="font-family: Roboto; font-size: 24px;">
+                        <u>1</u> <a class="grey-text text-darken-4" href="">2</a> <a class="grey-text text-darken-4"
+                            href="">3</a>
+                    </span>
+                    <i style="font-size: 20px;" class="material-icons">chevron_right</i>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer style="margin-top: 50px;">
+        <hr>
+        <div class="container grey-text text-darken-4">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5>Footer Content</h5>
+                    <p>You can use rows and columns here to organize your footer content.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5>Links</h5>
+                    <ul>
+                        <li><a href="#!">Link 1</a></li>
+                        <li><a href="#!">Link 2</a></li>
+                        <li><a href="#!">Link 3</a></li>
+                        <li><a href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright center-align">© 2020 Copyright Text</div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            $('select').formSelect();
+            $('.datepicker').datepicker();
+            $('.timepicker').timepicker();
+            $('.modal').modal();
+        });
+    </script>
+</body>
+
+</html>
