@@ -282,6 +282,49 @@ async function baza(){
     await knex('tovor').insert(tovor_pod)
     .then(() => console.log("Tovor podatki vstavljeni."))
     .catch((err) => {console.log(err); throw err});
+    const termin_pod = [
+        {datum_nalaganja: '2020-02-14', datum_dostave:'2020-02-15', tk_tovor: 3, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:2},
+        {datum_nalaganja: '2020-01-22', datum_dostave:'2020-01-22', tk_tovor: 2, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:1},
+        {datum_nalaganja: '2020-05-16', datum_dostave:'2020-05-17', tk_tovor: 1, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:3},
+        {datum_nalaganja: '2020-08-27', datum_dostave:'2020-08-27', tk_tovor: 4, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:4}
+    ]
+    await knex('termin').insert(termin_pod)
+    .then(() => console.log("Termin podatki vstavljeni."))
+    .catch((err) => {console.log(err); throw err});
+    const cenik_pod = [
+        {znesek: 130.00, tk_termin:1},
+        {znesek: 160.57, tk_termin:2},
+        {znesek: 70.61, tk_termin:3},
+        {znesek: 210.52, tk_termin:4}
+    ]
+    await knex('cenik').insert(cenik_pod)
+    .then(() => console.log("Cenik podatki vstavljeni."))
+    .catch((err) => {console.log(err); throw err});
+    const t_iskalec_pod = [
+        {naziv: 'fizicna oseba'},
+        {naziv: 'podjetje'}
+    ]
+    await knex('tip_iskalca').insert(t_iskalec_pod)
+    .then(() => console.log("Tip_iskalca podatki vstavljeni."))
+    .catch((err) => {console.log(err); throw err});
+    const iskalec_p_pod = [
+        {naziv: 'Janez Novak', davcna_st:83746234, tk_naslov:1, tk_tip_iskalca:1},
+        {naziv: 'Controleum', davcna_st: 34745745, tk_naslov:3, tk_tip_iskalca:2},
+        {naziv: 'Zidnak', davcna_st: 45746854, tk_naslov:4, tk_tip_iskalca:2},
+        {naziv: 'Avortium', davcna_st: 21323423, tk_naslov:2, tk_tip_iskalca:2},
+    ]
+    await knex('iskalec_prevoza').insert(iskalec_p_pod)
+    .then(() => console.log("Iskalec_prevoza podatki vstavljeni."))
+    .catch((err) => {console.log(err); throw err});
+    const t_h_i_p_pod = [
+        {datum_od: '2013-01-16', tk_tovor:1, tk_iskalec_prevoza:1},
+        {datum_od: '2013-01-16', tk_tovor:2, tk_iskalec_prevoza:2},
+        {datum_od: '2013-01-16', tk_tovor:3, tk_iskalec_prevoza:3},
+        {datum_od: '2013-01-16', tk_tovor:4, tk_iskalec_prevoza:4},
+    ]
+    await knex('tovor_has_iskalec_prevoza').insert(t_h_i_p_pod)
+    .then(() => console.log("Tovor_has vstavljeni."))
+    .catch((err) => {console.log(err); throw err});
 
     knex.destroy;
 }
