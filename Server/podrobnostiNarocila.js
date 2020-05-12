@@ -27,7 +27,7 @@ var termin = bookshelf.Model.extend({
 
 app.get('/podrobnostiNarocil', async(req, res, next) => {
     try {
-        let termini = await new  termin().fetchAll();
+        let termini = await new termin().fetchAll();
         res.json(termini.toJSON());        
     } catch (error) {
         res.status(500).json(error);
@@ -36,8 +36,8 @@ app.get('/podrobnostiNarocil', async(req, res, next) => {
 
 app.get('/podrobnostiNarocil/:id', async(req, res, next) => {
     try {
-        let id_iskalca = req.param.id;
-        let termini = await new  termin({id: id_iskalca}).fetch();
+        let id_iskalca = req.params.id;
+        let termini = await new termin({id: id_iskalca}).fetch();
         res.json(termini.toJSON());        
     } catch (error) {
         res.status(500).json(error);
