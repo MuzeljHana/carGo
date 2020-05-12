@@ -149,7 +149,7 @@ async function baza(){
     await knex.schema.createTable('iskalec_prevoza', (table) => {
         table.increments('id');
         table.string('naziv').notNullable()
-        table.decimal('davcna_st').notNullable().unique()
+        table.integer('davcna_st').notNullable().unique()
 
         table.integer('tk_naslov').references('id').inTable('naslov')
         table.integer('tk_tip_iskalca').references('id').inTable('tip_iskalca')
@@ -284,10 +284,10 @@ async function baza(){
     .then(() => console.log("Tip_iskalca podatki vstavljeni."))
     .catch((err) => {console.log(err); throw err});
     const iskalec_p_pod = [
-        {naziv: 'Janez Novak', davcna_st:83746234, tk_naslov:1, tk_tip_iskalca:1},
-        {naziv: 'Controleum', davcna_st: 34745745, tk_naslov:3, tk_tip_iskalca:2},
-        {naziv: 'Zidnak', davcna_st: 45746854, tk_naslov:4, tk_tip_iskalca:2},
-        {naziv: 'Avortium', davcna_st: 21323423, tk_naslov:2, tk_tip_iskalca:2},
+        {naziv: 'Janez Novak', davcna_st:985673452, tk_naslov:1, tk_tip_iskalca:1},
+        {naziv: 'Controleum', davcna_st: 985673454, tk_naslov:3, tk_tip_iskalca:2},
+        {naziv: 'Zidnak', davcna_st: 985673450, tk_naslov:4, tk_tip_iskalca:2},
+        {naziv: 'Avortium', davcna_st: 985673451, tk_naslov:2, tk_tip_iskalca:2},
     ]
     await knex('iskalec_prevoza').insert(iskalec_p_pod)
     .then(() => console.log("Iskalec_prevoza podatki vstavljeni."))
