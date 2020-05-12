@@ -19,7 +19,14 @@ var uporabnik = bookshelf.Model.extend({
     tableName: 'iskalec_prevoza',
     idAttribute: 'id'
 });
-
+ var povezava =bookshelf.Model.extend({
+     tableName: 'tovor_has_iskalec_prevoza',
+     idAttribute: 'id'
+});
+var tovor = bookshelf.Model.extend({
+    tableName: 'tovor',
+    idAttribute: 'id'
+});
 var termin = bookshelf.Model.extend({
     tableName: 'termin',
     idAttribute: 'id'
