@@ -15,6 +15,11 @@ var knex = require('knex')({
 
 const bookshelf = require('bookshelf')(knex)
 
+var uporabnik = bookshelf.Model.extend({
+    tableName: 'iskalec_prevoza',
+    idAttribute: 'id'
+});
+
 var termin = bookshelf.Model.extend({
     tableName: 'termin',
     idAttribute: 'id'
@@ -23,6 +28,16 @@ var termin = bookshelf.Model.extend({
 app.get('/podrobnostiNarocil', async(req, res, next) => {
     try {
         let termini = await new  termin().fetchAll();
+        res.json(termini.toJSON());        
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+app.get('/podrobnostiNarocil/:id', async(req, res, next) => {
+    try {
+        let id_iskalca = req.param.id;
+        let termini = await new  termin({id: id_iskalca}).fetch();
         res.json(termini.toJSON());        
     } catch (error) {
         res.status(500).json(error);
