@@ -82,7 +82,7 @@ async function baza(){
     await knex.schema.createTable('prevozno_sredstvo', (table) => {
         table.increments('id');
         table.string('registracijska_st').notNullable()
-        table.decimal('max_teza', [4], [2]).notNullable()
+        table.decimal('max_teza', [8], [2]).notNullable()
         table.decimal('cena', [4], [2]).notNullable()
         table.boolean('potrdilo_izpravnosti').notNullable()
         table.boolean('aktivnost').notNullable()
@@ -143,9 +143,7 @@ async function baza(){
     .catch((err) => {console.log(err); throw err});
     await knex.schema.createTable('tip_iskalca', (table) => {
         table.increments('id');
-        table.decimal('znesek').notNullable()
-
-        table.integer('tk_termin').references('id').inTable('termin')
+        table.enum('naziv',['fizicna oseba', 'podjetje']).notNullable() 
     }).then(() => console.log("tip_iskalca tabela narejena."))
     .catch((err) => {console.log(err); throw err});
     await knex.schema.createTable('iskalec_prevoza', (table) => {
@@ -159,6 +157,8 @@ async function baza(){
     .catch((err) => {console.log(err); throw err});
     await knex.schema.createTable('tovor_has_iskalec_prevoza', (table) => {
         table.increments('id');
+        table.date('datum_od').notNullable()
+        table.date('datum_do')
     
         table.integer('tk_tovor').references('id').inTable('tovor')
         table.integer('tk_iskalec_prevoza').references('id').inTable('iskalec_prevoza')
