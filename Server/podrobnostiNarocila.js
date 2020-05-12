@@ -1,0 +1,32 @@
+var express = require('express');
+var app = express();
+
+app.use(express.urlencoded({extended:false}));
+
+var knex = require('knex')({
+    client: 'mysql',
+    connection: {
+        host:   '127.0.0.1',
+        user:   'root',
+        password:   'geslo123',
+        database:   'cargo'
+    }
+});
+
+const bookshelf = require('bookshelf')(knex)
+
+var termin = bookshelf.Model.extend({
+    tableName: 'termin',
+    idAttribute: 'id'
+});
+
+app.get('/podrobnostiNarocil', async(req, res, next) => {
+    try {
+        let termini = await new  termin().fetchAll();
+        res.json(termini.toJSON());        
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+app.listen(3000);
