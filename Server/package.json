@@ -1,0 +1,20 @@
+{
+  "name": "cargo",
+  "version": "1.0.0",
+  "description": "carGo back-end",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bookshelf": "^1.1.1",
+    "express": "^4.17.1",
+    "knew": "0.0.0",
+    "mysql": "^2.18.1"
+  }
+}
