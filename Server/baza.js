@@ -134,12 +134,6 @@ async function baza(){
         table.integer('tk_prevozno_sredstvo').references('id').inTable('prevozno_sredstvo')
     }).then(() => console.log("termin tabela narejena."))
     .catch((err) => {console.log(err); throw err});
-    const termin_pod = [
-        {naziv: 'kombi'},
-        {naziv: 'tovornjak razsut tovor'},
-        {naziv: 'tovornjak blago'},
-        {naziv: 'izredni prevoz'}
-    ]
     await knex.schema.createTable('cenik', (table) => {
         table.increments('id');
         table.decimal('znesek').notNullable()
@@ -147,12 +141,6 @@ async function baza(){
         table.integer('tk_termin').references('id').inTable('termin')
     }).then(() => console.log("cenik tabela narejena."))
     .catch((err) => {console.log(err); throw err});
-    const cenik_pod = [
-        {naziv: 'kombi'},
-        {naziv: 'tovornjak razsut tovor'},
-        {naziv: 'tovornjak blago'},
-        {naziv: 'izredni prevoz'}
-    ]
     await knex.schema.createTable('tip_iskalca', (table) => {
         table.increments('id');
         table.decimal('znesek').notNullable()
@@ -160,12 +148,6 @@ async function baza(){
         table.integer('tk_termin').references('id').inTable('termin')
     }).then(() => console.log("tip_iskalca tabela narejena."))
     .catch((err) => {console.log(err); throw err});
-    const t_iskalec_pod = [
-        {naziv: 'kombi'},
-        {naziv: 'tovornjak razsut tovor'},
-        {naziv: 'tovornjak blago'},
-        {naziv: 'izredni prevoz'}
-    ]
     await knex.schema.createTable('iskalec_prevoza', (table) => {
         table.increments('id');
         table.string('naziv').notNullable()
@@ -175,12 +157,6 @@ async function baza(){
         table.integer('tk_tip_iskalca').references('id').inTable('tip_iskalca')
     }).then(() => console.log("iskalec_prevoza tabela narejena."))
     .catch((err) => {console.log(err); throw err});
-    const iskalec_p_pod = [
-        {naziv: 'kombi'},
-        {naziv: 'tovornjak razsut tovor'},
-        {naziv: 'tovornjak blago'},
-        {naziv: 'izredni prevoz'}
-    ]
     await knex.schema.createTable('tovor_has_iskalec_prevoza', (table) => {
         table.increments('id');
     
