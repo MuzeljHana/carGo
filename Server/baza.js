@@ -134,6 +134,7 @@ async function baza(){
         table.increments('id');
         table.date('datum_nalaganja').notNullable()
         table.date('datum_dostave').notNullable()
+        table.string('dodatne_pripombe')
         table.integer('tk_tovor').references('id').inTable('tovor')
         table.integer('tk_naslov').references('id').inTable('naslov')
         table.integer('tk_destinacija').references('id').inTable('destinacija')
@@ -278,10 +279,10 @@ async function baza(){
     .catch((err) => {console.log(err); throw err});
 
     const termin_pod = [
-        {datum_nalaganja: '2020-02-14', datum_dostave:'2020-02-15', tk_tovor: 3, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:2},
-        {datum_nalaganja: '2020-01-22', datum_dostave:'2020-01-22', tk_tovor: 2, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:1},
-        {datum_nalaganja: '2020-05-16', datum_dostave:'2020-05-17', tk_tovor: 1, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:3},
-        {datum_nalaganja: '2020-08-27', datum_dostave:'2020-08-27', tk_tovor: 4, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:4}
+        {datum_nalaganja: '2020-02-14', datum_dostave:'2020-02-15', dodatne_pripombe: "", tk_tovor: 3, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:2},
+        {datum_nalaganja: '2020-01-22', datum_dostave:'2020-01-22', dodatne_pripombe: "", tk_tovor: 2, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:1},
+        {datum_nalaganja: '2020-05-16', datum_dostave:'2020-05-17', dodatne_pripombe: "", tk_tovor: 1, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:3},
+        {datum_nalaganja: '2020-08-27', datum_dostave:'2020-08-27', dodatne_pripombe: "", tk_tovor: 4, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:4}
     ]
     await knex('termin').insert(termin_pod)
     .then(() => console.log("Termin podatki vstavljeni."))
