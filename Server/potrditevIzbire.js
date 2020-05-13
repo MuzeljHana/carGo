@@ -75,7 +75,7 @@ app.post('/potrdiIzbiro', async(req, res, next) => {
         let tabelaTovor = await new tovor().save(tovorPodatki);
 
         let tovorIskalecPrevozaPodatki = {
-            tovor_idtovor: req.body.idTovor,
+            tk_tovor: req.body.idTovor,
             tk_iskalec_prevoza: req.body.idIskalecPrevoza,
             datum_od: req.body.datumOd,
             datum_do: req.body.datumDo
@@ -83,14 +83,19 @@ app.post('/potrdiIzbiro', async(req, res, next) => {
         let tabelaTovorIskalecPrevoza = await new tovorIskalecPrevoza().save(tovorIskalecPrevozaPodatki);
 
         let terminPodatki = {
-            tovor_idtovor: req.body.idTovor,
-            naslov_idnaslov: req.body.idNaslov,
-            destinacija_iddestinacija: req.body.idDestinacija,
+            tk_tovor: req.body.idTovor,
+            tk_naslov: req.body.idNaslov,
+            tk_destinacija: req.body.idDestinacija,
             tk_prevozno_sredstvo: req.body.idPrevoznoSredstvo,
             datum_nalaganja: req.body.datumNalaganja,
             datum_dostave: req.body.datumDostave
         };
         let tabelaTermin = await new termin().save(terminPodatki);
+
+        let destinacijaPodatki = {
+            tk_naslov: req.body.tkidNaslov
+        };
+        let tabelaDestinacija = await new destinacija().save(destinacijaPodatki);
 
         let naslovPodatki = {
             tk_posta: req.body.idPosta,
