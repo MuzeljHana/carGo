@@ -35,7 +35,7 @@ app.post('/urediPonudnika', async(req, res, next) => {
         let prevozno_podjetjeData = {
             naziv: req.body.nazivPrevoznega_podjetja,
             davcna_st: req.body.davcna_stPrevoznega_podjetja,
-            zacetek_dolovanja: req.body.zacetek_dolovanjaPrevoznega_podjetja,
+            zacetek_delovanja: req.body.zacetek_delovanjaPrevoznega_podjetja,
             uspesnost_poslovanja: req.body.uspesnost_poslovanjaPrevoznega_podjetja,
             tk_naslov: req.body.idNaslov
         };
