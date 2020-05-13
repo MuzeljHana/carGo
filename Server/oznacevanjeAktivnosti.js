@@ -20,3 +20,17 @@ var prevozno_sredstvo = bookshelf.Model.extend({
     idAttribute: 'id'
 });
 
+pp.post('/oznaciAktivnost', async(req, res, next) => {
+    try {  
+        let prevozno_sredstvoDataAktivnosti= {
+            aktivnost: req.body.aktivnostPrevoznega_sredstva
+        }
+        let tabelaAktivnosti = await new prevozno_sredstvo().save(prevozno_sredstvoDataAktivnosti)
+
+        res.status(200).send("Aktivnost je bila uspešno označena!");
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+app.listen(3000);
