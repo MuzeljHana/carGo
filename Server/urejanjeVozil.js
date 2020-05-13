@@ -40,7 +40,7 @@ var znamka = bookshelf.Model.extend({
     idAttribute: 'id'
 });
 
-pp.post('/urediPonudnika', async(req, res, next) => {
+pp.post('/urediVozilo', async(req, res, next) => {
     try {
         let prevozno_podjetjeData = {
             naziv: req.body.nazivPrevoznega_podjetja,
