@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}carGo{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col m5 s12">
+            <h1>Iščeš transport?</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem
+                maxime sed iure nostrum earum ut quas obcaecati voluptatibus, nemo veniam fugit doloribus aut
+                qui
+                deserunt, exercitationem in voluptate quo nisi?</p>
+            <a href="/search" class="waves-effect waves-light btn-large" style="font-size: 20px; width: 100%;">Poglej
+                ponudbo<i class="material-icons right">chevron_right</i></a>
+        </div>
+        <div class="col m5 offset-m1 s12">
+            <img src="/images/truck.svg" class="responsive-img">
+        </div>
+    </div>
+    <div class="row" style="margin-top: 3rem;">
+        <div class="col m5 s12 hide-on-med-and-down">
+            <img src="/images/box.svg" class="responsive-img">
+        </div>
+        <div class="col m5 offset-m1 s12">
+            <h1>Ponujas transport?</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem
+                maxime sed iure nostrum earum ut quas obcaecati voluptatibus, nemo veniam fugit doloribus aut
+                qui deserunt, exercitationem in voluptate quo nisi?</p>
+            <a class="waves-effect waves-light btn-large" style="font-size: 20px; width: 100%;">Prijavi
+                se zdaj<i class="material-icons right">chevron_right</i></a>
+        </div>
+    </div>
+</div>
+{% endblock %}
