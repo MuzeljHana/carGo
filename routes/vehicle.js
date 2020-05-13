@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/:id', (req, res, next) => {
-    new table.Vozilo({ "id": req.params.id }).fetch()
+    new table.Vozilo({ id: req.params.id }).fetch()
         .then((vozilo) => {
             res.json(vozilo);
         })
