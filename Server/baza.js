@@ -134,6 +134,7 @@ async function baza(){
         table.increments('id');
         table.date('datum_nalaganja').notNullable()
         table.date('datum_dostave').notNullable()
+        table.string('dodatne_pripombe')
         table.integer('tk_tovor').references('id').inTable('tovor')
         table.integer('tk_naslov').references('id').inTable('naslov')
         table.integer('tk_destinacija').references('id').inTable('destinacija')
