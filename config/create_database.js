@@ -1,12 +1,6 @@
-var knex = require('knex')({
-    client: 'mysql',
-    connection: {
-        host: '127.0.0.1',
-        user: 'root',
-        password: 'geslo123',
-        database: 'cargo'
-    }
-});
+const path = require('path');
+process.chdir(path.dirname(__dirname));
+const knex = require('./database');
 
 async function baza(){
     await knex.schema.dropTableIfExists('posta')
@@ -326,6 +320,7 @@ async function baza(){
     .then(() => console.log("Tovor_has vstavljeni."))
     .catch((err) => {console.log(err); throw err});
 
-    knex.destroy;
+    knex.destroy();
 }
+
 baza();
