@@ -6,10 +6,10 @@ app.use(express.urlencoded({extended:false}));
 var knex = require('knex')({
     client: 'mysql',
     connection: {
-        host:   '127.0.0.1',
-        user:   'root',
-        password:   'geslo123',
-        database:   'cargo'
+        host: '127.0.0.1',
+        user: 'root',
+        password: 'geslo123',
+        database: 'cargo'
     }
 });
 
@@ -45,7 +45,6 @@ app.post('/urediStranko', async(req, res, next) => {
         };
         let tabelaIskalca_prevoza = await new iskalec_prevoza().save(iskalec_prevozaPodatki)
         
-
         let tip_iskalcaPodatki = {
             naziv: req.body.nazivTipa_Iskalca
         };
