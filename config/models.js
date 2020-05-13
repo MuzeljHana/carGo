@@ -32,5 +32,39 @@ module.exports = {
         idAttribute: 'id'
     }),
 
-    
+    Uporabnik: bookshelf.model('Uporabnik', {
+        tableName: 'iskalec_prevoza',
+        idAttribute: 'id'
+    }),
+
+    Tovor: bookshelf.model('Tovor', {
+        tableName: 'tovor',
+        idAttribute: 'id'
+    }),
+
+    Destinacija: bookshelf.model('Destinacija', {
+        tableName: 'destinacija',
+        idAttribute: 'id'
+    }),
+
+    Naslov: bookshelf.model('Naslov', {
+        tableName: 'naslov',
+        idAttribute: 'id'
+    }),
+
+    Posta: bookshelf.model('Posta', {
+        tableName: 'posta',
+        idAttribute: 'id'
+    }),
+
+    Cenik: bookshelf.model('Cenik', {
+        tableName: 'cenik',
+        idAttribute: 'id'
+    }),
+
+    Tip_tovora: bookshelf.model('Tip_tovora', {
+        tableName: 'tip_tovora',
+        idAttribute: 'id'
+    })
+
 }
