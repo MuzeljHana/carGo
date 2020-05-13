@@ -2,8 +2,8 @@ const table = require('../config/models');
 const express = require('express');
 const router = express.Router();
 
-router.get('/termini', function (req, res, next) {
-    table.Termin.fetchAll()
+router.get('/termini', (req, res, next) => {
+    new table.Termin().fetchAll()
         .then((termini) => {
             res.json(termini);
         })
