@@ -1,0 +1,28 @@
+html {
+    font-family: 'Quicksand', 'Roboto';
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    color: #212121;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+p {
+    font-family: 'Roboto';
+}
+
+.btn-large {
+    text-transform: none;
+    border-radius: 50px;
+}
+
+.btn {
+    text-transform: none;
+    border-radius: 50px;
+}
