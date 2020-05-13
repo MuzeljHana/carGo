@@ -37,33 +37,33 @@ var posta = bookshelf.Model.extend({
 
 app.post('/urediStranko', async(req, res, next) => {
     try {
-        let iskalec_prevozaPodatki = {
+        let iskalec_prevozaData = {
             naziv: req.body.nazivIskalca_prevoza,
             davcna_st: req.body.davcna_stIskalca_prevoza,
             tk_naslov: req.body.idNaslov,
             tk_tip_iskalca: req.body.idTip_iskalca
         };
-        let tabelaIskalca_prevoza = await new iskalec_prevoza().save(iskalec_prevozaPodatki)
+        let tabelaIskalca_prevoza = await new iskalec_prevoza().save(iskalec_prevozaData)
         
-        let tip_iskalcaPodatki = {
+        let tip_iskalcaData = {
             naziv: req.body.nazivTipa_Iskalca
         };
-        let iskalec_prevozaPodatki= await new tip_iskalca().save(tip_iskalcaPodatki)
+        let tabelaIskalca_prevoza= await new tip_iskalca().save(tip_iskalcaData)
 
-        let naslovPodatki = {
+        let naslovData = {
             tk_posta: req.body.idPosta,
             ulica: req.body.ulica,
             hisna_st: req.body.hisna_st
         };
-        let tabelaNaslov = await new naslov().save(naslovPodatki);
+        let tabelaNaslov = await new naslov().save(naslovData);
 
-        let postaPodatki = {
+        let postaData = {
             kraj: req.body.kraj,
             postna_st: req.body.postna_st
         };
-        let tabelaPosta = await new posta().save(postaPodatki);
+        let tabelaPosta = await new posta().save(postaData);
            
-        res.status(200).send("Stranka uspešno urejena.");
+        res.status(200).send("Stranka je bila uspešno urejena.");
     } catch (error) {
         res.status(500).json(error);
     }
