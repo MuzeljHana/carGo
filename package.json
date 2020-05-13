@@ -1,20 +1,30 @@
 {
   "name": "cargo",
-  "version": "1.0.0",
-  "description": "carGo back-end",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "version": "0.1.0",
+  "description": "Cargo transporation rent service",
+  "main": "cargo.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/tadejlahovnik/carGo.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/tadejlahovnik/carGo/issues"
+  },
+  "homepage": "https://gitlab.com/tadejlahovnik/carGo#readme",
   "dependencies": {
     "bookshelf": "^1.1.1",
     "express": "^4.17.1",
     "knex": "^0.21.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "nunjucks": "^3.2.1",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "sqlite3": "^4.2.0"
   }
 }
