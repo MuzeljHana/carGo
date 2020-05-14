@@ -16,7 +16,6 @@ router.get('/:id', async (req, res, next) => {
     let povezava;
     try{
         povezava = await new table.Povezava({tk_iskalec_prevoza: req.params.id}).fetch({columns: ['tk_tovor']});
-        console.log(povezava.get('tk_tovor'));
     } catch (err) {
         console.log(err);
         res.status(500).json({ "message": err });
