@@ -13,7 +13,7 @@ Clone the repository and install dependencies:
 ```
 $ git clone https://gitlab.com/tadejlahovnik/carGo.git
 $ cd carGo
-$ npm install --prduction
+$ npm install --production
 ```
 ## Usage
 Database back-end and http port can be changed from default values (database: `MySQL`, http port: `3000`) with environment variables `DATABASE` and `PORT`.
