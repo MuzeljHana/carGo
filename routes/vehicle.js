@@ -60,6 +60,16 @@ router.put('/:id/active/:bool', (req, res, next) => {
         });
 });
 
+router.put('/:id/occupied/:bool', (req, res, next) => {
+    new table.Vozilo({ id: req.params.id }).save({ zasedenost: req.params.bool })
+        .then(() => {
+            res.json({ "message": "success" });
+        })
+        .catch((err) => {
+            res.status(500).json({ "message": err });
+        });
+});
+
 router.delete('/:id', (req, res, next) => {
     new table.Vozilo({ id: req.params.id }).destroy()
         .then(() => {
