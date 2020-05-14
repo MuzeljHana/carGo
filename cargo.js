@@ -13,7 +13,8 @@ app.set('view engine', 'html');
 
 app.use(favicon('public/favicon.ico'));
 app.use(express.static('public'));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 require('./routes/_routes')(app);
 
