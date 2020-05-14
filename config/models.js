@@ -65,6 +65,11 @@ module.exports = {
     Tip_tovora: bookshelf.model('Tip_tovora', {
         tableName: 'tip_tovora',
         idAttribute: 'id'
+    }),
+    
+    Povezava: bookshelf.model('Povezava', {
+        tableName: 'tovor_has_iskalec_prevoza',
+        idAttribute: 'id'
     })
 
 }
