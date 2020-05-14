@@ -8,24 +8,26 @@ router.get('/:id', (req, res, next) => {
             res.json(vozilo);
         })
         .catch((err) => {
-            res.status(500).json(err);
+            res.status(500).json({ "message": err });
         });
 });
 
 router.post('/add', async (req, res, next) => {
+    let podjetje, tip, znamka, letnik;
     try {
-        let podjetje = await new table.Podjetje({ "naziv": req.body.podjetje }).fetch([columns = "id"]);
-        let tip = await new table.Tip_prevoza({ "naziv": req.body.tip }).fetch([columns = "id"]);
-        let znamka = await new table.Znamka({ "naziv": req.body.znamka }).fetch([columns = "id"]);
-        let letnik = await new table.Letnik({ "naziv": req.body.letnik }).fetch([columns = "id"]);
+        podjetje = await new table.Podjetje({ naziv: req.body.podjetje }).fetch({ columns: ['id'] });
+        tip = await new table.Tip_prevoza({ naziv: req.body.tip }).fetch({ columns: ['id'] });
+        znamka = await new table.Znamka({ naziv: req.body.znamka }).fetch({ columns: ['id'] });
+        letnik = await new table.Letnik({ naziv: req.body.letnik }).fetch({ columns: ['id'] });
     } catch (err) {
-        res.status(500).json(error);
+        console.log(err);
+        res.status(500).json({ "message": err });
     }
 
     let data = {
         registracijska_st: req.body.registracijska_st,
-        max_teza_tovora: req.body.max_teza_tovora,
-        cena_km: req.body.cena_km,
+        max_teza: req.body.max_teza_tovora,
+        cena: req.body.cena_km,
         potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
         aktivnost: req.body.aktivnost,
         zasedenost: req.body.zasedenost,
@@ -33,37 +35,38 @@ router.post('/add', async (req, res, next) => {
         dolzina: req.body.dolzina,
         sirina: req.body.sirina,
         visina: req.body.visina,
-        st_pelet: req.body.st_pelet,
-        tk_prevozno_podjetje: podjetje,
-        tk_znamka: znamka,
-        tk_tip_prevoza: tip,
-        tk_letnik: letnik
+        st_palet: req.body.st_pelet,
+        tk_prevozno_podjetje: podjetje.id,
+        tk_znamka: znamka.id,
+        tk_tip_prevoza: tip.id,
+        tk_letnik: letnik.id
     }
     new table.Vozilo().save(data).then(() => {
-        res.status(200);
+        res.json({ "message": "success" });
     }).catch((err) => {
-        res.status(500).json(err);
+        console.log(err);
+        res.status(500).json({ "message": err });
     });
 
 });
 
 router.put('/:id/active/:bool', (req, res, next) => {
-    new table.Vozilo({ id: req.params.id }).save({ aktivnost: req.params.bool }, { patch: true })
+    new table.Vozilo({ id: req.params.id }).save({ aktivnost: req.params.bool })
         .then(() => {
-            res.status(200);
+            res.json({ "message": "success" });
         })
         .catch((err) => {
-            res.status(500).json(err);
+            res.status(500).json({ "message": err });
         });
 });
 
 router.delete('/:id', (req, res, next) => {
     new table.Vozilo({ id: req.params.id }).destroy()
         .then(() => {
-            res.status(200);
+            res.json({ "message": "success" });
         })
         .catch((err) => {
-            res.status(500).json(error);
+            res.status(500).json({ "message": err });
         });
 });
 
