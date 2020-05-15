@@ -81,15 +81,17 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.post('/editVehicle', async(req, res, next) => {
+    let podjetje, vozilo, tip, znamka, letnik;
     try {
-        let prevozno_podjetjeData = {
-            naziv: req.body.nazivPrevoznega_podjetja,
-            davcna_st: req.body.davcna_stPrevoznega_podjetja,
-            zacetek_delovanja: req.body.zacetek_delovanjaPrevoznega_podjetja,
-            uspesnost_poslovanja: req.body.uspesnost_poslovanjaPrevoznega_podjetja,
-            tk_naslov: req.body.idNaslov
-        };
-        let tabelaPrevoznega_podjetja = await new Podjetje().save(prevozno_podjetjeData)
+        podjetje = await new table.Podjetje({ naziv: req.body.podjetje }).fetch({ columns: ['id'] });
+        vozilo = await new table.Vozilo({ naziv: req.body.vozilo }).fetch({ columns: ['id'] });
+        tip = await new table.Tip_prevoza({ naziv: req.body.tip }).fetch({ columns: ['id'] });
+        znamka = await new table.Znamka({ naziv: req.body.znamka }).fetch({ columns: ['id'] });
+        letnik = await new table.Letnik({ naziv: req.body.letnik }).fetch({ columns: ['id'] });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ "message": err });
+    }
         
         let prevozno_sredstvoData= {
             registracijska_st: req.body.registracijska_stPrevoznega_sredstva,
@@ -103,10 +105,18 @@ router.post('/editVehicle', async(req, res, next) => {
             sirina: req.body.sirinaPrevoznega_sredstva,
             visina: req.body.visinaPrevoznega_sredstva,
             st_pelet: req.body.st_peletPrevoznega_sredstva,
-            tk_znamka: req.body.idZnamka,
-            tk_tip_prevoza: req.body.idTip_prevoza,
-            tk_letnik: req.body.idLetnik
+            tk_znamka: znamka.get('id'),
+            tk_tip_prevoza: tip.get('id'),
+            tk_letnik: letnik.get('id'),
+            tk_prevozno_podjetje: podjetje.get('id')
         }
+        new table.Vozilo().save(data).then(() => {
+            res.json({ "message": "success" });
+        }).catch((err) => {
+            console.log(err);
+            res.status(500).json({ "message": err });
+        });
+        /*
         let tabelaPrevoznega_sredstva = await new Vozilo().save(prevozno_sredstvoData)
 
         let tip_prevozaData= {
@@ -128,19 +138,7 @@ router.post('/editVehicle', async(req, res, next) => {
     } catch (error) {
         res.status(500).json(error);
     }
-});
-
-router.post('/checkActivity', async(req, res, next) => {
-    try {  
-        let prevozno_sredstvoDataAktivnosti= {
-            aktivnost: req.body.aktivnostPrevoznega_sredstva
-        }
-        let tabelaAktivnosti = await new Vozilo().save(prevozno_sredstvoDataAktivnosti)
-
-        res.status(200).send("Activity was successfully checked.");
-    } catch (error) {
-        res.status(500).json(error);
-    }
+    */
 });
 
 module.exports = router;
