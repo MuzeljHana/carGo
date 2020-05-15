@@ -2,7 +2,7 @@ const table = require('../config/models');
 const express = require('express');
 const router = express.Router();
 
-router.post('/confirmation', async(req, res, next) => {
+router.post('/', async(req, res, next) => {
     try {
         let tipTovoraPodatki = {
             naziv: req.body.nazivTipaTovora
