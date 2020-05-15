@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - carGo{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h3>Vozila</h3>
+        </div>
+    </div>
+    <div class="row grey lighten-2" style="border-radius: 10px;">
+        <div class="input-field col s12">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">Iskanje</label>
+        </div>
+        <div class="col s12 grey lighten-3" style="min-height: 70vh; border-radius: 10px;">
+            <div class="row" style="margin-top: 15px;">
+                <div class="col s12 center-align">
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Dodaj vozilo</a>
+                </div>
+                <div id="modal1" class="modal">
+                    <div class="modal-content">
+                        <h4>Dodaj vozilo</h4>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="reg" type="text" class="validate">
+                                <label for="reg">Registracijska številka</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="znamka" type="text" class="validate">
+                                <label for="znamka">Znamka</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="letnik" type="text" class="validate">
+                                <label for="letnik">Letnik</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <select>
+                                    <option value="" disabled selected>Izberi</option>
+                                    <option value="kombi">Kombi</option>
+                                    <option value="Tovornjak razsut tovor">Tovornjak za razsut tovor</option>
+                                    <option value="Tovornjak blago">Tovornjak za blago</option>
+                                    <option value="izredni prevoz">Izredni prevoz</option>
+                                </select>
+                                <label>Tip vozila</label>
+                            </div>
+                            <div class="col s12">
+                                <hr>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="max_teza" type="text" class="validate">
+                                <label for="max_teza">Maksimalna teža tovora</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="cena" type="text" class="validate">
+                                <label for="cena">Cena na km</label>
+                            </div>
+
+                            <div class="hide">
+                                <div class="input-field col s6">
+                                    <input id="volumen" type="text" class="validate">
+                                    <label for="volumen">Volumen</label>
+                                </div>
+                            </div>
+
+                            <div class="hide">
+                                <div class="input-field col s6">
+                                    <input id="visina" type="text" class="validate">
+                                    <label for="visina">Višina tovora</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="dolzina" type="text" class="validate">
+                                    <label for="dolzina">Dolžina tovora</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="sirina" type="text" class="validate">
+                                    <label for="sirina">Širina tovora</label>
+                                </div>
+                            </div>
+
+                            <div class="col s6">
+                                <label>
+                                    <input type="checkbox" class="filled-in" checked="checked" />
+                                    <span>Aktivno</span>
+                                </label>
+                            </div>
+                            <div class="col s6">
+                                <label>
+                                    <input type="checkbox" class="filled-in">
+                                    <span>Potrjujem, da je vozilo izpravno</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                    </div>
+                </div>
+            </div>
+            <div id="vozila"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('.modal').modal();
+        $('select').formSelect();
+    });
+</script>
+<script src="/javascripts/vehicle.js"></script>
+{% endblock %}
