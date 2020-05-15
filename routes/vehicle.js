@@ -81,10 +81,9 @@ router.delete('/:id', (req, res, next) => {
 });
 
 router.post('/editVehicle', async(req, res, next) => {
-    let podjetje, vozilo, tip, znamka, letnik;
+    let podjetje, tip, znamka, letnik;
     try {
         podjetje = await new table.Podjetje({ naziv: req.body.podjetje }).fetch({ columns: ['id'] });
-        vozilo = await new table.Vozilo({ naziv: req.body.vozilo }).fetch({ columns: ['id'] });
         tip = await new table.Tip_prevoza({ naziv: req.body.tip }).fetch({ columns: ['id'] });
         znamka = await new table.Znamka({ naziv: req.body.znamka }).fetch({ columns: ['id'] });
         letnik = await new table.Letnik({ naziv: req.body.letnik }).fetch({ columns: ['id'] });
@@ -93,18 +92,19 @@ router.post('/editVehicle', async(req, res, next) => {
         res.status(500).json({ "message": err });
     }
         
-        let prevozno_sredstvoData= {
-            registracijska_st: req.body.registracijska_stPrevoznega_sredstva,
-            max_teza_tovora: req.body.max_teza_tovoraPrevoznega_sredstva,
-            cena_km: req.body.cena_kmPrevoznega_sredstva,
-            potrdilo_izpravnosti: req.body.potrdilo_izpravnostiPrevoznega_sredstva,
-            aktivnost: req.body.aktivnostPrevoznega_sredstva,
-            zasedenost: req.body.zasedenostPrevoznega_sredstva,
-            volumen: req.body.volumenPrevoznega_sredstva,
-            dolzina: req.body.dolzinaPrevoznega_sredstva,
-            sirina: req.body.sirinaPrevoznega_sredstva,
-            visina: req.body.visinaPrevoznega_sredstva,
-            st_pelet: req.body.st_peletPrevoznega_sredstva,
+        let data= {
+            id: req.body.vozilo,
+            registracijska_st: req.body.registracijska_st,
+            max_teza: req.body.max_teza_tovora,
+            cena: req.body.cena_km,
+            potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+            aktivnost: req.body.aktivnost,
+            zasedenost: req.body.zasedenost,
+            volumen: req.body.volumen,
+            dolzina: req.body.dolzina,
+            sirina: req.body.sirina,
+            visina: req.body.visina,
+            st_palet: req.body.st_pelet,
             tk_znamka: znamka.get('id'),
             tk_tip_prevoza: tip.get('id'),
             tk_letnik: letnik.get('id'),
