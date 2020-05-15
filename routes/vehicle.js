@@ -2,6 +2,16 @@ const table = require('../config/models');
 const express = require('express');
 const router = express.Router();
 
+router.get('/', (req, res, next) => {
+    new table.Vozilo().fetchAll()
+        .then((vozila) => {
+            res.json(vozila);
+        })
+        .catch((err) => {
+            res.status(500).json({ "message": err });
+        });
+});
+
 router.get('/:id', (req, res, next) => {
     new table.Vozilo({ id: req.params.id }).fetch()
         .then((vozilo) => {
