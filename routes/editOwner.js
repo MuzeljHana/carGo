@@ -11,20 +11,20 @@ router.post('/editOwner', async(req, res, next) => {
             uspesnost_poslovanja: req.body.uspesnost_poslovanjaPrevoznega_podjetja,
             tk_naslov: req.body.idNaslov
         };
-        let tabelaPrevoznega_podjetja = await new prevozno_podjetje().save(prevozno_podjetjeData)
+        let tabelaPrevoznega_podjetja = await new Podjetje().save(prevozno_podjetjeData)
         
         let naslovData = {
             tk_posta: req.body.idPosta,
             ulica: req.body.ulica,
             hisna_st: req.body.hisna_st
         };
-        let tabelaNaslov = await new naslov().save(naslovData);
+        let tabelaNaslov = await new Naslov().save(naslovData);
 
         let postaData = {
             kraj: req.body.kraj,
             postna_st: req.body.postna_st
         };
-        let tabelaPosta = await new posta().save(postaData);
+        let tabelaPosta = await new Posta().save(postaData);
            
         res.status(200).send("Ponudnik je bil uspešno urejen.");
     } catch (error) {
