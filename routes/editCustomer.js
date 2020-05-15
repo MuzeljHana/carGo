@@ -15,7 +15,7 @@ router.post('/editCustomer', async(req, res, next) => {
         let tip_iskalcaData = {
             naziv: req.body.nazivTipa_Iskalca
         };
-        let tabelaIskalca_prevoza= await new tip_iskalca().save(tip_iskalcaData)
+        let tabelaTip_iskalca = await new tip_iskalca().save(tip_iskalcaData)
 
         let naslovData = {
             tk_posta: req.body.idPosta,
