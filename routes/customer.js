@@ -10,7 +10,7 @@ router.post('/editCustomer', async(req, res, next) => {
             tk_naslov: req.body.idNaslov,
             tk_tip_iskalca: req.body.idTip_iskalca
         };
-        let tabelaIskalca_prevoza = await new Uporabnik().save(iskalec_prevozaData)
+        let tabelaIskalca_prevoza1 = await new Uporabnik().save(iskalec_prevozaData)
         
         let tip_iskalcaData = {
             naziv: req.body.nazivTipa_Iskalca
