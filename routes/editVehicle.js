@@ -11,7 +11,7 @@ router.post('/editVehicle', async(req, res, next) => {
             uspesnost_poslovanja: req.body.uspesnost_poslovanjaPrevoznega_podjetja,
             tk_naslov: req.body.idNaslov
         };
-        let tabelaPrevoznega_podjetja = await new prevozno_podjetje().save(prevozno_podjetjeData)
+        let tabelaPrevoznega_podjetja = await new Podjetje().save(prevozno_podjetjeData)
         
         let prevozno_sredstvoData= {
             registracijska_st: req.body.registracijska_stPrevoznega_sredstva,
@@ -29,22 +29,22 @@ router.post('/editVehicle', async(req, res, next) => {
             tk_tip_prevoza: req.body.idTip_prevoza,
             tk_letnik: req.body.idLetnik
         }
-        let tabelaPrevoznega_sredstva = await new prevozno_sredstvo().save(prevozno_sredstvoData)
+        let tabelaPrevoznega_sredstva = await new Vozilo().save(prevozno_sredstvoData)
 
         let tip_prevozaData= {
             naziv: req.body.nazivTipa_prevoza
         }
-        let tabelaTipa_prevoza = await new tip_prevoza().save(tip_prevozaData)
+        let tabelaTipa_prevoza = await new Tip_prevoza().save(tip_prevozaData)
 
         let letnikData = {
             leto: req.body.letoLetnik
         }
-        let tabelaLetnika = await new letnik().save(letnikData)
+        let tabelaLetnika = await new Letnik().save(letnikData)
 
         let znamkaData = {
             naziv: req.body.nazivZnamka
         }
-        let tabelaZnamk = await new znamka().save(znamkaData)
+        let tabelaZnamk = await new Znamka().save(znamkaData)
         
         res.status(200).send("Vehicle was successfully updated.");
     } catch (error) {
@@ -52,4 +52,4 @@ router.post('/editVehicle', async(req, res, next) => {
     }
 });
 
-modele.exports = router;
+module.exports = router;
