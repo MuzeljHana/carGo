@@ -116,29 +116,6 @@ router.post('/editVehicle', async(req, res, next) => {
             console.log(err);
             res.status(500).json({ "message": err });
         });
-        /*
-        let tabelaPrevoznega_sredstva = await new Vozilo().save(prevozno_sredstvoData)
-
-        let tip_prevozaData= {
-            naziv: req.body.nazivTipa_prevoza
-        }
-        let tabelaTipa_prevoza = await new Tip_prevoza().save(tip_prevozaData)
-
-        let letnikData = {
-            leto: req.body.letoLetnik
-        }
-        let tabelaLetnika = await new Letnik().save(letnikData)
-
-        let znamkaData = {
-            naziv: req.body.nazivZnamka
-        }
-        let tabelaZnamk = await new Znamka().save(znamkaData)
-        
-        res.status(200).send("Vehicle was successfully updated.");
-    } catch (error) {
-        res.status(500).json(error);
-    }
-    */
 });
 
 module.exports = router;
