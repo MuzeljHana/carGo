@@ -7,7 +7,7 @@ router.post('/checkActivity', async(req, res, next) => {
         let prevozno_sredstvoDataAktivnosti= {
             aktivnost: req.body.aktivnostPrevoznega_sredstva
         }
-        let tabelaAktivnosti = await new prevozno_sredstvo().save(prevozno_sredstvoDataAktivnosti)
+        let tabelaAktivnosti = await new Vozilo().save(prevozno_sredstvoDataAktivnosti)
 
         res.status(200).send("Activity was successfully checked.");
     } catch (error) {
