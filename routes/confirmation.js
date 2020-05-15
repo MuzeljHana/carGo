@@ -2,7 +2,7 @@ const table = require('../config/models');
 const express = require('express');
 const router = express.Router();
 
-app.post('/potrdiIzbiro', async(req, res, next) => {
+router.post('/potrdiIzbiro', async(req, res, next) => {
     try {
         let tipTovoraPodatki = {
             naziv: req.body.nazivTipaTovora
