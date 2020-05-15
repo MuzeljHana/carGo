@@ -36,10 +36,10 @@ router.post('/add', async (req, res, next) => {
         sirina: req.body.sirina,
         visina: req.body.visina,
         st_palet: req.body.st_pelet,
-        tk_prevozno_podjetje: podjetje.id,
-        tk_znamka: znamka.id,
-        tk_tip_prevoza: tip.id,
-        tk_letnik: letnik.id
+        tk_prevozno_podjetje: podjetje.get('id'),
+        tk_znamka: znamka.get('id'),
+        tk_tip_prevoza: tip.get('id'),
+        tk_letnik: letnik.get('id')
     }
     new table.Vozilo().save(data).then(() => {
         res.json({ "message": "success" });
