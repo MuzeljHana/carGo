@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Urejanje stranke</title>
+    </head>
+
+    <body>
+        <form action="http://localhost:3000/urediStranko" method="POST">
+            Naziv: <input type="text" name="nazivIskalca_prevoza" /> <br />
+            Davčna številka: <input type="text" name="davcna_stIskalca_prevoza" /> <br />
+            Naslov: <input type="text" name="naslov" /> <br />
+            Tip_iskalca: <select name="Tip_iskalca" >
+                <option value="fizicna_oseba">Fizična oseba</option>
+                <option value="podjetje">Podjetje</option>
+            </select>
+            <input type="submit" value="urediStranko" />
+        </form>
+    </body>
+</html> 
