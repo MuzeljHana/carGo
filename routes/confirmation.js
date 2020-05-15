@@ -36,6 +36,7 @@ app.post('/potrdiIzbiro', async(req, res, next) => {
             tk_prevozno_sredstvo: req.body.idPrevoznoSredstvo,
             datum_nalaganja: req.body.datumNalaganja,
             datum_dostave: req.body.datumDostave,
+            dodatne_pripombe: req.body.dodatnePripombe
         };
         new table.Termin().save(terminPodatki);
 
