@@ -2,7 +2,7 @@ const table = require('../config/models');
 const express = require('express');
 const router = express.Router();
 
-app.post('/editCustomer', async(req, res, next) => {
+router.post('/editCustomer', async(req, res, next) => {
     try {
         let iskalec_prevozaData = {
             naziv: req.body.nazivIskalca_prevoza,
