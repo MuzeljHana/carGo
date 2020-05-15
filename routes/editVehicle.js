@@ -52,4 +52,4 @@ router.post('/editVehicle', async(req, res, next) => {
     }
 });
 
-modele.exports = router;
+module.exports = router;
