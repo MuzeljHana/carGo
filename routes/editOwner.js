@@ -26,7 +26,7 @@ router.post('/editOwner', async(req, res, next) => {
         };
         let tabelaPosta = await new Posta().save(postaData);
            
-        res.status(200).send("Ponudnik je bil uspešno urejen.");
+        res.status(200).send("Owner was successfully edited.");
     } catch (error) {
         res.status(500).json(error);
     }
