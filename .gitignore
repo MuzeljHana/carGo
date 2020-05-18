@@ -2,5 +2,8 @@
 node_modules/
 package-lock.json
 
+#ER
+*.mwb.bak
+
 # SQLite
 *.sqlite
