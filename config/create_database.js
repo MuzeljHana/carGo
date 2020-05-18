@@ -2,347 +2,376 @@ const path = require('path');
 process.chdir(path.dirname(__dirname));
 const knex = require('./database');
 
-async function baza(){
-    await knex.schema.dropTableIfExists('posta')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('naslov')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('prevozno_podjetje')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('tip_prevoza')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('znamka')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('letnik')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('prevozno_sredstvo')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('destinacija')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('tip_tovora')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('tovor')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('termin')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('cenik')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('tip_iskalca')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('iskalec_prevoza')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('tovor_has_iskalec_prevoza')
-        .catch((err) => {console.log(err); throw err});
-    await knex.schema.dropTableIfExists('uporabnik')
-        .catch((err) => {console.log(err); throw err});
+create_database();
+
+async function create_database() {
+    await knex.schema.dropTableIfExists('Posta')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Naslov')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Uporabnik')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Vozilo')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Cenik')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Ponudba')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Tip_vozila')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Znamka')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Tip_tovora')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Izdelek')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
 
 
-//-----CREATE
-    await knex.schema.createTable('posta', (table) => {
+    /*  #####################
+        ### CREATE TABLES ###
+        ##################### */
+    await knex.schema.createTable('Posta', (table) => {
         table.increments('id');
-        table.string('kraj').notNullable().unique;
-        table.string('postna_st').notNullable().unique;
-    }).then(() => console.log("posta tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.string('kraj').notNullable();
+        table.string('stevilka').notNullable();
+    })
+        .then(() => console.log("Created table: Posta"))
+        .catch((err) => { console.log(err); throw err });
 
-    await knex.schema.createTable('naslov', (table) => {
+    await knex.schema.createTable('Naslov', (table) => {
         table.increments('id');
-        table.string('ulica').notNullable()
-        table.string('hisna_st').notNullable()
-        table.integer('tk_posta').references('id').inTable('posta')
-    }).then(() => console.log("naslov tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.string('ulica').notNullable();
+        table.string('stevilka').notNullable();
 
-    await knex.schema.createTable('prevozno_podjetje', (table) => {
+        table.integer('idPosta').references('id').inTable('Posta');
+    })
+        .then(() => console.log("Created table: Naslov"))
+        .catch((err) => { console.log(err); throw err });
+
+    await knex.schema.createTable('Uporabnik', (table) => {
         table.increments('id');
-        table.string('naziv').notNullable()
-        table.integer('davcna_st').notNullable()
-        table.date('zacetek_delovanja').notNullable()
-        table.boolean('uspesnost_poslovanja').notNullable()
-        table.integer('tk_naslov').references('id').inTable('naslov')
-    }).then(() => console.log("prevozno_podjetje tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.string('ime').notNullable();
+        table.string('priimek').notNullable();
+        table.string('email').notNullable();
+        table.string('geslo').notNullable();
+        table.string('naziv_podjetja');
+        table.string('davcna');
+        table.date('zacetek_delovanja');
+        table.string('uspesnost_poslovanja');
 
-    await knex.schema.createTable('tip_prevoza', (table) => {
+        table.integer('idNaslov').references('id').inTable('Naslov');
+    })
+        .then(() => console.log("Created table: Uporabnik"))
+        .catch((err) => { console.log(err); throw err });
+
+    await knex.schema.createTable('Tip_vozila', (table) => {
         table.increments('id');
-        table.enum('naziv',['kombi','tovornjak razsut tovor','tovornjak blago','izredni prevoz']).notNullable() 
-    }).then(() => console.log("tip_prevoza tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.string('naziv').notNullable();
+    })
+        .then(() => console.log("Created table: Tip_vozila"))
+        .catch((err) => { console.log(err); throw err });
 
-    await knex.schema.createTable('letnik', (table) => {
+    await knex.schema.createTable('Znamka', (table) => {
         table.increments('id');
-        table.integer('naziv').notNullable().unique();
-    }).then(() => console.log("letnik tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.string('naziv').notNullable();
+    })
+        .then(() => console.log("Created table: Znamka"))
+        .catch((err) => { console.log(err); throw err });
 
-    await knex.schema.createTable('znamka', (table) => {
+    await knex.schema.createTable('Vozilo', (table) => {
         table.increments('id');
-        table.string('naziv').notNullable().unique();
-    }).then(() => console.log("znamka tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.string('letnik').notNullable();
+        table.string('registerska').notNullable();
+        table.string('model').notNullable();
+        table.integer('maks_teza_tovora').notNullable();
+        table.string('potrdilo_izpravnosti').notNullable();
+        table.boolean('aktivno').notNullable().defaultTo(1);
+        table.boolean('zasedeno').notNullable().defaultTo(0);
+        table.integer('maks_volumen_tovora');
+        table.integer('maks_dolzina_tovora');
+        table.integer('maks_sirina_tovora');
+        table.integer('maks_visina_tovora');
+        table.integer('maks_st_palet');
 
-    await knex.schema.createTable('prevozno_sredstvo', (table) => {
+        table.integer('idTip_vozila').references('id').inTable('Tip_vozila');
+        table.integer('idZnamka').references('id').inTable('Znamka');
+        table.integer('idUporabnik').references('id').inTable('Uporabnik');
+    })
+        .then(() => console.log("Created table: Vozilo"))
+        .catch((err) => { console.log(err); throw err });
+
+    await knex.schema.createTable('Cenik', (table) => {
         table.increments('id');
-        table.binary('slika');
-        table.string('registracijska_st').notNullable()
-        table.decimal('max_teza', [8], [2]).notNullable()
-        table.decimal('cena', [4], [2]).notNullable()
-        table.boolean('potrdilo_izpravnosti').notNullable()
-        table.boolean('aktivnost').notNullable()
-        table.boolean('zasedenost').notNullable()
-        table.decimal('volumen', [4], [2])
-        table.decimal('dolzina', [4], [2])
-        table.decimal('sirina', [4], [2])
-        table.decimal('visina', [4], [2])
-        table.integer('st_palet')
-        table.integer('tk_prevozno_podjetje').references('id').inTable('prevozno_podjetje')
-        table.integer('tk_tip_prevoza').references('id').inTable('tip_prevoza')
-        table.integer('tk_znamka').references('id').inTable('znamka')
-        table.integer('tk_letnik').references('id').inTable('letnik')
-    }).then(() => console.log("prevozno_sredstvo tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.float('cena_na_km').notNullable();
+        table.date('datum_od').notNullable();
+        table.date('datum_do');
 
-    await knex.schema.createTable('destinacija', (table) => {
+        table.integer('idVozilo').references('id').inTable('Vozilo');
+    })
+        .then(() => console.log("Created table: Znamka"))
+        .catch((err) => { console.log(err); throw err });
+
+    await knex.schema.createTable('Tip_tovora', (table) => {
         table.increments('id');
-        table.integer('tk_naslov').references('id').inTable('naslov')
-    }).then(() => console.log("destinacija tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.string('naziv').notNullable();
+    })
+        .then(() => console.log("Created table: Tip_tovora"))
+        .catch((err) => { console.log(err); throw err });
 
-    await knex.schema.createTable('tip_tovora', (table) => {
+    await knex.schema.createTable('Ponudba', (table) => {
         table.increments('id');
-        table.enum('naziv',['razsut tovor','polizdelek','izdelek']).notNullable() 
-    }).then(() => console.log("tip_tovora tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.dateTime('cas_nalozitve').notNullable();
+        table.string('status').defaultTo("cakanje potrditve");
+        table.timestamp('cas_ponudbe').defaultTo(knex.fn.now());
+        table.string('pripombe');
+        table.integer('teza_tovora');
+        table.integer('volumen_tovora');
+        table.integer('st_palet');
+        table.integer('teza_palet');
 
-    await knex.schema.createTable('tovor', (table) => {
+        table.integer('idVozilo').references('id').inTable('Vozilo');
+        table.integer('idTip_tovora').references('id').inTable('Tip_tovora');
+        table.integer('naslov_nalozitve_idNaslov').references('id').inTable('Naslov');
+        table.integer('naslov_dostave_idNaslov').references('id').inTable('Naslov');
+        table.integer('idUporabnik').references('id').inTable('Uporabnik');
+    })
+        .then(() => console.log("Created table: Ponudba"))
+        .catch((err) => { console.log(err); throw err });
+
+    await knex.schema.createTable('Izdelek', (table) => {
         table.increments('id');
-        table.string('naziv').notNullable()
-        table.decimal('volumen')
-        table.decimal('dolzina')
-        table.decimal('sirina')
-        table.decimal('visina')
-        table.decimal('teza')
-        table.integer('st_palet')
-        table.integer('tk_tip_tovora').references('id').inTable('tip_tovora')
-    }).then(() => console.log("tovor tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.integer('teza').notNullable();
+        table.integer('dolzina').notNullable();
+        table.integer('visina').notNullable();
+        table.integer('sirina').notNullable();
+        table.integer('kolicina').notNullable();
 
-    await knex.schema.createTable('termin', (table) => {
-        table.increments('id');
-        table.date('datum_nalaganja').notNullable()
-        table.date('datum_dostave').notNullable()
-        table.string('dodatne_pripombe')
-        table.integer('tk_tovor').references('id').inTable('tovor')
-        table.integer('tk_naslov').references('id').inTable('naslov')
-        table.integer('tk_destinacija').references('id').inTable('destinacija')
-        table.integer('tk_prevozno_sredstvo').references('id').inTable('prevozno_sredstvo')
-    }).then(() => console.log("termin tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
+        table.integer('idPonudba').references('id').inTable('Ponudba');
+    })
+        .then(() => console.log("Created table: Izdelek"))
+        .catch((err) => { console.log(err); throw err });
 
-    await knex.schema.createTable('cenik', (table) => {
-        table.increments('id');
-        table.decimal('znesek').notNullable()
-        table.integer('tk_termin').references('id').inTable('termin')
-    }).then(() => console.log("cenik tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
 
-    await knex.schema.createTable('tip_iskalca', (table) => {
-        table.increments('id');
-        table.enum('naziv',['fizicna oseba', 'podjetje']).notNullable() 
-    }).then(() => console.log("tip_iskalca tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
-
-    await knex.schema.createTable('iskalec_prevoza', (table) => {
-        table.increments('id');
-        table.string('naziv').notNullable()
-        table.integer('davcna_st').notNullable().unique()
-        table.integer('tk_naslov').references('id').inTable('naslov')
-        table.integer('tk_tip_iskalca').references('id').inTable('tip_iskalca')
-    }).then(() => console.log("iskalec_prevoza tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
-
-    await knex.schema.createTable('tovor_has_iskalec_prevoza', (table) => {
-        table.increments('id');
-        table.date('datum_od').notNullable()
-        table.date('datum_do')
-        table.integer('tk_tovor').references('id').inTable('tovor')
-        table.integer('tk_iskalec_prevoza').references('id').inTable('iskalec_prevoza')
-    }).then(() => console.log("tovor_has_iskalec_prevoza tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
-
-    await knex.schema.createTable('uporabnik', (table) => {
-        table.increments('id');
-        table.string('uporabnisko_ime').notNullable()
-        table.string('geslo').notNullable()
-        table.string('email').notNullable()
-        table.integer('tk_prevozno_podjetje').references('id').inTable('prevozno_podjetje')
-        table.integer('tk_iskalec_prevoza').references('id').inTable('iskalec_prevoza')
-    }).then(() => console.log("uporabnik tabela narejena."))
-    .catch((err) => {console.log(err); throw err});
-
-//-----INSERT   
-    const postni_pod = [
-        {kraj: 'Maribor', postna_st: '2000'},
-        {kraj: 'Ljubljana', postna_st: '1000'},
-        {kraj: 'Celje', postna_st: '3000'},
-        {kraj: 'Koper', postna_st: '6000'}
+    /*  ###################
+        ### INSERT DATA ###
+        ################### */
+    const posta = [
+        { kraj: 'Maribor', stevilka: '2000' },
+        { kraj: 'Ljubljana', stevilka: '1000' },
+        { kraj: 'Celje', stevilka: '3000' },
+        { kraj: 'Koper', stevilka: '6000' }
     ]
-    await knex('posta').insert(postni_pod)
-    .then(() => console.log("Postni podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Posta').insert(posta)
+        .then(() => console.log("Data inserted: Posta"))
+        .catch((err) => { console.log(err); throw err });
 
-    const naslov_pod = [
-        {ulica: 'Koroška cesta', hisna_st: '46'},
-        {ulica: 'Večna pot ', hisna_st: '113'},
-        {ulica: 'Titov trg', hisna_st: '20a'},
-        {ulica: 'MNa Loko', hisna_st: '2'},
+    const naslov = [
+        { ulica: 'Koroška cesta', stevilka: '46' },
+        { ulica: 'Večna pot ', stevilka: '113' },
+        { ulica: 'Titov trg', stevilka: '20a' },
+        { ulica: 'MNa Loko', stevilka: '2' },
     ]
-    await knex('naslov').insert(naslov_pod)
-    .then(() => console.log("Naslovni podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Naslov').insert(naslov)
+        .then(() => console.log("Data inserted: Naslov"))
+        .catch((err) => { console.log(err); throw err });
 
-    const p_podjetje_pod = [
-        {naziv: 'Prevozi 123', davcna_st: 985673455, zacetek_delovanja:'2013-01-16',uspesnost_poslovanja: true, tk_naslov: 2},
-        {naziv: 'Mi vozimo', davcna_st: 746565456, zacetek_delovanja:'2015-11-06',uspesnost_poslovanja: true, tk_naslov: 1},
-        {naziv: 'Prevoz nudim', davcna_st: 867845673, zacetek_delovanja:'2020-09-14',uspesnost_poslovanja: true, tk_naslov: 3},
-        {naziv: 'Smrtnik prevozi', davcna_st: 348346564, zacetek_delovanja:'2019-08-30',uspesnost_poslovanja: true, tk_naslov: 4}
+    const uporabnik = [
+        { ime: 'Janez', priimek: 'Novak', email: 'janez.novak@mail.com', geslo: "test123", idNaslov: 1 },
+        { ime: 'Controleum', priimek: 'Controleum', email: 'controleum@mail.com', geslo: "test123", idNaslov: 2 },
+        { ime: 'Zidnak', priimek: 'Zidnak', email: 'zidnak@mail.com', geslo: "test123", idNaslov: 2 },
+        { ime: 'Avortium', priimek: 'Avortium', email: 'avortium@mail.com', geslo: "test123", idNaslov: 2 },
+        {
+            ime: 'Janez', priimek: 'Novak', email: 'prevozi123@mail.com', geslo: "test123", idNaslov: 2,
+            naziv_podjetja: 'Prevozi 123', davcna: 985673455, zacetek_delovanja: '2013-01-16', uspesnost_poslovanja: "neko poročilo"
+        },
+        {
+            ime: 'Janez', priimek: 'Novak', email: 'mi.vozimo@mail.com', geslo: "test123", idNaslov: 1,
+            naziv_podjetja: 'Mi vozimo', davcna: 985673455, zacetek_delovanja: '2015-11-06', uspesnost_poslovanja: "neko poročilo"
+        },
+        {
+            ime: 'Janez', priimek: 'Novak', email: 'prevoz.nudim@mail.com', geslo: "test123", idNaslov: 3,
+            naziv_podjetja: 'Prevoz nudim', davcna: 985673455, zacetek_delovanja: '2020-09-14', uspesnost_poslovanja: "neko poročilo"
+        },
+        {
+            ime: 'Janez', priimek: 'Novak', email: 'smrtnik.prevozi@mail.com', geslo: "test123", idNaslov: 3,
+            naziv_podjetja: 'Smrtnik prevozi', davcna: 985673455, zacetek_delovanja: '2019-08-30', uspesnost_poslovanja: "neko poročilo"
+        }
     ]
-    await knex('prevozno_podjetje').insert(p_podjetje_pod)
-    .then(() => console.log("Podjetni podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Uporabnik').insert(uporabnik)
+        .then(() => console.log("Data inserted: Uporabnik"))
+        .catch((err) => { console.log(err); throw err });
 
-    const t_prevoz_pod = [
-        {naziv: 'kombi'},
-        {naziv: 'tovornjak razsut tovor'},
-        {naziv: 'tovornjak blago'},
-        {naziv: 'izredni prevoz'}
+    const tip_vozila = [
+        { naziv: 'kombi' },
+        { naziv: 'tovornjak razsut tovor' },
+        { naziv: 'tovornjak blago' },
+        { naziv: 'izredni prevoz' }
     ]
-    await knex('tip_prevoza').insert(t_prevoz_pod)
-    .then(() => console.log("Tip prevoza podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
-        
-    const letnik_pod = [
-        {naziv: 2008},
-        {naziv: 2006},
-        {naziv: 2010},
-        {naziv: 2016}
-    ]
-    await knex('letnik').insert(letnik_pod)
-    .then(() => console.log("Letnik podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Tip_vozila').insert(tip_vozila)
+        .then(() => console.log("Data inserted: Tip_vozila"))
+        .catch((err) => { console.log(err); throw err });
 
-    const znamka_pod = [
-        {naziv: 'Mercedes'},
-        {naziv: 'MAN'},
-        {naziv: 'Volkswagen'},
-        {naziv: 'Renault'}
+    const znamka = [
+        { naziv: 'Mercedes' },
+        { naziv: 'MAN' },
+        { naziv: 'Volkswagen' },
+        { naziv: 'Renault' }
     ]
-    await knex('znamka').insert(znamka_pod)
-    .then(() => console.log("Znamka podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Znamka').insert(znamka)
+        .then(() => console.log("Data inserted: Znamka"))
+        .catch((err) => { console.log(err); throw err });
 
-    const p_sredstvo_pod = [
-        {registracijska_st: 'MB 1234L1', max_teza: 3500.00, cena: 2.5, potrdilo_izpravnosti: true, aktivnost:true,
-            zasedenost: false, dolzina: 5.2, sirina: 2.2, visina: 1.8,tk_prevozno_podjetje:3, tk_tip_prevoza:1, tk_znamka: 3, tk_letnik: 4},
-        {registracijska_st: 'LJ 346h3f', max_teza: 3500.00, cena: 4.5, potrdilo_izpravnosti: true, aktivnost:true, zasedenost:false,
-            volumen: 200.50, tk_prevozno_podjetje: 2,  tk_tip_prevoza: 2, tk_znamka: 4, tk_letnik:2},
-        {registracijska_st: 'MB H45RGR', max_teza: 7000.00, cena: 1.5, potrdilo_izpravnosti: true, aktivnost:true, zasedenost:false,
-            st_palet: 8, tk_prevozno_podjetje: 1,  tk_tip_prevoza: 3, tk_znamka: 1, tk_letnik:1},
-        {registracijska_st: 'NM 342H45', max_teza: 5000.00, cena: 2.2, potrdilo_izpravnosti: true, aktivnost:true, zasedenost:false,
-            st_palet: 6, tk_prevozno_podjetje: 1,  tk_tip_prevoza: 3, tk_znamka: 2, tk_letnik:3}
+    const vozilo = [
+        {
+            letnik: "2005",
+            registerska: 'MB FL-341',
+            model: "Transporter",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "neko potrdilo",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 1,
+            idZnamka: 3,
+            idUporabnik: 7
+        },
+        {
+            letnik: "2009",
+            registerska: 'LJ HF-653',
+            model: "T HIGH",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "neko potrdilo",
+            maks_volumen_tovora: 200,
+            idTip_vozila: 2,
+            idZnamka: 4,
+            idUporabnik: 6
+        },
+        {
+            letnik: "2015",
+            registerska: 'MB HG-879',
+            model: "Actros",
+            maks_teza_tovora: 7000,
+            potrdilo_izpravnosti: "neko potrdilo",
+            maks_dolzina_tovora: 5000,
+            maks_sirina_tovora: 2200,
+            maks_visina_tovora: 2000,
+            maks_st_palet: 8,
+            idTip_vozila: 3,
+            idZnamka: 1,
+            idUporabnik: 5
+        },
+        {
+            letnik: "2020",
+            registerska: 'NM DF-245',
+            model: "TGX",
+            maks_teza_tovora: 7000,
+            potrdilo_izpravnosti: "neko potrdilo",
+            maks_dolzina_tovora: 7000,
+            maks_sirina_tovora: 2200,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 5,
+            idTip_vozila: 3,
+            idZnamka: 2,
+            idUporabnik: 5
+        }
     ]
-    await knex('prevozno_sredstvo').insert(p_sredstvo_pod)
-    .then(() => console.log("Prevozno_sredstvo podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Vozilo').insert(vozilo)
+        .then(() => console.log("Data inserted: Vozilo"))
+        .catch((err) => { console.log(err); throw err });
 
-    const destinacija_pod = [
-        {tk_naslov: 2},
-        {tk_naslov: 3},
-        {tk_naslov: 4},
-        {tk_naslov: 1}
-    ]
-    await knex('destinacija').insert(destinacija_pod)
-    .then(() => console.log("Destinacija podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
 
-    const t_tovor_pod = [
-        {naziv: 'razsut tovor'},
-        {naziv: 'polizdelek'},
-        {naziv: 'izdelek'}
+    const cenik = [
+        { cena_na_km: 2.5, datum_od: "2019-08-30", idVozilo: 1 },
+        { cena_na_km: 4.5, datum_od: "2019-08-30", idVozilo: 2 },
+        { cena_na_km: 1.5, datum_od: "2019-08-30", idVozilo: 3 },
+        { cena_na_km: 2.2, datum_od: "2019-08-30", idVozilo: 4 },
     ]
-    await knex('tip_tovora').insert(t_tovor_pod)
-    .then(() => console.log("Tip_tovora podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Cenik').insert(cenik)
+        .then(() => console.log("Data inserted: Cenik"))
+        .catch((err) => { console.log(err); throw err });
 
-    const tovor_pod = [
-        {naziv: 'zabojniki', st_palet:4, teza:60.0, tk_tip_tovora:3},
-        {naziv: 'omara',dolzina: 0.5, sirina:2.0, visina:2.5, teza:10.0, tk_tip_tovora:3},
-        {naziv: 'pesek', volumen: 200, teza: 800.0, tk_tip_tovora:1},
-        {naziv: 'žakli', st_palet:3, teza: 120.0, tk_tip_tovora:2}
+    const tip_tovora = [
+        { naziv: "palete" },
+        { naziv: "posamezni izdelki" },
+        { naziv: "razsut tovor" },
     ]
-    await knex('tovor').insert(tovor_pod)
-    .then(() => console.log("Tovor podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Tip_tovora').insert(tip_tovora)
+        .then(() => console.log("Data inserted: Tip_tovora"))
+        .catch((err) => { console.log(err); throw err });
 
-    const termin_pod = [
-        {datum_nalaganja: '2020-02-14', datum_dostave:'2020-02-15', tk_tovor: 3, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:2},
-        {datum_nalaganja: '2020-01-22', datum_dostave:'2020-01-22', tk_tovor: 2, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:1},
-        {datum_nalaganja: '2020-05-16', datum_dostave:'2020-05-17', tk_tovor: 1, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:3},
-        {datum_nalaganja: '2020-08-27', datum_dostave:'2020-08-27', tk_tovor: 4, tk_naslov:1, tk_destinacija:1, tk_prevozno_sredstvo:4}
+    const ponudba = [
+        {
+            cas_nalozitve: "2019-08-30 08:00:00", st_palet: 1, teza_palet: 233,
+            idVozilo: 1, idTip_tovora: 1, naslov_nalozitve_idNaslov: 1, naslov_dostave_idNaslov: 2, idUporabnik: 1
+        },
+        {
+            cas_nalozitve: "2020-05-18 10:00:00", teza_tovora: 500, volumen_tovora: 300,
+            idVozilo: 2, idTip_tovora: 3, naslov_nalozitve_idNaslov: 2, naslov_dostave_idNaslov: 3, idUporabnik: 2
+        },
+        {
+            cas_nalozitve: "2020-06-03 16:30:00",
+            idVozilo: 3, idTip_tovora: 2, naslov_nalozitve_idNaslov: 3, naslov_dostave_idNaslov: 4, idUporabnik: 3
+        },
+        {
+            cas_nalozitve: "2019-08-30 08:00:00",
+            idVozilo: 4, idTip_tovora: 2, naslov_nalozitve_idNaslov: 4, naslov_dostave_idNaslov: 1, idUporabnik: 4
+        },
     ]
-    await knex('termin').insert(termin_pod)
-    .then(() => console.log("Termin podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Ponudba').insert(ponudba)
+        .then(() => console.log("Data inserted: Ponudba"))
+        .catch((err) => { console.log(err); throw err });
 
-    const cenik_pod = [
-        {znesek: 130.00, tk_termin:1},
-        {znesek: 160.57, tk_termin:2},
-        {znesek: 70.61, tk_termin:3},
-        {znesek: 210.52, tk_termin:4}
+    const izdelek = [
+        { teza: 2, dolzina: 20, visina: 30, sirina: 20, kolicina: 3, idPonudba: 3},
+        { teza: 6, dolzina: 60, visina: 30, sirina: 20, kolicina: 10, idPonudba: 3},
+        { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 3},
+        { teza: 2, dolzina: 20, visina: 30, sirina: 20, kolicina: 3, idPonudba: 4},
+        { teza: 6, dolzina: 60, visina: 30, sirina: 20, kolicina: 10, idPonudba: 4},
+        { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 4}
     ]
-    await knex('cenik').insert(cenik_pod)
-    .then(() => console.log("Cenik podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
-
-    const t_iskalec_pod = [
-        {naziv: 'fizicna oseba'},
-        {naziv: 'podjetje'}
-    ]
-    await knex('tip_iskalca').insert(t_iskalec_pod)
-    .then(() => console.log("Tip_iskalca podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
-
-    const iskalec_p_pod = [
-        {naziv: 'Janez Novak', davcna_st:985673452, tk_naslov:1, tk_tip_iskalca:1},
-        {naziv: 'Controleum', davcna_st: 985673454, tk_naslov:3, tk_tip_iskalca:2},
-        {naziv: 'Zidnak', davcna_st: 985673450, tk_naslov:4, tk_tip_iskalca:2},
-        {naziv: 'Avortium', davcna_st: 985673451, tk_naslov:2, tk_tip_iskalca:2},
-    ]
-    await knex('iskalec_prevoza').insert(iskalec_p_pod)
-    .then(() => console.log("Iskalec_prevoza podatki vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
-
-    const t_h_i_p_pod = [
-        {datum_od: '2013-01-16', tk_tovor:1, tk_iskalec_prevoza:1},
-        {datum_od: '2013-01-16', tk_tovor:2, tk_iskalec_prevoza:2},
-        {datum_od: '2013-01-16', tk_tovor:3, tk_iskalec_prevoza:3},
-        {datum_od: '2013-01-16', tk_tovor:4, tk_iskalec_prevoza:4},
-    ]
-    await knex('tovor_has_iskalec_prevoza').insert(t_h_i_p_pod)
-    .then(() => console.log("Tovor_has vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
-
-    const uporabnik_pod = [
-        {uporabnisko_ime: 'prevozi123',email: 'prevozi123@gmail.com',geslo:'123', tk_prevozno_podjetje:1},
-        {uporabnisko_ime: 'avtorium',email: 'avtorium@gmail.com',geslo:'345', tk_iskalec_prevoza:4},
-        {uporabnisko_ime: 'smrtnik',email: 'smrtnik@gmail.com',geslo:'567', tk_prevozno_podjetje:4},
-        {uporabnisko_ime: 'zidnak',email: 'zidnak@gmail.com',geslo:'789', tk_iskalec_prevoza:3},
-    ]
-    await knex('uporabnik').insert(uporabnik_pod)
-    .then(() => console.log("uporabnik vstavljeni."))
-    .catch((err) => {console.log(err); throw err});
+    await knex('Izdelek').insert(izdelek)
+        .then(() => console.log("Data inserted: Izdelek"))
+        .catch((err) => { console.log(err); throw err });
 
     knex.destroy();
 }
-
-baza();
