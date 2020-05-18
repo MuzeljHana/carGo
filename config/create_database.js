@@ -142,7 +142,7 @@ async function create_database() {
     await knex.schema.createTable('Cenik', (table) => {
         table.increments('id');
         table.float('cena_na_km').notNullable();
-        table.date('datum_od').notNullable();
+        table.date('datum_od').defaultTo(knex.fn.now());
         table.date('datum_do');
 
         table.integer('idVozilo').references('id').inTable('Vozilo');
