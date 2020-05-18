@@ -33,6 +33,8 @@ async function baza(){
         .catch((err) => {console.log(err); throw err});
     await knex.schema.dropTableIfExists('tovor_has_iskalec_prevoza')
         .catch((err) => {console.log(err); throw err});
+    await knex.schema.dropTableIfExists('uporabnik')
+        .catch((err) => {console.log(err); throw err});
 
 
 //-----CREATE
@@ -167,6 +169,14 @@ async function baza(){
     }).then(() => console.log("tovor_has_iskalec_prevoza tabela narejena."))
     .catch((err) => {console.log(err); throw err});
 
+    await knex.schema.createTable('uporabnik', (table) => {
+        table.increments('id');
+        table.string('uporabnisko_ime').notNullable()
+        table.string('geslo').notNullable()
+        table.integer('tk_prevozno_podjetje').references('id').inTable('prevozno_podjetje')
+        table.integer('tk_iskalec_prevoza').references('id').inTable('iskalec_prevoza')
+    }).then(() => console.log("uporabnik tabela narejena."))
+    .catch((err) => {console.log(err); throw err});
 
 //-----INSERT   
     const postni_pod = [
@@ -318,6 +328,16 @@ async function baza(){
     ]
     await knex('tovor_has_iskalec_prevoza').insert(t_h_i_p_pod)
     .then(() => console.log("Tovor_has vstavljeni."))
+    .catch((err) => {console.log(err); throw err});
+
+    const uporabnik_pod = [
+        {uporabnisko_ime: 'prevozi123',geslo:'123', tk_prevozno_podjetje:1},
+        {uporabnisko_ime: 'avtorium',geslo:'345', tk_iskalec_prevoza:4},
+        {uporabnisko_ime: 'smrtnik',geslo:'567', tk_prevozno_podjetje:4},
+        {uporabnisko_ime: 'zidnak',geslo:'789', tk_iskalec_prevoza:3},
+    ]
+    await knex('uporabnik').insert(uporabnik_pod)
+    .then(() => console.log("uporabnik vstavljeni."))
     .catch((err) => {console.log(err); throw err});
 
     knex.destroy();
