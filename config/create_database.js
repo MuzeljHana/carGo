@@ -71,18 +71,19 @@ async function baza(){
 
     await knex.schema.createTable('letnik', (table) => {
         table.increments('id');
-        table.integer('naziv').notNullable().unique()
+        table.integer('naziv').notNullable().unique();
     }).then(() => console.log("letnik tabela narejena."))
     .catch((err) => {console.log(err); throw err});
 
     await knex.schema.createTable('znamka', (table) => {
         table.increments('id');
-        table.string('naziv').notNullable().unique()
+        table.string('naziv').notNullable().unique();
     }).then(() => console.log("znamka tabela narejena."))
     .catch((err) => {console.log(err); throw err});
 
     await knex.schema.createTable('prevozno_sredstvo', (table) => {
         table.increments('id');
+        table.binary('slika');
         table.string('registracijska_st').notNullable()
         table.decimal('max_teza', [8], [2]).notNullable()
         table.decimal('cena', [4], [2]).notNullable()
