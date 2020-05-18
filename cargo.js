@@ -2,6 +2,7 @@ process.chdir(__dirname);
 const express = require('express');
 const nunjucks = require('nunjucks');
 const favicon = require('serve-favicon');
+const session = require('express-session')
 
 const app = express();
 
@@ -15,6 +16,20 @@ app.use(favicon('public/favicon.ico'));
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use((req, res, next) => {
+    console.log(`${Date()} ${req.ip} ${req.method} ${req.originalUrl}`);
+    next();
+});
+app.use((req, res, next) => {
+    req.session.user_id = 5;
+    next();
+});
 
 require('./routes/_routes')(app);
 
