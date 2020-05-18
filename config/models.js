@@ -2,30 +2,38 @@ const knex = require('./database');
 const bookshelf = require('bookshelf')(knex);
 
 module.exports = {
-    Posta: bookshelf.model('Posta', {
-        tableName: 'Posta',
-        naslov() {
-            return this.hasMany('Naslov');
+    Izdelek: bookshelf.model('Izdelek', {
+        tableName: 'Izdelek'
+    }),
+
+    Ponudba: bookshelf.model('Ponudba', {
+        tableName: 'Ponudba',
+        izdelek() {
+            return this.hasMany('Izdelek');
         }
     }),
 
-    Naslov: bookshelf.model('Naslov', {
-        tableName: 'Naslov',
-        uporabnik() {
-            return this.hasMany('Uporabnik');
-        },
-        ponudba() {
+    Tip_tovora: bookshelf.model('Tip_tovora', {
+        tableName: 'Tip_tovora',
+        izdelek() {
             return this.hasMany('Ponudba');
         }
     }),
 
-    Uporabnik: bookshelf.model('Uporabnik', {
-        tableName: 'Uporabnik',
+    Cenik: bookshelf.model('Cenik', {
+        tableName: 'Cenik',
         vozilo() {
-            return this.hasMany('Vozilo');
-        },
+            return this.belongsTo('Vozilo')
+        }
+    }),
+
+    Vozilo: bookshelf.model('Vozilo', {
+        tableName: 'Vozilo',
         ponudba() {
             return this.hasMany('Ponudba');
+        },
+        cenik() {
+            return this.hasMany('Cenik', 'idVozilo');
         }
     }),
 
@@ -43,35 +51,30 @@ module.exports = {
         }
     }),
 
-    Vozilo: bookshelf.model('Vozilo', {
-        tableName: 'Vozilo',
+    Uporabnik: bookshelf.model('Uporabnik', {
+        tableName: 'Uporabnik',
+        vozilo() {
+            return this.hasMany('Vozilo');
+        },
         ponudba() {
             return this.hasMany('Ponudba');
+        }
+    }),
+
+    Naslov: bookshelf.model('Naslov', {
+        tableName: 'Naslov',
+        uporabnik() {
+            return this.hasMany('Uporabnik');
         },
-        cenik() {
-            return this.hasMany('Cenik');
+        ponudba() {
+            return this.hasMany('Ponudba');
         }
     }),
 
-    Cenik: bookshelf.model('Cenik', {
-        tableName: 'Cenik'
-    }),
-
-    Ponudba: bookshelf.model('Ponudba', {
-        tableName: 'Ponudba',
-        izdelek() {
-            return this.hasMany('Izdelek'); 
-        }
-    }),
-
-    Izdelek: bookshelf.model('Izdelek', {
-        tableName: 'Izdelek'
-    }),
-
-    Tip_tovora: bookshelf.model('Tip_tovora', {
-        tableName: 'Tip_tovora',
-        izdelek() {
-            return this.hasMany('Ponudba'); 
+    Posta: bookshelf.model('Posta', {
+        tableName: 'Posta',
+        naslov() {
+            return this.hasMany('Naslov');
         }
     })
 }
