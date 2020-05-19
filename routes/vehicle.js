@@ -1,4 +1,4 @@
-const table = require('../config/models');
+const session = require('./auth');
 const knex = require('../config/database');
 const express = require('express');
 const router = express.Router();
@@ -80,12 +80,8 @@ router.get('/search', (req, res, next) => {
     }
 });
 
-router.use((req, res, next) => {
-    if (!req.session.user_id) {
-        res.status(401).send();
-    }
-    next();
-})
+// Use session from here on
+router.use(session);
 
 router.get('/', (req, res, next) => {
     knex.from('Vozilo as v')
