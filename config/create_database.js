@@ -205,10 +205,10 @@ async function create_database() {
         .catch((err) => { console.log(err); throw err });
 
     const naslov = [
-        { ulica: 'Koroška cesta', stevilka: '46' },
-        { ulica: 'Večna pot ', stevilka: '113' },
-        { ulica: 'Titov trg', stevilka: '20a' },
-        { ulica: 'MNa Loko', stevilka: '2' },
+        { ulica: 'Koroška cesta', stevilka: '46', idPosta: 1 },
+        { ulica: 'Večna pot ', stevilka: '113', idPosta: 2 },
+        { ulica: 'Titov trg', stevilka: '20a', idPosta: 3 },
+        { ulica: 'MNa Loko', stevilka: '2', idPosta: 4 },
     ]
     await knex('Naslov').insert(naslov)
         .then(() => console.log("Data inserted: Naslov"))
