@@ -18,4 +18,15 @@ function confirm() {
     let nalozitev = document.getElementById("nalozitev").innerHTML;
     let dostava = document.getElementById("dostava").innerHTML;  
 
+    fetch('http://localhost:3000/confirmation/', {
+        method: 'POST',
+        body: JSON.stringify([casNalozitve, status, casPonudbe, pripombe, tezaTovora, volumenTovora, 
+            stPalet, tezaPalet, tipTovora, nalozitev, dostava, idUporabnik,
+            idVozilo, tipTovora, nalozitev, dostava]),
+        headers: {
+            'Content type': 'application/json'
+        }
+    }).then((response) => {
+        console.log("Order successfully confirmed");
+    });
 }
