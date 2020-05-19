@@ -82,7 +82,7 @@ async function create_database() {
         table.string('ulica').notNullable();
         table.string('stevilka').notNullable();
 
-        table.integer('idPosta').references('id').inTable('Posta');
+        table.integer('idPosta').references('id').inTable('Posta').notNullable();
     })
         .then(() => console.log("Created table: Naslov"))
         .catch((err) => { console.log(err); throw err });
@@ -98,7 +98,7 @@ async function create_database() {
         table.date('zacetek_delovanja');
         table.string('uspesnost_poslovanja');
 
-        table.integer('idNaslov').references('id').inTable('Naslov');
+        table.integer('idNaslov').references('id').inTable('Naslov').notNullable();
     })
         .then(() => console.log("Created table: Uporabnik"))
         .catch((err) => { console.log(err); throw err });
@@ -132,9 +132,9 @@ async function create_database() {
         table.integer('maks_visina_tovora');
         table.integer('maks_st_palet');
 
-        table.integer('idTip_vozila').references('id').inTable('Tip_vozila');
-        table.integer('idZnamka').references('id').inTable('Znamka');
-        table.integer('idUporabnik').references('id').inTable('Uporabnik');
+        table.integer('idTip_vozila').references('id').inTable('Tip_vozila').notNullable();
+        table.integer('idZnamka').references('id').inTable('Znamka').notNullable();
+        table.integer('idUporabnik').references('id').inTable('Uporabnik').notNullable();
     })
         .then(() => console.log("Created table: Vozilo"))
         .catch((err) => { console.log(err); throw err });
@@ -145,7 +145,7 @@ async function create_database() {
         table.date('datum_od').defaultTo(knex.fn.now());
         table.date('datum_do');
 
-        table.integer('idVozilo').references('id').inTable('Vozilo');
+        table.integer('idVozilo').references('id').inTable('Vozilo').notNullable();
     })
         .then(() => console.log("Created table: Znamka"))
         .catch((err) => { console.log(err); throw err });
@@ -168,11 +168,11 @@ async function create_database() {
         table.integer('st_palet');
         table.integer('teza_palet');
 
-        table.integer('idVozilo').references('id').inTable('Vozilo');
-        table.integer('idTip_tovora').references('id').inTable('Tip_tovora');
-        table.integer('naslov_nalozitve_idNaslov').references('id').inTable('Naslov');
-        table.integer('naslov_dostave_idNaslov').references('id').inTable('Naslov');
-        table.integer('idUporabnik').references('id').inTable('Uporabnik');
+        table.integer('idVozilo').references('id').inTable('Vozilo').notNullable();
+        table.integer('idTip_tovora').references('id').inTable('Tip_tovora').notNullable();
+        table.integer('naslov_nalozitve_idNaslov').references('id').inTable('Naslov').notNullable();
+        table.integer('naslov_dostave_idNaslov').references('id').inTable('Naslov').notNullable();
+        table.integer('idUporabnik').references('id').inTable('Uporabnik').notNullable();
     })
         .then(() => console.log("Created table: Ponudba"))
         .catch((err) => { console.log(err); throw err });
@@ -185,7 +185,7 @@ async function create_database() {
         table.integer('sirina').notNullable();
         table.integer('kolicina').notNullable();
 
-        table.integer('idPonudba').references('id').inTable('Ponudba');
+        table.integer('idPonudba').references('id').inTable('Ponudba').notNullable();
     })
         .then(() => console.log("Created table: Izdelek"))
         .catch((err) => { console.log(err); throw err });
