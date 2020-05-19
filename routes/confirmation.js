@@ -27,6 +27,14 @@ router.post('/', async(req, res, next) => {
             nalozitevID = id[0].id;
         });
 
+        let nazivTipaTovora = req.body.tipTovora;
+        let idTipTovora;
+
+        await knex('Tip_tovora').where('naziv', nazivTipaTovora).select('id')
+        .then((id) => {
+            idTipTovora = id[0].id;
+        });
+
         let podatki = {
             //  podatki
             cas_nalozitve: req.body.casNalozitve,
@@ -40,7 +48,7 @@ router.post('/', async(req, res, next) => {
             //  tuji ključi
             idUporabnik: req.body.idUporabnik,
             idVozilo: req.body.vozilo,
-            idTip_tovora: req.body.tipTovora,
+            idTip_tovora: req.body.idTipTovora,
             naslov_nalozitve_idNaslov: nalozitevID,
             naslov_dostave_idNaslov: req.body.dostava
         }
