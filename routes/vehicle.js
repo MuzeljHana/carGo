@@ -3,7 +3,7 @@ const knex = require('../config/database');
 const express = require('express');
 const router = express.Router();
 
-router.get('/search', (req, res, next) => {
+router.post('/search', (req, res, next) => {
     const query = knex.from('Vozilo as v')
         .select([
             "v.id",
@@ -17,16 +17,20 @@ router.get('/search', (req, res, next) => {
             "maks_st_palet",
             "t.naziv as tip_vozila",
             "z.naziv as znamka",
-            "c.cena_na_km"
+            "c.cena_na_km",
+            "u.naziv_podjetja"
         ])
         .where({
             "c.datum_od": (qb) => {
                 qb.from("Cenik as c").max("datum_od").join("Vozilo as v", { 'c.idVozilo': 'v.id' });
-            }
+            },
+            "v.aktivno": 1,
+            "v.zasedeno": 0,
         })
         .join("Cenik as c", { 'c.idVozilo': 'v.id' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
+        .join("Uporabnik as u", { 'u.id': 'v.idUporabnik' })
 
     let tip_tovora = req.body.tip_tovora;
     let teza_tovora;
