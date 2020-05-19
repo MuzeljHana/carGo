@@ -6,95 +6,59 @@
 <div class="container">
     <div class="row">
         <div class="input-field col s12">
-            <form action="#">
-                <div class="col m3 offset-m2 s8 offset-s2">
-                    <label>
-                        <input name="group1" type="radio" checked />
-                        <span>Posamezni izdelki</span>
-                    </label>
-                </div>
-                <div class="col m3 s8 offset-s2">
-                    <label>
-                        <input name="group1" type="radio" />
-                        <span>Razsuti tovor</span>
-                    </label>
-                </div>
-                <div class="col m3 s8 offset-s2">
-                    <label>
-                        <input name="group1" type="radio" />
-                        <span>Standartne palete</span>
-                    </label>
-                </div>
-            </form>
+            <div class="col m3 offset-m2 s8 offset-s2">
+                <label>
+                    <input name="tip_tovora" value="posamezni izdelki" type="radio" checked>
+                    <span>Posamezni izdelki</span>
+                </label>
+            </div>
+            <div class="col m3 s8 offset-s2">
+                <label>
+                    <input name="tip_tovora" value="razsut tovor" type="radio">
+                    <span>Razsuti tovor</span>
+                </label>
+            </div>
+            <div class="col m3 s8 offset-s2">
+                <label>
+                    <input name="tip_tovora" value="palete" type="radio">
+                    <span>Standartne palete</span>
+                </label>
+            </div>
         </div>
     </div>
     <div class="row">
-        <hr>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <div class="row">
-                <div class="col s12">
-                    <h5 style="font-weight: bold;">Naziv izdelka</h5>
-                    <a href="" class="grey-text text-darken-4"><i class="right material-icons"
-                            style="margin-top: -24px;">close</i></a>
-                </div>
-                <div class="input-field col s2 offset-s1">
-                    <input id="visina" type="number" class="validate">
-                    <label for="visina">Višina</label>
-                </div>
-                <div class="input-field col s2">
-                    <input id="dolzina" type="number" class="validate">
-                    <label for="dolzina">Dolžina</label>
-                </div>
-                <div class="input-field col s2">
-                    <input id="sirina" type="number" class="validate">
-                    <label for="sirina">Širina</label>
-                </div>
-                <div class="input-field col s2">
-                    <input id="teza" type="number" class="validate">
-                    <label for="teza">Teža</label>
-                </div>
-                <div class="input-field col s2">
-                    <input id="kolicina" type="number" class="validate">
-                    <label for="kolicina">Količina</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12">
-                    <h5 style="font-weight: bold;">Naziv izdelka</h5>
-                    <a href="" class="grey-text text-darken-4"><i class="right material-icons"
-                            style="margin-top: -24px;">close</i></a>
-                </div>
-                <div class="input-field col s2 offset-s1">
-                    <input id="visina" type="number" class="validate">
-                    <label for="visina">Višina</label>
-                </div>
-                <div class="input-field col s2">
-                    <input id="dolzina" type="number" class="validate">
-                    <label for="dolzina">Dolžina</label>
-                </div>
-                <div class="input-field col s2">
-                    <input id="sirina" type="number" class="validate">
-                    <label for="sirina">Širina</label>
-                </div>
-                <div class="input-field col s2">
-                    <input id="teza" type="number" class="validate">
-                    <label for="teza">Teža</label>
-                </div>
-                <div class="input-field col s2">
-                    <input id="kolicina" type="number" class="validate">
-                    <label for="kolicina">Količina</label>
+        <div id="tab-izdelki">
+            <div class="row grey lighten-3" style="border-radius: 10px; padding: 10px;">
+                <div id="izdelki"></div>
+                <div class="col s12 center-align">
+                    <a id="dodaj" class="waves-effect waves-light btn" style="font-weight: bold;">Dodaj izdelek</a>
                 </div>
             </div>
         </div>
-        <div class="col s12 center-align">
-            <a class="waves-effect waves-light btn"
-                style="font-weight: bold;">Dodaj izdelek</a>
+        <div id="tab-tovor" style="display: none;">
+            <div class="row">
+                <div class="input-field col m3 offset-m3 s6">
+                    <input id="volumen" type="number" min="1">
+                    <label for="volumen">Volumen tovora v m<sup>3</sup></label>
+                </div>
+                <div class="input-field col m3 s6">
+                    <input id="teza" type="number" min="1">
+                    <label for="teza">Teža tovora v kg</label>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <hr>
+        <div id="tab-palete" style="display: none;">
+            <div class="row">
+                <div class="input-field col m3 offset-m3 s6">
+                    <input id="st_palet" type="number" min="1">
+                    <label for="st_palet">Število palet</label>
+                </div>
+                <div class="input-field col m3 s6">
+                    <input id="teza_palet" type="number" min="1">
+                    <label for="teza_palet">Teža ene palete v kg</label>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col m5 offset-m1 s12">
@@ -161,8 +125,7 @@
     </div>
     <div class="row">
         <div class="col s12 center-align">
-            <a href="izbira.html" class="waves-effect waves-light btn-large"
-                style="font-weight: bold;">Išči
+            <a id="isci" class="waves-effect waves-light btn-large" style="font-weight: bold;">Išči
                 ponudbe</a>
         </div>
     </div>
@@ -178,4 +141,5 @@
         $('.timepicker').timepicker();
     });
 </script>
+<script src="/javascripts/search.js"></script>
 {% endblock %}
