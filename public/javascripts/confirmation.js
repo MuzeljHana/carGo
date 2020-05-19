@@ -8,4 +8,8 @@ function confirm() {
     let volumenTovora = document.getElementById("volumen").value;
     let stPalet = document.getElementById("stPalet").value;
     let tezaPalet = document.getElementById("tezaPalet").value;
+
+    //  tuji ključ
+    let idUporabnik = sessionStorage.getItem("idUporabnik");
+    let idVozilo = document.getElementById("vehicleID").innerHTML;
 }
