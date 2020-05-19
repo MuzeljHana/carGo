@@ -9,6 +9,12 @@ router.post('/', async(req, res, next) => {
         let nalozitevUlica = "";
         let nalozitevStevilka = "";
         let nalozitevID;
+        let dostavaInfo = req.body.dostava.split(" ");
+        let dostavaUlica = "";
+        let dostavaStevilka = "";
+        let dostavaID;
+        let nazivTipaTovora = req.body.tipTovora;
+        let idTipTovora;
 
         for (let i = 0; i< nalozitevInfo.length; i++) {
             if (i == nalozitevInfo.length-1) {
@@ -19,17 +25,36 @@ router.post('/', async(req, res, next) => {
                 nalozitevUlica += nalozitevInfo[i] + " ";
             }
         }
+
+        for (let i = 0; i< dostavaInfo.length; i++) {
+            if (i == dostavaInfo.length-1) {
+                dostavaStevilka = dostavaInfo[i];
+            } else if (i == dostavaInfo.length-2) {
+                dostavaUlica += dostavaInfo[i];
+            } else {
+                dostavaUlica += dostavaInfo[i] + " ";
+            }
+        }
         
+        //  pridobivanje ID naložitve
         await knex('Naslov').where({
             'ulica': nalozitevUlica,
             'stevilka': nalozitevStevilka
         }).select('id').then((id) => {
             nalozitevID = id[0].id;
         });
+        
+        //  pridobivanje ID dostave
+        await knex('Naslov').where({
+            'ulica': dostavaUlica,
+            'stevilka': dostavaStevilka
+        }).select('id').then((id) => {
+            dostavaID = id[0].id;
+        });
 
-        let nazivTipaTovora = req.body.tipTovora;
-        let idTipTovora;
+        console.log(dostavaID);
 
+        //  pridobivanje ID tipa tovora
         await knex('Tip_tovora').where('naziv', nazivTipaTovora).select('id')
         .then((id) => {
             idTipTovora = id[0].id;
@@ -50,7 +75,7 @@ router.post('/', async(req, res, next) => {
             idVozilo: req.body.vozilo,
             idTip_tovora: req.body.idTipTovora,
             naslov_nalozitve_idNaslov: nalozitevID,
-            naslov_dostave_idNaslov: req.body.dostava
+            naslov_dostave_idNaslov: dostavaID
         }
         new table.Ponudba().save(podatki);
         res.status(200).send("Order successfully confirmed.");
