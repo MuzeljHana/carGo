@@ -3,11 +3,86 @@ const knex = require('../config/database');
 const express = require('express');
 const router = express.Router();
 
+router.get('/search', (req, res, next) => {
+    const query = knex.from('Vozilo as v')
+        .select([
+            "v.id",
+            "letnik",
+            "model",
+            "maks_teza_tovora",
+            "maks_volumen_tovora",
+            "maks_dolzina_tovora",
+            "maks_sirina_tovora",
+            "maks_visina_tovora",
+            "maks_st_palet",
+            "t.naziv as tip_vozila",
+            "z.naziv as znamka",
+            "c.cena_na_km"
+        ])
+        .where({
+            "c.datum_od": (qb) => {
+                qb.from("Cenik as c").max("datum_od").join("Vozilo as v", { 'c.idVozilo': 'v.id' });
+            }
+        })
+        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
+        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
+        .join("Znamka as z", { 'z.id': 'v.idZnamka' })
 
+    let tip_tovora = req.body.tip_tovora;
+    let teza_tovora;
+    switch (tip_tovora) {
+        case "posamezni izdelki":
+            let izdelki = req.body.izdelki;
+            teza_tovora = 0;
+            let volumen = 0;
+            for (const izdelek of izdelki) {
+                teza_tovora += izdelek.teza * izdelek.kolicina;
+                volumen += izdelek.dolzina * izdelek.visina * izdelek.sirina;
+            }
+            query.andWhere("v.maks_teza_tovora", ">=", teza_tovora)
+                .whereRaw("v.maks_dolzina_tovora * v.maks_sirina_tovora * v.maks_visina_tovora >= ?", [volumen])
+                .then((data) => {
+                    res.json(data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(500).send();
+                });
+            break;
+        case "palete":
+            let st_palet = req.body.st_palet;
+            teza_tovora = req.body.teza_palete * st_palet;
+            query.andWhere("v.maks_teza_tovora", ">=", teza_tovora)
+                .andWhere("v.maks_st_palet", ">=", st_palet)
+                .then((data) => {
+                    res.json(data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(500).send();
+                });
+            break;
+        case "razsut tovor":
+            let volumen_tovora = req.body.volumen_tovora;
+            teza_tovora = req.body.teza_tovora;
+            query.andWhere("v.maks_teza_tovora", ">=", teza_tovora)
+                .andWhere("v.maks_volumen_tovora", ">=", volumen_tovora)
+                .then((data) => {
+                    res.json(data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(500).send();
+                });
+            break;
+        default:
+            res.status(400).send();
+    }
+});
 
 router.use((req, res, next) => {
     if (!req.session.user_id) {
-        res.json({ "message": "Not signed in!" });
+        res.status(401).send();
     }
     next();
 })
