@@ -26,10 +26,6 @@ app.use((req, res, next) => {
     console.log(`${Date()} ${req.ip} ${req.method} ${req.originalUrl}`);
     next();
 });
-app.use((req, res, next) => {
-    req.session.user_id = 5;
-    next();
-});
 
 require('./routes/_routes')(app);
 
