@@ -52,8 +52,6 @@ router.post('/', async(req, res, next) => {
             dostavaID = id[0].id;
         });
 
-        console.log(dostavaID);
-
         //  pridobivanje ID tipa tovora
         await knex('Tip_tovora').where('naziv', nazivTipaTovora).select('id')
         .then((id) => {
