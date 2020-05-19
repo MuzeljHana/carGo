@@ -3,6 +3,8 @@ const knex = require('../config/database');
 const express = require('express');
 const router = express.Router();
 
+
+
 router.use((req, res, next) => {
     if (!req.session.user_id) {
         res.json({ "message": "Not signed in!" });
@@ -130,16 +132,6 @@ router.put('/:id/active/:bool', (req, res, next) => {
         .catch((err) => {
             console.log(err);
             res.status(500).send();
-        });
-});
-
-router.put('/:id/occupied/:bool', (req, res, next) => {
-    new table.Vozilo({ id: req.params.id }).save({ zasedenost: req.params.bool })
-        .then(() => {
-            res.json({ "message": "success" });
-        })
-        .catch((err) => {
-            res.status(500).json({ "message": err });
         });
 });
 
