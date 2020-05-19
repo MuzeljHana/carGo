@@ -47,12 +47,39 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-    new table.Vozilo({ id: req.params.id }).fetch()
-        .then((vozilo) => {
-            res.json(vozilo);
+    knex.from('Vozilo as v')
+        .select([
+            "v.id",
+            "letnik",
+            "registerska",
+            "model",
+            "maks_teza_tovora",
+            "aktivno",
+            "zasedeno",
+            "maks_volumen_tovora",
+            "maks_dolzina_tovora",
+            "maks_sirina_tovora",
+            "maks_visina_tovora",
+            "maks_st_palet",
+            "t.naziv as tip_vozila",
+            "z.naziv as znamka",
+            "c.cena_na_km"])
+        .where({
+            "idUporabnik": req.session.user_id,
+            "v.id": req.params.id,
+            "c.datum_od": (qb) => {
+                qb.from("Cenik as c").max("datum_od").join("Vozilo as v", { 'c.idVozilo': 'v.id' });
+            }
+        })
+        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
+        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
+        .join("Znamka as z", { 'z.id': 'v.idZnamka' })
+        .then((data) => {
+            res.json(data);
         })
         .catch((err) => {
-            res.status(500).json({ "message": err });
+            console.log(err);
+            res.status(500).send();
         });
 });
 
