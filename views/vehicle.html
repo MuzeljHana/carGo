@@ -24,19 +24,23 @@
                         <h4>Dodaj vozilo</h4>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="reg" type="text" class="validate">
+                                <input id="podjetje" type="text" class="validate" name="podjetje">
+                                <label for="podjetje">Podjetje</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="reg" type="text" class="validate" name="registracijska_st">
                                 <label for="reg">Registracijska številka</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="znamka" type="text" class="validate">
+                                <input id="znamka" type="text" class="validate" name="znamka">
                                 <label for="znamka">Znamka</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="letnik" type="text" class="validate">
+                                <input id="letnik" type="text" class="validate" name="letnik">
                                 <label for="letnik">Letnik</label>
                             </div>
                             <div class="input-field col s6">
-                                <select>
+                                <select name="tip">
                                     <option value="" disabled selected>Izberi</option>
                                     <option value="kombi">Kombi</option>
                                     <option value="Tovornjak razsut tovor">Tovornjak za razsut tovor</option>
@@ -49,45 +53,52 @@
                                 <hr>
                             </div>
                             <div class="input-field col s6">
-                                <input id="max_teza" type="text" class="validate">
+                                <input id="max_teza" type="text" class="validate" name="max_teza_tovora">
                                 <label for="max_teza">Maksimalna teža tovora</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="cena" type="text" class="validate">
+                                <input id="cena" type="text" class="validate" name="cena_km">
                                 <label for="cena">Cena na km</label>
                             </div>
 
                             <div class="hide">
                                 <div class="input-field col s6">
-                                    <input id="volumen" type="text" class="validate">
+                                    <input id="volumen" type="text" class="validate" name="volumen">
                                     <label for="volumen">Volumen</label>
                                 </div>
                             </div>
 
                             <div class="hide">
                                 <div class="input-field col s6">
-                                    <input id="visina" type="text" class="validate">
+                                    <input id="palete" type="text" class="validate" name="st_pelet">
+                                    <label for="palete">Številoa palet</label>
+                                </div>
+                            </div>
+
+                            <div class="hide">
+                                <div class="input-field col s6">
+                                    <input id="visina" type="text" class="validate" name="visina">
                                     <label for="visina">Višina tovora</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="dolzina" type="text" class="validate">
+                                    <input id="dolzina" type="text" class="validate" name="dolzina">
                                     <label for="dolzina">Dolžina tovora</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <input id="sirina" type="text" class="validate">
+                                    <input id="sirina" type="text" class="validate" name="sirina">
                                     <label for="sirina">Širina tovora</label>
                                 </div>
                             </div>
 
                             <div class="col s6">
                                 <label>
-                                    <input type="checkbox" class="filled-in" checked="checked" />
+                                    <input type="checkbox" class="filled-in" checked="checked" name="aktivnost" />
                                     <span>Aktivno</span>
                                 </label>
                             </div>
                             <div class="col s6">
                                 <label>
-                                    <input type="checkbox" class="filled-in">
+                                    <input type="checkbox" class="filled-in" name="potrdilo_izpravnosti">
                                     <span>Potrjujem, da je vozilo izpravno</span>
                                 </label>
                             </div>
