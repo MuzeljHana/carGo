@@ -12,4 +12,10 @@ function confirm() {
     //  tuji ključ
     let idUporabnik = sessionStorage.getItem("idUporabnik");
     let idVozilo = document.getElementById("vehicleID").innerHTML;
+
+    //  informacije za pridobivanje tujih ključev
+    let tipTovora = document.getElementById("tipTovora").value;
+    let nalozitev = document.getElementById("nalozitev").innerHTML;
+    let dostava = document.getElementById("dostava").innerHTML;  
+
 }
