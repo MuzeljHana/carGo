@@ -89,7 +89,7 @@ async function baza(){
         table.decimal('cena', [4], [2]).notNullable()
         table.boolean('potrdilo_izpravnosti').notNullable()
         table.boolean('aktivnost').notNullable()
-        table.boolean('zasedenost').notNullable()
+        table.boolean('zasedenost').notNullable().defaultTo(false)
         table.decimal('volumen', [4], [2])
         table.decimal('dolzina', [4], [2])
         table.decimal('sirina', [4], [2])
