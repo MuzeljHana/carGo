@@ -42,15 +42,31 @@
     <main>
         {% block main %}{% endblock %}
     </main>
-    <footer style="margin-top: 50px;">
-        <hr>
+    <footer class="grey lighten-2" style="margin-top: 50px;">
         <div class="container grey-text text-darken-4">
             <div class="row">
-                <div class="col l6 s12">
-                    <h5>Footer Content</h5>
-                    <p>You can use rows and columns here to organize your footer content.</p>
+                <div class="col l2 s12">
+                    <h5>Kontakt</h5>
+                    <ul style="font-family: Roboto;">
+                        <li>Email</li>
+                        <li>Address</li>
+                    </ul>
                 </div>
-                <div class="col l4 offset-l2 s12">
+                <div class="col l8 s12">
+                    <h5>O nas</h5>
+                    <p>
+                        Spletna aplikacija carGo je lokalno razvita storitev, ustvarjena za pomoč posameznikom kot malim
+                        in velikim podjetjem pri prevozu ali ponujanju prevoza.
+                    </p>
+                    <p>
+                        Je inovacija, ki postaja vedno bolj priljubljena zaradi lahkega dostopa in še lažje uporabe.
+                        Nudi lastni dogovor plačila ter terminov prevoza izdelkov in polizdelkov.
+                    </p>
+                    <p>
+                        Čeprav povezujemo veliko različnih podjetij, je varnost in zadovoljstvo na našem prvem mestu.
+                    </p>
+                </div>
+                <div class="col l2 s12">
                     <h5>Links</h5>
                     <ul>
                         <li><a href="#!">Link 1</a></li>
@@ -60,7 +76,10 @@
                     </ul>
                 </div>
             </div>
-            <div class="footer-copyright center-align">© 2020 Copyright Text</div>
+            <div class="footer-copyright center-align" style="font-family: Roboto;">
+                <div>Razvit z idejo, preproste in prilagodljive dostave</div>
+                <div>© 2020 carGo. All rights reserved.</div>
+            </div>
         </div>
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
