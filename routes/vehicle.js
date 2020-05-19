@@ -1,14 +1,48 @@
 const table = require('../config/models');
+const knex = require('../config/database');
 const express = require('express');
 const router = express.Router();
 
+router.use((req, res, next) => {
+    if (!req.session.user_id) {
+        res.json({ "message": "Not signed in!" });
+    }
+    next();
+})
+
 router.get('/', (req, res, next) => {
-    new table.Vozilo().fetchAll()
-        .then((vozila) => {
-            res.json(vozila);
+    knex.from('Vozilo as v')
+        .select([
+            "v.id",
+            "letnik",
+            "registerska",
+            "model",
+            "maks_teza_tovora",
+            "aktivno",
+            "zasedeno",
+            "maks_volumen_tovora",
+            "maks_dolzina_tovora",
+            "maks_sirina_tovora",
+            "maks_visina_tovora",
+            "maks_st_palet",
+            "t.naziv as tip_vozila",
+            "z.naziv as znamka",
+            "c.cena_na_km"])
+        .where({
+            "idUporabnik": req.session.user_id,
+            "c.datum_od": (qb) => {
+                qb.from("Cenik as c").max("datum_od").join("Vozilo as v", { 'c.idVozilo': 'v.id' });
+            }
+        })
+        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
+        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
+        .join("Znamka as z", { 'z.id': 'v.idZnamka' })
+        .then((data) => {
+            res.json(data);
         })
         .catch((err) => {
-            res.status(500).json({ "message": err });
+            console.log(err);
+            res.status(500).send();
         });
 });
 
@@ -90,7 +124,7 @@ router.delete('/:id', (req, res, next) => {
         });
 });
 
-router.post('/editVehicle', async(req, res, next) => {
+router.post('/editVehicle', async (req, res, next) => {
     let podjetje, tip, znamka, letnik;
     try {
         podjetje = await new table.Podjetje({ naziv: req.body.podjetje }).fetch({ columns: ['id'] });
@@ -101,31 +135,31 @@ router.post('/editVehicle', async(req, res, next) => {
         console.log(err);
         res.status(500).json({ "message": err });
     }
-        
-        let data= {
-            id: req.body.vozilo,
-            registracijska_st: req.body.registracijska_st,
-            max_teza: req.body.max_teza_tovora,
-            cena: req.body.cena_km,
-            potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-            aktivnost: req.body.aktivnost,
-            zasedenost: req.body.zasedenost,
-            volumen: req.body.volumen,
-            dolzina: req.body.dolzina,
-            sirina: req.body.sirina,
-            visina: req.body.visina,
-            st_palet: req.body.st_pelet,
-            tk_znamka: znamka.get('id'),
-            tk_tip_prevoza: tip.get('id'),
-            tk_letnik: letnik.get('id'),
-            tk_prevozno_podjetje: podjetje.get('id')
-        }
-        new table.Vozilo().save(data).then(() => {
-            res.json({ "message": "success" });
-        }).catch((err) => {
-            console.log(err);
-            res.status(500).json({ "message": err });
-        });
+
+    let data = {
+        id: req.body.vozilo,
+        registracijska_st: req.body.registracijska_st,
+        max_teza: req.body.max_teza_tovora,
+        cena: req.body.cena_km,
+        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+        aktivnost: req.body.aktivnost,
+        zasedenost: req.body.zasedenost,
+        volumen: req.body.volumen,
+        dolzina: req.body.dolzina,
+        sirina: req.body.sirina,
+        visina: req.body.visina,
+        st_palet: req.body.st_pelet,
+        tk_znamka: znamka.get('id'),
+        tk_tip_prevoza: tip.get('id'),
+        tk_letnik: letnik.get('id'),
+        tk_prevozno_podjetje: podjetje.get('id')
+    }
+    new table.Vozilo().save(data).then(() => {
+        res.json({ "message": "success" });
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json({ "message": err });
+    });
 });
 
 module.exports = router;
