@@ -1,9 +1,32 @@
 const table = require('../config/models');
+const knex = require('../config/database');
 const express = require('express');
 const router = express.Router();
 
 router.post('/', async(req, res, next) => {
     try {
+        let nalozitevInfo = req.body.nalozitev.split(" ");
+        let nalozitevUlica = "";
+        let nalozitevStevilka = "";
+        let nalozitevID;
+
+        for (let i = 0; i< nalozitevInfo.length; i++) {
+            if (i == nalozitevInfo.length-1) {
+                nalozitevStevilka = nalozitevInfo[i];
+            } else if (i == nalozitevInfo.length-2) {
+                nalozitevUlica += nalozitevInfo[i];
+            } else {
+                nalozitevUlica += nalozitevInfo[i] + " ";
+            }
+        }
+        
+        await knex('Naslov').where({
+            'ulica': nalozitevUlica,
+            'stevilka': nalozitevStevilka
+        }).select('id').then((id) => {
+            nalozitevID = id[0].id;
+        });
+
         let podatki = {
             //  podatki
             cas_nalozitve: req.body.casNalozitve,
@@ -15,11 +38,11 @@ router.post('/', async(req, res, next) => {
             st_palet: req.body.steviloPalet,
             teza_palet: req.body.tezaPalet,
             //  tuji ključi
+            idUporabnik: req.body.idUporabnik,
             idVozilo: req.body.vozilo,
             idTip_tovora: req.body.tipTovora,
-            naslov_nalozitve_idNaslov: req.body.nalozitev,
-            naslov_dostave_idNaslov: req.body.dostava,
-            idUporabnik: req.body.idUporabnik,
+            naslov_nalozitve_idNaslov: nalozitevID,
+            naslov_dostave_idNaslov: req.body.dostava
         }
         new table.Ponudba().save(podatki);
         res.status(200).send("Order successfully confirmed.");
