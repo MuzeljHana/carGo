@@ -17,7 +17,7 @@ function confirm() {
     let tipTovora = document.getElementById("tipTovora").value;
     let nalozitev = document.getElementById("nalozitev").innerHTML;
     let dostava = document.getElementById("dostava").innerHTML;  
-
+    
     fetch('http://localhost:3000/confirmation/', {
         method: 'POST',
         body: JSON.stringify([casNalozitve, status, casPonudbe, pripombe, tezaTovora, volumenTovora, 
