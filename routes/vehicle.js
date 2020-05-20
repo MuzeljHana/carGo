@@ -170,7 +170,6 @@ router.post('/', (req, res, next) => {
             potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
             maks_volumen_tovora: req.body.maks_volumen_tovora,
             maks_dolzina_tovora: req.body.maks_dolzina_tovora,
-            maks_dolzina_tovora: req.body.maks_dolzina_tovora,
             maks_sirina_tovora: req.body.maks_sirina_tovora,
             maks_visina_tovora: req.body.maks_visina_tovora,
             maks_st_palet: req.body.maks_st_palet,
