@@ -1,3 +1,26 @@
+$("[name='tip']").change(function () {
+    let tip = $("select[name='tip']").val();
+    
+    $("#tab-tovor").hide();
+    $("#tab-izdelki").hide();
+    $("#tab-palete").hide();
+    switch (tip) {
+        case "kombi":
+            $("#tab-izdelki").show();
+            break;
+        case "izredni prevoz":
+            $("#tab-izdelki").show();
+            break;
+        case "tovornjak razsut tovor":
+            $("#tab-tovor").show();
+            break;
+        case "tovornjak blago":
+            $("#tab-palete").show();
+            $("#tab-izdelki").show();
+            break;
+    }
+});
+
 $.ajax({
     method: "get",
     url: "/vehicle",
@@ -73,3 +96,43 @@ function getCard(vozilo) {
 </div>
 </div>`;
 }
+
+$("#agree").click(function () {
+    let letnik = document.getElementById('letnik').value;
+    let registerska = document.getElementById('registerska').value;
+    let model = document.getElementById('model').value;
+    let maks_teza_tovora = document.getElementById('max_teza').value;
+    let potrdilo_izpravnosti = document.getElementById('potrdilo_izpravnosti').value;
+    let maks_volumen_tovora = document.getElementById('maks_volumen_tovora').value;
+    let maks_dolzina_tovora = document.getElementById('maks_dolzina_tovora').value;
+    let maks_sirina_tovora = document.getElementById('maks_sirina_tovora').value;
+    let maks_visina_tovora = document.getElementById('maks_visina_tovora').value;
+    let maks_st_palet = document.getElementById('maks_st_palet').value;
+    let tip_vozila = document.getElementById('tip').value;
+    let znamka  = document.getElementById('znamka').value;
+    
+    let podatki = {
+        'letnik': letnik,
+        'registerska': registerska,
+        'model': model,
+        'maks_teza_tovora': maks_teza_tovora,
+        'potrdilo_izpravnosti': potrdilo_izpravnosti,
+        'maks_volumen_tovora': maks_volumen_tovora,
+        'maks_dolzina_tovora': maks_dolzina_tovora,
+        'maks_sirina_tovora': maks_sirina_tovora,
+        'maks_visina_tovora': maks_visina_tovora,
+        'maks_st_palet': maks_st_palet,
+        'tip_vozila': tip_vozila,
+        'znamka': znamka,
+    }
+ 
+    fetch('http://localhost:3000/vehicle', {
+        method: 'POST',
+        body: JSON.stringify(podatki),
+        headers: {
+            'Content type': 'application/json'
+        }
+    }).then((response) => {
+        console.log("Vehicle successfully added");
+    });
+});
