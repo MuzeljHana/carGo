@@ -24,12 +24,12 @@
                         <h4>Dodaj vozilo</h4>
                         <div class="row">
                             <div class="input-field col s6">
-                                <input id="podjetje" type="text" class="validate" name="podjetje">
-                                <label for="podjetje">Podjetje</label>
+                                <input id="model" type="text" class="validate" name="model">
+                                <label for="model">Model</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="reg" type="text" class="validate" name="registracijska_st">
-                                <label for="reg">Registracijska številka</label>
+                                <input id="registerska" type="text" class="validate" name="registerska">
+                                <label for="registerska">Registracijska številka</label>
                             </div>
                             <div class="input-field col s6">
                                 <input id="znamka" type="text" class="validate" name="znamka">
@@ -40,11 +40,11 @@
                                 <label for="letnik">Letnik</label>
                             </div>
                             <div class="input-field col s6">
-                                <select name="tip">
+                                <select id="tip" name="tip">
                                     <option value="" disabled selected>Izberi</option>
                                     <option value="kombi">Kombi</option>
-                                    <option value="Tovornjak razsut tovor">Tovornjak za razsut tovor</option>
-                                    <option value="Tovornjak blago">Tovornjak za blago</option>
+                                    <option value="tovornjak razsut tovor">Tovornjak za razsut tovor</option>
+                                    <option value="tovornjak blago">Tovornjak za blago</option>
                                     <option value="izredni prevoz">Izredni prevoz</option>
                                 </select>
                                 <label>Tip vozila</label>
@@ -57,55 +57,42 @@
                                 <label for="max_teza">Maksimalna teža tovora</label>
                             </div>
                             <div class="input-field col s6">
-                                <input id="cena" type="text" class="validate" name="cena_km">
-                                <label for="cena">Cena na km</label>
+                                <input id="potrdilo_izpravnosti" type="text" class="validate" name="potrdilo_izpravnosti">
+                                <label for="potrdilo_izpravnosti">Cena na km</label>
                             </div>
 
-                            <div class="hide">
+                            <div id="tab_tovor">
                                 <div class="input-field col s6">
-                                    <input id="volumen" type="text" class="validate" name="volumen">
-                                    <label for="volumen">Volumen</label>
-                                </div>
-                            </div>
-
-                            <div class="hide">
-                                <div class="input-field col s6">
-                                    <input id="palete" type="text" class="validate" name="st_pelet">
-                                    <label for="palete">Številoa palet</label>
+                                    <input id="maks_volumen_tovora" type="text" class="validate" name="maks_volumen_tovora">
+                                    <label for="maks_volumen_tovora">Volumen</label>
                                 </div>
                             </div>
 
-                            <div class="hide">
+                            <div id="tab-palete">
                                 <div class="input-field col s6">
-                                    <input id="visina" type="text" class="validate" name="visina">
-                                    <label for="visina">Višina tovora</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="dolzina" type="text" class="validate" name="dolzina">
-                                    <label for="dolzina">Dolžina tovora</label>
-                                </div>
-                                <div class="input-field col s6">
-                                    <input id="sirina" type="text" class="validate" name="sirina">
-                                    <label for="sirina">Širina tovora</label>
+                                    <input id="maks_st_palet" type="text" class="validate" name="maks_st_palet">
+                                    <label for="maks_st_palet">Številoa palet</label>
                                 </div>
                             </div>
 
-                            <div class="col s6">
-                                <label>
-                                    <input type="checkbox" class="filled-in" checked="checked" name="aktivnost" />
-                                    <span>Aktivno</span>
-                                </label>
-                            </div>
-                            <div class="col s6">
-                                <label>
-                                    <input type="checkbox" class="filled-in" name="potrdilo_izpravnosti">
-                                    <span>Potrjujem, da je vozilo izpravno</span>
-                                </label>
+                            <div id="tab-izdelki">
+                                <div class="input-field col s6">
+                                    <input id="maks_visina_tovora" type="text" class="validate" name="maks_visina_tovora">
+                                    <label for="maks_visina_tovora">Višina tovora</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="maks_dolzina_tovora" type="text" class="validate" name="maks_dolzina_tovora">
+                                    <label for="maks_dolzina_tovora">Dolžina tovora</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="maks_sirina_tovora" type="text" class="validate" name="maks_sirina_tovora">
+                                    <label for="maks_sirina_tovora">Širina tovora</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="agree">Agree</a>
                     </div>
                 </div>
             </div>
