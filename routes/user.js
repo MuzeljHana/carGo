@@ -4,10 +4,10 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/register', async (req, res, next) => {
-    if (PostaExists(req.body.kraj, req.body.postna_stevilka)) {
+    if (!PostaExists(req.body.kraj, req.body.postna_stevilka)) {
         await knex.into("Posta").insert([{ kraj: req.body.kraj, stevilka: req.body.postna_stevilka }]);
     }
-    if (NaslovExists(req.body.ulica, req.body.hisna_stevilka)) {
+    if (!NaslovExists(req.body.ulica, req.body.hisna_stevilka)) {
         await knex.into("Naslov").insert([{ 
                 ulica: req.body.ulica, 
                 stevilka: req.body.hisna_stevilka, 
