@@ -75,7 +75,7 @@ router.post('/', async(req, res, next) => {
             naslov_nalozitve_idNaslov: nalozitevID,
             naslov_dostave_idNaslov: dostavaID
         }
-        await new table.Ponudba().save(podatki);
+        new table.Ponudba().save(podatki);
         res.status(200).send("Order successfully confirmed.");
     } catch (error) {
         res.status(500).json(error);
