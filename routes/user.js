@@ -4,18 +4,10 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/register', async (req, res, next) => {
-    let posta = await knex.from("Posta as p")
-                        .select("p.id")
-                        .where({ kraj: req.body.kraj })
-                        .orWhere({ stevilka: req.body.postna_stevilka });
-    if (posta.length == 0) {
+    if (PostaExists(req.body.kraj, req.body.postna_stevilka)) {
         await knex.into("Posta").insert([{ kraj: req.body.kraj, stevilka: req.body.postna_stevilka }]);
     }
-    let naslov = await knex.from("Naslov as n")
-                        .select("n.id")
-                        .where({ ulica: req.body.ulica, "n.stevilka": req.body.hisna_stevilka })
-                        .join("Posta as p", { 'n.idPosta': 'p.id' });
-    if (naslov.length == 0) {
+    if (NaslovExists(req.body.ulica, req.body.hisna_stevilka)) {
         await knex.into("Naslov").insert([{ 
                 ulica: req.body.ulica, 
                 stevilka: req.body.hisna_stevilka, 
@@ -37,25 +29,24 @@ router.post('/register', async (req, res, next) => {
         }
     };
     if (req.body.naziv_podjetja) {
-        data.naziv_podjetja = req.body.naziv_podjetja;
-        data.davcna = req.body.davcna;
-        data.zacetek_delovanja = req.body.zacetek_delovanja;
-        data.uspesnost_poslovanja = req.body.uspesnost_poslovanja;
+        let podjetje_data = {
+            naziv_podjetja: req.body.naziv_podjetja,
+            davcna: req.body.davcna,
+            zacetek_delovanja: req.body.zacetek_delovanja,
+            uspesnost_poslovanja: req.body.uspesnost_poslovanja
+        }
+        data = Object.assign(data, podjetje_data);
     }
-    let user = await knex.from("Uporabnik")
-                        .select("id")
-                        .where({ email: req.body.email })
-                        .orWhere({ davcna: req.body.davcna || 0 });
-    if (user.length == 0) {
+    if (!UserExists(req.body.email, req.body.davcna)) {
         knex.into("Uporabnik")
-        .insert([data])
-        .then((data) => {
-            res.send();
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).send();
-        });
+            .insert([data])
+            .then((data) => {
+                res.send();
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).send();
+            });
     } else {
         res.json({ "message": "User exists" });
     }
@@ -80,3 +71,27 @@ router.post("/login", (req, res, next) => {
 });
 
 module.exports = router;
+
+async function PostaExists(kraj, stevilka) {
+    let posta = await knex.from("Posta as p")
+                        .select("p.id")
+                        .where({ kraj: kraj })
+                        .orWhere({ stevilka: stevilka });
+    return posta.length != 0;
+}
+
+async function NaslovExists(ulica, stevilka) {
+    let naslov = await knex.from("Naslov as n")
+                        .select("n.id")
+                        .where({ ulica: ulica, "n.stevilka": stevilka })
+                        .join("Posta as p", { 'n.idPosta': 'p.id' });
+    return naslov.length != 0;
+}
+
+async function UserExists(email, davcna) {
+    let user = await knex.from("Uporabnik")
+                        .select("id")
+                        .where({ email: email })
+                        .orWhere({ davcna: davcna || 0 });
+    return user.length != 0;
+}
