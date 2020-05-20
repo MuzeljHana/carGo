@@ -13,6 +13,10 @@ $.ajax({
     });
 
 function getCard(vozilo) {
+    let zasedenost, aktivnost = '';
+    if (vozilo.aktivno==1){aktivnost='da'}else aktivnost='ne';
+    if (vozilo.zasedeno==1){zasedenost='da'}else zasedenost='ne';
+
     return `<div class="row" style="padding: 0 15px 0 15px;">
 <div class="col s12 white" style="border-radius: 10px; padding: 15px;">
     <div class="col s12 m4 valign-wrapper center-align">
@@ -21,7 +25,7 @@ function getCard(vozilo) {
     <div class="col s12 m8">
         <div class="row">
             <div class="col s10">
-                <h4>` + vozilo.registracijska_st + `</h4>
+                <h4>` + vozilo.model+' '+vozilo.letnik + `</h4>
             </div>
             <div class="col s2" style="margin-top: 25px;">
                 <a class="waves-effect waves-light btn-flat right"><i
@@ -30,24 +34,35 @@ function getCard(vozilo) {
         </div>
         <div class="row">
             <div class="col s4">
-                <span>Cena: ` + vozilo.cena + `€/km</span>
+                <span>Registerska: ` + vozilo.registerska + `€/km</span>
             </div>
             <div class="col s4">
-                <span>Aktivnost: ` + vozilo.aktivnost + `</span>
+                <span>Aktivnost: ` + aktivnost + `</span>
             </div>
             <div class="col s4">
-                <span>Zaseden: ` + vozilo.zasedenost + `</span>
+                <span>Zaseden: ` + zasedenost + `</span>
             </div>
         </div>
         <div class="row">
             <div class="col s4">
-                <span>Dolžina: </span>
+                <span>Teza: ` + vozilo.maks_teza_tovora + `</span>
             </div>
             <div class="col s4">
-                <span>Širina: </span>
+                <span>Palete: ` + vozilo.maks_st_palet + `</span>
             </div>
             <div class="col s4">
-                <span>Višina: <span></span></span>
+                <span>Volumen: ` + vozilo.maks_volumen_tovora + `<span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                <span>Dolžina: ` + vozilo.maks_dolzina_tovora + `</span>
+            </div>
+            <div class="col s4">
+                <span>Širina: ` + vozilo.maks_sirina_tovora + `</span>
+            </div>
+            <div class="col s4">
+                <span>Višina: ` + vozilo.maks_visina_tovora + `<span></span></span>
             </div>
         </div>
         <div class="row">
