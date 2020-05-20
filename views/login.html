@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Prijava - carGo{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row valign-wrapper" style="height: 40vh;">
+        <div class="col m4 offset-m4 s12">
+            <h3>Prijava</h3>
+            <form id="prijava">
+                <div class="input-field">
+                    <input id="email" type="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input id="geslo" type="password" class="validate">
+                    <label for="geslo">Geslo</label>
+                    <span class="helper-text" data-error="Email ali geslo napačno!"></span>
+                </div>
+                <button class="waves-effect waves-light btn" type="submit" style="width: 100%; font-family: Quicksand;">Prijava</button>
+            </form>
+            <p class="center-align">Še nimaš računa? Registreraj se <a href="/register">tukaj</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="/javascripts/login.js"></script>
+{% endblock %}
