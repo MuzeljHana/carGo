@@ -142,3 +142,40 @@ function deleteVehicle(id){
         //
     });
 };
+function editVehicle(id) {
+    let letnik = document.getElementById('letnik-uredi').value;
+    let registerska = document.getElementById('registerska-uredi').value;
+    let model = document.getElementById('model-uredi').value;
+    let maks_teza_tovora = document.getElementById('max_teza-uredi').value;
+    let potrdilo_izpravnosti = document.getElementById('potrdilo_izpravnosti-uredi').value;
+    let maks_volumen_tovora = document.getElementById('maks_volumen_tovora-uredi').value;
+    let maks_dolzina_tovora = document.getElementById('maks_dolzina_tovora-uredi').value;
+    let maks_sirina_tovora = document.getElementById('maks_sirina_tovora-uredi').value;
+    let maks_visina_tovora = document.getElementById('maks_visina_tovora-uredi').value;
+    let maks_st_palet = document.getElementById('maks_st_palet-uredi').value;
+    let tip_vozila = document.getElementById('tip-uredi').value;
+    let znamka  = document.getElementById('znamka-uredi').value;
+    
+    let podatki = {
+        'id': id,
+        'letnik': letnik,
+        'registerska': registerska,
+        'model': model,
+        'maks_teza_tovora': maks_teza_tovora,
+        'potrdilo_izpravnosti': potrdilo_izpravnosti,
+        'maks_volumen_tovora': maks_volumen_tovora,
+        'maks_dolzina_tovora': maks_dolzina_tovora,
+        'maks_sirina_tovora': maks_sirina_tovora,
+        'maks_visina_tovora': maks_visina_tovora,
+        'maks_st_palet': maks_st_palet,
+        'tip_vozila': tip_vozila,
+        'znamka': znamka,
+    }
+ 
+    fetch('http://localhost:3000/vehicle/edit', {
+        method: 'POST',
+        body: JSON.stringify(podatki)
+    }).then((response) => {
+        console.log("Vehicle successfully edited");
+    });
+};
