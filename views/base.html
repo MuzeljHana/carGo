@@ -14,73 +14,84 @@
 
 <body>
     <header>
+        {% block header %}
         <nav style="background-color: white; height: 8rem;" class="z-depth-0">
             <div class="nav-wrapper">
                 <a href="/" class="brand-logo"><img src="/images/logo_black.svg" alt="" height="100%"></a>
                 <a href="#" data-target="mobile-sidenav" class="sidenav-trigger grey-text text-darken-4"
                     style="margin: 40px 0 0 30px;"><i style="font-size: 40px;" class="material-icons">menu</i></a>
                 <ul class="left hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-left: 18rem;">
-                    <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;"
-                            href="/search">Poišči prevoz</a></li>
+                    <li><a class="grey-text text-darken-4 nav-link" href="/search">Poišči prevoz</a></li>
                 </ul>
                 <ul class="right hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-right: 4rem;">
-                    <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;"
-                            href="/login">Prijava</a></li>
-                    <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;"
-                            href="/register">Registracija</a></li>
+                    {% if login %}
+                    <li><a class="grey-text text-darken-4 nav-link" href="/dashboard">Nadzorna plošča</a></li>
+                    {% else %}
+                    <li><a class="grey-text text-darken-4 nav-link" href="/login">Prijava</a></li>
+                    <li><a class="grey-text text-darken-4 nav-link" href="/register">Registracija</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
         <ul id="mobile-sidenav" class="sidenav">
-            <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;" href="">Prevozi</a></li>
-            <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;" href="">Prijava</a>
-            </li>
-            <li><a class="grey-text text-darken-4" style="font-size: 24px; font-weight: bold;" href="">O nas</a>
-            </li>
+            <li><a class="grey-text text-darken-4 nav-link" href="/search">Poišči prevoz</a></li>
+            {% if login %}
+            <li><a class="grey-text text-darken-4 nav-link" href="/dashboard">Nadzorna plošča</a></li>
+            {% else %}
+            <li><a class="grey-text text-darken-4 nav-link" href="/login">Prijava</a></li>
+            <li><a class="grey-text text-darken-4 nav-link" href="/register">Registracija</a></li>
+            {% endif %}
         </ul>
+        {% endblock %}
     </header>
     <main>
         {% block main %}{% endblock %}
     </main>
-    <footer class="grey lighten-2" style="margin-top: 50px;">
-        <div class="container grey-text text-darken-4">
-            <div class="row">
-                <div class="col l2 s12">
-                    <h5>Kontakt</h5>
-                    <ul style="font-family: Roboto;">
-                        <li>Email</li>
-                        <li>Address</li>
-                    </ul>
+    <footer>
+        {% block footer %}
+        <div class="grey lighten-2" style="margin-top: 50px;">
+            <div class="container grey-text text-darken-4">
+                <div class="row">
+                    <div class="col l2 s12">
+                        <h5>Kontakt</h5>
+                        <ul style="font-family: Roboto;">
+                            <li>Email</li>
+                            <li>Address</li>
+                        </ul>
+                    </div>
+                    <div class="col l8 s12">
+                        <h5>O nas</h5>
+                        <p>
+                            Spletna aplikacija carGo je lokalno razvita storitev, ustvarjena za pomoč posameznikom kot
+                            malim
+                            in velikim podjetjem pri prevozu ali ponujanju prevoza.
+                        </p>
+                        <p>
+                            Je inovacija, ki postaja vedno bolj priljubljena zaradi lahkega dostopa in še lažje uporabe.
+                            Nudi lastni dogovor plačila ter terminov prevoza izdelkov in polizdelkov.
+                        </p>
+                        <p>
+                            Čeprav povezujemo veliko različnih podjetij, je varnost in zadovoljstvo na našem prvem
+                            mestu.
+                        </p>
+                    </div>
+                    <div class="col l2 s12">
+                        <h5>Links</h5>
+                        <ul>
+                            <li><a href="#!">Link 1</a></li>
+                            <li><a href="#!">Link 2</a></li>
+                            <li><a href="#!">Link 3</a></li>
+                            <li><a href="#!">Link 4</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col l8 s12">
-                    <h5>O nas</h5>
-                    <p>
-                        Spletna aplikacija carGo je lokalno razvita storitev, ustvarjena za pomoč posameznikom kot malim
-                        in velikim podjetjem pri prevozu ali ponujanju prevoza.
-                    </p>
-                    <p>
-                        Je inovacija, ki postaja vedno bolj priljubljena zaradi lahkega dostopa in še lažje uporabe.
-                        Nudi lastni dogovor plačila ter terminov prevoza izdelkov in polizdelkov.
-                    </p>
-                    <p>
-                        Čeprav povezujemo veliko različnih podjetij, je varnost in zadovoljstvo na našem prvem mestu.
-                    </p>
+                <div class="footer-copyright center-align" style="font-family: Roboto;">
+                    <div>Razvit z idejo, preproste in prilagodljive dostave</div>
+                    <div>© 2020 carGo. All rights reserved.</div>
                 </div>
-                <div class="col l2 s12">
-                    <h5>Links</h5>
-                    <ul>
-                        <li><a href="#!">Link 1</a></li>
-                        <li><a href="#!">Link 2</a></li>
-                        <li><a href="#!">Link 3</a></li>
-                        <li><a href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-copyright center-align" style="font-family: Roboto;">
-                <div>Razvit z idejo, preproste in prilagodljive dostave</div>
-                <div>© 2020 carGo. All rights reserved.</div>
             </div>
         </div>
+        {% endblock %}
     </footer>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>

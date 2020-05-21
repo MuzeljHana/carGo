@@ -26,3 +26,8 @@ p {
     text-transform: none;
     border-radius: 50px;
 }
+
+.nav-link {
+    font-size: 24px;
+    font-weight: bold;
+}
