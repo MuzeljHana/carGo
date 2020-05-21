@@ -31,3 +31,13 @@ p {
     font-size: 24px;
     font-weight: bold;
 }
+
+.bottom-sidenav {
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+}
+
+.sidenav {
+    height: 100vh;
+}

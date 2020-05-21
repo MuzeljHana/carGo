@@ -26,6 +26,8 @@
                 <ul class="right hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-right: 4rem;">
                     {% if login %}
                     <li><a class="grey-text text-darken-4 nav-link" href="/dashboard">Nadzorna plošča</a></li>
+                    <li><a class="grey-text text-darken-4 nav-link" href="/user/logout" title="Izpis"><i
+                                class="material-icons grey-text text-darken-4">exit_to_app</i></a></li>
                     {% else %}
                     <li><a class="grey-text text-darken-4 nav-link" href="/login">Prijava</a></li>
                     <li><a class="grey-text text-darken-4 nav-link" href="/register">Registracija</a></li>
@@ -34,12 +36,18 @@
             </div>
         </nav>
         <ul id="mobile-sidenav" class="sidenav">
-            <li><a class="grey-text text-darken-4 nav-link" href="/search">Poišči prevoz</a></li>
+            <li><a class="grey-text text-darken-4 nav-link" href="/search"><i class="material-icons">search</i>Poišči
+                    prevoz</a></li>
             {% if login %}
-            <li><a class="grey-text text-darken-4 nav-link" href="/dashboard">Nadzorna plošča</a></li>
+            <li><a class="grey-text text-darken-4 nav-link" href="/dashboard"><i
+                        class="material-icons">dashboard</i>Nadzorna plošča</a></li>
+            <li class="bottom-sidenav"><a class="grey-text text-darken-4 nav-link" href="/user/logout"><i
+                        class="material-icons">exit_to_app</i>Izpis</a></li>
             {% else %}
-            <li><a class="grey-text text-darken-4 nav-link" href="/login">Prijava</a></li>
-            <li><a class="grey-text text-darken-4 nav-link" href="/register">Registracija</a></li>
+            <li><a class="grey-text text-darken-4 nav-link" href="/login"><i
+                        class="material-icons">exit_to_app</i>Prijava</a></li>
+            <li><a class="grey-text text-darken-4 nav-link" href="/register"><i
+                        class="material-icons">person_add</i>Registracija</a></li>
             {% endif %}
         </ul>
         {% endblock %}
