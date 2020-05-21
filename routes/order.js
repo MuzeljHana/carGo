@@ -3,29 +3,45 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    new table.Termin().fetchAll()
-        .then((termini) => {
-            res.json(termini);
+    new table.Ponudba().fetchAll()
+        .then((ponudbe) => {
+            res.json(ponudbe);
         })
         .catch((err) => {
             res.status(500).json(err);
         });
 });
 
-router.get('/:id', async (req, res, next) => {
-    let povezava;
-    try{
-        povezava = await new table.Povezava({tk_iskalec_prevoza: req.params.id}).fetch({columns: ['tk_tovor']});
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ "message": err });
-    }
-    new table.Termin().where('tk_tovor', povezava.get('tk_tovor')).fetchAll()
-        .then((termin) => {
-            res.json(termin);
+router.get('/:id', (req, res, next) => {
+    knex.from('Ponudba as p')
+        .select([
+            "p.id",
+            "cas_nalozitve",
+            "status",
+            "cas_ponudbe",
+            "pripombe",
+            "teza_tovora",
+            "volumen_tovora",
+            "st_palet",
+            "teza_palet",
+            "idVozilo",
+            "idTip_tovora",
+            "naslov_nalozitve_idNaslov",
+            "naslov_dostave_idNaslov"])
+        .where({
+            "idUporabnik": req.session.user_id,
+            "p.id": req.params.id,
+        })
+        .join("Vozilo as v", { 'v.id': 'p.idVozilo' })
+        .join("Tip_tovora as t", { 't.id': 'p.idTip_tovora' })
+        .join("Naslov as n", { 'n.id': 'p.naslov_nalozitve_idNaslov' })
+        .join("Naslov as n", { 'n.id': 'p.naslov_dostave_idNaslov' })
+        .then((data) => {
+            res.json(data);
         })
         .catch((err) => {
-            res.status(500).json(err);
+            console.log(err);
+            res.status(500).send();
         });
 });
 
