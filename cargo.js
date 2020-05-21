@@ -18,7 +18,7 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(session({
-    secret: 'keyboard cat',
+    secret: require('crypto').randomBytes(64).toString('hex'),
     resave: false,
     saveUninitialized: true
 }));
