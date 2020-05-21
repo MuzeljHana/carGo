@@ -84,10 +84,7 @@ router.post('/search', (req, res, next) => {
     }
 });
 
-// Use session from here on
-router.use(auth);
-
-router.get('/', (req, res, next) => {
+router.get('/', auth, (req, res, next) => {
     knex.from('Vozilo as v')
         .select([
             "v.id",
@@ -123,7 +120,7 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', auth, (req, res, next) => {
     knex.from('Vozilo as v')
         .select([
             "v.id",
@@ -160,7 +157,7 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', auth, (req, res, next) => {
     knex.into('Vozilo')
         .insert([{
             letnik: req.body.letnik,
@@ -191,7 +188,7 @@ router.post('/', (req, res, next) => {
         });
 });
 
-router.put('/:id/active/:bool', (req, res, next) => {
+router.put('/:id/active/:bool', auth, (req, res, next) => {
     knex('Vozilo')
         .update({
             aktivno: req.params.bool
@@ -209,7 +206,7 @@ router.put('/:id/active/:bool', (req, res, next) => {
         });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', auth, (req, res, next) => {
     knex('Vozilo')
         .del()
         .where({

@@ -23,7 +23,7 @@ $("[name='tip']").change(function () {
 
 $.ajax({
     method: "get",
-    url: "/vehicle",
+    url: "/vehicle/",
     dataType: "json"
 })
     .done(function (data) {

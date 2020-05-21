@@ -1,3 +1,4 @@
+const auth = require('./auth');
 const express = require('express');
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.get('/transports', (req, res, next) => {
     res.render('transports', req.template_data);
 });
 
-router.get('/dashboard/vehicle', (req, res, next) => {
+router.get('/dashboard/vehicle', auth, (req, res, next) => {
     res.render('vehicle', req.template_data);
 });
 
