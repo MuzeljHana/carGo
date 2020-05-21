@@ -75,6 +75,15 @@ router.post("/login", (req, res, next) => {
         });
 });
 
+router.get("/logout", (req, res, next) => {
+    if (req.session) {
+        req.session.destroy();
+        res.redirect("/");
+    } else {
+        res.json({ message: "user not logged in" });
+    }
+});
+
 module.exports = router;
 
 async function PostaExists(kraj, stevilka) {
