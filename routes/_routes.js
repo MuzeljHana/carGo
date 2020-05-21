@@ -7,7 +7,7 @@ const owner = require('./owner');
 const customer = require('./customer');
 const user = require('./user');
 
-module.exports = function (app) {
+module.exports = (app) => {
     app.use('/example', example)
     app.use('/', page);
     app.use('/vehicle', vehicle);
