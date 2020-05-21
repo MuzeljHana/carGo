@@ -128,16 +128,17 @@ $("#agree").click(function () {
  
     fetch('http://localhost:3000/vehicle', {
         method: 'POST',
-        body: JSON.stringify(podatki),
-        headers: {
-            'Content type': 'application/json'
-        }
+        body: JSON.stringify(podatki)
     }).then((response) => {
         console.log("Vehicle successfully added");
     });
 });
 
 function deleteVehicle(id){
-    fetch(`http://localhost:3000/vehicle/${id}`, {method: 'DELETE'})
-    .then((odgovor) => { })
+    fetch(`http://localhost:3000/vehicle/${id}`, {
+        method: 'DELETE'
+    }).then((response) => {
+        console.log("Vehicle successfully deleted");
+        //
+    });
 };
