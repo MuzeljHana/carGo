@@ -51,7 +51,7 @@ function getCard(vozilo) {
                 <h4>` + vozilo.model+' '+vozilo.letnik + `</h4>
             </div>
             <div class="col s2" style="margin-top: 25px;">
-                <a class="waves-effect waves-light btn-flat right"><i
+                <a class="waves-effect waves-light btn-flat right" name="brisi" onclick="deleteVehicle(`+vozilo.id+`)"><i
                         class="material-icons">close</i></a>
             </div>
         </div>
@@ -136,3 +136,8 @@ $("#agree").click(function () {
         console.log("Vehicle successfully added");
     });
 });
+
+function deleteVehicle(id){
+    fetch(`http://localhost:3000/vehicle/${id}`, {method: 'DELETE'})
+    .then((odgovor) => { })
+};
