@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Registracija - carGo{% endblock %}
+
+{% block head %}
+<style>
+    .tabs .tab a:focus.active {
+        color: #26a69a;
+        /*Custom Text Color While Active*/
+        background-color: rgba(38, 166, 154, 0.2);
+        /*Custom Background Color While Active*/
+    }
+
+    .tabs .indicator {
+        background-color: #26a69a;
+        /*Custom Color Of Indicator*/
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col m6 offset-m3 s12">
+            <h3>Registracija</h3>
+            <ul class="tabs tabs-fixed-width">
+                <li class="tab col s3"><a class="active grey-text text-darken-4" href="#iskalec">Iskalec</a></li>
+                <li class="tab col s3"><a class="grey-text text-darken-4" href="#ponudnik">Ponudnik</a></li>
+            </ul>
+            <div id="iskalec">
+                <div class="input-field">
+                    <input id="i_ime" type="text">
+                    <label for="i_ime">Ime</label>
+                </div>
+                <div class="input-field">
+                    <input id="i_priimek" type="text">
+                    <label for="i_priimek">Priimek</label>
+                </div>
+                <div class="input-field" style="margin-top: 3rem;">
+                    <input id="i_email" type="email" class="validate">
+                    <label for="i_email">Email</label>
+                    <span class="helper-text" data-error="Email že v uporabi"></span>
+                </div>
+                <div class="input-field">
+                    <input id="i_geslo" type="password" class="validate">
+                    <label for="i_geslo">Geslo</label>
+                    <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
+                </div>
+                <div class="input-field">
+                    <input id="i_pgeslo" type="password" class="validate">
+                    <label for="i_pgeslo">Ponovi geslo</label>
+                    <span class="helper-text" data-error="Gesli se ne ujemata"></span>
+                </div>
+            </div>
+            <div id="ponudnik">
+                <div class="input-field">
+                    <input id="p_ime" type="text">
+                    <label for="p_ime">Ime</label>
+                </div>
+                <div class="input-field">
+                    <input id="p_priimek" type="text">
+                    <label for="p_priimek">Priimek</label>
+                </div>
+                <div class="input-field" style="margin-top: 3rem;">
+                    <input id="p_email" type="email" class="validate">
+                    <label for="p_email">Email</label>
+                    <span class="helper-text" data-error="Email že v uporabi"></span>
+                </div>
+                <div class="input-field">
+                    <input id="p_geslo" type="password" class="validate">
+                    <label for="p_geslo">Geslo</label>
+                    <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
+                </div>
+                <div class="input-field">
+                    <input id="p_pgeslo" type="password" class="validate">
+                    <label for="p_pgeslo">Ponovi geslo</label>
+                    <span class="helper-text" data-error="Gesli se ne ujemata"></span>
+                </div>
+                <div class="input-field" style="margin-top: 3rem;">
+                    <input id="naziv_podjetja" type="text" class="validate">
+                    <label for="naziv_podjetja">Naziv podjetja</label>
+                </div>
+                <div class="input-field">
+                    <input id="davcna" type="number" class="validate">
+                    <label for="davcna">Davcna številka</label>
+                </div>
+                <div class="input-field">
+                    <input id="zacetek_delovanja" type="text" class="datepicker">
+                    <label for="zacetek_delovanja">Začetek delovanja</label>
+                </div>
+                <div class="input-field">
+                    <input id="uspesnost_poslovanja" type="text">
+                    <label for="uspesnost_poslovanja">Uspešnost poslovanja</label>
+                </div>
+            </div>
+            <a id="prijava" class="waves-effect waves-light btn" style="width: 100%;">Registracija</a>
+            <p class="center-align">Že imaš račun? Prijavi se <a href="/login">tukaj</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('.tabs').tabs();
+        $('.datepicker').datepicker();
+    });
+</script>
+<script src="/javascripts/register.js"></script>
+{% endblock %}
