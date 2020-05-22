@@ -157,9 +157,10 @@ router.get('/:id', auth, (req, res, next) => {
         });
 });
 
-router.post('/', auth, (req, res, next) => {
-    knex.into('Vozilo')
-        .insert([{
+
+router.post('/editVehicle', auth, (req, res, next) => {
+    knex('Vozilo')
+        .update({
             letnik: req.body.letnik,
             registerska: req.body.registerska,
             model: req.body.model,
@@ -170,15 +171,11 @@ router.post('/', auth, (req, res, next) => {
             maks_sirina_tovora: req.body.maks_sirina_tovora,
             maks_visina_tovora: req.body.maks_visina_tovora,
             maks_st_palet: req.body.maks_st_palet,
-
+        })
+        .where({
             idUporabnik: req.session.user_id,
-            idZnamka: (qb) => {
-                qb.from("Znamka").select("id").where({ naziv: req.body.znamka });
-            },
-            idTip_vozila: (qb) => {
-                qb.from("Tip_vozila").select("id").where({ naziv: req.body.tip_vozila });
-            }
-        }])
+            id: req.params.id
+        })
         .then((data) => {
             res.send();
         })
