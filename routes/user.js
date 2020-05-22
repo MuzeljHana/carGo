@@ -83,7 +83,46 @@ router.get("/logout", (req, res, next) => {
         res.json({ message: "user not logged in" });
     }
 });
-
+/* Yet to be tested and improved da bo dejansko delal..
+router.post('/editUser' , (req,res,next => {
+        knex('Uporabnik')
+            .update({
+                ime: req.body.ime,
+                priimek: req.body.priimek,
+                email: req.body.email,
+                geslo: bcrypt.hashSync(req.body.geslo.trim(), 10),
+                idNaslov: (qb) => {
+                qb.from("Naslov").select("id").where({ ulica: req.body.ulica, stevilka: req.body.hisna_stevilka })}
+            })
+            .where({
+                idUporabnik: req.session.user_id,
+                id: req.params.id
+            })
+            if (req.body.naziv_podjetja) {
+                let podjetje_data = {
+                    naziv_podjetja: req.body.naziv_podjetja,
+                    davcna: req.body.davcna,
+                    zacetek_delovanja: req.body.zacetek_delovanja,
+                    uspesnost_poslovanja: req.body.uspesnost_poslovanja
+                }
+                data = Object.assign(data, podjetje_data);
+            }
+            update({
+                naziv_podjetja: req.body.naziv_podjetja,
+                davcna: req.body.davcna,
+                zacetek_delovanja: req.body.zacetek_delovanja,
+                uspesnost_poslovanja: req.body.uspesnost_poslovanja
+            })
+            .where({})
+            .then((data) => {
+                res.send();
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(500).send();
+            });
+    });
+    */ 
 module.exports = router;
 
 async function PostaExists(kraj, stevilka) {
