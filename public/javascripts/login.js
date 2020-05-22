@@ -16,8 +16,9 @@ $("#prijava").submit(function (event) {
                 $("#geslo").val("");
                 $("#geslo").addClass("invalid");
             }
-        } else {
-            window.location = "/";
+            if (data.message == "success") {
+                window.location = "/";
+            }
         }
     });
 });
