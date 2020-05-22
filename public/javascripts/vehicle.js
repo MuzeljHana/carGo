@@ -123,12 +123,15 @@ $("#agree").click(function () {
         'maks_visina_tovora': maks_visina_tovora,
         'maks_st_palet': maks_st_palet,
         'tip_vozila': tip_vozila,
-        'znamka': znamka,
+        'znamka': znamka
     }
- 
+
     fetch('http://localhost:3000/vehicle', {
         method: 'POST',
-        body: JSON.stringify(podatki)
+        body: JSON.stringify(podatki),
+        headers: {
+            'content-type': 'application/json'
+        }
     }).then((response) => {
         console.log("Vehicle successfully added");
     });
