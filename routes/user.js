@@ -46,7 +46,7 @@ router.post('/register', async (req, res, next) => {
         knex.into("Uporabnik")
             .insert([data])
             .then((data) => {
-                res.send();
+                res.json({ message: "success" });
             })
             .catch((err) => {
                 console.log(err);
@@ -64,7 +64,7 @@ router.post("/login", (req, res, next) => {
         .then((user) => {
             if (user.length != 0 && bcrypt.compareSync(req.body.geslo.trim(), user[0].geslo)) {
                 req.session.user_id = user[0].id;
-                res.send();
+                res.json({ message: "success" });
             } else {
                 res.json({ message: "login failed" });
             }
