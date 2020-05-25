@@ -27,7 +27,6 @@ function confirm() {
         'volumen': volumen,
         'steviloPalet': steviloPalet,
         'tezaPalet': tezaPalet,
-        'idUporabnik': idUporabnik,
         'vozilo': vozilo,
         'tipTovora': tipTovora,
         'nalozitev': nalozitev,
