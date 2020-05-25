@@ -85,48 +85,39 @@ router.get("/logout", (req, res, next) => {
     }
 });
 
-router.post('/editUser' , (req,res,next => {
-        knex('Uporabnik')
-            .update({
-                ime: req.body.ime,
-                priimek: req.body.priimek,
-                email: req.body.email,
-                geslo: bcrypt.hashSync(req.body.geslo.trim(), 10),
-                idNaslov: (qb) => {
-                qb.from("Naslov").select("id").where({ ulica: req.body.ulica, stevilka: req.body.hisna_stevilka })}
-            })
-            .where({
-                idUporabnik: req.session.user_id,
-                id: req.params.id
-            })
-            if (req.body.naziv_podjetja) {
-                let podjetje_data = {
-                    naziv_podjetja: req.body.naziv_podjetja,
-                    davcna: req.body.davcna,
-                    zacetek_delovanja: req.body.zacetek_delovanja,
-                    uspesnost_poslovanja: req.body.uspesnost_poslovanja
-                }
-                data = Object.assign(data, podjetje_data);
-            }
-            update({
-                naziv_podjetja: req.body.naziv_podjetja,
-                davcna: req.body.davcna,
-                zacetek_delovanja: req.body.zacetek_delovanja,
-                uspesnost_poslovanja: req.body.uspesnost_poslovanja
-            })
-            .where({
-                idUporabnik: req.session.user_id,
-                id: req.params.id
-            })
-            .then((data) => {
-                res.send();
-            })
-            .catch((err) => {
-                console.log(err);
-                res.status(500).send();
-            });
-    });
-    
+router.post('/editUser', (req, res, next) => {
+    let data = {
+        ime: req.body.ime,
+        priimek: req.body.priimek,
+        email: req.body.email,
+        geslo: bcrypt.hashSync(req.body.geslo.trim(), 10),
+        idNaslov: (qb) => {
+            qb.from("Naslov").select("id").where({ ulica: req.body.ulica, stevilka: req.body.hisna_stevilka })
+        }
+    }
+    if (req.body.naziv_podjetja) {
+        let podjetje_data = {
+            naziv_podjetja: req.body.naziv_podjetja,
+            davcna: req.body.davcna,
+            zacetek_delovanja: req.body.zacetek_delovanja,
+            uspesnost_poslovanja: req.body.uspesnost_poslovanja
+        }
+        data = Object.assign(data, podjetje_data);
+    }
+    knex('Uporabnik')
+        .update(data)
+        .where({
+            id: req.session.user_id,
+        })
+        .then((data) => {
+            res.json({ message: "success" });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send();
+        });
+}));
+
 module.exports = router;
 
 async function PostaExists(kraj, stevilka) {
