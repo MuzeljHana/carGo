@@ -69,7 +69,7 @@ router.post('/', async(req, res, next) => {
             st_palet: req.body.steviloPalet,
             teza_palet: req.body.tezaPalet,
             //  tuji ključi
-            idUporabnik: req.body.idUporabnik,
+            idUporabnik: req.session.user_id,
             idVozilo: req.body.vozilo,
             idTip_tovora: idTipTovora,
             naslov_nalozitve_idNaslov: nalozitevID,
