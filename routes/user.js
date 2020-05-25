@@ -84,7 +84,7 @@ router.get("/logout", (req, res, next) => {
         res.json({ message: "user not logged in" });
     }
 });
-/* Yet to be tested and improved da bo dejansko delal..
+
 router.post('/editUser' , (req,res,next => {
         knex('Uporabnik')
             .update({
@@ -114,7 +114,10 @@ router.post('/editUser' , (req,res,next => {
                 zacetek_delovanja: req.body.zacetek_delovanja,
                 uspesnost_poslovanja: req.body.uspesnost_poslovanja
             })
-            .where({})
+            .where({
+                idUporabnik: req.session.user_id,
+                id: req.params.id
+            })
             .then((data) => {
                 res.send();
             })
@@ -123,7 +126,7 @@ router.post('/editUser' , (req,res,next => {
                 res.status(500).send();
             });
     });
-    */ 
+    
 module.exports = router;
 
 async function PostaExists(kraj, stevilka) {
