@@ -59,11 +59,12 @@ router.post('/register', async (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
     knex.from("Uporabnik")
-        .select("id", "geslo")
+        .select("id", "geslo", "naziv_podjetja")
         .where({ email: req.body.email })
         .then((user) => {
             if (user.length != 0 && bcrypt.compareSync(req.body.geslo.trim(), user[0].geslo)) {
                 req.session.user_id = user[0].id;
+                req.session.provider = user[0].naziv_podjetja;
                 res.json({ message: "success" });
             } else {
                 res.json({ message: "login failed" });
@@ -83,7 +84,7 @@ router.get("/logout", (req, res, next) => {
         res.json({ message: "user not logged in" });
     }
 });
-/* Yet to be tested and improved da bo dejansko delal..
+
 router.post('/editUser' , (req,res,next => {
         knex('Uporabnik')
             .update({
@@ -113,7 +114,10 @@ router.post('/editUser' , (req,res,next => {
                 zacetek_delovanja: req.body.zacetek_delovanja,
                 uspesnost_poslovanja: req.body.uspesnost_poslovanja
             })
-            .where({})
+            .where({
+                idUporabnik: req.session.user_id,
+                id: req.params.id
+            })
             .then((data) => {
                 res.send();
             })
@@ -122,7 +126,7 @@ router.post('/editUser' , (req,res,next => {
                 res.status(500).send();
             });
     });
-    */ 
+    
 module.exports = router;
 
 async function PostaExists(kraj, stevilka) {
