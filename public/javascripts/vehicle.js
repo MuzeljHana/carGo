@@ -1,3 +1,21 @@
+function updateData(){
+    $.ajax({
+        method: "get",
+        url: "/vehicle/",
+        dataType: "json"
+    })
+        .done(function (data) {
+            if (data) {
+                let root = $("#vozila");
+                for (let i = 0; i < data.length; i++) {
+                    if(i == data.length-1) {
+                        root.append(getCard(data[i]));
+                    }
+                }
+            }
+        });
+}
+
 $("[name='tip']").change(function () {
     let tip = $("select[name='tip']").val();
     
@@ -20,23 +38,20 @@ $("[name='tip']").change(function () {
             break;
     }
 });
-function updateData(){
-    $.ajax({
-        method: "get",
-        url: "/vehicle/",
-        dataType: "json"
-    })
-        .done(function (data) {
-            if (data) {
-                let root = $("#vozila");
-                for (let i = 0; i < data.length; i++) {
-                    if(i == data.length-1) {
-                        root.append(getCard(data[i]));
-                    }
+
+$.ajax({
+    method: "get",
+    url: "/vehicle/",
+    dataType: "json"
+})
+    .done(function (data) {
+        if (data) {
+            let root = $("#vozila");
+            for (let i = 0; i < data.length; i++) {
+                    root.append(getCard(data[i]));
                 }
             }
         });
-}
 
 function getCard(vozilo) {
     let zasedenost, aktivnost = '';
