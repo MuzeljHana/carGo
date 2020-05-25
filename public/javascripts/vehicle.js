@@ -30,7 +30,9 @@ function updateData(){
             if (data) {
                 let root = $("#vozila");
                 for (let i = 0; i < data.length; i++) {
-                    root.append(getCard(data[i]));
+                    if(i == data.length-1) {
+                        root.append(getCard(data[i]));
+                    }
                 }
             }
         });
