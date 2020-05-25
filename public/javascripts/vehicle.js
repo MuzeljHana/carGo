@@ -20,20 +20,21 @@ $("[name='tip']").change(function () {
             break;
     }
 });
-
-$.ajax({
-    method: "get",
-    url: "/vehicle/",
-    dataType: "json"
-})
-    .done(function (data) {
-        if (data) {
-            let root = $("#vozila");
-            for (let i = 0; i < data.length; i++) {
-                root.append(getCard(data[i]));
+function updateData(){
+    $.ajax({
+        method: "get",
+        url: "/vehicle/",
+        dataType: "json"
+    })
+        .done(function (data) {
+            if (data) {
+                let root = $("#vozila");
+                for (let i = 0; i < data.length; i++) {
+                    root.append(getCard(data[i]));
+                }
             }
-        }
-    });
+        });
+}
 
 function getCard(vozilo) {
     let zasedenost, aktivnost = '';
@@ -133,6 +134,7 @@ $("#agree").click(function () {
             'content-type': 'application/json'
         }
     }).then((response) => {
+        updateData();
         console.log("Vehicle successfully added");
     });
 });
@@ -141,8 +143,8 @@ function deleteVehicle(id){
     fetch(`http://localhost:3000/vehicle/${id}`, {
         method: 'DELETE'
     }).then((response) => {
+        updateData();
         console.log("Vehicle successfully deleted");
-        //
     });
 };
 function editVehicle(id) {
@@ -179,6 +181,7 @@ function editVehicle(id) {
         method: 'POST',
         body: JSON.stringify(podatki)
     }).then((response) => {
+        updateData();
         console.log("Vehicle successfully edited");
     });
 };
