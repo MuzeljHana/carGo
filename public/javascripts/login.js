@@ -9,7 +9,6 @@ $("#prijava").submit(function (event) {
     data: { email: $("#email").val(), geslo: $("#geslo").val() },
 })
     .done(function (data) {
-        console.log(data);
         if (data) {
             if (data.message == "login failed") {
                 $("#email").addClass("invalid");

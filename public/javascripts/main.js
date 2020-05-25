@@ -1,3 +1,2 @@
-$(document).ready(function () {
-    $('.sidenav').sidenav();
-});
+$('.sidenav').sidenav();
+M.updateTextFields();
