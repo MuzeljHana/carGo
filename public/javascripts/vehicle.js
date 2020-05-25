@@ -7,10 +7,9 @@ function updateData(){
         .done(function (data) {
             if (data) {
                 let root = $("#vozila");
+                root.empty();
                 for (let i = 0; i < data.length; i++) {
-                    if (i == data.length-1) {
-                        root.append(getCard(data[i]));
-                    }
+                    root.append(getCard(data[i]));
                 }
             }
         });
@@ -160,9 +159,11 @@ function deleteVehicle(id){
     fetch(`http://localhost:3000/vehicle/${id}`, {
         method: 'DELETE'
     }).then((response) => {
+        updateData();
         console.log("Vehicle successfully deleted");
     });
 };
+
 function editVehicle(id) {
     let letnik = document.getElementById('letnik-uredi').value;
     let registerska = document.getElementById('registerska-uredi').value;
@@ -197,6 +198,7 @@ function editVehicle(id) {
         method: 'POST',
         body: JSON.stringify(podatki)
     }).then((response) => {
+        updateData();
         console.log("Vehicle successfully edited");
     });
 };
