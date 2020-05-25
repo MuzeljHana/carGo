@@ -6,7 +6,7 @@ function editUser(id) {
     let naziv_podjetja = document.getElementById('naziv_podjetja-uredi').value;
     let davcna = document.getElementById('davcna-uredi').value;
     let zacetek_delovanja = document.getElementById('zacetek_delovanja-uredi').value;
-    let uspešnost_poslovanja = document.getElementById('uspesnot_poslovanja-uredi').value;
+    let uspesnost_poslovanja = document.getElementById('uspesnot_poslovanja-uredi').value;
     
     
     let podatkiUporabnika = {
@@ -18,7 +18,7 @@ function editUser(id) {
         'naziv_podjetja': naziv_podjetja,
         'davcna': davcna,
         'zacetek_delovanja': zacetek_delovanja,
-        'zacetek_delovanja': zacetek_delovanja
+        'uspesnost_poslovanja': uspesnost_poslovanja
     }
  
     fetch('http://localhost:3000/user/edit', {
