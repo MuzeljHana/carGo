@@ -8,7 +8,7 @@ function updateData(){
             if (data) {
                 let root = $("#vozila");
                 for (let i = 0; i < data.length; i++) {
-                    if(i == data.length-1) {
+                    if (i == data.length-1) {
                         root.append(getCard(data[i]));
                     }
                 }
@@ -160,7 +160,6 @@ function deleteVehicle(id){
     fetch(`http://localhost:3000/vehicle/${id}`, {
         method: 'DELETE'
     }).then((response) => {
-        updateData();
         console.log("Vehicle successfully deleted");
     });
 };
@@ -198,7 +197,6 @@ function editVehicle(id) {
         method: 'POST',
         body: JSON.stringify(podatki)
     }).then((response) => {
-        updateData();
         console.log("Vehicle successfully edited");
     });
 };
