@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Prevoz - carGo{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h4 id="podjetje"></h4>
+        </div>
+    </div>
+    <div class="row grey lighten-2" style="border-radius: 10px;">
+        <div class="col m6 s12" style="padding: 15px;">
+            <img src="https://picsum.photos/700/500" class="responsive-img">
+        </div>
+        <div class="col m6 s12 grey lighten-3"
+            style="font-family: Roboto; padding: 0 25px 0 25px; border-radius: 10px;">
+            <div class="row">
+                <h5>Vozilo</h5>
+                <div class="row">
+                    <div class="col s4">
+                        <span>Vozilo: <span id="vozilo"></span></span>
+                    </div>
+                    <div class="col s4">
+                        <span>Letnik: <span id="letnik"></span></span>
+                    </div>
+                    <div class="col s4">
+                        <span>Tip vozila: <span id="tip"></span></span>
+                    </div>
+                </div>
+                <div class="row" id="omejitve">
+                    
+                    <div class="col s4">
+                        <span>Maksimaln število palet: 2</span>
+                    </div>
+                    <div class="col s4">
+                        <span>Maksimala teža ene palete: 150kg</span>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <h6>Cena: 2€/km</h6>
+                </div>
+            </div>
+            <div class="row">
+                <h5>Tovor</h5>
+                <div class="row">
+                    <div class="col s4">
+                        <span>Število palet: 2</span>
+                    </div>
+                    <div class="col s4">
+                        <span>Teža ene palete: 50kg</span>
+                    </div>
+                </div>
+                <div class="col s6">
+                    <h6>Dolžina poti: 50km</h6>
+                </div>
+                <div class="col s6">
+                    <h6>Cena za pot: 100€</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 center-align">
+                    <div class="input-field">
+                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <label for="textarea1">Opombe</label>
+                    </div>
+                    <a class="waves-effect waves-light btn-large">Daj ponudbo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mapouter">
+            <div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas"
+                    src="https://maps.google.com/maps?q=slovenia&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                    scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            </div>
+            <style>
+                .mapouter {
+                    position: relative;
+                    text-align: right;
+                    height: 100%;
+                    width: 100%;
+                }
+
+                .gmap_canvas {
+                    border-radius: 10px;
+                    overflow: hidden;
+                    background: none !important;
+                    height: 500px;
+                    width: 100%;
+                }
+            </style>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="/javascripts/details.js"></script>
+{% endblock %}

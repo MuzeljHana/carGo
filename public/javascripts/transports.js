@@ -43,14 +43,14 @@ $.ajax({
         if (data) {
             let vozila = $("#vozila");
             for (const vozilo of data) {
-                vozila.append(getCard(vozilo.naziv_podjetja, vozilo.cena_na_km, vozilo.znamka + " " + vozilo.model, vozilo.tip_vozila));
+                vozila.append(getCard(vozilo.naziv_podjetja, vozilo.cena_na_km, vozilo.znamka + " " + vozilo.model, vozilo.tip_vozila, vozilo.id));
             }
         }
     });
 
 
-function getCard(podjetje, cena, vozilo, tip) {
-    return `<a href="" class="grey-text text-darken-4">
+function getCard(podjetje, cena, vozilo, tip, id) {
+    return `<a href="#!" onclick="details(` + id + `)" class="grey-text text-darken-4">
                 <div class="col s12 grey lighten-3" style="padding: 15px; border-radius: 10px; margin-top: 10px;">
                     <div class="row" style="margin-bottom: 0;">
                         <div class="col m4 s12">
@@ -85,4 +85,9 @@ function getCard(podjetje, cena, vozilo, tip) {
                     </div>
                 </div>
             </a>`
+}
+
+function details(id) {
+    localStorage.setItem("details_vehicle", id);
+    window.location = "/transports/details";
 }

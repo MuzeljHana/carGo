@@ -19,6 +19,10 @@ router.get('/transports', (req, res, next) => {
     res.render('transports', req.template_data);
 });
 
+router.get('/transports/details', auth, (req, res, next) => {
+    res.render('details', req.template_data);
+});
+
 router.get('/dashboard/vehicle', auth, (req, res, next) => {
     res.render('vehicle', req.template_data);
 });
