@@ -8,17 +8,28 @@ function exportConfirmation(){
     var customerName = document.getElementById("customerName").innerHTML;
     var customerAddress = document.getElementById("customerAddress").innerHTML;
 
-    content = "Order confirmed\n\nOrder summary\nTransport vehicle: " + transportName + "\nPrice: " + price + 
-        "\nOrder date: " + orderDate + "\n\nCustomer information\n" + customerName + "\n" + customerAddress;
+    var choice = document.getElementById("formatChoice").value;
 
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
-    element.setAttribute('download', "OrderInfo");
-      
-    element.style.display = 'none';
-    document.body.appendChild(element);
-      
-    element.click();
-      
-    document.body.removeChild(element);
+    switch (choice) {
+        case "txt":
+            content = "Order confirmed\n\nOrder summary\nTransport vehicle: " + transportName + "\nPrice: " + price + 
+                "\nOrder date: " + orderDate + "\n\nCustomer information\n" + customerName + "\n" + customerAddress;
+
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', "OrderInfo");
+            
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            
+            element.click();
+            
+            document.body.removeChild(element);        
+            break;
+        case "pdf":
+            var doc = new jsPDF();
+            doc.fromHTML($("#prikazIzbire").get(0), 20, 20);
+            doc.save("Order.pdf");
+        }
+
 }
