@@ -22,10 +22,16 @@
                     style="margin: 40px 0 0 30px;"><i style="font-size: 40px;" class="material-icons">menu</i></a>
                 <ul class="left hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-left: 18rem;">
                     <li><a class="grey-text text-darken-4 nav-link" href="/search">Poišči prevoz</a></li>
+                    {% if login %}
+                    <li><a class="grey-text text-darken-4 nav-link" href="/profile/orders">Ponudbe</a></li>
+                    {% if provider %}
+                    <li><a class="grey-text text-darken-4 nav-link" href="/profile/vehicle">Vozila</a></li>
+                    {% endif%}
+                    {% endif %}
                 </ul>
                 <ul class="right hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-right: 4rem;">
                     {% if login %}
-                    <li><a class="grey-text text-darken-4 nav-link" href="/dashboard">Nadzorna plošča</a></li>
+                    <li><a class="grey-text text-darken-4 nav-link" href="/profile">Profil</a></li>
                     <li><a class="grey-text text-darken-4 nav-link" href="/user/logout" title="Izpis"><i
                                 class="material-icons grey-text text-darken-4">exit_to_app</i></a></li>
                     {% else %}
@@ -39,8 +45,15 @@
             <li><a class="grey-text text-darken-4 nav-link" href="/search"><i class="material-icons">search</i>Poišči
                     prevoz</a></li>
             {% if login %}
-            <li><a class="grey-text text-darken-4 nav-link" href="/dashboard"><i
-                        class="material-icons">dashboard</i>Nadzorna plošča</a></li>
+            <li><a class="grey-text text-darken-4 nav-link" href="/profile/orders"><i
+                        class="material-icons">local_post_office</i>Ponudbe</a></li>
+            {% if provider %}
+            <li><a class="grey-text text-darken-4 nav-link" href="/profile/vehicle"><i
+                        class="material-icons">local_shipping
+                    </i>Vozila</a></li>
+            {% endif%}
+            <li><a class="grey-text text-darken-4 nav-link" href="/profile"><i
+                        class="material-icons">account_circle</i>Profil</a></li>
             <li class="bottom-sidenav"><a class="grey-text text-darken-4 nav-link" href="/user/logout"><i
                         class="material-icons">exit_to_app</i>Izpis</a></li>
             {% else %}

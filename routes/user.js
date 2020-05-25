@@ -59,11 +59,12 @@ router.post('/register', async (req, res, next) => {
 
 router.post("/login", (req, res, next) => {
     knex.from("Uporabnik")
-        .select("id", "geslo")
+        .select("id", "geslo", "naziv_podjetja")
         .where({ email: req.body.email })
         .then((user) => {
             if (user.length != 0 && bcrypt.compareSync(req.body.geslo.trim(), user[0].geslo)) {
                 req.session.user_id = user[0].id;
+                req.session.provider = user[0].naziv_podjetja;
                 res.json({ message: "success" });
             } else {
                 res.json({ message: "login failed" });
