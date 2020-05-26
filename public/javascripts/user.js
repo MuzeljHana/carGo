@@ -1,4 +1,9 @@
-function editUser(id) {
+function userID(id) {
+    sessionStorage.setItem("userID", id);
+}
+
+$("#edit").click (function() {
+    let id = sessionStorage.getItem("userID");
     let ime = document.getElementById('ime-uredi').value;
     let priimek = document.getElementById('priimek-uredi').value;
     let email = document.getElementById('email-uredi').value;
@@ -21,10 +26,14 @@ function editUser(id) {
         'uspesnost_poslovanja': uspesnost_poslovanja
     }
  
-    fetch('http://localhost:3000/user/edit', {
+    fetch('http://localhost:3000/user/editUser', {
         method: 'POST',
-        body: JSON.stringify(podatkiUporabnika)
+        body: JSON.stringify(podatkiUporabnika),
+        headers: {
+            'content-type': 'application/json'
+        }
     }).then((response) => {
+        updateData
         console.log("User successfully edited!");
     });
-};
+});
