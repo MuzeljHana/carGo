@@ -98,21 +98,14 @@ router.get('/', auth, (req, res, next) => {
             "maks_dolzina_tovora",
             "maks_sirina_tovora",
             "maks_visina_tovora",
-            "maks_st_palet", /*
+            "maks_st_palet", 
             "t.naziv as tip_vozila",
-            "z.naziv as znamka",
-            "c.cena_na_km"*/]) 
+            "z.naziv as znamka"])
         .where({
             "idUporabnik": req.session.user_id,
-            /*
-            "c.datum_od": (qb) => {
-                qb.from("Cenik as c").max("datum_od").join("Vozilo as v", { 'c.idVozilo': 'v.id' });
-            }*/
-        })/*
-        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
-        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
+        })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
-        */
+        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .then((data) => {
             res.json(data);
         })
@@ -138,16 +131,11 @@ router.get('/:id', auth, (req, res, next) => {
             "maks_visina_tovora",
             "maks_st_palet",
             "t.naziv as tip_vozila",
-            "z.naziv as znamka",
-            "c.cena_na_km"])
+            "z.naziv as znamka"])
         .where({
             "idUporabnik": req.session.user_id,
-            "v.id": req.params.id,
-            "c.datum_od": (qb) => {
-                qb.from("Cenik as c").max("datum_od").join("Vozilo as v", { 'c.idVozilo': 'v.id' });
-            }
+            "v.id": req.params.id
         })
-        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
         .then((data) => {
