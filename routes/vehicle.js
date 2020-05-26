@@ -161,11 +161,14 @@ router.post('/editVehicle', auth, (req, res, next) => {
             maks_sirina_tovora: req.body.maks_sirina_tovora,
             maks_visina_tovora: req.body.maks_visina_tovora,
             maks_st_palet: req.body.maks_st_palet,
+
         })
         .where({
             idUporabnik: req.session.user_id,
             id: req.params.id
         })
+        .join("Znamka as z", { 'z.id': 'v.idZnamka' })
+        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .then((data) => {
             res.send();
         })
