@@ -107,7 +107,7 @@ function getCard(vozilo) {
         </div>
         <div class="row">
             <a class="waves-effect waves-light btn-flat right modal-trigger"
-                style="text-transform: none;" href="#modal2">Uredi</a>
+                style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`">Uredi</a>
         </div>
     </div>
 </div>
@@ -164,7 +164,8 @@ function deleteVehicle(id){
     });
 };
 
-function editVehicle(id) {
+$("#edit").click(function () {
+    let id = document.getElementById('id').value;
     let letnik = document.getElementById('letnik-uredi').value;
     let registerska = document.getElementById('registerska-uredi').value;
     let model = document.getElementById('model-uredi').value;
@@ -201,4 +202,4 @@ function editVehicle(id) {
         updateData();
         console.log("Vehicle successfully edited");
     });
-};
+});
