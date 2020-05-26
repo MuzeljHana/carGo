@@ -14,10 +14,10 @@
             <img src="https://picsum.photos/700/500" class="responsive-img">
         </div>
         <div class="col m6 s12 grey lighten-3"
-            style="font-family: Roboto; padding: 0 25px 0 25px; border-radius: 10px;">
+            style="padding: 0 25px 0 25px; border-radius: 10px;">
             <div class="row">
                 <h5>Vozilo</h5>
-                <div class="row">
+                <div class="row" style="font-family: Roboto;">
                     <div class="col s4">
                         <span>Vozilo: <span id="vozilo"></span></span>
                     </div>
@@ -28,22 +28,18 @@
                         <span>Tip vozila: <span id="tip"></span></span>
                     </div>
                 </div>
-                <div class="row" id="omejitve">
-                    
-                    <div class="col s4">
-                        <span>Maksimaln število palet: 2</span>
+            </div>
+            <div class="row">
+                <h5>Omejitve vozila</h5>
+                <div class="row" style="font-family: Roboto;">
+                    <div class="col s12">
+                        <ul id="omejitve"></ul>
                     </div>
-                    <div class="col s4">
-                        <span>Maksimala teža ene palete: 150kg</span>
-                    </div>
-                </div>
-                <div class="col s12">
-                    <h6>Cena: 2€/km</h6>
                 </div>
             </div>
             <div class="row">
                 <h5>Tovor</h5>
-                <div class="row">
+                <div class="row" style="font-family: Roboto;">
                     <div class="col s4">
                         <span>Število palet: 2</span>
                     </div>
@@ -51,11 +47,19 @@
                         <span>Teža ene palete: 50kg</span>
                     </div>
                 </div>
-                <div class="col s6">
-                    <h6>Dolžina poti: 50km</h6>
-                </div>
-                <div class="col s6">
-                    <h6>Cena za pot: 100€</h6>
+            </div>
+            <div class="row">
+                <h5>Cena</h5>
+                <div class="row" style="font-family: Roboto;">
+                    <div class="col s4">
+                        <h6>Cena na km: <span id="cena_na_km"></span>€/km</h6>
+                    </div>
+                    <div class="col s4">
+                        <h6>Dolžina poti: 50km</h6>
+                    </div>
+                    <div class="col s4">
+                        <h6>Cena za pot: 100€</h6>
+                    </div>
                 </div>
             </div>
             <div class="row">
