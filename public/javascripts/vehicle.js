@@ -130,11 +130,63 @@ function getCard(vozilo) {
         </div>
         <div class="row">
             <a class="waves-effect waves-light btn-flat right modal-trigger"
-                style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`" onclick="vehicleID(`+vozilo.id+`)">Uredi</a>
+                style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`" onclick="prenosPodatkov(`+vozilo.id+`)">Uredi</a>
         </div>
     </div>
 </div>
 </div>`;
+}
+
+function prenosPodatkov(id) {
+    $.ajax({
+        method: "get",
+        url: "/vehicle/",
+        dataType: "json"
+    })
+    .done(function (data) {
+        if (data) {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].id == id) {
+                    let vozilo = data[i];
+                    if ($("#registerska-uredi").val(vozilo.registerska)) {
+                        $("#registerska-uredi").focus();
+                    }
+                    if ($("#znamka-uredi").val(vozilo.znamka)) {
+                        $("#znamka-uredi").focus();
+                    }
+                    if ($("#letnik-uredi").val(vozilo.letnik)) {
+                        $("#letnik-uredi").focus();
+                    }
+                    if ($("#max_teza-uredi").val(vozilo.maks_teza_tovora)) {
+                        $("#max_teza-uredi").focus();
+                    }
+                    if ($("#potrdilo_izpravnosti-uredi").val(vozilo.potrdilo_izpravnosti)) {
+                        $("#potrdilo_izpravnosti-uredi").focus();
+                    }
+                    if ($("#maks_volumen_tovora-uredi").val(vozilo.maks_volumen_tovora)) {
+                        $("#maks_volumen_tovora-uredi").focus();
+                    }
+                    if ($("#maks_st_palet-uredi").val(vozilo.maks_st_palet)) {
+                        $("#maks_st_palet-uredi").focus();
+                    }
+                    if ($("#maks_dolzina_tovora-uredi").val(vozilo.maks_dolzina_tovora)) {
+                        $("#maks_dolzina_tovora-uredi").focus();
+                    }
+                    if ($("#maks_visina_tovora-uredi").val(vozilo.maks_visina_tovora)) {
+                        $("#maks_visina_tovora-uredi").focus();
+                    }
+                    if ($("#maks_sirina_tovora-uredi").val(vozilo.maks_sirina_tovora)) {
+                        $("#maks_sirina_tovora-uredi").focus();
+                    }
+                    if ($("#model-uredi").val(vozilo.model)) {
+                        $("#model-uredi").focus();
+                    }
+                    break;
+                }
+            }        
+        }
+    });
+    vehicleID(id);
 }
 
 function vehicleID(id) {
