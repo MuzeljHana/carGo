@@ -195,9 +195,12 @@ $("#edit").click(function () {
         'znamka': znamka,
     }
  
-    fetch('http://localhost:3000/vehicle/edit', {
+    fetch('http://localhost:3000/vehicle/editVehicle', {
         method: 'POST',
-        body: JSON.stringify(podatki)
+        body: JSON.stringify(podatki),
+        headers: {
+            'content-type': 'application/json'
+        }
     }).then((response) => {
         updateData();
         console.log("Vehicle successfully edited");
