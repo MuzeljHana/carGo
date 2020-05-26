@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Ponudbe - carGo{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h3>Ponudbe</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <ul id="ponudbe"></ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $.ajax({
+        method: "get",
+        url: "/order/",
+        dataType: "json"
+    })
+        .done(function (data) {
+            if (data) {
+                for (const ponudba of data) {
+                    $("#ponudbe").append("<li>" + JSON.stringify(ponudba) + "</li>");
+                }
+            }
+        });
+</script>
+{% endblock %}

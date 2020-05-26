@@ -27,6 +27,10 @@ router.get('/profile/vehicle', auth, (req, res, next) => {
     res.render('vehicle', req.template_data);
 });
 
+router.get('/profile/orders', auth, (req, res, next) => {
+    res.render('order', req.template_data);
+});
+
 router.get('/login', (req, res, next) => {
     res.render('login', req.template_data);
 });
