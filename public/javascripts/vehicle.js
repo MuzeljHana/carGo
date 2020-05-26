@@ -107,7 +107,7 @@ function getCard(vozilo) {
         </div>
         <div class="row">
             <a class="waves-effect waves-light btn-flat right"
-                style="text-transform: none;">Uredi</a>
+                style="text-transform: none;" href="#modal2">Uredi</a>
         </div>
     </div>
 </div>
