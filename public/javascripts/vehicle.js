@@ -130,11 +130,15 @@ function getCard(vozilo) {
         </div>
         <div class="row">
             <a class="waves-effect waves-light btn-flat right modal-trigger"
-                style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`">Uredi</a>
+                style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`" onclick="vehicleID(`+vozilo.id+`)">Uredi</a>
         </div>
     </div>
 </div>
 </div>`;
+}
+
+function vehicleID(id) {
+    sessionStorage.setItem("vehicleID", id);
 }
 
 $("#agree").click(function () {
@@ -188,7 +192,7 @@ function deleteVehicle(id){
 };
 
 $("#edit").click(function () {
-    let id = document.getElementById('id').value;
+    let id = sessionStorage.getItem("vehicleID");
     let letnik = document.getElementById('letnik-uredi').value;
     let registerska = document.getElementById('registerska-uredi').value;
     let model = document.getElementById('model-uredi').value;
