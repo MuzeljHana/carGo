@@ -38,6 +38,29 @@ $("[name='tip']").change(function () {
     }
 });
 
+$("#tip-uredi").change(function () {
+    let tip = $("#tip-uredi").val();
+    
+    $("#tab-tovor-urejanje").hide();
+    $("#tab-izdelki-urejanje").hide();
+    $("#tab-palete-urejanje").hide();
+    switch (tip) {
+        case "kombi":
+            $("#tab-izdelki-urejanje").show();
+            break;
+        case "izredni prevoz":
+            $("#tab-izdelki-urejanje").show();
+            break;
+        case "tovornjak razsut tovor":
+            $("#tab-tovor-urejanje").show();
+            break;
+        case "tovornjak blago":
+            $("#tab-palete-urejanje").show();
+            $("#tab-izdelki-urejanje").show();
+            break;
+    }
+});
+
 $.ajax({
     method: "get",
     url: "/vehicle/",
