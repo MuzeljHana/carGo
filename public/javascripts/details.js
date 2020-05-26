@@ -35,3 +35,34 @@ $.ajax({
             }
         }
     });
+
+genOmejitve();
+
+function genOmejitve() {
+    let search_data = JSON.parse(localStorage.getItem("search_data"));
+    let omejitve = $("#omejitve_tovor");
+
+    switch (search_data.tip_tovora) {
+        case "posamezni izdelki":
+            omejitve.append(getPill("Število izdelkov: " + search_data.izdelki.length));
+
+            let teza = 0;
+            for (const izdelek of search_data.izdelki) {
+                teza += izdelek.teza * izdelek.kolicina;
+            }
+            omejitve.append(getPill("Skupna teža: " + teza + " kg"));
+            break;
+        case "razsut tovor":
+            omejitve.append(getPill("Volumen tovora: " + search_data.volumen_tovora + " m<sup>3</sup>"));
+            omejitve.append(getPill("Teža tovora: " + search_data.teza_tovora + " kg"));
+            break;
+        case "palete":
+            omejitve.append(getPill("Število palet: " + search_data.st_palet));
+            omejitve.append(getPill("Teža ene palete: " + search_data.teza_palete + " kg"));
+            break;
+    }
+}
+
+function getPill(text) {
+    return '<div class="chip" style="font-family: Roboto;">' + text + '</div>'
+}
