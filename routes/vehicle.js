@@ -21,12 +21,11 @@ router.post('/search', (req, res, next) => {
             "u.naziv_podjetja"
         ])
         .where({
-            "c.datum_od": (qb) => {
-                qb.from("Cenik as c").max("datum_od").join("Vozilo as v", { 'c.idVozilo': 'v.id' });
-            },
             "v.aktivno": 1,
-            "v.zasedeno": 0,
+            "v.zasedeno": 0
         })
+        .groupBy("v.id")
+        .havingRaw("MAX(c.datum_od)", [])
         .join("Cenik as c", { 'c.idVozilo': 'v.id' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
