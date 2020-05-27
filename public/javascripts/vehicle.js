@@ -88,7 +88,7 @@ function getCard(vozilo) {
     <div class="col s12 m8">
         <div class="row">
             <div class="col s10">
-                <h4>` + vozilo.model+' '+vozilo.letnik + `</h4>
+                <h4>`+ vozilo.znamka +' '+vozilo.model+' '+vozilo.letnik + `</h4>
             </div>
             <div class="col s2" style="margin-top: 25px;">
                 <a class="waves-effect waves-light btn-flat right" name="brisi" onclick="deleteVehicle(`+vozilo.id+`)"><i
