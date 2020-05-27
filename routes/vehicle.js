@@ -187,6 +187,11 @@ router.post('/editVehicle', auth, (req, res, next) => {
 
 router.post('/', auth, async(req, res, next) => {
     try {
+        if (! await ZnamkaExists(req.body.znamka)) {
+            await knex.into("Znamka")
+            .insert([{ naziv: req.body.znamka }]);
+        }
+
         var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0');
@@ -470,3 +475,10 @@ router.delete('/:id', auth, (req, res, next) => {
 });
 
 module.exports = router;
+
+async function ZnamkaExists(naziv) {
+    let znamka = await knex.from("Znamka as z")
+        .select("z.id")
+        .where({ naziv: naziv })
+    return znamka.length != 0;
+}
