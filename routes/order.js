@@ -19,6 +19,8 @@ router.get('/', auth, (req, res, next) => {
             "t.naziv as tip_tovora",
             "naslov_nalozitve_idNaslov as nalozisce",
             "naslov_dostave_idNaslov as dostava",
+            "u.ime",
+            "u.priimek"
         ])
         .whereNotIn("status", ["zavrnjeno", "koncano"])
         .andWhere((qb) => {
@@ -29,6 +31,7 @@ router.get('/', auth, (req, res, next) => {
         .join("Tip_tovora as t", { 't.id': 'p.idTip_tovora' })
         .join("Naslov as nalozitev", { 'nalozitev.id': 'p.naslov_nalozitve_idNaslov' })
         .join("Naslov as dostava", { 'dostava.id': 'p.naslov_dostave_idNaslov' })
+        .join("Uporabnik as u", { 'u.id': 'p.idUporabnik' })
         .then(async (data) => {
             if (data) {
                 for (let order of data) {
@@ -47,7 +50,6 @@ router.get('/', auth, (req, res, next) => {
                             "c.cena_na_km"
                         ])
                         .where({
-                            "idUporabnik": req.session.user_id,
                             "v.id": order.vozilo,
                             "c.datum_od": (qb) => {
                                 qb.from("Cenik as c").max("datum_od")
@@ -306,7 +308,7 @@ router.put('/:id/status/:status', auth, (req, res, next) => {
         .where({
             "p.id": (qb) => {
                 qb.from('Vozilo as v')
-                    .select('v.id')
+                    .select('p.id')
                     .join("Ponudba as p", "p.idVozilo", "=", "v.id")
                     .where({ "p.id": req.params.id, "v.idUporabnik": req.session.user_id });
             }
