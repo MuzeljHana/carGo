@@ -41,3 +41,7 @@ p {
 .sidenav {
     height: 100vh;
 }
+
+.normal-text {
+    font-family: 'Roboto';
+}
