@@ -328,6 +328,20 @@ router.post('/editVehicle', auth, async(req, res, next) => {
     try {    
         let tip_vozila;
         let znamka;
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+
+        let datum_do;
+
+        if (req.body.datum_do) {
+            datum_do = req.body.datum_do;
+        } else {
+            datum_do = null;
+        }
     
         await knex('Tip_vozila').where({
             'naziv': req.body.tip_vozila
@@ -339,6 +353,16 @@ router.post('/editVehicle', auth, async(req, res, next) => {
             'naziv': req.body.znamka
         }).select('id').then((id) => {
             znamka = id[0].id;
+        });
+
+        await knex('Cenik').update({
+            cena_na_km: req.body.cena,
+            datum_od: today,
+            datum_do: datum_do
+        }).where({
+            idVozilo: req.body.id
+        }).catch((error) => {
+            res.status(500).json(error);
         });
 
         switch(tip_vozila) {
@@ -436,7 +460,7 @@ router.post('/editVehicle', auth, async(req, res, next) => {
         }
         res.status(200).send("Vehicle successfully edited");
     } catch (error) {
-        res.status(500).send("Failed to edit vehicle");
+        res.status(500).send("Failed to edit vehicle").json(error);
     }
 });
 
