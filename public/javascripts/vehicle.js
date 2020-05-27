@@ -130,7 +130,7 @@ function getCard(vozilo) {
         </div>
         <div class="row">
             <div class="col s4">
-                <span>Cena: ` + cena + `</span>
+                <span>Cena: ` + cena + ` €/km</span>
             </div>
         </div>
         <div class="row">
@@ -211,6 +211,7 @@ $("#agree").click(function () {
     let maks_st_palet = document.getElementById('maks_st_palet').value;
     let tip_vozila = document.getElementById('tip').value;
     let znamka  = document.getElementById('znamka').value;
+    let cena = document.getElementById('cena_na_km').value;
     
     let podatki = {
         'letnik': letnik,
@@ -224,7 +225,8 @@ $("#agree").click(function () {
         'maks_visina_tovora': maks_visina_tovora,
         'maks_st_palet': maks_st_palet,
         'tip_vozila': tip_vozila,
-        'znamka': znamka
+        'znamka': znamka,
+        'cena': cena
     }
 
     fetch('http://localhost:3000/vehicle', {
