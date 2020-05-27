@@ -100,12 +100,18 @@ router.get('/', auth, (req, res, next) => {
             "maks_visina_tovora",
             "maks_st_palet", 
             "t.naziv as tip_vozila",
-            "z.naziv as znamka"])
+            "z.naziv as znamka",
+            "c.cena_na_km"])
         .where({
             "idUporabnik": req.session.user_id,
+            "c.datum_od": (qb) => {
+                qb.from("Cenik as c").max("datum_od")
+                    .join("Vozilo as v", { 'c.idVozilo': 'v.id' });
+            }
         })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
+        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
         .then((data) => {
             res.json(data);
         })
@@ -181,6 +187,11 @@ router.post('/editVehicle', auth, (req, res, next) => {
 
 router.post('/', auth, async(req, res, next) => {
     try {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
         let tip_vozila;
         let znamka;
     
@@ -277,6 +288,22 @@ router.post('/', auth, async(req, res, next) => {
                 });
                 break;
         }
+        await knex.into('Cenik')
+        .insert([{
+            cena_na_km: req.body.cena_na_km,
+            datum_od: today
+        }]).where({
+            "idVozilo": (qb) => {
+                qb.from('Vozilo as v')
+                    .select('v.id')
+                    .where({"v.letnik": req.body.letnik, "v.registerska": req.body.registerska, "v.model": req.body.model, "v.idZnamka": znamka, "v.idTip_vozila": tip_vozila});
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send();
+        });
+        
         res.status(200).send("Vehicle successfully added.");
     } catch(error) {
         console.log(error);
