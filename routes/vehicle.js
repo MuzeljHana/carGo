@@ -102,13 +102,9 @@ router.get('/', auth, (req, res, next) => {
             "t.naziv as tip_vozila",
             "z.naziv as znamka",
             "c.cena_na_km"])
-        .where({
-            "idUporabnik": req.session.user_id,
-            "c.datum_od": (qb) => {
-                qb.from("Cenik as c").max("datum_od")
-                    .join("Vozilo as v", { 'c.idVozilo': 'v.id' });
-            }
-        })
+        .where({ "idUporabnik": req.session.user_id })
+        .groupBy("v.id")
+        .havingRaw("MAX(c.datum_od)", [])
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Cenik as c", { 'c.idVozilo': 'v.id' })
