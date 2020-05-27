@@ -137,6 +137,9 @@ function getCard(vozilo) {
             </div>
         </div>
         <div class="row">
+            <div class="col s8">
+                <span>Potrdilo izpravnosti: ` + vozilo.potrdilo_izpravnosti + ` </span>
+            </div>
             <a class="waves-effect waves-light btn-flat right modal-trigger"
                 style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`" onclick="prenosPodatkov(`+vozilo.id+`)">Uredi</a>
         </div>
