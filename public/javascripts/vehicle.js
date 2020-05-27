@@ -130,7 +130,7 @@ function getCard(vozilo) {
         </div>
         <div class="row">
             <div class="col s4">
-                <span>Cena: ` + cena + ` €/km</span>
+            <span >Cena: <span id="trenutnaCena">` + cena + `</span> €/km</span>
             </div>
             <div class="col s8">
                 <span>Tip vozila: ` + vozilo.tip_vozila + ` </span>
@@ -156,6 +156,7 @@ function prenosPodatkov(id) {
             for (let i = 0; i < data.length; i++) {
                 if (data[i].id == id) {
                     let vozilo = data[i];
+                    let cena = $("#trenutnaCena").html();
                     if ($("#registerska-uredi").val(vozilo.registerska)) {
                         $("#registerska-uredi").focus();
                     }
@@ -185,6 +186,10 @@ function prenosPodatkov(id) {
                     }
                     if ($("#maks_sirina_tovora-uredi").val(vozilo.maks_sirina_tovora)) {
                         $("#maks_sirina_tovora-uredi").focus();
+                    }
+                    if (cena) {
+                        $("#cena-uredi").val(cena);
+                        $("#cena-uredi").focus();
                     }
                     if ($("#model-uredi").val(vozilo.model)) {
                         $("#model-uredi").focus();
@@ -267,6 +272,7 @@ $("#edit").click(function () {
     let maks_st_palet = document.getElementById('maks_st_palet-uredi').value;
     let tip_vozila = document.getElementById('tip-uredi').value;
     let znamka  = document.getElementById('znamka-uredi').value;
+    let cena = document.getElementById('cena-uredi').value;
     
     let podatki = {
         'id': id,
@@ -282,6 +288,7 @@ $("#edit").click(function () {
         'maks_st_palet': maks_st_palet,
         'tip_vozila': tip_vozila,
         'znamka': znamka,
+        'cena': cena
     }
  
     fetch('http://localhost:3000/vehicle/editVehicle', {
