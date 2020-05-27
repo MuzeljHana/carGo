@@ -41,6 +41,10 @@ router.get('/register', (req, res, next) => {
 
 router.get('/export', (req, res, next) => {
     res.render('export', req.template_data);
-})
+});
+
+router.get('/profile', (req, res, next) => {
+    res.render('profile', req.template_data);
+});
 
 module.exports = router;
