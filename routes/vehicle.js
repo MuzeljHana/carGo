@@ -288,17 +288,27 @@ router.post('/', auth, async(req, res, next) => {
                 });
                 break;
         }
+
+        let idVozilo;
+        
+        await knex('Vozilo as v').where({
+            "v.letnik": req.body.letnik,
+            "v.registerska": req.body.registerska,
+            "v.model": req.body.model,
+            "v.idZnamka": znamka,
+            "v.idTip_vozila": tip_vozila
+        }).select('id').then((id) => {
+            console.log(id);
+            idVozilo = id[0].id;
+            console.log(idVozilo);
+        });
+
         await knex.into('Cenik')
         .insert([{
-            cena_na_km: req.body.cena_na_km,
-            datum_od: today
-        }]).where({
-            "idVozilo": (qb) => {
-                qb.from('Vozilo as v')
-                    .select('v.id')
-                    .where({"v.letnik": req.body.letnik, "v.registerska": req.body.registerska, "v.model": req.body.model, "v.idZnamka": znamka, "v.idTip_vozila": tip_vozila});
-            }
-        })
+            cena_na_km: req.body.cena,
+            datum_od: today,
+            idVozilo: idVozilo
+        }])
         .catch((err) => {
             console.log(err);
             res.status(500).send();
