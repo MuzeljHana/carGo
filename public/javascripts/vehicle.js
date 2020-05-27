@@ -74,11 +74,11 @@ $.ajax({
                 }
             }
         });
-
 function getCard(vozilo) {
-    let zasedenost, aktivnost = '';
+    let zasedenost, aktivnost, cena = '';
     if (vozilo.aktivno==1){aktivnost='da'}else aktivnost='ne';
     if (vozilo.zasedeno==1){zasedenost='da'}else zasedenost='ne';
+    if (vozilo.cena_na_km) {cena=vozilo.cena_na_km}else cena='/';
 
     return `<div class="row" style="padding: 0 15px 0 15px;">
 <div class="col s12 white" style="border-radius: 10px; padding: 15px;">
@@ -97,7 +97,7 @@ function getCard(vozilo) {
         </div>
         <div class="row">
             <div class="col s4">
-                <span>Registerska: ` + vozilo.registerska + `€/km</span>
+                <span>Registerska: ` + vozilo.registerska + `</span>
             </div>
             <div class="col s4">
                 <span>Aktivnost: ` + aktivnost + `</span>
@@ -126,6 +126,11 @@ function getCard(vozilo) {
             </div>
             <div class="col s4">
                 <span>Višina: ` + vozilo.maks_visina_tovora + `<span></span></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s4">
+                <span>Cena: ` + cena + `</span>
             </div>
         </div>
         <div class="row">
