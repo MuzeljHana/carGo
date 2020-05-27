@@ -298,9 +298,7 @@ router.post('/', auth, async(req, res, next) => {
             "v.idZnamka": znamka,
             "v.idTip_vozila": tip_vozila
         }).select('id').then((id) => {
-            console.log(id);
             idVozilo = id[0].id;
-            console.log(idVozilo);
         });
 
         await knex.into('Cenik')
