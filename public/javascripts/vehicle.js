@@ -132,6 +132,9 @@ function getCard(vozilo) {
             <div class="col s4">
                 <span>Cena: ` + cena + ` €/km</span>
             </div>
+            <div class="col s8">
+                <span>Tip vozila: ` + vozilo.tip_vozila + ` </span>
+            </div>
         </div>
         <div class="row">
             <a class="waves-effect waves-light btn-flat right modal-trigger"
