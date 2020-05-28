@@ -37,6 +37,13 @@ $.ajax({
     });
 
 genOmejitve();
+genMap();
+
+function genMap() {
+    let search_data = JSON.parse(localStorage.getItem("search_data"));
+    setStart(search_data.nalozitev.kraj);
+    setEnd(search_data.dostava.kraj);
+}
 
 function genOmejitve() {
     let search_data = JSON.parse(localStorage.getItem("search_data"));
@@ -81,7 +88,7 @@ $("#ponudba").click(function () {
         "dostava_kraj": search_data.dostava.kraj,
         "dostava_postna_stevilka": search_data.dostava.posta,
         "dostava_ulica": search_data.dostava.ulica,
-        "dostava_hisna_stevilka": search_data.dostava.stevilka,       
+        "dostava_hisna_stevilka": search_data.dostava.stevilka,
         "idVozilo": vehicle_id,
         "cas_nalozitve": cas_nalozitve,
         "tip_tovora": search_data.tip_tovora,
