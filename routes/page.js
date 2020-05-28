@@ -39,10 +39,6 @@ router.get('/register', (req, res, next) => {
     res.render('register', req.template_data);
 });
 
-router.get('/export', auth, (req, res, next) => {
-    res.render('export', req.template_data);
-});
-
 router.get('/profile', auth, (req, res, next) => {
     res.render('profile', req.template_data);
 });
