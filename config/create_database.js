@@ -217,24 +217,24 @@ async function create_database() {
 
     const uporabnik = [
         { ime: 'Janez', priimek: 'Novak', email: 'janez.novak@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 1 },
-        { ime: 'Controleum', priimek: 'Controleum', email: 'controleum@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2 },
-        { ime: 'Zidnak', priimek: 'Zidnak', email: 'zidnak@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2 },
-        { ime: 'Avortium', priimek: 'Avortium', email: 'avortium@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2 },
+        { ime: 'Marko', priimek: 'Horvat', email: 'marko.horvat@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 4 },
+        { ime: 'Irena', priimek: 'Kranjc', email: 'irena.kranjc@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2 },
+        { ime: 'Barbara', priimek: 'Potocnik', email: 'barbara.potocnik@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3 },
         {
-            ime: 'Janez', priimek: 'Novak', email: 'prevozi123@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2,
-            naziv_podjetja: 'Prevozi 123', davcna: 985673455, zacetek_delovanja: '2013-01-16', uspesnost_poslovanja: "neko poročilo"
+            ime: 'Luka', priimek: 'Kos', email: 'prevozi123@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2,
+            naziv_podjetja: 'Prevozi123', davcna: 985673455, zacetek_delovanja: '2013-01-16', uspesnost_poslovanja: "EBITDA,ROA "
         },
         {
-            ime: 'Janez', priimek: 'Novak', email: 'mi.vozimo@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 1,
-            naziv_podjetja: 'Mi vozimo', davcna: 985673455, zacetek_delovanja: '2015-11-06', uspesnost_poslovanja: "neko poročilo"
+            ime: 'Tomaz', priimek: 'Bizjak', email: 'mi.vozimo@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 1,
+            naziv_podjetja: 'Mi vozimo', davcna: 985673455, zacetek_delovanja: '2015-11-06', uspesnost_poslovanja: "ROE, ROR, EVA"
         },
         {
-            ime: 'Janez', priimek: 'Novak', email: 'prevoz.nudim@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3,
-            naziv_podjetja: 'Prevoz nudim', davcna: 985673455, zacetek_delovanja: '2020-09-14', uspesnost_poslovanja: "neko poročilo"
+            ime: 'Petra', priimek: 'Kotnik', email: 'prevoz.nudim@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3,
+            naziv_podjetja: 'Prevoz nudim', davcna: 985673455, zacetek_delovanja: '2020-09-14', uspesnost_poslovanja: "EBITDA, EVA, ROR"
         },
         {
-            ime: 'Janez', priimek: 'Novak', email: 'smrtnik.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3,
-            naziv_podjetja: 'Smrtnik prevozi', davcna: 985673455, zacetek_delovanja: '2019-08-30', uspesnost_poslovanja: "neko poročilo"
+            ime: 'Eva', priimek: 'Oblak', email: 'smrtnik.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 4,
+            naziv_podjetja: 'Smrtnik prevozi', davcna: 985673455, zacetek_delovanja: '2019-08-30', uspesnost_poslovanja: "EBITDA, ROA, EVA"
         }
     ]
     await knex('Uporabnik').insert(uporabnik)
@@ -267,7 +267,7 @@ async function create_database() {
             registerska: 'MB FL-341',
             model: "Transporter",
             maks_teza_tovora: 3500,
-            potrdilo_izpravnosti: "neko potrdilo",
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
             maks_dolzina_tovora: 2000,
             maks_sirina_tovora: 1500,
             maks_visina_tovora: 1800,
@@ -281,7 +281,7 @@ async function create_database() {
             registerska: 'LJ HF-653',
             model: "T HIGH",
             maks_teza_tovora: 3500,
-            potrdilo_izpravnosti: "neko potrdilo",
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
             maks_volumen_tovora: 200,
             idTip_vozila: 2,
             idZnamka: 4,
@@ -292,7 +292,7 @@ async function create_database() {
             registerska: 'MB HG-879',
             model: "Actros",
             maks_teza_tovora: 7000,
-            potrdilo_izpravnosti: "neko potrdilo",
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
             maks_dolzina_tovora: 5000,
             maks_sirina_tovora: 2200,
             maks_visina_tovora: 2000,
@@ -306,7 +306,7 @@ async function create_database() {
             registerska: 'NM DF-245',
             model: "TGX",
             maks_teza_tovora: 7000,
-            potrdilo_izpravnosti: "neko potrdilo",
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
             maks_dolzina_tovora: 7000,
             maks_sirina_tovora: 2200,
             maks_visina_tovora: 1800,
