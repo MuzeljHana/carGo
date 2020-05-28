@@ -39,11 +39,11 @@ router.get('/register', (req, res, next) => {
     res.render('register', req.template_data);
 });
 
-router.get('/export', (req, res, next) => {
+router.get('/export', auth, (req, res, next) => {
     res.render('export', req.template_data);
 });
 
-router.get('/profile', (req, res, next) => {
+router.get('/profile', auth, (req, res, next) => {
     res.render('profile', req.template_data);
 });
 
