@@ -86,37 +86,57 @@ router.get("/logout", (req, res, next) => {
     }
 });
 
-router.post('/editUser', (req, res, next) => {
-    let data = {
-        ime: req.body.ime,
-        priimek: req.body.priimek,
-        email: req.body.email,
-        geslo: bcrypt.hashSync(req.body.geslo.trim(), 10),
-        idNaslov: (qb) => {
-            qb.from("Naslov").select("id").where({ ulica: req.body.ulica, stevilka: req.body.hisna_stevilka })
+router.post('/editUser', async(req, res, next) => {
+    try {
+        let novoGeslo;
+
+        if (req.body.geslo) {
+            novoGeslo = req.body.geslo;
+        } else {
+            novoGeslo = req.body.staro_geslo;
         }
-    }
-    if (req.body.naziv_podjetja) {
-        let podjetje_data = {
-            naziv_podjetja: req.body.naziv_podjetja,
-            davcna: req.body.davcna,
-            zacetek_delovanja: req.body.zacetek_delovanja,
-            uspesnost_poslovanja: req.body.uspesnost_poslovanja
-        }
-        data = Object.assign(data, podjetje_data);
-    }
-    knex('Uporabnik')
-        .update(data)
-        .where({
-            id: req.session.user_id,
-        })
-        .then((data) => {
-            res.json({ message: "success" });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).send();
+
+        await knex.from('Uporabnik').where({
+            id: req.session.user_id
+        }).select('geslo').then((geslo) => {
+            if (bcrypt.compareSync(req.body.staro_geslo.trim(), geslo[0].geslo)) {
+                if (req.body.naziv_podjetja) {
+                    knex('Uporabnik').update({
+                        ime: req.body.ime,
+                        priimek: req.body.priimek,
+                        email: req.body.email,
+                        geslo: bcrypt.hashSync(novoGeslo.trim(), 10),
+                        naziv_podjetja: req.body.naziv_podjetja,
+                        davcna: req.body.davcna,
+                        zacetek_delovanja: req.body.zacetek_delovanja,
+                        uspesnost_poslovanja: req.body.uspesnost_poslovanja
+                    }).where({
+                        id: req.session.user_id
+                    }).catch((error) => {
+                        res.json(error);
+                    });
+                } else {
+                    knex('Uporabnik').update({
+                        ime: req.body.ime,
+                        priimek: req.body.priimek,
+                        email: req.body.email,
+                        geslo: bcrypt.hashSync(novoGeslo.trim(), 10),
+                    }).where({
+                        id: req.session.user_id
+                    }).catch((error) => {
+                        res.json(error);
+                    });
+                }
+            } else {
+                res.send("Password mismatch").status(500);
+            }
+            res.status(200).json({'Message': 'Success'});
+        }).catch((error) => {
+            res.json(error);
         });
+    } catch (error) {
+        res.json(error);
+    }
 });
 
 module.exports = router;
