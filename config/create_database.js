@@ -132,6 +132,7 @@ async function create_database() {
         table.integer('maks_sirina_tovora');
         table.integer('maks_visina_tovora');
         table.integer('maks_st_palet');
+        table.binary('slika');
 
         table.integer('idTip_vozila').references('id').inTable('Tip_vozila').notNullable();
         table.integer('idZnamka').references('id').inTable('Znamka').notNullable();
@@ -277,7 +278,7 @@ async function create_database() {
             idUporabnik: 7
         },
         {
-            letnik: "2009",
+            letnik: "2016",
             registerska: 'LJ HF-653',
             model: "T HIGH",
             maks_teza_tovora: 3500,
@@ -288,7 +289,7 @@ async function create_database() {
             idUporabnik: 6
         },
         {
-            letnik: "2015",
+            letnik: "2017",
             registerska: 'MB HG-879',
             model: "Actros",
             maks_teza_tovora: 7000,
