@@ -66,3 +66,55 @@ function genOmejitve() {
 function getPill(text) {
     return '<div class="chip" style="font-family: Roboto;">' + text + '</div>'
 }
+
+$("#ponudba").click(function () {
+    let search_data = JSON.parse(localStorage.getItem("search_data"));
+    let vehicle_id = Number(localStorage.getItem("details_vehicle"));
+    let datum = search_data.datum.split(".");
+    let cas_nalozitve = datum[2] + "-" + datum[1] + "-" + datum[0] + " " + search_data.cas;
+
+    let data = {
+        "nalozitev_kraj": search_data.nalozitev.kraj,
+        "nalozitev_postna_stevilka": search_data.nalozitev.posta,
+        "nalozitev_ulica": search_data.nalozitev.ulica,
+        "nalozitev_hisna_stevilka": search_data.nalozitev.stevilka,
+        "dostava_kraj": search_data.dostava.kraj,
+        "dostava_postna_stevilka": search_data.dostava.posta,
+        "dostava_ulica": search_data.dostava.ulica,
+        "dostava_hisna_stevilka": search_data.dostava.stevilka,       
+        "idVozilo": vehicle_id,
+        "cas_nalozitve": cas_nalozitve,
+        "tip_tovora": search_data.tip_tovora,
+        "pripombe": $("#opombe").val()
+    };
+
+    switch (search_data.tip_tovora) {
+        case "posamezni izdelki":
+            data.izdelki = search_data.izdelki;
+            break;
+        case "razsut tovor":
+            data.teza_tovora = search_data.teza_tovora;
+            data.volumen_tovora = search_data.volumed_tovora;
+            break;
+        case "palete":
+            data.st_palet = search_data.st_palet;
+            data.teza_palete = search_data.teza_palete;
+            break;
+    }
+
+    console.log(data);
+
+    $.ajax({
+        method: "post",
+        url: "/order/",
+        data: data,
+        dataType: "json"
+    })
+        .done(function (data) {
+            if (data) {
+                if (data.message == "success") {
+                    window.location = "/profile/orders";
+                }
+            }
+        });
+});
