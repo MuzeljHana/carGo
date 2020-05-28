@@ -3,6 +3,7 @@ $("#edit").click (function() {
     let priimek = document.getElementById('i_priimek_uredi').value;
     let email = document.getElementById('i_email_uredi').value;
     let geslo = document.getElementById('i_geslo_uredi').value;
+    let staro_geslo = document.getElementById('staro_geslo').value;
     let naziv_podjetja = document.getElementById('naziv_podjetja_uredi').value;
     let davcna = document.getElementById('davcna').value;
     let zacetek_delovanja = document.getElementById('zacetek_delovanja_uredi').value;
@@ -13,6 +14,7 @@ $("#edit").click (function() {
         'priimek': priimek,
         'email': email,
         'geslo': geslo,
+        'staro_geslo': staro_geslo,
         'naziv_podjetja': naziv_podjetja,
         'davcna': davcna,
         'zacetek_delovanja': zacetek_delovanja,
