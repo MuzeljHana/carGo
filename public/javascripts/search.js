@@ -32,7 +32,7 @@ $("#isci").click(function () {
         case "razsut tovor":
             let volumen = $("#volumen").val();
             let teza = $("#teza").val();
-            search_data.volumen_tovora = volumen;
+            search_data.volumed_tovora = volumen;
             search_data.teza_tovora = teza;
             break;
         case "palete":
@@ -42,6 +42,30 @@ $("#isci").click(function () {
             search_data.teza_palete = teza_palete;
             break;
     }
+
+    search_data.datum = $("#date").val();
+    search_data.cas = $("#time").val();
+
+    search_data.nalozitev = {
+        ulica: $("#n_ulica").val(),
+        stevilka: $("#n_hisna_stevilka").val(),
+        kraj: $("#n_kraj").val(),
+        posta: $("#n_postna_stevilka").val()
+    };
+
+    search_data.dostava = {
+        ulica: $("#d_ulica").val(),
+        stevilka: $("#d_hisna_stevilka").val(),
+        kraj: $("#d_kraj").val(),
+        posta: $("#d_postna_stevilka").val()
+    };
+
+    search_data.dodatno = {
+        cena: $("#cena").val(),
+        prevoznik: $("#prevoznik").val(),
+        letnik: $("#letnik").val(),
+        tip: $("#tip option:selected").val()
+    };
 
     localStorage.setItem("search_data", JSON.stringify(search_data));
 

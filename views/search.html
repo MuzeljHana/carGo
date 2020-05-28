@@ -73,8 +73,47 @@
                 <label for="time">Čas naložitve</label>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <h5>Kraj naložitve</h5>
+        <div class="input-field col m4 s8">
+            <input id="n_ulica" type="text">
+            <label for="n_ulica">Ulica</label>
+        </div>
+        <div class="input-field col m2 s4">
+            <input id="n_hisna_stevilka" type="text">
+            <label for="n_hisna_stevilka">Hišna številka</label>
+        </div>
+
+        <div class="input-field col m2 s4">
+            <input id="n_postna_stevilka" type="number">
+            <label for="n_postna_stevilka">Poštna številka</label>
+        </div>
+        <div class="input-field col m4 s8">
+            <input id="n_kraj" type="text">
+            <label for="n_kraj">Kraj</label>
+        </div>
+    </div>
+    <div class="row">
+        <h5>Kraj dostave</h5>
+        <div class="input-field col m4 s8">
+            <input id="d_ulica" type="text">
+            <label for="d_ulica">Ulica</label>
+        </div>
+        <div class="input-field col m2 s4">
+            <input id="d_hisna_stevilka" type="text">
+            <label for="d_hisna_stevilka">Hišna številka</label>
+        </div>
+
+        <div class="input-field col m2 s4">
+            <input id="d_postna_stevilka" type="number">
+            <label for="d_postna_stevilka">Poštna številka</label>
+        </div>
+        <div class="input-field col m4 s8">
+            <input id="d_kraj" type="text">
+            <label for="d_kraj">Kraj</label>
+        </div>
         <div class="col s12">
-            <h5>Izbira poti</h5>
             <div class="mapouter">
                 <div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas"
                         src="https://maps.google.com/maps?q=slovenia&t=&z=7&ie=UTF8&iwloc=&output=embed" frameborder="0"
@@ -109,15 +148,16 @@
                 <label for="prevoznik">Prevoznik</label>
             </div>
             <div class="input-field col s6">
-                <input id="vozilo" type="text" class="validate">
-                <label for="vozilo">Letnik vozila</label>
+                <input id="letnik" type="text" class="validate">
+                <label for="letnik">Minimalni letnik vozila</label>
             </div>
             <div class="input-field col s6">
-                <select>
+                <select id="tip">
                     <option value="" disabled selected>Izberi</option>
-                    <option value="1">Dostavni kombi</option>
-                    <option value="2">Tovornjak za prevoz razsutega tovora</option>
-                    <option value="3">Tovornjak za prevoz blaga</option>
+                    <option value="kombi">Dostavni kombi</option>
+                    <option value="tovornjak razsut tovor">Tovornjak za prevoz razsutega tovora</option>
+                    <option value="tovornjak blago">Tovornjak za prevoz blaga</option>
+                    <option value="izredni prevoz">Izredni prevoz</option>
                 </select>
                 <label>Tip vozila</label>
             </div>
