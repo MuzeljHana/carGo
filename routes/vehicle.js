@@ -2,6 +2,7 @@ const auth = require('./auth');
 const knex = require('../config/database');
 const express = require('express');
 const router = express.Router();
+//const fileUpload = require('express-fileupload');
 
 router.post('/search', (req, res, next) => {
     const query = knex.from('Vozilo as v')
@@ -184,6 +185,7 @@ router.post('/editVehicle', auth, (req, res, next) => {
 
 router.post('/', auth, async(req, res, next) => {
     try {
+        datoteka = Buffer.from(req.files.slika.data);
         if (! await ZnamkaExists(req.body.znamka)) {
             await knex.into("Znamka")
             .insert([{ naziv: req.body.znamka }]);
@@ -224,7 +226,8 @@ router.post('/', auth, async(req, res, next) => {
                     maks_visina_tovora: req.body.maks_visina_tovora,
                     idUporabnik: req.session.user_id,
                     idZnamka: znamka,
-                    idTip_vozila: tip_vozila
+                    idTip_vozila: tip_vozila,
+                    slika: datoteka
                 }]).catch((err) => {
                     console.log(err);
                     res.status(500).send();
@@ -242,7 +245,8 @@ router.post('/', auth, async(req, res, next) => {
                     maks_volumen_tovora: req.body.maks_volumen_tovora,
                     idUporabnik: req.session.user_id,
                     idZnamka: znamka,
-                    idTip_vozila: tip_vozila
+                    idTip_vozila: tip_vozila,
+                    slika: datoteka
                 }]).catch((err) => {
                     console.log(err);
                     res.status(500).send();
@@ -263,7 +267,8 @@ router.post('/', auth, async(req, res, next) => {
                     maks_st_palet: req.body.maks_st_palet,
                     idUporabnik: req.session.user_id,
                     idZnamka: znamka,
-                    idTip_vozila: tip_vozila
+                    idTip_vozila: tip_vozila,
+                    slika: datoteka
                 }]).catch((err) => {
                     console.log(err);
                     res.status(500).send();
