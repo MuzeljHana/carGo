@@ -45,3 +45,11 @@ p {
 .normal-text {
     font-family: 'Roboto';
 }
+
+.map-marker {
+    background-color: transparent;
+}
+
+.leaflet-control-container .leaflet-routing-container-hide {
+    display: none;
+}
