@@ -86,37 +86,34 @@ router.get("/logout", (req, res, next) => {
     }
 });
 
-router.post('/editUser', (req, res, next) => {
-    let data = {
-        ime: req.body.ime,
-        priimek: req.body.priimek,
-        email: req.body.email,
-        geslo: bcrypt.hashSync(req.body.geslo.trim(), 10),
-        idNaslov: (qb) => {
-            qb.from("Naslov").select("id").where({ ulica: req.body.ulica, stevilka: req.body.hisna_stevilka })
-        }
-    }
+router.post('/editUser', async(req, res, next) => {
     if (req.body.naziv_podjetja) {
-        let podjetje_data = {
+        await knex('Uporabnik').update({
+            ime: req.body.ime,
+            priimek: req.body.priimek,
+            email: req.body.email,
+            geslo: bcrypt.hashSync(req.body.geslo.trim(), 10),
             naziv_podjetja: req.body.naziv_podjetja,
             davcna: req.body.davcna,
             zacetek_delovanja: req.body.zacetek_delovanja,
             uspesnost_poslovanja: req.body.uspesnost_poslovanja
-        }
-        data = Object.assign(data, podjetje_data);
-    }
-    knex('Uporabnik')
-        .update(data)
-        .where({
-            id: req.session.user_id,
-        })
-        .then((data) => {
-            res.json({ message: "success" });
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).send();
+        }).where({
+            id: req.session.user_id
+        }).catch((error) => {
+            res.json(error);
         });
+    } else {
+        await knex('Uporabnik').update({
+            ime: req.body.ime,
+            priimek: req.body.priimek,
+            email: req.body.email,
+            geslo: bcrypt.hashSync(req.body.geslo.trim(), 10),
+        }).where({
+            id: req.session.user_id
+        }).catch((error) => {
+            res.json(error);
+        });
+    }
 });
 
 module.exports = router;
