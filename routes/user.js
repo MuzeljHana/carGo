@@ -1,3 +1,4 @@
+const auth = require('./auth');
 const knex = require('../config/database');
 const bcrypt = require('bcryptjs');
 const express = require('express');
@@ -143,3 +144,27 @@ async function UserExists(email, davcna) {
         .orWhere({ davcna: davcna || 0 });
     return user.length != 0;
 }
+
+router.get('/', auth, (req, res, next) => {
+    knex.from('Uporabnik as u')
+        .select([
+            "ime",
+            "priimek",
+            "email",
+            "naziv_podjetja",
+            "davcna",
+            "zacetek_delovanja",
+            "uspesnost_poslovanja",
+            "n.ulica as naslov",
+            "n.stevilka as stevilka"])
+        .where({ "u.id": req.session.user_id })
+        //.groupBy("v.id")
+        .join("Naslov as n", { 'n.id': 'u.idNaslov'  })
+        .then((data) => {
+            res.json(data);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send();
+        });
+});
