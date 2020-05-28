@@ -3,9 +3,122 @@
 {% block title %}Profile - carGo{% endblock %}
 
 {% block main %}
-
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <h3>Profil uporabnika</h3>
+        </div>
+    </div>
+    <div class="row grey lighten-2" style="border-radius: 10px;">
+        <div class="input-field col s12">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">Urejanje profila</label>
+        </div>
+        <div id="iskalec">
+            <div class="input-field col s12">
+                <input id="i_ime_uredi" type="text">
+                <label for="i_ime_uredi">Ime</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="i_priimek_uredi" type="text">
+                <label for="i_priimek_uredi">Priimek</label>
+            </div>
+            <div class="input-field col s4">
+                <input id="i_postna_stevilka_uredi" type="number">
+                <label for="i_postna_stevilka_uredi">Poštna številka</label>
+            </div>
+            <div class="input-field col s8">
+                <input id="i_kraj_uredi" type="text">
+                <label for="i_kraj_uredi">Kraj</label>
+            </div>
+            <div class="input-field col s8">
+                <input id="i_ulica_uredi" type="text">
+                <label for="i_ulica_uredi">Ulica</label>
+            </div>
+            <div class="input-field col s4">
+                <input id="i_hisna_stevilka_uredi" type="text">
+                <label for="i_hisna_stevilka_uredi">Hišna številka</label>
+            </div>
+            <div class="input-field col s12" style="margin-top: 3rem;">
+                <input id="i_email_uredi" type="email" class="validate">
+                <label for="i_email_uredi">Email</label>
+                <span class="helper-text" data-error="Napačen format email-a ali pa je že v uporabi"></span>
+            </div>
+            <div class="input-field col s12">
+                <input id="i_geslo_uredi" type="password" class="validate">
+                <label for="i_geslo_uredi">Geslo</label>
+                <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
+            </div>
+            <div class="input-field col s12">
+                <input id="i_pgeslo_uredi" type="password">
+                <label for="i_pgeslo_uredi">Ponovi geslo</label>
+                <span class="helper-text" data-error="Gesli se ne ujemata"></span>
+            </div>
+            <a id="i_registracija" class="waves-effect waves-light btn" style="width: 100%;"> Uredi </a>
+        </div>
+        <div id="ponudnik">
+            <div class="input-field col s12">
+                <input id="p_ime_uredi" type="text">
+                <label for="p_ime_uredi">Ime</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="p_priimek_uredi" type="text">
+                <label for="p_priimek_uredi">Priimek</label>
+            </div>
+            <div class="input-field col s4">
+                <input id="p_postna_stevilka_uredi" type="number">
+                <label for="p_postna_stevilka_uredi">Poštna številka</label>
+            </div>
+            <div class="input-field col s8">
+                <input id="p_kraj_uredi" type="text">
+                <label for="p_kraj_uredi">Kraj</label>
+            </div>
+            <div class="input-field col s8">
+                <input id="p_ulica_uredi" type="text">
+                <label for="p_ulica_uredi">Ulica</label>
+            </div>
+            <div class="input-field col s4">
+                <input id="p_hisna_stevilka_uredi" type="text">
+                <label for="p_hisna_stevilka_uredi">Hišna številka</label>
+            </div>
+            <div class="input-field col s12" style="margin-top: 3rem;">
+                <input id="p_email_uredi" type="email" class="validate">
+                <label for="p_email_uredi">Email</label>
+                <span class="helper-text" data-error="Napačen format email-a ali pa je že v uporabi"></span>
+            </div>
+            <div class="input-field col s12">
+                <input id="p_geslo_uredi" type="password" class="validate">
+                <label for="p_geslo_uredi">Geslo</label>
+                <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
+            </div>
+            <div class="input-field col s12">
+                <input id="p_pgeslo_uredi" type="password" class="validate">
+                <label for="p_pgeslo_uredi">Ponovi geslo</label>
+                <span class="helper-text" data-error="Gesli se ne ujemata"></span>
+            </div>
+            <div class="input-field col s12" style="margin-top: 3rem;">
+                <input id="naziv_podjetja_uredi" type="text" class="validate">
+                <label for="naziv_podjetja_uredi">Naziv podjetja</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="davcna" type="number" class="validate">
+                <label for="davcna">Davcna številka</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="zacetek_delovanja_uredi" type="text" class="datepicker">
+                <label for="zacetek_delovanja_uredi">Začetek delovanja</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="uspesnost_poslovanja_uredi" type="text">
+                <label for="uspesnost_poslovanja_uredi">Uspešnost poslovanja</label>
+            </div>
+            <a id="p_registracija" class="waves-effect waves-light btn" style="width: 100%;">Uredi</a>
+        </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block javascript %}
-    <script src="javascripts/profile.js"></script>
+    <script src="javascripts/user.js"></script>
 {% endblock %}
