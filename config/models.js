@@ -1,5 +1,7 @@
 const knex = require('./database');
 const bookshelf = require('bookshelf')(knex);
+const fileUpload = require('express-fileupload');
+app.use(fileUpload());
 
 module.exports = {
     Izdelek: bookshelf.model('Izdelek', {
