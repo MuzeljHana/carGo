@@ -34,23 +34,7 @@ $("#edit").click (function() {
 function updateData() {  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-function prenosPodatkovUporabnika(id) {
-    $.ajax({
+$.ajax({
         method: "get",
         url: "/user/",
         dataType: "json"
@@ -58,46 +42,35 @@ function prenosPodatkovUporabnika(id) {
     .done(function (data) {
         if (data) {
             for (let i = 0; i < data.length; i++) {
-                if (data[i].id == id) {
+                
                     let uporabnik = data[i];
-                    if ($("#ime-uredi").val(uporabnik.ime)) {
-                        $("#ime-uredi").focus();
+                    if ($("#i_ime_uredi").val(uporabnik.ime)) {
+                        $("#i_ime_uredi").focus();
                     }
-                    if ($("#priimek-uredi").val(uporabnik.priimek)) {
-                        $("#priimek-uredi").focus();
+                    if ($("#i_priimek_uredi").val(uporabnik.priimek)) {
+                        $("#i_priimek_uredi").focus();
                     }
-                    if ($("#email-uredi").val(uporabnik.email)) {
-                        $("#email-uredi").focus();
+                    /*if ($("#i_postna_stevilka_uredi").val(uporabnik.po)) {
+                        $("#i_postna_stevilka_uredi").focus();
                     }
-                    if ($("geslo-uredi").val(uporabnik.geslo)) {
-                        $("#geslo-uredi").focus();
+                    if ($("#i_kraj_uredi").val(uporabnik.geslo)) {
+                        $("#i_kraj_uredi").focus();
+                    }*/
+                    if ($("#i_ulica_uredi").val(uporabnik.ulica)) {
+                        $("#i_ulica_uredi").focus();
                     }
-                    if ($("#naziv_podjetja-uredi").val(uporabnik.naziv_podjetja)) {
-                        $("#naziv_podjetja-uredi").focus();
+                    if ($("#i_hisna_stevilka_uredi").val(uporabnik.naziv_podjetja)) {
+                        $("#i_hisna_stevilka_uredi").focus();
                     }
-                    if ($("#davcna-uredi").val(uporabnik.davcna) {
-                        $("#davcna-uredi").focus();
+                    if ($("#i_hisna_stevilka_uredi").val(uporabnik.naziv_podjetja)) {
+                        $("#i_hisna_stevilka_uredi").focus();
                     }
-                    if ($("#zacetek_delovanja-uredi").val(uporabnik.zacetek_delovanja)) {
-                        $("#zacetek_delovanja-uredi").focus();
-                    }
-                    if ($("#uspesnot_poslovanja-uredi").val(uporabnik.uspesnost_poslovanja)) {
-                        $("#uspesnot_poslovanja-uredi").focus();
-                    }
-                    /*
-                    if ($("#model-uredi").val(vozilo.model)) {
-                        $("#model-uredi").focus();
+                    if ($("#i_email_uredi").val(uporabnik.email)) {
+                        $("#i_email_uredi").focus();
                     }
                     
                     break;
-                }
             }        
         }
     });
-    userID(id);
-}
 
-function userID(id) {
-    sessionStorage.setItem("userID", id);
-}
-*/
