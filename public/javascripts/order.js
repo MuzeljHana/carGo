@@ -242,9 +242,7 @@ function getCardIskalec(ponudba) {
             break;
     }
 
-
-
-    return `<div class="row" style="padding: 0 15px 0 15px;">
+    return `<div class="row" id="orderCard" style="padding: 0 15px 0 15px;">
     <div class="col s12 white" style="border-radius: 10px; padding: 15px;">
         <div class="row">
             <div class="col s10">
@@ -279,6 +277,87 @@ function getCardIskalec(ponudba) {
                 <h5>Status ponudbe: ` + status + `</h5>
             </div>
         </div>
+        <div class="row">
+            <div class="col s12 center-align">
+                <select name="format" id="formatChoice" style="display: inline; margin: auto;">
+                    <option value=""></option>
+                    <option value="txt">.txt</option>
+                    <option value="pdf">.pdf</option>
+                </select>
+            </div>
+        </div>
+        <a class="waves-effect waves-light btn-flat right"
+            style="text-transform: none;" onclick="exportConfirmation(${ponudba.id})">Izvoz potrdila</a>
     </div>
 </div>`;
+}
+
+async function exportConfirmation(id) {
+    let ponudba;
+    
+    await $.ajax({
+        method: "get",
+        url: "/order/",
+        dataType: "json"
+    })
+    .done(function (data) {
+        if (data) {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].id == id) {
+                    ponudba = data[i];
+                    break;
+                }
+            }
+        }
+    });
+    
+    let datum_full = new Date(ponudba.cas_nalozitve);
+    let datum = datum_full.getHours() + ":" + datum_full.getMinutes() + " " + datum_full.getDate() + "." + datum_full.getMonth() + "." + datum_full.getFullYear();
+
+    var choice = document.getElementById("formatChoice").value;
+
+    switch (choice) {
+        case "txt":
+            content = "Podatki o naročilu\n\nStatus naročila: " + ponudba.status +"\nVozilo: " + 
+                ponudba.vozilo.znamka + " " + ponudba.vozilo.model + " " + "\nPrice: " + ponudba.vozilo.cena_na_km +
+                "\nDatum nalaganja: " + datum_full + "\nDatum izvoza: " + datum;
+
+                switch (ponudba.tip_tovora) {
+                    case "palete":
+                        let skupnaTeza = ponudba.teza_palet * ponudba.st_palet;
+                        content += "\n\nTovor\nŠtevilo palet: " + ponudba.st_palet + "\nTeža palet: " + ponudba.teza_palet +
+                        "\nSkupna teža: " + skupnaTeza;
+                        break;
+                    case "posamezni izdelki":
+                        let teza = 0;
+                        let volumen = 0;
+                        for (const izdelek of ponudba.izdelki) {
+                            teza += izdelek.teza * izdelek.kolicina;
+                            volumen += izdelek.dolzina * izdelek.visina * izdelek.sirina;
+                        }
+                        content += "\n\nTovor\nTeža: " + teza + "\nVolumen: " + volumen; 
+                        break;
+                    case "razsut tovor":
+                        content += "\n\nTovor\nVolumen: " + izdelek.volumen_tovora + "\nTeža: " + izdelek.teza_tovora;
+                        break;
+                }
+
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
+            element.setAttribute('download', "Izvoz naročila");
+            
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            
+            element.click();
+            
+            document.body.removeChild(element);        
+            break;
+        case "pdf":
+            var doc = new jsPDF();
+            doc.setFont("Times", "Roman");
+            doc.fromHTML($("#orderCard").get(0), 20, 20);
+            doc.save("Izvoz naročila.pdf");
+            break;
+        }
 }
