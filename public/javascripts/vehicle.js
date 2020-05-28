@@ -100,7 +100,7 @@ function getCard(vozilo) {
                 <span>Registerska: ` + vozilo.registerska + `</span>
             </div>
             <div class="col s4">
-                <span>Aktivnost: ` + aktivnost + `</span>
+                <span id="aktivnost">Aktivnost: ` + aktivnost + `</span>
             </div>
             <div class="col s4">
                 <span>Zaseden: ` + zasedenost + `</span>
@@ -137,11 +137,17 @@ function getCard(vozilo) {
             </div>
         </div>
         <div class="row">
-            <div class="col s8">
+            <div class="col s6">
                 <span>Potrdilo izpravnosti: ` + vozilo.potrdilo_izpravnosti + ` </span>
             </div>
-            <a class="waves-effect waves-light btn-flat right modal-trigger"
-                style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`" onclick="prenosPodatkov(`+vozilo.id+`)">Uredi</a>
+            <div class="col s3">
+                <a class="waves-effect waves-light btn-flat right modal-trigger"
+                    style="text-transform: none;" id="idakt" onclick="editActive(`+vozilo.id+`,`+vozilo.aktivno+`)">Aktiven</a>
+            </div>
+            <div class="col s3">
+                <a class="waves-effect waves-light btn-flat right modal-trigger"
+                    style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`" onclick="prenosPodatkov(`+vozilo.id+`)">Uredi</a>
+            </div>
         </div>
     </div>
 </div>
@@ -258,6 +264,19 @@ function deleteVehicle(id){
     }).then((response) => {
         updateData();
         console.log("Vehicle successfully deleted");
+    });
+};
+
+function editActive(id, bool){
+    if (bool==0) {
+        bool=1;
+    }else 
+        bool=0;
+    fetch(`http://localhost:3000/vehicle/${id}/active/${bool}`, {
+        method: 'PUT'
+    }).then((response) => {
+        updateData();
+        console.log("Vehicle activity successfully edited");
     });
 };
 
