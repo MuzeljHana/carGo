@@ -141,7 +141,7 @@ function getCard(vozilo) {
                 <span>Potrdilo izpravnosti: ` + vozilo.potrdilo_izpravnosti + ` </span>
             </div>
             <div class="col s3">
-                <a class="waves-effect waves-light btn-flat right modal-trigger"
+                <a class="waves-effect waves-light btn-flat right"
                     style="text-transform: none;" id="idakt" onclick="editActive(`+vozilo.id+`,`+vozilo.aktivno+`)">Aktiven</a>
             </div>
             <div class="col s3">
