@@ -148,13 +148,13 @@ function getCardPonudnik(ponudba) {
                         <span>Cena na km: ` + ponudba.vozilo.cena_na_km + `€</span>
                     </div>
                     <div class="col s12">
-                        <span>` + ponudba.nalozisce.ulica + ` ` + ponudba.nalozisce.stevilka + `, ` + ponudba.nalozisce.kraj + ` ` + ponudba.nalozisce.posta + `</span>
+                        <span>Naložišče: ` + ponudba.nalozisce.ulica + ` ` + ponudba.nalozisce.stevilka + `, ` + ponudba.nalozisce.posta + ` ` + ponudba.nalozisce.kraj + `</span>
                     </div>
                     <div class="col s12">
                         <span>Čas naložitve: ` + datum + `</span>
                     </div>
                     <div class="col s12">
-                        <span>` + ponudba.dostava.ulica + ` ` + ponudba.dostava.stevilka + `, ` + ponudba.dostava.kraj + ` ` + ponudba.dostava.posta + `</span>
+                        <span>Dostava: ` + ponudba.dostava.ulica + ` ` + ponudba.dostava.stevilka + `, ` + ponudba.dostava.posta + ` ` + ponudba.dostava.kraj + `</span>
                     </div>
                 </div>
             </div>
@@ -259,13 +259,13 @@ function getCardIskalec(ponudba) {
                         <span>Cena na km: ` + ponudba.vozilo.cena_na_km + `€</span>
                     </div>
                     <div class="col s12">
-                        <span>` + ponudba.nalozisce.ulica + ` ` + ponudba.nalozisce.stevilka + `, ` + ponudba.nalozisce.kraj + ` ` + ponudba.nalozisce.posta + `</span>
+                        <span>Naložišče: ` + ponudba.nalozisce.ulica + ` ` + ponudba.nalozisce.stevilka + `, ` + ponudba.nalozisce.posta + ` ` + ponudba.nalozisce.kraj + `</span>
                     </div>
                     <div class="col s12">
                         <span>Čas naložitve: ` + datum + `</span>
                     </div>
                     <div class="col s12">
-                        <span>` + ponudba.dostava.ulica + ` ` + ponudba.dostava.stevilka + `, ` + ponudba.dostava.kraj + ` ` + ponudba.dostava.posta + `</span>
+                        <span>Dostava: ` + ponudba.dostava.ulica + ` ` + ponudba.dostava.stevilka + `, ` + ponudba.dostava.posta + ` ` + ponudba.dostava.kraj + `</span>
                     </div>
                 </div>
             </div>
