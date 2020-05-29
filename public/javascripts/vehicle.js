@@ -69,13 +69,10 @@ function updateData() {
                             vozilo.model.toLowerCase(),
                             vozilo.registerska.toLowerCase()
                         ];
-                        if ($("#search").val() != "") {
-                            if (vozilo_attributes.includes($("#search").val().toLowerCase())) {
-                                root.append(getCard(vozilo));
-                            }
-                        } else {
-                            root.append(getCard(vozilo));
+                        if ($("#search").val() != "" && !vozilo_attributes.includes($("#search").val().toLowerCase())) {
+                            continue;
                         }
+                        root.append(getCard(vozilo));
                     }
                     $('input.autocomplete').autocomplete({
                         data: autocomplete,
@@ -116,55 +113,53 @@ function getCard(vozilo) {
             </div>
         </div>
         <div class="row">
-            <div class="col s4">
+            <div class="col m4 s12">
                 <span>Registerska: ` + vozilo.registerska + `</span>
             </div>
-            <div class="col s4">
+            <div class="col m4 s12">
                 <span id="aktivnost">Aktivnost: ` + aktivnost + `</span>
             </div>
-            <div class="col s4">
+            <div class="col m4 s12">
                 <span>Zaseden: ` + zasedenost + `</span>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s4">
-                <span>Teza: ` + vozilo.maks_teza_tovora + `</span>
+            <div class="col m4 s12">
+                <span>Teza: ` + vozilo.maks_teza_tovora + ` kg</span>
             </div>
-            <div class="col s4">
+            <div class="col m4 s12">
                 <span>Palete: ` + vozilo.maks_st_palet + `</span>
             </div>
-            <div class="col s4">
-                <span>Volumen: ` + vozilo.maks_volumen_tovora + `<span>
+            <div class="col m4 s12">
+                <span>Volumen: ` + vozilo.maks_volumen_tovora + ` m<sup>3</sup><span>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s4">
-                <span>Dolžina: ` + vozilo.maks_dolzina_tovora + `</span>
+            <div class="col m4 s12">
+                <span>Dolžina: ` + vozilo.maks_dolzina_tovora + ` cm</span>
             </div>
-            <div class="col s4">
-                <span>Širina: ` + vozilo.maks_sirina_tovora + `</span>
+            <div class="col m4 s12">
+                <span>Širina: ` + vozilo.maks_sirina_tovora + ` cm</span>
             </div>
-            <div class="col s4">
-                <span>Višina: ` + vozilo.maks_visina_tovora + `<span></span></span>
+            <div class="col m4 s12">
+                <span>Višina: ` + vozilo.maks_visina_tovora + ` cm<span></span></span>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s4">
-            <span >Cena: <span id="trenutnaCena">` + cena + `</span> €/km</span>
+            <div class="col m4 s12">
+                <span >Cena: <span id="trenutnaCena">` + cena + `</span> €/km</span>
             </div>
-            <div class="col s8">
+            <div class="col m4 s12">
                 <span>Tip vozila: ` + vozilo.tip_vozila + ` </span>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s6">
+            <div class="col m4 s12">
                 <span>Potrdilo izpravnosti: ` + vozilo.potrdilo_izpravnosti + ` </span>
             </div>
-            <div class="col s3">
-                <a class="waves-effect waves-light btn-flat right"
+        </div>
+        <div class="row">
+            <div class="col m3 s6 left">
+                <label>
+                    <input type="checkbox" class="filled-in left" checked="checked" />
+                    <span>Aktiven</span>
+                </label>
+                <a class="waves-effect waves-light btn-flat hide"
                     style="text-transform: none;" id="idakt" onclick="editActive(`+ vozilo.id + `,` + vozilo.aktivno + `)">Aktiven</a>
             </div>
-            <div class="col s3">
+            <div class="col m3 s6 right">
                 <a class="waves-effect waves-light btn-flat right modal-trigger"
                     style="text-transform: none;" href="#modal2" id="id" value="`+ vozilo.id + `" onclick="prenosPodatkov(` + vozilo.id + `)">Uredi</a>
             </div>

@@ -27,21 +27,14 @@ function getPonudbe() {
                             ponudba.ime.toLowerCase(),
                             ponudba.priimek.toLowerCase()
                         ];
-                        
-                        if ($("#search").val() != "") {
-                            if (ponudba_attributes.includes($("#search").val().toLowerCase())) {
-                                if (ponudbe.attr('id') == "ponudbe_ponudnik") {
-                                    ponudbe.append(getCardPonudnik(ponudba));
-                                } else {
-                                    ponudbe.append(getCardIskalec(ponudba));
-                                }
-                            }
+
+                        if ($("#search").val() != "" && !ponudba_attributes.includes($("#search").val().toLowerCase())) {
+                            continue;
+                        }
+                        if (ponudbe.attr('id') == "ponudbe_ponudnik") {
+                            ponudbe.append(getCardPonudnik(ponudba));
                         } else {
-                            if (ponudbe.attr('id') == "ponudbe_ponudnik") {
-                                ponudbe.append(getCardPonudnik(ponudba));
-                            } else {
-                                ponudbe.append(getCardIskalec(ponudba));
-                            }
+                            ponudbe.append(getCardIskalec(ponudba));
                         }
                     }
                     $('input.autocomplete').autocomplete({
