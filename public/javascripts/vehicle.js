@@ -153,15 +153,13 @@ function getCard(vozilo) {
         <div class="row">
             <div class="col m3 s6 left">
                 <label>
-                    <input type="checkbox" class="filled-in left" checked="checked" />
+                    <input type="checkbox" class="filled-in left" onchange="editActive(this, ` + vozilo.id + `)" ` + ((vozilo.aktivno) ? 'checked="true"' : "") + `" />
                     <span>Aktiven</span>
                 </label>
-                <a class="waves-effect waves-light btn-flat hide"
-                    style="text-transform: none;" id="idakt" onclick="editActive(`+ vozilo.id + `,` + vozilo.aktivno + `)">Aktiven</a>
             </div>
             <div class="col m3 s6 right">
                 <a class="waves-effect waves-light btn-flat right modal-trigger"
-                    style="text-transform: none;" href="#modal2" id="id" value="`+ vozilo.id + `" onclick="prenosPodatkov(` + vozilo.id + `)">Uredi</a>
+                    style="text-transform: none;" href="#modal2" onclick="prenosPodatkov(` + vozilo.id + `)">Uredi</a>
             </div>
         </div>
     </div>
@@ -282,11 +280,11 @@ function deleteVehicle(id) {
     });
 };
 
-function editActive(id, bool) {
-    if (bool == 0) {
+function editActive(el, id) {
+    let bool = 0;
+    if ($(el).is(":checked")) {
         bool = 1;
-    } else
-        bool = 0;
+    }
     fetch(`http://localhost:3000/vehicle/${id}/active/${bool}`, {
         method: 'PUT'
     }).then((response) => {
