@@ -125,7 +125,7 @@ function getCardPonudnik(ponudba) {
 
     controls = `<div class="col s12 center-align">
         <a onclick="potrdi(` + ponudba.id + `)" class="waves-effect waves-light btn">Potrdi</a>
-        <a onclick="zavrni(` + ponudba.id + `)" class="waves-effect waves-dark btn red lighten-2">Zavrni</a>
+        <a onclick="zavrni(` + ponudba.id + `)" class="waves-effect waves-dark btn red">Zavrni</a>
     </div>`;
     if (ponudba.status == "potrjeno") {
         controls = `<div class="col s12 center-align">
