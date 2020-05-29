@@ -38,6 +38,7 @@ router.get('/', auth, (req, res, next) => {
                     vozilo = await knex.from('Vozilo as v')
                         .select([
                             "letnik",
+                            "registerska",
                             "model",
                             "maks_teza_tovora",
                             "maks_volumen_tovora",
