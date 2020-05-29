@@ -16,7 +16,7 @@ $("#prijava").submit(function (event) {
                 $("#geslo").addClass("invalid");
             }
             if (data.message == "success") {
-                window.location = "/";
+                window.location = localStorage.getItem("last_page") || "/";
             }
         }
     });
