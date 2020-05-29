@@ -1,7 +1,7 @@
 let key = "pk.eyJ1IjoidGphbiIsImEiOiJja2FxajhibTYyOGpnMnNwNjFwem4xMXNjIn0.EZT8ffs1GmMUZIaSqQW3HA";
 
 L.mapbox.accessToken = key;
-let map = L.mapbox.map('map', 'mapbox.streets', { attributionControl: { compact: true } })
+let map = L.mapbox.map('map', 'mapbox.streets', { attributionControl: { compact: true }, scrollWheelZoom: false })
     .setView([46.1488296, 14.4326165], 9)
     .addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
