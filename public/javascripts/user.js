@@ -106,6 +106,7 @@ function updateData() {
                 if ($("#i_ime_uredi").val(uporabnik.ime)) {
                     $("#i_ime_uredi").focus();
                 }
+                window.scrollTo(0,0);
                 break;
             }        
         }
