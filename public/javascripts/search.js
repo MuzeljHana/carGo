@@ -32,7 +32,7 @@ $("#isci").click(function () {
         case "razsut tovor":
             let volumen = $("#volumen").val();
             let teza = $("#teza").val();
-            search_data.volumed_tovora = volumen;
+            search_data.volumen_tovora = volumen;
             search_data.teza_tovora = teza;
             break;
         case "palete":
