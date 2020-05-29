@@ -49,6 +49,11 @@ function updateData() {
                 let uporabnik = data[i];
                 if (uporabnik.zacetek_delovanja) {
                     let zacetek_delovanja = uporabnik.zacetek_delovanja.slice(0, 10);
+                    if ($("#zacetek_delovanja_uredi").length != 0) {
+                        if ($("#zacetek_delovanja_uredi").val(zacetek_delovanja)) {
+                            $("#zacetek_delovanja_uredi").focus();
+                        }
+                    }
                 }
                 if ($("#i_priimek_uredi").val(uporabnik.priimek)) {
                     $("#i_priimek_uredi").focus();
@@ -79,11 +84,6 @@ function updateData() {
                 if ($("#uspesnost_poslovanja_uredi").length != 0) {
                     if ($("#uspesnost_poslovanja_uredi").val(uporabnik.uspesnost_poslovanja)) {
                         $("#uspesnost_poslovanja_uredi").focus();
-                    }
-                }
-                if ($("#zacetek_delovanja_uredi").length != 0) {
-                    if ($("#zacetek_delovanja_uredi").val(zacetek_delovanja)) {
-                        $("#zacetek_delovanja_uredi").focus();
                     }
                 }
                 if ($("#i_email_uredi").val(uporabnik.email)) {
