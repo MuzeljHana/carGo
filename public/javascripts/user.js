@@ -12,10 +12,16 @@ $("#edit").click (function() {
     let hisna_st = document.getElementById('hisna_st_uredi').value;
     let kraj = document.getElementById('kraj_uredi').value;
     let postna_st = document.getElementById('postna_st_uredi').value;
-    let naziv_podjetja = document.getElementById('naziv_podjetja_uredi').value;
-    let davcna = document.getElementById('davcna').value;
-    let zacetek_delovanja = document.getElementById('zacetek_delovanja_uredi').value;
-    let uspesnost_poslovanja = document.getElementById('uspesnost_poslovanja_uredi').value;
+    let naziv_podjetja;
+    let davcna;
+    let zacetek_delovanja;
+    let uspesnost_poslovanja;
+    if ($('#naziv_podjetja_uredi').length != 0) {
+        naziv_podjetja = document.getElementById('naziv_podjetja_uredi').value;
+        davcna = document.getElementById('davcna').value;
+        zacetek_delovanja = document.getElementById('zacetek_delovanja_uredi').value;
+        uspesnost_poslovanja = document.getElementById('uspesnost_poslovanja_uredi').value;
+    }
 
     let podatkiUporabnika = {
         'ime': ime,
