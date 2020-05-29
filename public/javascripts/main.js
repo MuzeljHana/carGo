@@ -4,6 +4,6 @@ $(document).ready(function() {
 });
 
 let curr_location = window.location.pathname;
-if (curr_location != "/login") {
+if (!["/login", "/register"].includes(curr_location)) {
     localStorage.setItem("last_page", curr_location);
 }
