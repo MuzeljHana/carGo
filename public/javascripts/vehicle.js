@@ -79,15 +79,14 @@ function updateData() {
                     }
                     $('input.autocomplete').autocomplete({
                         data: autocomplete,
+                        onAutocomplete: () => {
+                            updateData();
+                        }
                     });
                 }
             }
         });
 }
-
-$("#search").change(function () {
-    updateData();
-});
 
 function getCard(vozilo) {
     let zasedenost, aktivnost, cena = '';
