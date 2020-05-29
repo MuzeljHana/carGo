@@ -30,7 +30,22 @@ router.post('/search', (req, res, next) => {
         .join("Cenik as c", { 'c.idVozilo': 'v.id' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
-        .join("Uporabnik as u", { 'u.id': 'v.idUporabnik' })
+        .join("Uporabnik as u", { 'u.id': 'v.idUporabnik' });
+
+    if (req.body.dodatno) {
+        if (req.body.dodatno.cena) {
+            query.andWhere("c.cena_na_km", "<=", req.body.dodatno.cena);
+        }
+        if (req.body.dodatno.prevoznik) {
+            query.andWhere("u.naziv", "like", "%" + req.body.dodatno.prevoznik.trim() + "%");
+        }
+        if (req.body.dodatno.letnik) {
+            query.andWhere("v.letnik", "<=", req.body.dodatno.letnik);
+        }
+        if (req.body.dodatno.tip) {
+            query.andWhere("t.naziv", "=", req.body.dodatno.tip);
+        }
+    }
 
     let tip_tovora = req.body.tip_tovora;
     let teza_tovora;
@@ -99,7 +114,7 @@ router.get('/', auth, (req, res, next) => {
             "maks_dolzina_tovora",
             "maks_sirina_tovora",
             "maks_visina_tovora",
-            "maks_st_palet", 
+            "maks_st_palet",
             "t.naziv as tip_vozila",
             "z.naziv as znamka",
             "c.cena_na_km"])
@@ -183,12 +198,12 @@ router.post('/editVehicle', auth, (req, res, next) => {
 });
 */
 
-router.post('/', auth, async(req, res, next) => {
+router.post('/', auth, async (req, res, next) => {
     try {
         datoteka = Buffer.from(req.files.slika.data);
         if (! await ZnamkaExists(req.body.znamka)) {
             await knex.into("Znamka")
-            .insert([{ naziv: req.body.znamka }]);
+                .insert([{ naziv: req.body.znamka }]);
         }
 
         var today = new Date();
@@ -198,106 +213,106 @@ router.post('/', auth, async(req, res, next) => {
         today = yyyy + '-' + mm + '-' + dd;
         let tip_vozila;
         let znamka;
-    
+
         await knex('Tip_vozila').where({
             'naziv': req.body.tip_vozila
         }).select('id').then((id) => {
             tip_vozila = id[0].id;
         });
-    
+
         await knex('Znamka').where({
             'naziv': req.body.znamka
         }).select('id').then((id) => {
             znamka = id[0].id;
         });
 
-        switch(tip_vozila) {
+        switch (tip_vozila) {
             //  KOMBI
             case 1:
                 knex.into('Vozilo')
-                .insert([{
-                    letnik: req.body.letnik,
-                    registerska: req.body.registerska,
-                    model: req.body.model,
-                    maks_teza_tovora: req.body.maks_teza_tovora,
-                    potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-                    maks_dolzina_tovora: req.body.maks_dolzina_tovora,
-                    maks_sirina_tovora: req.body.maks_sirina_tovora,
-                    maks_visina_tovora: req.body.maks_visina_tovora,
-                    idUporabnik: req.session.user_id,
-                    idZnamka: znamka,
-                    idTip_vozila: tip_vozila,
-                    slika: datoteka
-                }]).catch((err) => {
-                    console.log(err);
-                    res.status(500).send();
-                });
+                    .insert([{
+                        letnik: req.body.letnik,
+                        registerska: req.body.registerska,
+                        model: req.body.model,
+                        maks_teza_tovora: req.body.maks_teza_tovora,
+                        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+                        maks_dolzina_tovora: req.body.maks_dolzina_tovora,
+                        maks_sirina_tovora: req.body.maks_sirina_tovora,
+                        maks_visina_tovora: req.body.maks_visina_tovora,
+                        idUporabnik: req.session.user_id,
+                        idZnamka: znamka,
+                        idTip_vozila: tip_vozila,
+                        slika: datoteka
+                    }]).catch((err) => {
+                        console.log(err);
+                        res.status(500).send();
+                    });
                 break;
             //  TOVORNJAK ZA RAZSUT TOVOR
             case 2:
                 knex.into('Vozilo')
-                .insert([{
-                    letnik: req.body.letnik,
-                    registerska: req.body.registerska,
-                    model: req.body.model,
-                    maks_teza_tovora: req.body.maks_teza_tovora,
-                    potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-                    maks_volumen_tovora: req.body.maks_volumen_tovora,
-                    idUporabnik: req.session.user_id,
-                    idZnamka: znamka,
-                    idTip_vozila: tip_vozila,
-                    slika: datoteka
-                }]).catch((err) => {
-                    console.log(err);
-                    res.status(500).send();
-                });
+                    .insert([{
+                        letnik: req.body.letnik,
+                        registerska: req.body.registerska,
+                        model: req.body.model,
+                        maks_teza_tovora: req.body.maks_teza_tovora,
+                        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+                        maks_volumen_tovora: req.body.maks_volumen_tovora,
+                        idUporabnik: req.session.user_id,
+                        idZnamka: znamka,
+                        idTip_vozila: tip_vozila,
+                        slika: datoteka
+                    }]).catch((err) => {
+                        console.log(err);
+                        res.status(500).send();
+                    });
                 break;
             //  TOVORNJAK ZA BLAGO
             case 3:
                 knex.into('Vozilo')
-                .insert([{
-                    letnik: req.body.letnik,
-                    registerska: req.body.registerska,
-                    model: req.body.model,
-                    maks_teza_tovora: req.body.maks_teza_tovora,
-                    potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-                    maks_dolzina_tovora: req.body.maks_dolzina_tovora,
-                    maks_sirina_tovora: req.body.maks_sirina_tovora,
-                    maks_visina_tovora: req.body.maks_visina_tovora,
-                    maks_st_palet: req.body.maks_st_palet,
-                    idUporabnik: req.session.user_id,
-                    idZnamka: znamka,
-                    idTip_vozila: tip_vozila,
-                    slika: datoteka
-                }]).catch((err) => {
-                    console.log(err);
-                    res.status(500).send();
-                });           
+                    .insert([{
+                        letnik: req.body.letnik,
+                        registerska: req.body.registerska,
+                        model: req.body.model,
+                        maks_teza_tovora: req.body.maks_teza_tovora,
+                        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+                        maks_dolzina_tovora: req.body.maks_dolzina_tovora,
+                        maks_sirina_tovora: req.body.maks_sirina_tovora,
+                        maks_visina_tovora: req.body.maks_visina_tovora,
+                        maks_st_palet: req.body.maks_st_palet,
+                        idUporabnik: req.session.user_id,
+                        idZnamka: znamka,
+                        idTip_vozila: tip_vozila,
+                        slika: datoteka
+                    }]).catch((err) => {
+                        console.log(err);
+                        res.status(500).send();
+                    });
                 break;
             //  IZREDNI PREVOZ
             case 4:
                 knex.into('Vozilo')
-                .insert([{
-                    letnik: req.body.letnik,
-                    registerska: req.body.registerska,
-                    model: req.body.model,
-                    maks_teza_tovora: req.body.maks_teza_tovora,
-                    potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-                    maks_dolzina_tovora: req.body.maks_dolzina_tovora,
-                    maks_sirina_tovora: req.body.maks_sirina_tovora,
-                    maks_visina_tovora: req.body.maks_visina_tovora,
-                    idUporabnik: req.session.user_id,
-                    idZnamka: znamka,
-                    idTip_vozila: tip_vozila
-                }]).catch((err) => {
-                    console.log(err);
-                    res.status(500).send();
-                });
+                    .insert([{
+                        letnik: req.body.letnik,
+                        registerska: req.body.registerska,
+                        model: req.body.model,
+                        maks_teza_tovora: req.body.maks_teza_tovora,
+                        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+                        maks_dolzina_tovora: req.body.maks_dolzina_tovora,
+                        maks_sirina_tovora: req.body.maks_sirina_tovora,
+                        maks_visina_tovora: req.body.maks_visina_tovora,
+                        idUporabnik: req.session.user_id,
+                        idZnamka: znamka,
+                        idTip_vozila: tip_vozila
+                    }]).catch((err) => {
+                        console.log(err);
+                        res.status(500).send();
+                    });
                 break;
         }
 
         let idVozilo;
-        
+
         await knex('Vozilo as v').where({
             "v.letnik": req.body.letnik,
             "v.registerska": req.body.registerska,
@@ -309,25 +324,25 @@ router.post('/', auth, async(req, res, next) => {
         });
 
         await knex.into('Cenik')
-        .insert([{
-            cena_na_km: req.body.cena,
-            datum_od: today,
-            idVozilo: idVozilo
-        }])
-        .catch((err) => {
-            console.log(err);
-            res.status(500).send();
-        });
-        
+            .insert([{
+                cena_na_km: req.body.cena,
+                datum_od: today,
+                idVozilo: idVozilo
+            }])
+            .catch((err) => {
+                console.log(err);
+                res.status(500).send();
+            });
+
         res.status(200).send("Vehicle successfully added.");
-    } catch(error) {
+    } catch (error) {
         console.log(error);
         res.status(400).send("Failed to add the vehicle.");
     }
 });
 
-router.post('/editVehicle', auth, async(req, res, next) => {
-    try {    
+router.post('/editVehicle', auth, async (req, res, next) => {
+    try {
         let tip_vozila;
         let znamka;
 
@@ -344,13 +359,13 @@ router.post('/editVehicle', auth, async(req, res, next) => {
         } else {
             datum_do = null;
         }
-    
+
         await knex('Tip_vozila').where({
             'naziv': req.body.tip_vozila
         }).select('id').then((id) => {
             tip_vozila = id[0].id;
         });
-    
+
         await knex('Znamka').where({
             'naziv': req.body.znamka
         }).select('id').then((id) => {
@@ -367,97 +382,97 @@ router.post('/editVehicle', auth, async(req, res, next) => {
             res.status(500).json(error);
         });
 
-        switch(tip_vozila) {
+        switch (tip_vozila) {
             //  KOMBI
             case 1:
                 knex('Vozilo')
-                .update({
-                    letnik: req.body.letnik,
-                    registerska: req.body.registerska,
-                    model: req.body.model,
-                    maks_teza_tovora: req.body.maks_teza_tovora,
-                    potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-                    maks_dolzina_tovora: req.body.maks_dolzina_tovora,
-                    maks_sirina_tovora: req.body.maks_sirina_tovora,
-                    maks_visina_tovora: req.body.maks_visina_tovora,
-                    idUporabnik: req.session.user_id,
-                    idZnamka: znamka,
-                    idTip_vozila: tip_vozila
-                })
-                .where({
-                    id: req.body.id
-                }).catch((err) => {
-                    console.log(err);
-                    res.status(500).send();
-                });
+                    .update({
+                        letnik: req.body.letnik,
+                        registerska: req.body.registerska,
+                        model: req.body.model,
+                        maks_teza_tovora: req.body.maks_teza_tovora,
+                        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+                        maks_dolzina_tovora: req.body.maks_dolzina_tovora,
+                        maks_sirina_tovora: req.body.maks_sirina_tovora,
+                        maks_visina_tovora: req.body.maks_visina_tovora,
+                        idUporabnik: req.session.user_id,
+                        idZnamka: znamka,
+                        idTip_vozila: tip_vozila
+                    })
+                    .where({
+                        id: req.body.id
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(500).send();
+                    });
                 break;
             //  TOVORNJAK ZA RAZSUT TOVOR
             case 2:
                 knex('Vozilo')
-                .update({
-                    letnik: req.body.letnik,
-                    registerska: req.body.registerska,
-                    model: req.body.model,
-                    maks_teza_tovora: req.body.maks_teza_tovora,
-                    potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-                    maks_volumen_tovora: req.body.maks_volumen_tovora,
-                    idUporabnik: req.session.user_id,
-                    idZnamka: znamka,
-                    idTip_vozila: tip_vozila
-                })
-                .where({
-                    id: req.body.id
-                }).catch((err) => {
-                    console.log(err);
-                    res.status(500).send();
-                });
+                    .update({
+                        letnik: req.body.letnik,
+                        registerska: req.body.registerska,
+                        model: req.body.model,
+                        maks_teza_tovora: req.body.maks_teza_tovora,
+                        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+                        maks_volumen_tovora: req.body.maks_volumen_tovora,
+                        idUporabnik: req.session.user_id,
+                        idZnamka: znamka,
+                        idTip_vozila: tip_vozila
+                    })
+                    .where({
+                        id: req.body.id
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(500).send();
+                    });
                 break;
             //  TOVORNJAK ZA BLAGO
             case 3:
                 knex('Vozilo')
-                .update({
-                    letnik: req.body.letnik,
-                    registerska: req.body.registerska,
-                    model: req.body.model,
-                    maks_teza_tovora: req.body.maks_teza_tovora,
-                    potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-                    maks_dolzina_tovora: req.body.maks_dolzina_tovora,
-                    maks_sirina_tovora: req.body.maks_sirina_tovora,
-                    maks_visina_tovora: req.body.maks_visina_tovora,
-                    maks_st_palet: req.body.maks_st_palet,
-                    idUporabnik: req.session.user_id,
-                    idZnamka: znamka,
-                    idTip_vozila: tip_vozila
-                })
-                .where({
-                    id: req.body.id
-                }).catch((err) => {
-                    console.log(err);
-                    res.status(500).send();
-                });           
+                    .update({
+                        letnik: req.body.letnik,
+                        registerska: req.body.registerska,
+                        model: req.body.model,
+                        maks_teza_tovora: req.body.maks_teza_tovora,
+                        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+                        maks_dolzina_tovora: req.body.maks_dolzina_tovora,
+                        maks_sirina_tovora: req.body.maks_sirina_tovora,
+                        maks_visina_tovora: req.body.maks_visina_tovora,
+                        maks_st_palet: req.body.maks_st_palet,
+                        idUporabnik: req.session.user_id,
+                        idZnamka: znamka,
+                        idTip_vozila: tip_vozila
+                    })
+                    .where({
+                        id: req.body.id
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(500).send();
+                    });
                 break;
             //  IZREDNI PREVOZ
             case 4:
                 knex('Vozilo')
-                .update({
-                    letnik: req.body.letnik,
-                    registerska: req.body.registerska,
-                    model: req.body.model,
-                    maks_teza_tovora: req.body.maks_teza_tovora,
-                    potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-                    maks_dolzina_tovora: req.body.maks_dolzina_tovora,
-                    maks_sirina_tovora: req.body.maks_sirina_tovora,
-                    maks_visina_tovora: req.body.maks_visina_tovora,
-                    idUporabnik: req.session.user_id,
-                    idZnamka: znamka,
-                    idTip_vozila: tip_vozila
-                })
-                .where({
-                    id: req.body.id
-                }).catch((err) => {
-                    console.log(err);
-                    res.status(500).send();
-                });
+                    .update({
+                        letnik: req.body.letnik,
+                        registerska: req.body.registerska,
+                        model: req.body.model,
+                        maks_teza_tovora: req.body.maks_teza_tovora,
+                        potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
+                        maks_dolzina_tovora: req.body.maks_dolzina_tovora,
+                        maks_sirina_tovora: req.body.maks_sirina_tovora,
+                        maks_visina_tovora: req.body.maks_visina_tovora,
+                        idUporabnik: req.session.user_id,
+                        idZnamka: znamka,
+                        idTip_vozila: tip_vozila
+                    })
+                    .where({
+                        id: req.body.id
+                    }).catch((err) => {
+                        console.log(err);
+                        res.status(500).send();
+                    });
                 break;
         }
         res.status(200).send("Vehicle successfully edited");

@@ -28,17 +28,19 @@ function genOmejitve() {
             break;
     }
 
-    if (search_data.dodatno.cena) {
-        omejitve.append(getPill("Maksimalna cena: " + search_data.dodatno.cena + "€"));
-    }
-    if (search_data.dodatno.prevoznik) {
-        omejitve.append(getPill("Prevoznik: " + search_data.dodatno.prevoznik));
-    }
-    if (search_data.dodatno.letnik) {
-        omejitve.append(getPill("Maksimalen letnik vozila: " + search_data.dodatno.letnik));
-    }
-    if (search_data.dodatno.tip) {
-        omejitve.append(getPill("Tip vozila: " + search_data.dodatno.tip));
+    if (search_data.dodatno) {
+        if (search_data.dodatno.cena) {
+            omejitve.append(getPill("Maksimalna cena: " + search_data.dodatno.cena + "€"));
+        }
+        if (search_data.dodatno.prevoznik) {
+            omejitve.append(getPill("Prevoznik: " + search_data.dodatno.prevoznik));
+        }
+        if (search_data.dodatno.letnik) {
+            omejitve.append(getPill("Maksimalen letnik vozila: " + search_data.dodatno.letnik));
+        }
+        if (search_data.dodatno.tip) {
+            omejitve.append(getPill("Tip vozila: " + search_data.dodatno.tip));
+        }
     }
 }
 
