@@ -1,4 +1,16 @@
-$("input[name='tip_tovora']").change(function () {
+$(window).bind("pageshow", function () {
+    changeTab();
+    checkAllInputs();
+
+    if ($("#n_kraj").val()) {
+        setStart($("#n_kraj").val());
+    }
+    if ($("#d_kraj").val()) {
+        setEnd($("#d_kraj").val());
+    }
+});
+
+function changeTab() {
     let tip = $("input[name='tip_tovora']:checked").val();
 
     $("#tab-izdelki").hide();
@@ -15,7 +27,9 @@ $("input[name='tip_tovora']").change(function () {
             $("#tab-palete").show();
             break;
     }
-});
+}
+
+$("input[name='tip_tovora']").change(changeTab);
 
 $("#isci").click(function () {
     let search_data = new Object();
@@ -43,8 +57,8 @@ $("#isci").click(function () {
             break;
     }
 
-    search_data.datum = $("#date").val();
-    search_data.cas = $("#time").val();
+    search_data.datum = $(".datepicker").val();
+    search_data.cas = $(".timepicker").val();
 
     search_data.nalozitev = {
         ulica: $("#n_ulica").val(),
@@ -79,7 +93,8 @@ $("#isci").click(function () {
     window.location = "/transports";
 });
 
-$("input[name='tip_tovora']:checked, #date, #time, #n_ulica, #n_hisna_stevilka, #n_kraj, #n_postna_stevilka, #d_ulica, #d_hisna_stevilka, #d_kraj, #d_postna_stevilka").change(function () {
+$("input[name='tip_tovora']:checked, .datepicker, .timepicker, #n_ulica, #n_hisna_stevilka, #n_kraj, #n_postna_stevilka, #d_ulica, #d_hisna_stevilka, #d_kraj, #d_postna_stevilka").change(checkAllInputs);
+function checkAllInputs() {
     let fail = false;
     let tip = $("input[name='tip_tovora']:checked").val()
     switch (tip) {
@@ -104,8 +119,8 @@ $("input[name='tip_tovora']:checked, #date, #time, #n_ulica, #n_hisna_stevilka, 
             break;
     }
 
-    let datum = $("#date").val();
-    let cas = $("#time").val();
+    let datum = $(".datepicker").val();
+    let cas = $(".timepicker").val();
     let n_ulica = $("#n_ulica").val();
     let n_stevilka = $("#n_hisna_stevilka").val();
     let n_kraj = $("#n_kraj").val();
@@ -124,7 +139,7 @@ $("input[name='tip_tovora']:checked, #date, #time, #n_ulica, #n_hisna_stevilka, 
     } else {
         $("#isci").removeClass("disabled");
     }
-});
+}
 
 function getCardData(el) {
     let obj = new Object();

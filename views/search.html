@@ -68,13 +68,13 @@
     <div class="row">
         <div class="col m5 offset-m1 s12">
             <div class="input-field col s12">
-                <input id="date" type="text" class="datepicker">
+                <input type="text" class="datepicker">
                 <label for="date">Datum naložitve</label>
             </div>
         </div>
         <div class="col m5 s12">
             <div class="input-field col s12">
-                <input id="time" type="text" class="timepicker">
+                <input type="text" class="timepicker">
                 <label for="time">Čas naložitve</label>
             </div>
         </div>
@@ -127,7 +127,7 @@
         <div class="col s12">
             <div class="input-field col s6">
                 <input id="cena" type="text" class="validate">
-                <label for="cena">Maksimalna cena</label>
+                <label for="cena">Maksimalna cena na km</label>
             </div>
             <div class="input-field col s6">
                 <input id="prevoznik" type="text" class="validate">
@@ -139,8 +139,7 @@
             </div>
             <div class="input-field col s6">
                 <select id="tip">
-                    <option value="" disabled selected>Izberi</option>
-                    <option value="">Kateri koli</option>
+                    <option value="" selected>Kateri koli</option>
                     <option value="kombi">Dostavni kombi</option>
                     <option value="tovornjak razsut tovor">Tovornjak za prevoz razsutega tovora</option>
                     <option value="tovornjak blago">Tovornjak za prevoz blaga</option>
@@ -150,14 +149,13 @@
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col s12 center-align">
             <a id="isci" class="waves-effect waves-light btn-large disabled" style="font-weight: bold;">Išči
                 ponudbe</a>
         </div>
     </div>
-</div>
+    <div id="datepicker_render"></div>
 </div>
 {% endblock %}
 
@@ -166,22 +164,21 @@
 <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <script>
-    $(document).ready(function () {
-        $('select').formSelect();
-        $('.datepicker').datepicker({
-            firstDay: 1,
-            format: "dd.mm.yyyy",
-            minDate: new Date(),
-            i18n: {
-                months: ['Januar', 'Februar', 'Marec', 'April', 'Maj', 'Junij', 'Julij', 'August', 'September', 'Oktober', 'November', 'December'],
-                monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
-                weekdays: ['Nedelja', 'Ponedeljek', 'Torek', 'Sreda', 'Četrtek', 'Petek', 'Sobota'],
-                weekdaysShort: ['Ned', 'Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob'],
-                weekdaysAbbrev: ['S', 'P', 'T', 'S', 'Č', 'P', 'S']
-            }
-        });
-        $('.timepicker').timepicker({ twelveHour: false });
+    $('select').formSelect();
+    $('.datepicker').datepicker({
+        container: $("#datepicker_render"),
+        firstDay: 1,
+        format: "dd.mm.yyyy",
+        minDate: new Date(),
+        i18n: {
+            months: ['Januar', 'Februar', 'Marec', 'April', 'Maj', 'Junij', 'Julij', 'August', 'September', 'Oktober', 'November', 'December'],
+            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+            weekdays: ['Nedelja', 'Ponedeljek', 'Torek', 'Sreda', 'Četrtek', 'Petek', 'Sobota'],
+            weekdaysShort: ['Ned', 'Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob'],
+            weekdaysAbbrev: ['S', 'P', 'T', 'S', 'Č', 'P', 'S']
+        }
     });
+    $('.timepicker').timepicker({ twelveHour: false });
 </script>
 <script src="/javascripts/map.js"></script>
 <script src="/javascripts/search.js"></script>
