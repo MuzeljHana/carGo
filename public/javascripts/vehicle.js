@@ -1,23 +1,6 @@
-function updateData(){
-    $.ajax({
-        method: "get",
-        url: "/vehicle/",
-        dataType: "json"
-    })
-        .done(function (data) {
-            if (data) {
-                let root = $("#vozila");
-                root.empty();
-                for (let i = 0; i < data.length; i++) {
-                    root.append(getCard(data[i]));
-                }
-            }
-        });
-}
-
 $("[name='tip']").change(function () {
     let tip = $("select[name='tip']").val();
-    
+
     $("#tab-tovor").hide();
     $("#tab-izdelki").hide();
     $("#tab-palete").hide();
@@ -40,7 +23,7 @@ $("[name='tip']").change(function () {
 
 $("#tip-uredi").change(function () {
     let tip = $("#tip-uredi").val();
-    
+
     $("#tab-tovor-urejanje").hide();
     $("#tab-izdelki-urejanje").hide();
     $("#tab-palete-urejanje").hide();
@@ -61,37 +44,69 @@ $("#tip-uredi").change(function () {
     }
 });
 
-$.ajax({
-    method: "get",
-    url: "/vehicle/",
-    dataType: "json"
-})
-    .done(function (data) {
-        if (data) {
-            let root = $("#vozila");
-            for (let i = 0; i < data.length; i++) {
-                    root.append(getCard(data[i]));
+updateData();
+function updateData() {
+    $.ajax({
+        method: "get",
+        url: "/vehicle/",
+        dataType: "json"
+    })
+        .done(function (data) {
+            if (data) {
+                if (data.length == 0) {
+                    ponudbe.html(`<div class="row"><div class="col s12 center-align"><h3>Ni ponudb</h3></div></div`)
+                } else {
+                    let root = $("#vozila");
+                    root.empty();
+                    let autocomplete = {};
+                    for (const vozilo of data) {
+                        autocomplete[vozilo.znamka] = null;
+                        autocomplete[vozilo.model] = null;
+                        autocomplete[vozilo.registerska] = null;
+
+                        let vozilo_attributes = [
+                            vozilo.znamka.toLowerCase(),
+                            vozilo.model.toLowerCase(),
+                            vozilo.registerska.toLowerCase()
+                        ];
+                        if ($("#search").val() != "") {
+                            if (vozilo_attributes.includes($("#search").val().toLowerCase())) {
+                                root.append(getCard(vozilo));
+                            }
+                        } else {
+                            root.append(getCard(vozilo));
+                        }
+                    }
+                    $('input.autocomplete').autocomplete({
+                        data: autocomplete,
+                    });
                 }
             }
         });
+}
+
+$("#search").change(function () {
+    updateData();
+});
+
 function getCard(vozilo) {
     let zasedenost, aktivnost, cena = '';
-    if (vozilo.aktivno==1){aktivnost='da'}else aktivnost='ne';
-    if (vozilo.zasedeno==1){zasedenost='da'}else zasedenost='ne';
-    if (vozilo.cena_na_km) {cena=vozilo.cena_na_km}else cena='/';
+    if (vozilo.aktivno == 1) { aktivnost = 'da' } else aktivnost = 'ne';
+    if (vozilo.zasedeno == 1) { zasedenost = 'da' } else zasedenost = 'ne';
+    if (vozilo.cena_na_km) { cena = vozilo.cena_na_km } else cena = '/';
 
     return `<div class="row" style="padding: 0 15px 0 15px;">
-<div class="col s12 white" style="border-radius: 10px; padding: 15px;">
+<div class="col s12 white rounded" style="padding: 15px;">
     <div class="col s12 m4 valign-wrapper center-align">
         <img src="https://picsum.photos/500/350?random=1" alt="" class="responsive-img">
     </div>
     <div class="col s12 m8">
         <div class="row">
             <div class="col s10">
-                <h4>`+ vozilo.znamka +' '+vozilo.model+' '+vozilo.letnik + `</h4>
+                <h4>`+ vozilo.znamka + ' ' + vozilo.model + ' ' + vozilo.letnik + `</h4>
             </div>
             <div class="col s2" style="margin-top: 25px;">
-                <a class="waves-effect waves-light btn-flat right" name="brisi" onclick="deleteVehicle(`+vozilo.id+`)"><i
+                <a class="waves-effect waves-light btn-flat right" name="brisi" onclick="deleteVehicle(`+ vozilo.id + `)"><i
                         class="material-icons">close</i></a>
             </div>
         </div>
@@ -142,11 +157,11 @@ function getCard(vozilo) {
             </div>
             <div class="col s3">
                 <a class="waves-effect waves-light btn-flat right"
-                    style="text-transform: none;" id="idakt" onclick="editActive(`+vozilo.id+`,`+vozilo.aktivno+`)">Aktiven</a>
+                    style="text-transform: none;" id="idakt" onclick="editActive(`+ vozilo.id + `,` + vozilo.aktivno + `)">Aktiven</a>
             </div>
             <div class="col s3">
                 <a class="waves-effect waves-light btn-flat right modal-trigger"
-                    style="text-transform: none;" href="#modal2" id="id" value="`+vozilo.id+`" onclick="prenosPodatkov(`+vozilo.id+`)">Uredi</a>
+                    style="text-transform: none;" href="#modal2" id="id" value="`+ vozilo.id + `" onclick="prenosPodatkov(` + vozilo.id + `)">Uredi</a>
             </div>
         </div>
     </div>
@@ -160,54 +175,54 @@ function prenosPodatkov(id) {
         url: "/vehicle/",
         dataType: "json"
     })
-    .done(function (data) {
-        if (data) {
-            for (let i = 0; i < data.length; i++) {
-                if (data[i].id == id) {
-                    let vozilo = data[i];
-                    let cena = $("#trenutnaCena").html();
-                    if ($("#registerska-uredi").val(vozilo.registerska)) {
-                        $("#registerska-uredi").focus();
+        .done(function (data) {
+            if (data) {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].id == id) {
+                        let vozilo = data[i];
+                        let cena = $("#trenutnaCena").html();
+                        if ($("#registerska-uredi").val(vozilo.registerska)) {
+                            $("#registerska-uredi").focus();
+                        }
+                        if ($("#znamka-uredi").val(vozilo.znamka)) {
+                            $("#znamka-uredi").focus();
+                        }
+                        if ($("#letnik-uredi").val(vozilo.letnik)) {
+                            $("#letnik-uredi").focus();
+                        }
+                        if ($("#max_teza-uredi").val(vozilo.maks_teza_tovora)) {
+                            $("#max_teza-uredi").focus();
+                        }
+                        if ($("#potrdilo_izpravnosti-uredi").val(vozilo.potrdilo_izpravnosti)) {
+                            $("#potrdilo_izpravnosti-uredi").focus();
+                        }
+                        if ($("#maks_volumen_tovora-uredi").val(vozilo.maks_volumen_tovora)) {
+                            $("#maks_volumen_tovora-uredi").focus();
+                        }
+                        if ($("#maks_st_palet-uredi").val(vozilo.maks_st_palet)) {
+                            $("#maks_st_palet-uredi").focus();
+                        }
+                        if ($("#maks_dolzina_tovora-uredi").val(vozilo.maks_dolzina_tovora)) {
+                            $("#maks_dolzina_tovora-uredi").focus();
+                        }
+                        if ($("#maks_visina_tovora-uredi").val(vozilo.maks_visina_tovora)) {
+                            $("#maks_visina_tovora-uredi").focus();
+                        }
+                        if ($("#maks_sirina_tovora-uredi").val(vozilo.maks_sirina_tovora)) {
+                            $("#maks_sirina_tovora-uredi").focus();
+                        }
+                        if (cena) {
+                            $("#cena-uredi").val(cena);
+                            $("#cena-uredi").focus();
+                        }
+                        if ($("#model-uredi").val(vozilo.model)) {
+                            $("#model-uredi").focus();
+                        }
+                        break;
                     }
-                    if ($("#znamka-uredi").val(vozilo.znamka)) {
-                        $("#znamka-uredi").focus();
-                    }
-                    if ($("#letnik-uredi").val(vozilo.letnik)) {
-                        $("#letnik-uredi").focus();
-                    }
-                    if ($("#max_teza-uredi").val(vozilo.maks_teza_tovora)) {
-                        $("#max_teza-uredi").focus();
-                    }
-                    if ($("#potrdilo_izpravnosti-uredi").val(vozilo.potrdilo_izpravnosti)) {
-                        $("#potrdilo_izpravnosti-uredi").focus();
-                    }
-                    if ($("#maks_volumen_tovora-uredi").val(vozilo.maks_volumen_tovora)) {
-                        $("#maks_volumen_tovora-uredi").focus();
-                    }
-                    if ($("#maks_st_palet-uredi").val(vozilo.maks_st_palet)) {
-                        $("#maks_st_palet-uredi").focus();
-                    }
-                    if ($("#maks_dolzina_tovora-uredi").val(vozilo.maks_dolzina_tovora)) {
-                        $("#maks_dolzina_tovora-uredi").focus();
-                    }
-                    if ($("#maks_visina_tovora-uredi").val(vozilo.maks_visina_tovora)) {
-                        $("#maks_visina_tovora-uredi").focus();
-                    }
-                    if ($("#maks_sirina_tovora-uredi").val(vozilo.maks_sirina_tovora)) {
-                        $("#maks_sirina_tovora-uredi").focus();
-                    }
-                    if (cena) {
-                        $("#cena-uredi").val(cena);
-                        $("#cena-uredi").focus();
-                    }
-                    if ($("#model-uredi").val(vozilo.model)) {
-                        $("#model-uredi").focus();
-                    }
-                    break;
                 }
-            }        
-        }
-    });
+            }
+        });
     vehicleID(id);
 }
 
@@ -227,9 +242,9 @@ $("#agree").click(function () {
     let maks_visina_tovora = document.getElementById('maks_visina_tovora').value;
     let maks_st_palet = document.getElementById('maks_st_palet').value;
     let tip_vozila = document.getElementById('tip').value;
-    let znamka  = document.getElementById('znamka').value;
+    let znamka = document.getElementById('znamka').value;
     let cena = document.getElementById('cena_na_km').value;
-    
+
     let podatki = {
         'letnik': letnik,
         'registerska': registerska,
@@ -258,7 +273,7 @@ $("#agree").click(function () {
     });
 });
 
-function deleteVehicle(id){
+function deleteVehicle(id) {
     fetch(`http://localhost:3000/vehicle/${id}`, {
         method: 'DELETE'
     }).then((response) => {
@@ -267,11 +282,11 @@ function deleteVehicle(id){
     });
 };
 
-function editActive(id, bool){
-    if (bool==0) {
-        bool=1;
-    }else 
-        bool=0;
+function editActive(id, bool) {
+    if (bool == 0) {
+        bool = 1;
+    } else
+        bool = 0;
     fetch(`http://localhost:3000/vehicle/${id}/active/${bool}`, {
         method: 'PUT'
     }).then((response) => {
@@ -293,9 +308,9 @@ $("#edit").click(function () {
     let maks_visina_tovora = document.getElementById('maks_visina_tovora-uredi').value;
     let maks_st_palet = document.getElementById('maks_st_palet-uredi').value;
     let tip_vozila = document.getElementById('tip-uredi').value;
-    let znamka  = document.getElementById('znamka-uredi').value;
+    let znamka = document.getElementById('znamka-uredi').value;
     let cena = document.getElementById('cena-uredi').value;
-    
+
     let podatki = {
         'id': id,
         'letnik': letnik,
@@ -312,7 +327,7 @@ $("#edit").click(function () {
         'znamka': znamka,
         'cena': cena
     }
- 
+
     fetch('http://localhost:3000/vehicle/editVehicle', {
         method: 'POST',
         body: JSON.stringify(podatki),
