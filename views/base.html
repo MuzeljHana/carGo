@@ -17,10 +17,13 @@
         {% block header %}
         <nav style="background-color: white; height: 8rem;" class="z-depth-0">
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo"><img src="/images/logo_black.svg" alt="" height="100%"></a>
+                <a href="/" class="brand-logo" style="height: inherit;">
+                    <img src="/images/logo_black.svg" class="hide-on-med-and-down" style="height: 65px; margin: 30px 0 0 70px;">
+                    <img src="/images/logo_black.svg" class="hide-on-large-only" style="height: 65px; margin-top: 30px;">
+                </a>
                 <a href="#" data-target="mobile-sidenav" class="sidenav-trigger grey-text text-darken-4"
                     style="margin: 40px 0 0 30px;"><i style="font-size: 40px;" class="material-icons">menu</i></a>
-                <ul class="left hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-left: 18rem;">
+                <ul class="left hide-on-med-and-down valign-wrapper" style="height: inherit; margin-left: 18rem;">
                     <li><a class="grey-text text-darken-4 nav-link" href="/search">Poišči prevoz</a></li>
                     {% if login %}
                     <li><a class="grey-text text-darken-4 nav-link" href="/profile/orders">Ponudbe</a></li>
@@ -29,7 +32,7 @@
                     {% endif%}
                     {% endif %}
                 </ul>
-                <ul class="right hide-on-med-and-down valign-wrapper" style="height: 8rem; margin-right: 4rem;">
+                <ul class="right hide-on-med-and-down valign-wrapper" style="height: inherit; margin-right: 4rem;">
                     {% if login %}
                     <li><a class="grey-text text-darken-4 nav-link" href="/profile">Profil</a></li>
                     <li><a class="grey-text text-darken-4 nav-link" href="/user/logout" title="Izpis"><i
