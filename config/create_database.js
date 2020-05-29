@@ -133,6 +133,7 @@ async function create_database() {
         table.integer('maks_visina_tovora');
         table.integer('maks_st_palet');
         table.binary('slika');
+        table.boolean("deleted").notNullable().defaultTo(0)
 
         table.integer('idTip_vozila').references('id').inTable('Tip_vozila').notNullable();
         table.integer('idZnamka').references('id').inTable('Znamka').notNullable();

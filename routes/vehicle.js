@@ -23,7 +23,8 @@ router.post('/search', (req, res, next) => {
         ])
         .where({
             "v.aktivno": 1,
-            "v.zasedeno": 0
+            "v.zasedeno": 0,
+            "v.deleted": 0
         })
         .groupBy("v.id")
         .havingRaw("MAX(c.datum_od)", [])
@@ -118,7 +119,7 @@ router.get('/', auth, (req, res, next) => {
             "t.naziv as tip_vozila",
             "z.naziv as znamka",
             "c.cena_na_km"])
-        .where({ "idUporabnik": req.session.user_id })
+        .where({ "idUporabnik": req.session.user_id, "deleted": 0 })
         .groupBy("v.id")
         .havingRaw("MAX(c.datum_od)", [])
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
@@ -154,7 +155,8 @@ router.get('/:id', auth, (req, res, next) => {
             "c.cena_na_km"])
         .where({
             "idUporabnik": req.session.user_id,
-            "v.id": req.params.id
+            "v.id": req.params.id,
+            "deleted": 0
         })
         .groupBy("v.id")
         .havingRaw("MAX(c.datum_od)", [])
@@ -492,7 +494,8 @@ router.put('/:id/active/:bool', auth, (req, res, next) => {
         })
         .where({
             idUporabnik: req.session.user_id,
-            id: req.params.id
+            id: req.params.id,
+            deleted: 0
         })
         .then((data) => {
             res.json(data);
@@ -505,7 +508,7 @@ router.put('/:id/active/:bool', auth, (req, res, next) => {
 
 router.delete('/:id', auth, (req, res, next) => {
     knex('Vozilo')
-        .del()
+        .update({deleted: 1})
         .where({
             idUporabnik: req.session.user_id,
             id: req.params.id
