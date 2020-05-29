@@ -225,7 +225,7 @@ $("#agree").click(function () {
         'cena': cena
     }
 
-    fetch('http://localhost:3000/vehicle', {
+    fetch('/vehicle', {
         method: 'POST',
         body: JSON.stringify(podatki),
         headers: {
@@ -238,7 +238,7 @@ $("#agree").click(function () {
 });
 
 function deleteVehicle(id) {
-    fetch(`http://localhost:3000/vehicle/${id}`, {
+    fetch(`/vehicle/${id}`, {
         method: 'DELETE'
     }).then((response) => {
         updateData();
@@ -251,7 +251,7 @@ function editActive(el, id) {
     if ($(el).is(":checked")) {
         bool = 1;
     }
-    fetch(`http://localhost:3000/vehicle/${id}/active/${bool}`, {
+    fetch(`/vehicle/${id}/active/${bool}`, {
         method: 'PUT'
     }).then((response) => {
         updateData();
@@ -292,7 +292,7 @@ $("#edit").click(function () {
         'cena': cena
     }
 
-    fetch('http://localhost:3000/vehicle/editVehicle', {
+    fetch('/vehicle/editVehicle', {
         method: 'POST',
         body: JSON.stringify(podatki),
         headers: {
