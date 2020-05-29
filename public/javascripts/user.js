@@ -69,9 +69,6 @@ function updateData() {
                         }
                     }
                 }
-                if ($("#i_ime_uredi").val(uporabnik.ime)) {
-                    $("#i_ime_uredi").focus();
-                }
                 if ($("#i_priimek_uredi").val(uporabnik.priimek)) {
                     $("#i_priimek_uredi").focus();
                 }
@@ -104,6 +101,9 @@ function updateData() {
                     if ($("#uspesnost_poslovanja_uredi").val(uporabnik.uspesnost_poslovanja)) {
                         $("#uspesnost_poslovanja_uredi").focus();
                     }
+                }
+                if ($("#i_ime_uredi").val(uporabnik.ime)) {
+                    $("#i_ime_uredi").focus();
                 }
                 window.scrollTo(0,0);
                 break;
