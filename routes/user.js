@@ -210,10 +210,13 @@ router.get('/', auth, (req, res, next) => {
             "zacetek_delovanja",
             "uspesnost_poslovanja",
             "n.ulica as naslov",
-            "n.stevilka as stevilka"])
+            "n.stevilka as stevilka",
+            "p.kraj as kraj",
+            "p.stevilka as postna_st"])
         .where({ "u.id": req.session.user_id })
         //.groupBy("v.id")
         .join("Naslov as n", { 'n.id': 'u.idNaslov'  })
+        .join("Posta as p", { 'p.id': 'n.idPosta' })
         .then((data) => {
             res.json(data);
         })
