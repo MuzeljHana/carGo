@@ -44,7 +44,6 @@ function getPonudbe() {
                             }
                         }
                     }
-                    console.log(autocomplete);
                     $('input.autocomplete').autocomplete({
                         data: autocomplete,
                         onAutocomplete: () => {
@@ -55,6 +54,12 @@ function getPonudbe() {
             }
         });
 }
+
+$("#search").change(function () {
+    if ($("#search").val() == "") {
+        getPonudbe();
+    }
+});
 
 function potrdi(id) {
     $.ajax({

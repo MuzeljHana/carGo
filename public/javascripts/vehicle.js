@@ -88,6 +88,12 @@ function updateData() {
         });
 }
 
+$("#search").change(function () {
+    if ($("#search").val() == "") {
+        updateData();
+    }
+});
+
 function getCard(vozilo) {
     let zasedenost, aktivnost, cena = '';
     if (vozilo.aktivno == 1) { aktivnost = 'da' } else aktivnost = 'ne';
