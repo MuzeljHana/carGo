@@ -23,6 +23,10 @@ router.get('/transports/details', auth, (req, res, next) => {
     res.render('details', req.template_data);
 });
 
+router.get('/profile', auth, (req, res, next) => {
+    res.render('profile', req.template_data);
+});
+
 router.get('/profile/vehicle', auth, (req, res, next) => {
     res.render('vehicle', req.template_data);
 });
@@ -37,10 +41,6 @@ router.get('/login', (req, res, next) => {
 
 router.get('/register', (req, res, next) => {
     res.render('register', req.template_data);
-});
-
-router.get('/profile', auth, (req, res, next) => {
-    res.render('profile', req.template_data);
 });
 
 module.exports = router;
