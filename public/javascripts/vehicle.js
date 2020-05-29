@@ -153,7 +153,7 @@ function getCard(vozilo) {
         <div class="row">
             <div class="col m3 s6 left">
                 <label>
-                    <input type="checkbox" class="filled-in left" onchange="editActive(this, ` + vozilo.id + `)" ` + ((vozilo.aktivno) ? 'checked="true"' : "") + `" />
+                    <input type="checkbox" class="filled-in left" onchange="editActive(this, ` + vozilo.id + `)" ` + ((vozilo.aktivno) ? 'checked="checked"' : "") + `" />
                     <span>Aktiven</span>
                 </label>
             </div>
@@ -168,6 +168,7 @@ function getCard(vozilo) {
 }
 
 function prenosPodatkov(id) {
+    $("#edit").val(id);
     $.ajax({
         method: "get",
         url: `/vehicle/${id}`,
@@ -191,11 +192,6 @@ function prenosPodatkov(id) {
                 M.updateTextFields();
             }
         });
-    vehicleID(id);
-}
-
-function vehicleID(id) {
-    sessionStorage.setItem("vehicleID", id);
 }
 
 $("#agree").click(function () {
@@ -264,7 +260,7 @@ function editActive(el, id) {
 };
 
 $("#edit").click(function () {
-    let id = sessionStorage.getItem("vehicleID");
+    let id = $("#edit").val();
     let letnik = document.getElementById('letnik-uredi').value;
     let registerska = document.getElementById('registerska-uredi').value;
     let model = document.getElementById('model-uredi').value;

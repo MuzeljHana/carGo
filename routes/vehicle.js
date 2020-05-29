@@ -150,11 +150,15 @@ router.get('/:id', auth, (req, res, next) => {
             "maks_visina_tovora",
             "maks_st_palet",
             "t.naziv as tip_vozila",
-            "z.naziv as znamka"])
+            "z.naziv as znamka",
+            "c.cena_na_km"])
         .where({
             "idUporabnik": req.session.user_id,
             "v.id": req.params.id
         })
+        .groupBy("v.id")
+        .havingRaw("MAX(c.datum_od)", [])
+        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
         .then((data) => {
