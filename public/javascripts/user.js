@@ -8,17 +8,25 @@ $("#edit").click (function() {
     let email = document.getElementById('i_email_uredi').value;
     let geslo = document.getElementById('i_geslo_uredi').value;
     let staro_geslo = document.getElementById('staro_geslo').value;
+    let ulica = document.getElementById('ulica_uredi').value 
+    let hisna_st = document.getElementById('hisna_st_uredi').value;
+    let kraj = document.getElementById('kraj_uredi').value;
+    let postna_st = document.getElementById('postna_st_uredi').value;
     let naziv_podjetja = document.getElementById('naziv_podjetja_uredi').value;
     let davcna = document.getElementById('davcna').value;
     let zacetek_delovanja = document.getElementById('zacetek_delovanja_uredi').value;
     let uspesnost_poslovanja = document.getElementById('uspesnost_poslovanja_uredi').value;
-    
+
     let podatkiUporabnika = {
         'ime': ime,
         'priimek': priimek,
         'email': email,
         'geslo': geslo,
         'staro_geslo': staro_geslo,
+        'ulica': ulica,
+        'hisna_st': hisna_st,
+        'kraj': kraj,
+        'postna_st': postna_st,
         'naziv_podjetja': naziv_podjetja,
         'davcna': davcna,
         'zacetek_delovanja': zacetek_delovanja,
