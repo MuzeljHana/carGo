@@ -170,55 +170,25 @@ function getCard(vozilo) {
 function prenosPodatkov(id) {
     $.ajax({
         method: "get",
-        url: "/vehicle/",
+        url: `/vehicle/${id}`,
         dataType: "json"
     })
         .done(function (data) {
             if (data) {
-                for (let i = 0; i < data.length; i++) {
-                    if (data[i].id == id) {
-                        let vozilo = data[i];
-                        let cena = $("#trenutnaCena").html();
-                        if ($("#registerska-uredi").val(vozilo.registerska)) {
-                            $("#registerska-uredi").focus();
-                        }
-                        if ($("#znamka-uredi").val(vozilo.znamka)) {
-                            $("#znamka-uredi").focus();
-                        }
-                        if ($("#letnik-uredi").val(vozilo.letnik)) {
-                            $("#letnik-uredi").focus();
-                        }
-                        if ($("#max_teza-uredi").val(vozilo.maks_teza_tovora)) {
-                            $("#max_teza-uredi").focus();
-                        }
-                        if ($("#potrdilo_izpravnosti-uredi").val(vozilo.potrdilo_izpravnosti)) {
-                            $("#potrdilo_izpravnosti-uredi").focus();
-                        }
-                        if ($("#maks_volumen_tovora-uredi").val(vozilo.maks_volumen_tovora)) {
-                            $("#maks_volumen_tovora-uredi").focus();
-                        }
-                        if ($("#maks_st_palet-uredi").val(vozilo.maks_st_palet)) {
-                            $("#maks_st_palet-uredi").focus();
-                        }
-                        if ($("#maks_dolzina_tovora-uredi").val(vozilo.maks_dolzina_tovora)) {
-                            $("#maks_dolzina_tovora-uredi").focus();
-                        }
-                        if ($("#maks_visina_tovora-uredi").val(vozilo.maks_visina_tovora)) {
-                            $("#maks_visina_tovora-uredi").focus();
-                        }
-                        if ($("#maks_sirina_tovora-uredi").val(vozilo.maks_sirina_tovora)) {
-                            $("#maks_sirina_tovora-uredi").focus();
-                        }
-                        if (cena) {
-                            $("#cena-uredi").val(cena);
-                            $("#cena-uredi").focus();
-                        }
-                        if ($("#model-uredi").val(vozilo.model)) {
-                            $("#model-uredi").focus();
-                        }
-                        break;
-                    }
-                }
+                let vozilo = data[0];
+                $("#registerska-uredi").val(vozilo.registerska);
+                $("#znamka-uredi").val(vozilo.znamka);
+                $("#letnik-uredi").val(vozilo.letnik);
+                $("#max_teza-uredi").val(vozilo.maks_teza_tovora);
+                $("#potrdilo_izpravnosti-uredi").val(vozilo.potrdilo_izpravnosti);
+                $("#maks_volumen_tovora-uredi").val(vozilo.maks_volumen_tovora);
+                $("#maks_st_palet-uredi").val(vozilo.maks_st_palet);
+                $("#maks_dolzina_tovora-uredi").val(vozilo.maks_dolzina_tovora);
+                $("#maks_visina_tovora-uredi").val(vozilo.maks_visina_tovora);
+                $("#maks_sirina_tovora-uredi").val(vozilo.maks_sirina_tovora);
+                $("#cena-uredi").val(vozilo.cena_na_km);
+                $("#model-uredi").val(vozilo.model);
+                M.updateTextFields();
             }
         });
     vehicleID(id);
