@@ -88,12 +88,71 @@ router.get("/logout", (req, res, next) => {
 
 router.post('/editUser', async(req, res, next) => {
     try {
-        let novoGeslo;
+        let novoGeslo, idNaslov, idPosta, shranjenoGeslo;
 
         if (req.body.geslo) {
             novoGeslo = req.body.geslo;
         } else {
             novoGeslo = req.body.staro_geslo;
+        }
+
+        await knex.from('Uporabnik').where({
+            id: req.session.user_id
+        }).select('geslo').then((geslo) => {
+            shranjenoGeslo = geslo[0].geslo;
+        });
+
+        if (await PostaExists(req.body.kraj, req.body.postna_st)) {
+            knex.from('Posta').where({
+                kraj: req.body.kraj,
+                stevilka: req.body.postna_st
+            }).select('id').then((id) => {
+                idPosta = id[0].id;
+            }).catch((error) => {
+                res.json(error);
+            });
+        } else if (bcrypt.compareSync(req.body.staro_geslo.trim(), shranjenoGeslo)) {
+            if (req.body.kraj && req.body.postna_st && req.body.ulica && req.body.hisna_st) {
+                await knex.into("Posta").insert([{
+                    kraj: req.body.kraj,
+                    stevilka: req.body.postna_st
+                }]);
+                await knex.from('Posta').where({
+                    kraj: req.body.kraj,
+                    stevilka: req.body.postna_st
+                }).select('id').then((id) => {
+                    idPosta = id[0].id;
+                }).catch((error) => {
+                    res.json(error);
+                });
+            }
+        }
+
+        if (await NaslovExists(req.body.ulica, req.body.hisna_st)) {
+            knex.from('Naslov').where({
+                ulica: req.body.ulica,
+                stevilka: req.body.hisna_st
+            }).select('id').then((id) => {
+                idNaslov = id[0].id;
+            }).catch((error) => {
+                res.json(error);
+            });
+        } else if (bcrypt.compareSync(req.body.staro_geslo.trim(), shranjenoGeslo)) {
+            if (req.body.kraj && req.body.postna_st && req.body.ulica && req.body.hisna_st) {
+                await knex.into("Naslov").insert([{
+                    ulica: req.body.ulica,
+                    stevilka: req.body.hisna_st,
+                    idPosta: idPosta
+                }]);
+                await knex.from('Naslov').where({
+                    ulica: req.body.ulica,
+                    stevilka: req.body.hisna_st
+                }).select('id').then((id) => {
+                    idNaslov = id[0].id;
+                }).catch((error) => {
+                    res.json(error);
+                });
+            }
         }
 
         await knex.from('Uporabnik').where({
@@ -106,6 +165,7 @@ router.post('/editUser', async(req, res, next) => {
                         priimek: req.body.priimek,
                         email: req.body.email,
                         geslo: bcrypt.hashSync(novoGeslo.trim(), 10),
+                        idNaslov: idNaslov,
                         naziv_podjetja: req.body.naziv_podjetja,
                         davcna: req.body.davcna,
                         zacetek_delovanja: req.body.zacetek_delovanja,
