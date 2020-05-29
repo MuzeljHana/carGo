@@ -3,7 +3,6 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 const favicon = require('serve-favicon');
 const session = require('express-session')
-const cors = require('cors');
 
 const app = express();
 
@@ -22,7 +21,6 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
-app.use(cors());
 
 app.use((req, res, next) => {
     console.log(`${Date()} ${req.ip} ${req.method} ${req.originalUrl}`);
