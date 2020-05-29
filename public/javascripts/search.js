@@ -149,7 +149,7 @@ function odstrani(id) {
 var cardCount = 0
 function getCard() {
     let id = cardCount++;
-    return `<div id="card_` + id + `" class="row white" style="border-radius: 10px; padding: 10px;">
+    return `<div id="card_` + id + `" class="row white rounded" style="padding: 10px;">
                 <div class="row">
                     <div class="col s4">
                         <h5 style="font-weight: bold;">Izdelek</h5>
