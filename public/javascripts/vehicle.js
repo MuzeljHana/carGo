@@ -56,7 +56,7 @@ function updateData() {
                 let root = $("#vozila");
                 root.empty();
                 if (data.length == 0) {
-                    ponudbe.html(`<div class="row"><div class="col s12 center-align"><h3>Ni ponudb</h3></div></div`)
+                    root.html(`<div class="row"><div class="col s12 center-align"><h3>Ni ponudb</h3></div></div`)
                 } else {
                     let autocomplete = {};
                     for (const vozilo of data) {
