@@ -69,22 +69,27 @@ function updateData() {
                         }
                     }
                 }
+                if ($("#i_ime_uredi").val(uporabnik.ime)) {
+                    $("#i_ime_uredi").focus();
+                }
                 if ($("#i_priimek_uredi").val(uporabnik.priimek)) {
                     $("#i_priimek_uredi").focus();
                 }
-                /*if ($("#i_postna_stevilka_uredi").val(uporabnik.po)) {
-                    $("#i_postna_stevilka_uredi").focus();
+                if ($("#i_email_uredi").val(uporabnik.email)) {
+                    $("#i_email_uredi").focus();
                 }
-                if ($("#i_kraj_uredi").val(uporabnik.geslo)) {
-                    $("#i_kraj_uredi").focus();
+                if ($('#ulica_uredi').val(uporabnik.naslov)) {
+                    $('#ulica_uredi').focus();
                 }
-                if ($("#i_ulica_uredi").val(uporabnik.ulica)) {
-                    $("#i_ulica_uredi").focus();
+                if ($('#hisna_st_uredi').val(uporabnik.stevilka)) {
+                    $('#hisna_st_uredi').focus();
                 }
-                if ($("#i_hisna_stevilka_uredi").val(uporabnik.naziv_podjetja)) {
-                    $("#i_hisna_stevilka_uredi").focus();
+                if ($('#kraj_uredi').val(uporabnik.kraj)) {
+                    $('#kraj_uredi').focus();
                 }
-                */
+                if ($('#postna_st_uredi').val(uporabnik.postna_st)) {
+                    $('#postna_st_uredi').focus();
+                }
                 if ($("#davcna").length != 0) {
                     if ($("#davcna").val(uporabnik.davcna)) {
                         $("#davcna").focus();
@@ -99,12 +104,6 @@ function updateData() {
                     if ($("#uspesnost_poslovanja_uredi").val(uporabnik.uspesnost_poslovanja)) {
                         $("#uspesnost_poslovanja_uredi").focus();
                     }
-                }
-                if ($("#i_email_uredi").val(uporabnik.email)) {
-                    $("#i_email_uredi").focus();
-                }
-                if ($("#i_ime_uredi").val(uporabnik.ime)) {
-                    $("#i_ime_uredi").focus();
                 }
                 window.scrollTo(0,0);
                 break;
