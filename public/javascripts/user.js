@@ -3,6 +3,12 @@ $(document).ready(function() {
 });
 
 $("#edit").click (function() {
+    $("#staro_geslo").removeClass("invalid");
+    if (!($("#staro_geslo").val())) {
+        $("#staro_geslo").addClass("invalid");
+        return;
+    }
+
     let ime = document.getElementById('i_ime_uredi').value;
     let priimek = document.getElementById('i_priimek_uredi').value;
     let email = document.getElementById('i_email_uredi').value;
@@ -47,7 +53,6 @@ $("#edit").click (function() {
         }
     }).then((response) => {
         updateData();
-        console.log("User successfully edited!");
     });
 });
 
