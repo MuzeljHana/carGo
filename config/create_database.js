@@ -276,7 +276,8 @@ async function create_database() {
             maks_st_palet: 2,
             idTip_vozila: 1,
             idZnamka: 3,
-            idUporabnik: 7
+            idUporabnik: 7,
+            slika: "transporter.jpg"
         },
         {
             letnik: "2016",
@@ -287,7 +288,8 @@ async function create_database() {
             maks_volumen_tovora: 200,
             idTip_vozila: 2,
             idZnamka: 4,
-            idUporabnik: 6
+            idUporabnik: 6,
+            slika: "t_high.jpg"
         },
         {
             letnik: "2017",
@@ -301,7 +303,8 @@ async function create_database() {
             maks_st_palet: 8,
             idTip_vozila: 3,
             idZnamka: 1,
-            idUporabnik: 5
+            idUporabnik: 5,
+            slika: "actros.jpg"
         },
         {
             letnik: "2020",
@@ -315,7 +318,8 @@ async function create_database() {
             maks_st_palet: 5,
             idTip_vozila: 3,
             idZnamka: 2,
-            idUporabnik: 5
+            idUporabnik: 5,
+            slika: "tgx.jpg"
         }
     ]
     await knex('Vozilo').insert(vozilo)
