@@ -100,7 +100,7 @@ function getCard(vozilo) {
     return `<div class="row" style="padding: 0 15px 0 15px;">
 <div class="col s12 white rounded" style="padding: 15px;">
     <div class="col s12 m4 valign-wrapper center-align">
-        <img src="https://picsum.photos/500/350?random=1" alt="" class="responsive-img">
+        <img src="/vehicle/` + vozilo.id + `/image" alt="" class="responsive-img">
     </div>
     <div class="col s12 m8">
         <div class="row">
@@ -210,33 +210,39 @@ $("#agree").click(function () {
     let tip_vozila = document.getElementById('tip').value;
     let znamka = document.getElementById('znamka').value;
     let cena = document.getElementById('cena_na_km').value;
+    let slika = document.getElementById('slika').files[0];
 
-    let podatki = {
-        'letnik': letnik,
-        'registerska': registerska,
-        'model': model,
-        'maks_teza_tovora': maks_teza_tovora,
-        'potrdilo_izpravnosti': potrdilo_izpravnosti,
-        'maks_volumen_tovora': maks_volumen_tovora,
-        'maks_dolzina_tovora': maks_dolzina_tovora,
-        'maks_sirina_tovora': maks_sirina_tovora,
-        'maks_visina_tovora': maks_visina_tovora,
-        'maks_st_palet': maks_st_palet,
-        'tip_vozila': tip_vozila,
-        'znamka': znamka,
-        'cena': cena
-    }
+    var formData = new FormData();
 
-    fetch('/vehicle', {
-        method: 'POST',
-        body: JSON.stringify(podatki),
-        headers: {
-            'content-type': 'application/json'
-        }
-    }).then((response) => {
-        updateData();
-        console.log("Vehicle successfully added");
-    });
+    formData.append('letnik', letnik);
+    formData.append('registerska', registerska);
+    formData.append('model', model);
+    formData.append('maks_teza_tovora', maks_teza_tovora);
+    formData.append('potrdilo_izpravnosti', potrdilo_izpravnosti);
+    formData.append('maks_volumen_tovora', maks_volumen_tovora);
+    formData.append('maks_dolzina_tovora', maks_dolzina_tovora);
+    formData.append('maks_sirina_tovora', maks_sirina_tovora);
+    formData.append('maks_visina_tovora', maks_visina_tovora);
+    formData.append('maks_st_palet', maks_st_palet);
+    formData.append('tip_vozila', tip_vozila);
+    formData.append('znamka', znamka);
+    formData.append('cena', cena);
+    formData.append('slika', slika);
+
+    $.ajax({
+        method: "post",
+        url: `/vehicle/`,
+        data: formData,
+        processData: false,
+        contentType: false
+    })
+        .done(function (data) {
+            if (data) {
+                if (data.message == "success") {
+                    updateData();
+                }
+            }
+        });
 });
 
 function deleteVehicle(id) {
@@ -275,33 +281,38 @@ $("#edit").click(function () {
     let maks_st_palet = document.getElementById('maks_st_palet-uredi').value;
     let tip_vozila = document.getElementById('tip-uredi').value;
     let znamka = document.getElementById('znamka-uredi').value;
-    let cena = document.getElementById('cena-uredi').value;
+    let cena = document.getElementById('cena_na_km-uredi').value;
+    let slika = document.getElementById('slika-uredi').files[0];
 
-    let podatki = {
-        'id': id,
-        'letnik': letnik,
-        'registerska': registerska,
-        'model': model,
-        'maks_teza_tovora': maks_teza_tovora,
-        'potrdilo_izpravnosti': potrdilo_izpravnosti,
-        'maks_volumen_tovora': maks_volumen_tovora,
-        'maks_dolzina_tovora': maks_dolzina_tovora,
-        'maks_sirina_tovora': maks_sirina_tovora,
-        'maks_visina_tovora': maks_visina_tovora,
-        'maks_st_palet': maks_st_palet,
-        'tip_vozila': tip_vozila,
-        'znamka': znamka,
-        'cena': cena
-    }
+    var formData = new FormData();
 
-    fetch('/vehicle/edit', {
-        method: 'PUT',
-        body: JSON.stringify(podatki),
-        headers: {
-            'content-type': 'application/json'
-        }
-    }).then((response) => {
-        updateData();
-        console.log("Vehicle successfully edited");
-    });
+    formData.append('letnik', letnik);
+    formData.append('registerska', registerska);
+    formData.append('model', model);
+    formData.append('maks_teza_tovora', maks_teza_tovora);
+    formData.append('potrdilo_izpravnosti', potrdilo_izpravnosti);
+    formData.append('maks_volumen_tovora', maks_volumen_tovora);
+    formData.append('maks_dolzina_tovora', maks_dolzina_tovora);
+    formData.append('maks_sirina_tovora', maks_sirina_tovora);
+    formData.append('maks_visina_tovora', maks_visina_tovora);
+    formData.append('maks_st_palet', maks_st_palet);
+    formData.append('tip_vozila', tip_vozila);
+    formData.append('znamka', znamka);
+    formData.append('cena', cena);
+    formData.append('slika', slika);
+
+    $.ajax({
+        method: "put",
+        url: `/vehicle/${id}/edit`,
+        data: formData,
+        processData: false,
+        contentType: false
+    })
+        .done(function (data) {
+            if (data) {
+                if (data.message == "success") {
+                    updateData();
+                }
+            }
+        });
 });

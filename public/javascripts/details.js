@@ -9,6 +9,7 @@ $.ajax({
             let vehicle_id = localStorage.getItem("details_vehicle");
             let vehicle = data.find((veh) => { return veh.id == Number(vehicle_id); });
 
+            $("#img").attr("src", `/vehicle/${vehicle.id}/image`);
             $("#podjetje").text(vehicle.naziv_podjetja);
             $("#vozilo").text(vehicle.znamka + " " + vehicle.model);
             $("#letnik").text(vehicle.letnik);
