@@ -6,45 +6,42 @@
 <div class="container">
     <div class="row">
         <div class="col s12">
-            <h3>Profil uporabnika</h3>
+            <h3>Profil</h3>
         </div>
     </div>
-    <div class="row grey lighten-2" style="border-radius: 10px;">
-        <div class="input-field col s12">
-            <h4>Urejanje profila</h4>
-        </div>
+    <div class="row">
         <div id="iskalec">
-            <div class="input-field col s12">
+            <div class="input-field col m6 s12">
                 <input id="i_ime_uredi" type="text">
                 <label for="i_ime_uredi">Ime</label>
             </div>
-            <div class="input-field col s12">
+            <div class="input-field col m6 s12">
                 <input id="i_priimek_uredi" type="text">
                 <label for="i_priimek_uredi">Priimek</label>
             </div>
-            <div class="input-field col s4">
-                <input id="postna_st_uredi" type="number">
-                <label for="postna_st_uredi">Poštna številka</label>
-            </div>
-            <div class="input-field col s8">
-                <input id="kraj_uredi" type="text">
-                <label for="kraj_uredi">Kraj</label>
-            </div>
-            <div class="input-field col s8">
+            <div class="input-field col m4 s8">
                 <input id="ulica_uredi" type="text">
                 <label for="ulica_uredi">Ulica</label>
             </div>
-            <div class="input-field col s4">
+            <div class="input-field col m2 s4">
                 <input id="hisna_st_uredi" type="text">
                 <label for="hisna_st_uredi">Hišna številka</label>
             </div>
-            <div class="input-field col s12" style="margin-top: 3rem;">
+            <div class="input-field col m2 s4">
+                <input id="postna_st_uredi" type="number">
+                <label for="postna_st_uredi">Poštna številka</label>
+            </div>
+            <div class="input-field col m4 s8">
+                <input id="kraj_uredi" type="text">
+                <label for="kraj_uredi">Kraj</label>
+            </div>
+            <div class="input-field col s12">
                 <input id="i_email_uredi" type="email" class="validate">
                 <label for="i_email_uredi">Email</label>
                 <span class="helper-text" data-error="Napačen format email-a ali pa je že v uporabi"></span>
             </div>
             <div class="input-field col s12">
-                <input id="staro_geslo" type="password">
+                <input id="staro_geslo" type="password" class="validate">
                 <label for="staro_geslo">Staro geslo</label>
                 <span class="helper-text" data-error="Vnesite geslo!"></span>
             </div>
@@ -54,22 +51,24 @@
                 <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
             </div>
             <div class="input-field col s12">
-                <input id="i_pgeslo_uredi" type="password">
+                <input id="i_pgeslo_uredi" type="password" class="validate">
                 <label for="i_pgeslo_uredi">Ponovi geslo</label>
                 <span class="helper-text" data-error="Gesli se ne ujemata"></span>
             </div>
         </div>
+    </div>
+    <div class="row">
         {% if provider %}
         <div id="ponudnik">
-            <div class="input-field col s12">
-                <h4>Podjetje</h4>
+            <div class="col s12">
+                <h5>Podjetje</h5>
             </div>
-            <div class="input-field col s12" style="margin-top: 3rem;">
-                <input id="naziv_podjetja_uredi" type="text" class="validate">
+            <div class="input-field col s12">
+                <input id="naziv_podjetja_uredi" type="text">
                 <label for="naziv_podjetja_uredi">Naziv podjetja</label>
             </div>
             <div class="input-field col s12">
-                <input id="davcna" type="number" class="validate">
+                <input id="davcna" type="number">
                 <label for="davcna">Davčna številka</label>
             </div>
             <div class="input-field col s12">
@@ -82,12 +81,32 @@
             </div>
         </div>
         {% endif %}
-        <a id="edit" class="waves-effect waves-light btn" style="width: 100%;"> Uredi </a>
+    </div>
+    <div class="row">
+        <div class="col s12 center-align">
+            <a id="edit" class="waves-effect waves-light btn">Uredi</a>
         </div>
     </div>
 </div>
 {% endblock %}
 
 {% block javascript %}
-    <script src="javascripts/user.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.tabs').tabs();
+        $('.datepicker').datepicker({
+            firstDay: 1,
+            format: "dd.mm.yyyy",
+            maxDate: new Date(),
+            i18n: {
+                months: ['Januar', 'Februar', 'Marec', 'April', 'Maj', 'Junij', 'Julij', 'August', 'September', 'Oktober', 'November', 'December'],
+                monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+                weekdays: ['Nedelja', 'Ponedeljek', 'Torek', 'Sreda', 'Četrtek', 'Petek', 'Sobota'],
+                weekdaysShort: ['Ned', 'Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob'],
+                weekdaysAbbrev: ['S', 'P', 'T', 'S', 'Č', 'P', 'S']
+            }
+        });
+    });
+</script>
+<script src="javascripts/user.js"></script>
 {% endblock %}

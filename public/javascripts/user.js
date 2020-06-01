@@ -1,8 +1,8 @@
-$(document).ready(function() {
+$(document).ready(function () {
     updateData();
 });
 
-$("#edit").click (function() {
+$("#edit").click(function () {
     $("#staro_geslo").removeClass("invalid");
     if (!($("#staro_geslo").val())) {
         $("#staro_geslo").addClass("invalid");
@@ -14,7 +14,7 @@ $("#edit").click (function() {
     let email = document.getElementById('i_email_uredi').value;
     let geslo = document.getElementById('i_geslo_uredi').value;
     let staro_geslo = document.getElementById('staro_geslo').value;
-    let ulica = document.getElementById('ulica_uredi').value 
+    let ulica = document.getElementById('ulica_uredi').value
     let hisna_st = document.getElementById('hisna_st_uredi').value;
     let kraj = document.getElementById('kraj_uredi').value;
     let postna_st = document.getElementById('postna_st_uredi').value;
@@ -26,6 +26,8 @@ $("#edit").click (function() {
         naziv_podjetja = document.getElementById('naziv_podjetja_uredi').value;
         davcna = document.getElementById('davcna').value;
         zacetek_delovanja = document.getElementById('zacetek_delovanja_uredi').value;
+        let date_arr = $("#zacetek_delovanja_uredi").val().split(".");
+        zacetek_delovanja = `${date_arr[2]}-${date_arr[1]}-${date_arr[0]}`;
         uspesnost_poslovanja = document.getElementById('uspesnost_poslovanja_uredi').value;
     }
 
@@ -44,8 +46,8 @@ $("#edit").click (function() {
         'zacetek_delovanja': zacetek_delovanja,
         'uspesnost_poslovanja': uspesnost_poslovanja
     }
- 
-    fetch('http://localhost:3000/user/editUser', {
+
+    fetch('/user/editUser', {
         method: 'POST',
         body: JSON.stringify(podatkiUporabnika),
         headers: {
@@ -62,57 +64,33 @@ function updateData() {
         url: "/user/",
         dataType: "json"
     })
-    .done(function (data) {
-        if (data) {
-            for (let i = 0; i < data.length; i++) {
-                let uporabnik = data[i];
-                if (uporabnik.zacetek_delovanja) {
-                    let zacetek_delovanja = uporabnik.zacetek_delovanja.slice(0, 10);
-                    if ($("#zacetek_delovanja_uredi").length != 0) {
-                        if ($("#zacetek_delovanja_uredi").val(zacetek_delovanja)) {
-                            $("#zacetek_delovanja_uredi").focus();
-                        }
+        .done(function (data) {
+            if (data) {
+                if (data.length != 0) {
+                    let uporabnik = data[0];
+                    if (uporabnik.zacetek_delovanja) {
+                        let datum_full = new Date(uporabnik.zacetek_delovanja);
+                        let datum = `${String(datum_full.getDate()).padStart(2, '0')}.${String(datum_full.getMonth()+1).padStart(2, '0')}.${datum_full.getFullYear()}`;
+                        $("#zacetek_delovanja_uredi").val(datum);
                     }
-                }
-                if ($("#i_priimek_uredi").val(uporabnik.priimek)) {
-                    $("#i_priimek_uredi").focus();
-                }
-                if ($("#i_email_uredi").val(uporabnik.email)) {
-                    $("#i_email_uredi").focus();
-                }
-                if ($('#ulica_uredi').val(uporabnik.naslov)) {
-                    $('#ulica_uredi').focus();
-                }
-                if ($('#hisna_st_uredi').val(uporabnik.stevilka)) {
-                    $('#hisna_st_uredi').focus();
-                }
-                if ($('#kraj_uredi').val(uporabnik.kraj)) {
-                    $('#kraj_uredi').focus();
-                }
-                if ($('#postna_st_uredi').val(uporabnik.postna_st)) {
-                    $('#postna_st_uredi').focus();
-                }
-                if ($("#davcna").length != 0) {
-                    if ($("#davcna").val(uporabnik.davcna)) {
-                        $("#davcna").focus();
+                    $("#i_priimek_uredi").val(uporabnik.priimek);
+                    $("#i_email_uredi").val(uporabnik.email);
+                    $('#ulica_uredi').val(uporabnik.naslov);
+                    $('#hisna_st_uredi').val(uporabnik.stevilka);
+                    $('#kraj_uredi').val(uporabnik.kraj);
+                    $('#postna_st_uredi').val(uporabnik.postna_st);
+                    if ($("#davcna").length != 0) {
+                        $("#davcna").val(uporabnik.davcna);
                     }
-                }
-                if ($("#naziv_podjetja_uredi").length != 0) {
-                    if ($("#naziv_podjetja_uredi").val(uporabnik.naziv_podjetja)) {
-                        $("#naziv_podjetja_uredi").focus();
+                    if ($("#naziv_podjetja_uredi").length != 0) {
+                        $("#naziv_podjetja_uredi").val(uporabnik.naziv_podjetja);
                     }
-                }
-                if ($("#uspesnost_poslovanja_uredi").length != 0) {
-                    if ($("#uspesnost_poslovanja_uredi").val(uporabnik.uspesnost_poslovanja)) {
-                        $("#uspesnost_poslovanja_uredi").focus();
+                    if ($("#uspesnost_poslovanja_uredi").length != 0) {
+                        $("#uspesnost_poslovanja_uredi").val(uporabnik.uspesnost_poslovanja);
                     }
+                    $("#i_ime_uredi").val(uporabnik.ime);
+                    M.updateTextFields();
                 }
-                if ($("#i_ime_uredi").val(uporabnik.ime)) {
-                    $("#i_ime_uredi").focus();
-                }
-                window.scrollTo(0,0);
-                break;
-            }        
-        }
-    });  
+            }
+        });
 }
