@@ -42,6 +42,28 @@ HTML
                                 <label for="letnik">Letnik</label>
                             </div>
                             <div class="input-field col m6 s12">
+                                <input id="potrdilo_izpravnosti" type="text" class="validate"
+                                    name="potrdilo_izpravnosti">
+                                <label for="potrdilo_izpravnosti">Potrdilo o izpravnosti</label>
+                            </div>
+                            <div class="input-field col m6 s12">
+                                <input id="cena_na_km" type="text" class="validate" name="cena_na_kma">
+                                <label for="cena_na_km">Cena na km</label>
+                            </div>
+                            <div class="input-field col m6 s12">
+                                <input id="max_teza" type="text" class="validate" name="max_teza_tovora">
+                                <label for="max_teza">Maksimalna teža tovora</label>
+                            </div>
+                            <div class="file-field input-field col m6 s12">
+                                <div class="btn">
+                                    <span>Slika</span>
+                                    <input type="file" accept="image/*">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <div class="input-field col m6 s12">
                                 <select id="tip" name="tip">
                                     <option value="" disabled selected>Izberi</option>
                                     <option value="kombi">Kombi</option>
@@ -54,16 +76,6 @@ HTML
                             <div class="col s12">
                                 <hr>
                             </div>
-                            <div class="input-field col m6 s12">
-                                <input id="max_teza" type="text" class="validate" name="max_teza_tovora">
-                                <label for="max_teza">Maksimalna teža tovora</label>
-                            </div>
-                            <div class="input-field col m6 s12">
-                                <input id="potrdilo_izpravnosti" type="text" class="validate"
-                                    name="potrdilo_izpravnosti">
-                                <label for="potrdilo_izpravnosti">Potrdilo o izpravnosti</label>
-                            </div>
-
                             <div id="tab-tovor">
                                 <div class="input-field col m6 s12">
                                     <input id="maks_volumen_tovora" type="text" class="validate"
@@ -96,19 +108,10 @@ HTML
                                     <label for="maks_sirina_tovora">Širina tovora</label>
                                 </div>
                             </div>
-                            <div id="tab-izdelki">
-                                <div class="input-field col m6 s12">
-                                    <input id="cena_na_km" type="text" class="validate" name="cena_na_kma">
-                                    <label for="cena_na_km">Cena na km</label>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <div class="input-field col m6 s12">
-                            <input id="slika" type="file" class="validate" name="slika">
-                        </div>
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="agree">Agree</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="agree">Dodaj</a>
                     </div>
                 </div>
 
@@ -133,6 +136,28 @@ HTML
                                 <label for="letnik">Letnik</label>
                             </div>
                             <div class="input-field col m6 s12">
+                                <input id="potrdilo_izpravnosti-uredi" type="text" class="validate"
+                                    name="potrdilo_izpravnosti">
+                                <label for="potrdilo_izpravnosti">Potrdilo izpravnosti</label>
+                            </div>
+                            <div class="input-field col m6 s12">
+                                <input id="cena-uredi" type="text" class="validate" name="cena-uredi">
+                                <label for="cena-uredi">Cena na km</label>
+                            </div>
+                            <div class="input-field col m6 s12">
+                                <input id="max_teza-uredi" type="text" class="validate" name="max_teza_tovora">
+                                <label for="max_teza">Maksimalna teža tovora</label>
+                            </div>
+                            <div class="file-field input-field col m6 s12">
+                                <div class="btn">
+                                    <span>Slika</span>
+                                    <input id="slika" type="file" accept="image/*">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text">
+                                </div>
+                            </div>
+                            <div class="input-field col m6 s12">
                                 <select id="tip-uredi" name="tip">
                                     <option value="kombi">Kombi</option>
                                     <option value="tovornjak razsut tovor">Tovornjak za razsut tovor</option>
@@ -143,19 +168,6 @@ HTML
                             </div>
                             <div class="col s12">
                                 <hr>
-                            </div>
-                            <div class="input-field col m6 s12">
-                                <input id="max_teza-uredi" type="text" class="validate" name="max_teza_tovora">
-                                <label for="max_teza">Maksimalna teža tovora</label>
-                            </div>
-                            <div class="input-field col m6 s12">
-                                <input id="potrdilo_izpravnosti-uredi" type="text" class="validate"
-                                    name="potrdilo_izpravnosti">
-                                <label for="potrdilo_izpravnosti">Potrdilo izpravnosti</label>
-                            </div>
-                            <div class="input-field col m6 s12">
-                                <input id="cena-uredi" type="text" class="validate" name="cena-uredi">
-                                <label for="cena-uredi">Cena na km</label>
                             </div>
 
                             <div id="tab-tovor-urejanje">
@@ -193,10 +205,7 @@ HTML
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <div class="input-field col m6 s12">
-                            <input id="slika-uredi" type="file" class="validate" name="slika-uredi">
-                        </div>
-                        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="edit">Edit</a>
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat" id="edit">Potrdi</a>
                     </div>
                 </div>
             </div>
