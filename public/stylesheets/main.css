@@ -69,3 +69,10 @@ p {
     background-color: #26a69a;
     /*Custom Color Of Indicator*/
 }
+
+.card-image {
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

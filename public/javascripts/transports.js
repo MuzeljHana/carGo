@@ -66,10 +66,10 @@ $.ajax({
 
 function getCard(vozilo) {
     return `<a href="#!" onclick="details(` + vozilo.id + `)" class="grey-text text-darken-4">
-                <div class="col s12 grey lighten-3" style="padding: 15px; border-radius: 10px; margin-top: 10px;">
+                <div class="col s12 grey lighten-3 rounded" style="padding: 15px; margin-top: 10px;">
                     <div class="row" style="margin-bottom: 0;">
                         <div class="col m4 s12">
-                            <img src="/vehicle/` + vozilo.id + `/image" alt="" class="responsive-img">
+                            <div class="rounded card-image" style="background-image: url(/vehicle/` + vozilo.id + `/image);"></div>
                         </div>
                         <div class="col m8 s12">
                             <div class="row">
@@ -77,7 +77,7 @@ function getCard(vozilo) {
                                     <h5>` + vozilo.naziv_podjetja + `</h5>
                                 </div>
                             </div>
-                            <div class="row" style="font-family: Roboto;">
+                            <div class="row normal-text" style="font-size: 18px;">
                                 <div class="col m3 s3">
                                     <span>Cena: ` + vozilo.cena_na_km + `€/km</span>
                                 </div>
@@ -86,14 +86,6 @@ function getCard(vozilo) {
                                 </div>
                                 <div class="col m4 s4">
                                     <span>Tip vozila: ` + vozilo.tip_vozila + `</span>
-                                </div>
-                            </div>
-                            <div class="row" style="font-family: Roboto;">
-                                <div class="col s12">
-                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-                                        doloremque recusandae impedit qui quia adipisci? Mollitia, vitae quam ad
-                                        laborum et vel sequi labore cupiditate provident, esse magni omnis
-                                        aspernatur?</span>
                                 </div>
                             </div>
                         </div>
