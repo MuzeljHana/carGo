@@ -95,7 +95,7 @@ function zakljuci(id) {
 
 function getCardPonudnik(ponudba) {
     let datum_full = new Date(ponudba.cas_nalozitve);
-    let datum = datum_full.getHours() + ":" + datum_full.getMinutes() + " " + datum_full.getDate() + "." + datum_full.getMonth() + "." + datum_full.getFullYear();
+    let datum = `${String(datum_full.getHours()).padStart(2, '0')}:${String(datum_full.getMinutes()).padStart(2, '0')} ${String(datum_full.getDate()).padStart(2, '0')}.${String(datum_full.getMonth()+1).padStart(2, '0')}.${datum_full.getFullYear()}`;
 
     let pripombe = "";
     if (ponudba.pripombe) {
