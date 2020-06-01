@@ -44,7 +44,8 @@
                 <div class="input-field col s12">
                     <input id="i_geslo" type="password" class="validate">
                     <label for="i_geslo">Geslo</label>
-                    <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
+                    <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in
+                        velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
                 </div>
                 <div class="input-field col s12">
                     <input id="i_pgeslo" type="password">
@@ -86,7 +87,8 @@
                 <div class="input-field col s12">
                     <input id="p_geslo" type="password" class="validate">
                     <label for="p_geslo">Geslo</label>
-                    <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
+                    <span class="helper-text" data-error="Geslo ne ustreza kriterijem">Geslo mora vsebovati majhne in
+                        velike črke, števila ter mora biti dolgo vsaj 6 znakov.</span>
                 </div>
                 <div class="input-field col s12">
                     <input id="p_pgeslo" type="password" class="validate">
@@ -119,20 +121,18 @@
 
 {% block javascript %}
 <script>
-    $(document).ready(function () {
-        $('.tabs').tabs();
-        $('.datepicker').datepicker({
-            firstDay: 1,
-            format: "dd.mm.yyyy",
-            maxDate: new Date(),
-            i18n: {
-                months: ['Januar', 'Februar', 'Marec', 'April', 'Maj', 'Junij', 'Julij', 'August', 'September', 'Oktober', 'November', 'December'],
-                monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
-                weekdays: ['Nedelja', 'Ponedeljek', 'Torek', 'Sreda', 'Četrtek', 'Petek', 'Sobota'],
-                weekdaysShort: ['Ned', 'Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob'],
-                weekdaysAbbrev: ['S', 'P', 'T', 'S', 'Č', 'P', 'S']
-            }
-        });
+    $('.tabs').tabs();
+    $('.datepicker').datepicker({
+        firstDay: 1,
+        format: "dd.mm.yyyy",
+        maxDate: new Date(),
+        i18n: {
+            months: ['Januar', 'Februar', 'Marec', 'April', 'Maj', 'Junij', 'Julij', 'August', 'September', 'Oktober', 'November', 'December'],
+            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+            weekdays: ['Nedelja', 'Ponedeljek', 'Torek', 'Sreda', 'Četrtek', 'Petek', 'Sobota'],
+            weekdaysShort: ['Ned', 'Pon', 'Tor', 'Sre', 'Čet', 'Pet', 'Sob'],
+            weekdaysAbbrev: ['S', 'P', 'T', 'S', 'Č', 'P', 'S']
+        }
     });
 </script>
 <script src="/javascripts/register.js"></script>

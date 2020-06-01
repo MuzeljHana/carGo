@@ -59,13 +59,15 @@ HTML
                                 <label for="max_teza">Maksimalna teža tovora</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="potrdilo_izpravnosti" type="text" class="validate" name="potrdilo_izpravnosti">
+                                <input id="potrdilo_izpravnosti" type="text" class="validate"
+                                    name="potrdilo_izpravnosti">
                                 <label for="potrdilo_izpravnosti">Potrdilo o izpravnosti</label>
                             </div>
 
                             <div id="tab-tovor">
                                 <div class="input-field col m6 s12">
-                                    <input id="maks_volumen_tovora" type="text" class="validate" name="maks_volumen_tovora">
+                                    <input id="maks_volumen_tovora" type="text" class="validate"
+                                        name="maks_volumen_tovora">
                                     <label for="maks_volumen_tovora">Volumen</label>
                                 </div>
                             </div>
@@ -79,15 +81,18 @@ HTML
 
                             <div id="tab-izdelki">
                                 <div class="input-field col m6 s12">
-                                    <input id="maks_visina_tovora" type="text" class="validate" name="maks_visina_tovora">
+                                    <input id="maks_visina_tovora" type="text" class="validate"
+                                        name="maks_visina_tovora">
                                     <label for="maks_visina_tovora">Višina tovora</label>
                                 </div>
                                 <div class="input-field col m6 s12">
-                                    <input id="maks_dolzina_tovora" type="text" class="validate" name="maks_dolzina_tovora">
+                                    <input id="maks_dolzina_tovora" type="text" class="validate"
+                                        name="maks_dolzina_tovora">
                                     <label for="maks_dolzina_tovora">Dolžina tovora</label>
                                 </div>
                                 <div class="input-field col m6 s12">
-                                    <input id="maks_sirina_tovora" type="text" class="validate" name="maks_sirina_tovora">
+                                    <input id="maks_sirina_tovora" type="text" class="validate"
+                                        name="maks_sirina_tovora">
                                     <label for="maks_sirina_tovora">Širina tovora</label>
                                 </div>
                             </div>
@@ -141,7 +146,8 @@ HTML
                                 <label for="max_teza">Maksimalna teža tovora</label>
                             </div>
                             <div class="input-field col m6 s12">
-                                <input id="potrdilo_izpravnosti-uredi" type="text" class="validate" name="potrdilo_izpravnosti">
+                                <input id="potrdilo_izpravnosti-uredi" type="text" class="validate"
+                                    name="potrdilo_izpravnosti">
                                 <label for="potrdilo_izpravnosti">Potrdilo izpravnosti</label>
                             </div>
                             <div class="input-field col m6 s12">
@@ -151,7 +157,8 @@ HTML
 
                             <div id="tab-tovor-urejanje">
                                 <div class="input-field col m6 s12">
-                                    <input id="maks_volumen_tovora-uredi" type="text" class="validate" name="maks_volumen_tovora">
+                                    <input id="maks_volumen_tovora-uredi" type="text" class="validate"
+                                        name="maks_volumen_tovora">
                                     <label for="maks_volumen_tovora">Volumen</label>
                                 </div>
                             </div>
@@ -165,15 +172,18 @@ HTML
 
                             <div id="tab-izdelki-urejanje">
                                 <div class="input-field col m6 s12">
-                                    <input id="maks_visina_tovora-uredi" type="text" class="validate" name="maks_visina_tovora">
+                                    <input id="maks_visina_tovora-uredi" type="text" class="validate"
+                                        name="maks_visina_tovora">
                                     <label for="maks_visina_tovora">Višina tovora</label>
                                 </div>
                                 <div class="input-field col m6 s12">
-                                    <input id="maks_dolzina_tovora-uredi" type="text" class="validate" name="maks_dolzina_tovora">
+                                    <input id="maks_dolzina_tovora-uredi" type="text" class="validate"
+                                        name="maks_dolzina_tovora">
                                     <label for="maks_dolzina_tovora">Dolžina tovora</label>
                                 </div>
                                 <div class="input-field col m6 s12">
-                                    <input id="maks_sirina_tovora-uredi" type="text" class="validate" name="maks_sirina_tovora">
+                                    <input id="maks_sirina_tovora-uredi" type="text" class="validate"
+                                        name="maks_sirina_tovora">
                                     <label for="maks_sirina_tovora">Širina tovora</label>
                                 </div>
                             </div>
@@ -192,10 +202,8 @@ HTML
 
 {% block javascript %}
 <script>
-    $(document).ready(function () {
-        $('.modal').modal();
-        $('select').formSelect();
-    });
+    $('.modal').modal();
+    $('select').formSelect();
 </script>
 <script src="/javascripts/vehicle.js"></script>
 {% endblock %}
