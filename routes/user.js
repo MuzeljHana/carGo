@@ -86,7 +86,7 @@ router.get("/logout", (req, res, next) => {
     }
 });
 
-router.post('/editUser', async(req, res, next) => {
+router.put('/edit', async(req, res, next) => {
     try {
         let novoGeslo, idNaslov, idPosta, shranjenoGeslo;
 
@@ -215,7 +215,6 @@ router.get('/', auth, (req, res, next) => {
             "p.kraj as kraj",
             "p.stevilka as postna_st"])
         .where({ "u.id": req.session.user_id })
-        //.groupBy("v.id")
         .join("Naslov as n", { 'n.id': 'u.idNaslov'  })
         .join("Posta as p", { 'p.id': 'n.idPosta' })
         .then((data) => {

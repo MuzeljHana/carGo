@@ -47,8 +47,8 @@ $("#edit").click(function () {
         'uspesnost_poslovanja': uspesnost_poslovanja
     }
 
-    fetch('/user/editUser', {
-        method: 'POST',
+    fetch('/user/edit', {
+        method: 'PUT',
         body: JSON.stringify(podatkiUporabnika),
         headers: {
             'content-type': 'application/json'

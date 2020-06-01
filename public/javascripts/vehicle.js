@@ -294,8 +294,8 @@ $("#edit").click(function () {
         'cena': cena
     }
 
-    fetch('/vehicle/editVehicle', {
-        method: 'POST',
+    fetch('/vehicle/edit', {
+        method: 'PUT',
         body: JSON.stringify(podatki),
         headers: {
             'content-type': 'application/json'

@@ -172,38 +172,6 @@ router.get('/:id', auth, (req, res, next) => {
         });
 });
 
-/*
-router.post('/editVehicle', auth, (req, res, next) => {
-    knex('Vozilo')
-        .update({
-            letnik: req.body.letnik,
-            registerska: req.body.registerska,
-            model: req.body.model,
-            maks_teza_tovora: req.body.maks_teza_tovora,
-            potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
-            maks_volumen_tovora: req.body.maks_volumen_tovora,
-            maks_dolzina_tovora: req.body.maks_dolzina_tovora,
-            maks_sirina_tovora: req.body.maks_sirina_tovora,
-            maks_visina_tovora: req.body.maks_visina_tovora,
-            maks_st_palet: req.body.maks_st_palet,
-
-        })
-        .where({
-            idUporabnik: req.session.user_id,
-            id: req.params.id
-        })
-        .join("Znamka as z", { 'z.id': 'v.idZnamka' })
-        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
-        .then((data) => {
-            res.send();
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).send();
-        });
-});
-*/
-
 router.post('/', auth, async (req, res, next) => {
     try {
         datoteka = Buffer.from(req.files.slika.data);
@@ -347,7 +315,7 @@ router.post('/', auth, async (req, res, next) => {
     }
 });
 
-router.post('/editVehicle', auth, async (req, res, next) => {
+router.put('/edit', auth, async (req, res, next) => {
     try {
         let tip_vozila;
         let znamka;
