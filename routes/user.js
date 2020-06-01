@@ -51,7 +51,7 @@ router.post('/register', async (req, res, next) => {
             })
             .catch((err) => {
                 console.log(err);
-                res.status(500).send();
+                res.sendStatus(500);
             });
     } else {
         res.json({ message: "User exists" });
@@ -73,7 +73,7 @@ router.post("/login", (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 
@@ -222,7 +222,7 @@ router.get('/', auth, (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 

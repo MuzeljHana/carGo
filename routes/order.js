@@ -105,7 +105,7 @@ router.get('/', auth, (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 
@@ -208,7 +208,7 @@ router.get('/:id', auth, (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 
@@ -289,14 +289,14 @@ router.post('/', auth, async (req, res, next) => {
                     .then((data) => { })
                     .catch((err) => {
                         console.log(err);
-                        res.status(500).send();
+                        res.sendStatus(500);
                     });
             }
             res.json({ message: "success" });
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 
@@ -316,7 +316,7 @@ router.put('/:id/status/:status', auth, (req, res, next) => {
         .then(() => { })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 
     let data;
@@ -344,7 +344,7 @@ router.put('/:id/status/:status', auth, (req, res, next) => {
             })
             .catch((err) => {
                 console.log(err);
-                res.status(500).send();
+                res.sendStatus(500);
             });
     } else {
         res.json({ message: "success" });

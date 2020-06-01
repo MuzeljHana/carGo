@@ -68,7 +68,7 @@ router.post('/search', (req, res, next) => {
                 })
                 .catch((err) => {
                     console.log(err);
-                    res.status(500).send();
+                    res.sendStatus(500);
                 });
             break;
         case "palete":
@@ -81,7 +81,7 @@ router.post('/search', (req, res, next) => {
                 })
                 .catch((err) => {
                     console.log(err);
-                    res.status(500).send();
+                    res.sendStatus(500);
                 });
             break;
         case "razsut tovor":
@@ -94,11 +94,11 @@ router.post('/search', (req, res, next) => {
                 })
                 .catch((err) => {
                     console.log(err);
-                    res.status(500).send();
+                    res.sendStatus(500);
                 });
             break;
         default:
-            res.status(400).send();
+            res.sendStatus(400);
     }
 });
 
@@ -132,7 +132,7 @@ router.get('/', auth, (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 
@@ -170,7 +170,7 @@ router.get('/:id', auth, (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 
@@ -311,7 +311,7 @@ router.put('/:id/active/:bool', auth, (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 
@@ -327,7 +327,7 @@ router.delete('/:id', auth, (req, res, next) => {
         })
         .catch((err) => {
             console.log(err);
-            res.status(500).send();
+            res.sendStatus(500);
         });
 });
 
