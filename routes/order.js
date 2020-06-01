@@ -279,7 +279,6 @@ router.post('/', auth, async (req, res, next) => {
 
     knex.into('Ponudba as p')
         .insert([data])
-        .returning('id')
         .then((id) => {
             if (req.body.izdelki) {
                 for (let izdelek of req.body.izdelki) {

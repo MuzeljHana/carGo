@@ -43,6 +43,7 @@ function getPonudbe() {
                             getPonudbe();
                         }
                     });
+                    $('select').formSelect();
                 }
             }
         });
@@ -208,7 +209,7 @@ function getCardPonudnik(ponudba) {
 
 function getCardIskalec(ponudba) {
     let datum_full = new Date(ponudba.cas_nalozitve);
-    let datum = datum_full.getHours() + ":" + datum_full.getMinutes() + " " + datum_full.getDate() + "." + datum_full.getMonth() + "." + datum_full.getFullYear();
+    let datum = `${String(datum_full.getHours()).padStart(2, '0')}:${String(datum_full.getMinutes()).padStart(2, '0')} ${String(datum_full.getDate()).padStart(2, '0')}.${String(datum_full.getMonth()+1).padStart(2, '0')}.${datum_full.getFullYear()}`;
 
     let status = "";
     switch (ponudba.status) {
@@ -308,16 +309,17 @@ function getCardIskalec(ponudba) {
             </div>
         </div>
         <div class="row">
-            <div class="col s12 center-align">
-                <select name="format" id="formatChoice" style="display: inline; margin: auto;">
-                    <option value=""></option>
-                    <option value="txt">.txt</option>
-                    <option value="pdf">.pdf</option>
+            <div class="input-field col m3 offset-m7 s7">
+                <select id="formatChoice">
+                    <option value="pdf" selected>PDF datoteka</option>
+                    <option value="txt">Tekstovna datoteka</option>
                 </select>
             </div>
+            <div class="input-field col m2 s5">
+                <a class="waves-effect waves-light btn"
+                    style="text-transform: none;" onclick="exportConfirmation(${ponudba.id})">Izvoz potrdila</a>
+            </div>
         </div>
-        <a class="waves-effect waves-light btn-flat right"
-            style="text-transform: none;" onclick="exportConfirmation(${ponudba.id})">Izvoz potrdila</a>
     </div>
 </div>`;
 }
