@@ -181,6 +181,7 @@ router.post('/editUser', async(req, res, next) => {
                         priimek: req.body.priimek,
                         email: req.body.email,
                         geslo: bcrypt.hashSync(novoGeslo.trim(), 10),
+                        idNaslov: idNaslov
                     }).where({
                         id: req.session.user_id
                     }).catch((error) => {
