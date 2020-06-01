@@ -10,3 +10,4 @@ package-lock.json
 
 # User content
 user_content/
+config.json
