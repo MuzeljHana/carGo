@@ -99,8 +99,8 @@ function getCard(vozilo) {
 
     return `<div class="row" style="padding: 0 15px 0 15px;">
 <div class="col s12 white rounded" style="padding: 15px;">
-    <div class="col s12 m4 valign-wrapper center-align">
-        <img src="/vehicle/` + vozilo.id + `/image" alt="" class="responsive-img">
+    <div class="col s12 m4">
+        <div class="card-image rounded" style="background-image: url(/vehicle/` + vozilo.id + `/image);"></div>
     </div>
     <div class="col s12 m8">
         <div class="row">
