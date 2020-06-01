@@ -1,11 +1,11 @@
 {
     "mysql": {
-        "host": "",
-        "user": "",
+        "host": "127.0.0.1",
+        "user": "root",
         "password": "",
-        "database": ""
+        "database": "cargo"
     },
     "sqlite": {
-        "filename": ""
+        "filename": "database.sqlite"
     }
 }
