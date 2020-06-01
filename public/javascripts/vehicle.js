@@ -180,6 +180,7 @@ function prenosPodatkov(id) {
                 $("#registerska-uredi").val(vozilo.registerska);
                 $("#znamka-uredi").val(vozilo.znamka);
                 $("#letnik-uredi").val(vozilo.letnik);
+                $("#tip-uredi").val(vozilo.tip_vozila);
                 $("#max_teza-uredi").val(vozilo.maks_teza_tovora);
                 $("#potrdilo_izpravnosti-uredi").val(vozilo.potrdilo_izpravnosti);
                 $("#maks_volumen_tovora-uredi").val(vozilo.maks_volumen_tovora);
@@ -190,6 +191,7 @@ function prenosPodatkov(id) {
                 $("#cena-uredi").val(vozilo.cena_na_km);
                 $("#model-uredi").val(vozilo.model);
                 M.updateTextFields();
+                $('select').formSelect();
             }
         });
 }
