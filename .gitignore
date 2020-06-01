@@ -7,3 +7,6 @@ package-lock.json
 
 # SQLite
 *.sqlite
+
+# User content
+user_content/
