@@ -146,10 +146,10 @@ function getCardPonudnik(ponudba) {
                     <span>Tip: Razsut tovor</span>
                 </div>
                 <div class="col s12">
-                    <span>Volumen: ` + izdelek.volumen_tovora + ` m<sup>3</sup></span>
+                    <span>Volumen: ` + ponudba.volumen_tovora + ` m<sup>3</sup></span>
                 </div>
                 <div class="col s12">
-                    <span>Teža: ` + izdelek.teza_tovora + ` kg</span>
+                    <span>Teža: ` + ponudba.teza_tovora + ` kg</span>
                 </div>`;
             break;
     }
@@ -265,10 +265,10 @@ function getCardIskalec(ponudba) {
                     <span>Tip: Razsut tovor</span>
                 </div>
                 <div class="col s12">
-                    <span>Volumen: ` + izdelek.volumen_tovora + ` m<sup>3</sup></span>
+                    <span>Volumen: ` + ponudba.volumen_tovora + ` m<sup>3</sup></span>
                 </div>
                 <div class="col s12">
-                    <span>Teža: ` + izdelek.teza_tovora + ` kg</span>
+                    <span>Teža: ` + ponudba.teza_tovora + ` kg</span>
                 </div>`;
             break;
     }
