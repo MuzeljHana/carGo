@@ -40,7 +40,7 @@ router.post('/search', (req, res, next) => {
             query.andWhere("c.cena_na_km", "<=", req.body.dodatno.cena);
         }
         if (req.body.dodatno.prevoznik) {
-            query.andWhere("u.naziv", "like", "%" + req.body.dodatno.prevoznik.trim() + "%");
+            query.andWhere("u.naziv_podjetja", "like", "%" + req.body.dodatno.prevoznik.trim() + "%");
         }
         if (req.body.dodatno.letnik) {
             query.andWhere("v.letnik", "<=", req.body.dodatno.letnik);
