@@ -102,7 +102,7 @@ $("#ponudba").click(function () {
             break;
         case "razsut tovor":
             data.teza_tovora = search_data.teza_tovora;
-            data.volumen_tovora = search_data.volumed_tovora;
+            data.volumen_tovora = search_data.volumen_tovora;
             break;
         case "palete":
             data.st_palet = search_data.st_palet;
