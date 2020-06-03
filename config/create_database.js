@@ -619,31 +619,31 @@ async function create_database() {
         },
         {
             cas_nalozitve: "2020-04-28 08:00:00",teza_tovora: 300, volumen_tovora: 100,
-            idVozilo: 5, idTip_tovora: 4, naslov_nalozitve_idNaslov: 5, naslov_dostave_idNaslov: 1, idUporabnik: 7
+            idVozilo: 5, idTip_tovora: 3, naslov_nalozitve_idNaslov: 5, naslov_dostave_idNaslov: 1, idUporabnik: 7
         },
         {
             cas_nalozitve: "2020-04-07 08:00:00",st_palet: 4, teza_palet: 1600,
-            idVozilo: 6, idTip_tovora: 3, naslov_nalozitve_idNaslov: 6, naslov_dostave_idNaslov: 11, idUporabnik: 8
+            idVozilo: 6, idTip_tovora: 1, naslov_nalozitve_idNaslov: 6, naslov_dostave_idNaslov: 11, idUporabnik: 8
         },
         {
             cas_nalozitve: "2020-05-06 22:00:00",
-            idVozilo: 7, idTip_tovora: 4, naslov_nalozitve_idNaslov: 11, naslov_dostave_idNaslov: 12, idUporabnik: 3
+            idVozilo: 7, idTip_tovora: 3, naslov_nalozitve_idNaslov: 11, naslov_dostave_idNaslov: 12, idUporabnik: 3
         },
         {
             cas_nalozitve: "2019-01-31 11:00:00",teza_tovora: 5000, volumen_tovora: 4000,
-            idVozilo: 8, idTip_tovora: 2, naslov_nalozitve_idNaslov: 15, naslov_dostave_idNaslov: 10, idUporabnik: 9
+            idVozilo: 8, idTip_tovora: 3, naslov_nalozitve_idNaslov: 15, naslov_dostave_idNaslov: 10, idUporabnik: 9
         },
         {
             cas_nalozitve: "2018-03-16 10:30:00",st_palet: 4, teza_palet: 1463,
-            idVozilo: 9, idTip_tovora: 3, naslov_nalozitve_idNaslov: 12, naslov_dostave_idNaslov: 4, idUporabnik: 10
+            idVozilo: 9, idTip_tovora: 1, naslov_nalozitve_idNaslov: 12, naslov_dostave_idNaslov: 4, idUporabnik: 10
         },
         {
             cas_nalozitve: "2016-09-01 08:30:00",teza_tovora: 300, volumen_tovora: 250,
-            idVozilo: 10, idTip_tovora: 2, naslov_nalozitve_idNaslov: 1, naslov_dostave_idNaslov: 6, idUporabnik: 12
+            idVozilo: 10, idTip_tovora: 3, naslov_nalozitve_idNaslov: 1, naslov_dostave_idNaslov: 6, idUporabnik: 12
         },
         {
             cas_nalozitve: "2017-11-26 09:00:00",
-            idVozilo: 11, idTip_tovora: 4, naslov_nalozitve_idNaslov: 7, naslov_dostave_idNaslov: 2, idUporabnik: 6
+            idVozilo: 11, idTip_tovora: 3, naslov_nalozitve_idNaslov: 7, naslov_dostave_idNaslov: 2, idUporabnik: 6
         },
         {
             cas_nalozitve: "2018-02-18 06:00:00",st_palet: 2, teza_palet: 500,
@@ -655,7 +655,7 @@ async function create_database() {
         },
         {
             cas_nalozitve: "2019-02-21 04:30:00",st_palet: 5, teza_palet: 1000,
-            idVozilo: 14, idTip_tovora: 3, naslov_nalozitve_idNaslov: 12, naslov_dostave_idNaslov: 5, idUporabnik: 14
+            idVozilo: 14, idTip_tovora: 1, naslov_nalozitve_idNaslov: 12, naslov_dostave_idNaslov: 5, idUporabnik: 14
         },
         {
             cas_nalozitve: "2020-02-21 04:30:00",
