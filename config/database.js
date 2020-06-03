@@ -14,7 +14,8 @@ switch (String(process.env.DATABASE).toLowerCase()) {
     default:
         var config = {
             client: 'mysql',
-            connection: db_config.mysql
+            connection: db_config.mysql,
+            useNullAsDefault: true
         };
 }
 

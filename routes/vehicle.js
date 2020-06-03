@@ -26,10 +26,11 @@ router.post('/search', (req, res, next) => {
         .where({
             "v.aktivno": 1,
             "v.zasedeno": 0,
-            "v.deleted": 0
+            "v.deleted": 0,
+            "c.datum_od": (qb) => {
+                qb.from("Cenik as c2").max("c2.datum_od").whereRaw("c2.idVozilo = v.id", []);
+            }
         })
-        .groupBy("v.id")
-        .havingRaw("MAX(c.datum_od)", [])
         .join("Cenik as c", { 'c.idVozilo': 'v.id' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
@@ -121,9 +122,13 @@ router.get('/', auth, (req, res, next) => {
             "t.naziv as tip_vozila",
             "z.naziv as znamka",
             "c.cena_na_km"])
-        .where({ "idUporabnik": req.session.user_id, "deleted": 0 })
-        .groupBy("v.id")
-        .havingRaw("MAX(c.datum_od)", [])
+        .where({
+            "idUporabnik": req.session.user_id,
+            "deleted": 0,
+            "c.datum_od": (qb) => {
+                qb.from("Cenik as c2").max("c2.datum_od").whereRaw("c2.idVozilo = v.id", []);
+            }
+        })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
         .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Cenik as c", { 'c.idVozilo': 'v.id' })
@@ -158,13 +163,14 @@ router.get('/:id', auth, (req, res, next) => {
         .where({
             "idUporabnik": req.session.user_id,
             "v.id": req.params.id,
-            "deleted": 0
+            "deleted": 0,
+            "c.datum_od": (qb) => {
+                qb.from("Cenik as c2").max("c2.datum_od").where({ "c2.idVozilo": req.params.id });
+            }
         })
-        .groupBy("v.id")
-        .havingRaw("MAX(c.datum_od)", [])
-        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
-        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
         .join("Znamka as z", { 'z.id': 'v.idZnamka' })
+        .join("Tip_vozila as t", { 't.id': 'v.idTip_vozila' })
+        .join("Cenik as c", { 'c.idVozilo': 'v.id' })
         .then((data) => {
             res.json(data);
         })
@@ -186,28 +192,6 @@ router.post('/', auth, async (req, res, next) => {
         fs.writeFileSync(path.join(__dirname, "..", "user_content", "images", slika_name), req.files.slika.data);
     }
 
-    let volumen = null;
-    let dolzina = null;
-    let sirina = null;
-    let visina = null;
-    let stPalet = null;
-
-    if (req.body.maks_volumen_tovora) {
-        volumen = req.body.maks_volumen_tovora;
-    }
-    if (req.body.maks_dolzina_tovora) {
-        dolzina = req.body.maks_dolzina_tovora;
-    }
-    if (req.body.maks_sirina_tovora) {
-        sirina = req.body.maks_sirina_tovora;
-    }
-    if (req.body.maks_visina_tovora) {
-        visina = req.body.maks_visina_tovora;
-    }
-    if (req.body.maks_st_palet) {
-        stPalet = req.body.maks_st_palet;
-    }
-
     knex.into("Vozilo")
         .insert([{
             letnik: req.body.letnik,
@@ -216,11 +200,11 @@ router.post('/', auth, async (req, res, next) => {
             maks_teza_tovora: req.body.maks_teza_tovora,
             potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
             slika: slika_name,
-            maks_volumen_tovora: volumen,
-            maks_dolzina_tovora: dolzina,
-            maks_sirina_tovora: sirina,
-            maks_visina_tovora: visina,
-            maks_st_palet: stPalet,
+            maks_volumen_tovora: req.body.maks_volumen_tovora,
+            maks_dolzina_tovora: req.body.maks_dolzina_tovora,
+            maks_sirina_tovora: req.body.maks_sirina_tovora,
+            maks_visina_tovora: req.body.maks_visina_tovora,
+            maks_st_palet: req.body.maks_st_palet,
             idUporabnik: req.session.user_id,
             idZnamka: (qb) => {
                 qb.select("id").from("Znamka").where({ naziv: req.body.znamka });
@@ -260,28 +244,6 @@ router.put('/:id/edit', auth, async (req, res, next) => {
         fs.writeFileSync(path.join(__dirname, "..", "user_content", "images", slika_name), req.files.slika.data);
     }
 
-    let volumen = null;
-    let dolzina = null;
-    let sirina = null;
-    let visina = null;
-    let stPalet = null;
-
-    if (req.body.maks_volumen_tovora) {
-        volumen = req.body.maks_volumen_tovora;
-    }
-    if (req.body.maks_dolzina_tovora) {
-        dolzina = req.body.maks_dolzina_tovora;
-    }
-    if (req.body.maks_sirina_tovora) {
-        sirina = req.body.maks_sirina_tovora;
-    }
-    if (req.body.maks_visina_tovora) {
-        visina = req.body.maks_visina_tovora;
-    }
-    if (req.body.maks_st_palet) {
-        stPalet = req.body.maks_st_palet;
-    }
-
     let data = {
         letnik: req.body.letnik,
         registerska: req.body.registerska,
@@ -289,11 +251,11 @@ router.put('/:id/edit', auth, async (req, res, next) => {
         maks_teza_tovora: req.body.maks_teza_tovora,
         potrdilo_izpravnosti: req.body.potrdilo_izpravnosti,
         slika: slika_name,
-        maks_volumen_tovora: volumen,
-        maks_dolzina_tovora: dolzina,
-        maks_sirina_tovora: sirina,
-        maks_visina_tovora: visina,
-        maks_st_palet: stPalet
+        maks_volumen_tovora: req.body.maks_volumen_tovora,
+        maks_dolzina_tovora: req.body.maks_dolzina_tovora,
+        maks_sirina_tovora: req.body.maks_sirina_tovora,
+        maks_visina_tovora: req.body.maks_visina_tovora,
+        maks_st_palet: req.body.maks_st_palet
     }
 
     if (req.body.znamka) {
