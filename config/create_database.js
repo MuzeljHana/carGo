@@ -6,37 +6,25 @@ const bcrypt = require('bcryptjs');
 create_database();
 
 async function create_database() {
-    await knex.schema.dropTableIfExists('Posta')
-        .catch((err) => {
-            console.log(err);
-            throw err;
-        });
-
-    await knex.schema.dropTableIfExists('Naslov')
-        .catch((err) => {
-            console.log(err);
-            throw err;
-        });
-
-    await knex.schema.dropTableIfExists('Uporabnik')
-        .catch((err) => {
-            console.log(err);
-            throw err;
-        });
-
-    await knex.schema.dropTableIfExists('Vozilo')
-        .catch((err) => {
-            console.log(err);
-            throw err;
-        });
-
     await knex.schema.dropTableIfExists('Cenik')
         .catch((err) => {
             console.log(err);
             throw err;
         });
 
+    await knex.schema.dropTableIfExists('Izdelek')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
     await knex.schema.dropTableIfExists('Ponudba')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Vozilo')
         .catch((err) => {
             console.log(err);
             throw err;
@@ -54,13 +42,25 @@ async function create_database() {
             throw err;
         });
 
-    await knex.schema.dropTableIfExists('Tip_tovora')
+    await knex.schema.dropTableIfExists('Uporabnik')
         .catch((err) => {
             console.log(err);
             throw err;
         });
 
-    await knex.schema.dropTableIfExists('Izdelek')
+    await knex.schema.dropTableIfExists('Naslov')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Posta')
+        .catch((err) => {
+            console.log(err);
+            throw err;
+        });
+
+    await knex.schema.dropTableIfExists('Tip_tovora')
         .catch((err) => {
             console.log(err);
             throw err;
@@ -83,7 +83,7 @@ async function create_database() {
         table.string('ulica').notNullable();
         table.string('stevilka').notNullable();
 
-        table.integer('idPosta').references('id').inTable('Posta').notNullable();
+        table.integer('idPosta').unsigned().references('id').inTable('Posta').notNullable();
     })
         .then(() => console.log("Created table: Naslov"))
         .catch((err) => { console.log(err); throw err });
@@ -99,7 +99,7 @@ async function create_database() {
         table.date('zacetek_delovanja');
         table.string('uspesnost_poslovanja');
 
-        table.integer('idNaslov').references('id').inTable('Naslov').notNullable();
+        table.integer('idNaslov').unsigned().references('id').inTable('Naslov').notNullable();
     })
         .then(() => console.log("Created table: Uporabnik"))
         .catch((err) => { console.log(err); throw err });
@@ -135,9 +135,9 @@ async function create_database() {
         table.string('slika');
         table.boolean("deleted").notNullable().defaultTo(0)
 
-        table.integer('idTip_vozila').references('id').inTable('Tip_vozila').notNullable();
-        table.integer('idZnamka').references('id').inTable('Znamka').notNullable();
-        table.integer('idUporabnik').references('id').inTable('Uporabnik').notNullable();
+        table.integer('idTip_vozila').unsigned().references('id').inTable('Tip_vozila').notNullable();
+        table.integer('idZnamka').unsigned().references('id').inTable('Znamka').notNullable();
+        table.integer('idUporabnik').unsigned().references('id').inTable('Uporabnik').notNullable();
     })
         .then(() => console.log("Created table: Vozilo"))
         .catch((err) => { console.log(err); throw err });
@@ -145,9 +145,9 @@ async function create_database() {
     await knex.schema.createTable('Cenik', (table) => {
         table.increments('id');
         table.float('cena_na_km').notNullable();
-        table.date('datum_od').defaultTo(knex.fn.now());
+        table.timestamp('datum_od').defaultTo(knex.fn.now());
 
-        table.integer('idVozilo').references('id').inTable('Vozilo').notNullable();
+        table.integer('idVozilo').unsigned().references('id').inTable('Vozilo').notNullable();
     })
         .then(() => console.log("Created table: Znamka"))
         .catch((err) => { console.log(err); throw err });
@@ -170,11 +170,11 @@ async function create_database() {
         table.integer('st_palet');
         table.integer('teza_palet');
 
-        table.integer('idVozilo').references('id').inTable('Vozilo').notNullable();
-        table.integer('idTip_tovora').references('id').inTable('Tip_tovora').notNullable();
-        table.integer('naslov_nalozitve_idNaslov').references('id').inTable('Naslov').notNullable();
-        table.integer('naslov_dostave_idNaslov').references('id').inTable('Naslov').notNullable();
-        table.integer('idUporabnik').references('id').inTable('Uporabnik').notNullable();
+        table.integer('idVozilo').unsigned().references('id').inTable('Vozilo').notNullable();
+        table.integer('idTip_tovora').unsigned().references('id').inTable('Tip_tovora').notNullable();
+        table.integer('naslov_nalozitve_idNaslov').unsigned().references('id').inTable('Naslov').notNullable();
+        table.integer('naslov_dostave_idNaslov').unsigned().references('id').inTable('Naslov').notNullable();
+        table.integer('idUporabnik').unsigned().references('id').inTable('Uporabnik').notNullable();
     })
         .then(() => console.log("Created table: Ponudba"))
         .catch((err) => { console.log(err); throw err });
@@ -187,7 +187,7 @@ async function create_database() {
         table.integer('sirina').notNullable();
         table.integer('kolicina').notNullable();
 
-        table.integer('idPonudba').references('id').inTable('Ponudba').notNullable();
+        table.integer('idPonudba').unsigned().references('id').inTable('Ponudba').notNullable();
     })
         .then(() => console.log("Created table: Izdelek"))
         .catch((err) => { console.log(err); throw err });
@@ -368,12 +368,12 @@ async function create_database() {
         .catch((err) => { console.log(err); throw err });
 
     const izdelek = [
-        { teza: 2, dolzina: 20, visina: 30, sirina: 20, kolicina: 3, idPonudba: 3},
-        { teza: 6, dolzina: 60, visina: 30, sirina: 20, kolicina: 10, idPonudba: 3},
-        { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 3},
-        { teza: 2, dolzina: 20, visina: 30, sirina: 20, kolicina: 3, idPonudba: 4},
-        { teza: 6, dolzina: 60, visina: 30, sirina: 20, kolicina: 10, idPonudba: 4},
-        { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 4}
+        { teza: 2, dolzina: 20, visina: 30, sirina: 20, kolicina: 3, idPonudba: 3 },
+        { teza: 6, dolzina: 60, visina: 30, sirina: 20, kolicina: 10, idPonudba: 3 },
+        { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 3 },
+        { teza: 2, dolzina: 20, visina: 30, sirina: 20, kolicina: 3, idPonudba: 4 },
+        { teza: 6, dolzina: 60, visina: 30, sirina: 20, kolicina: 10, idPonudba: 4 },
+        { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 4 }
     ]
     await knex('Izdelek').insert(izdelek)
         .then(() => console.log("Data inserted: Izdelek"))
