@@ -197,10 +197,14 @@ async function create_database() {
         ### INSERT DATA ###
         ################### */
     const posta = [
-        { kraj: 'Maribor', stevilka: '2000' },
         { kraj: 'Ljubljana', stevilka: '1000' },
+        { kraj: 'Maribor', stevilka: '2000' },
         { kraj: 'Celje', stevilka: '3000' },
-        { kraj: 'Koper', stevilka: '6000' }
+        { kraj: 'Kranj', stevilka: '4000' },
+        { kraj: 'Nova Gorica', stevilka: '5000' },
+        { kraj: 'Koper', stevilka: '6000' },
+        { kraj: 'Novo mesto', stevilka: '8000' },
+        { kraj: 'Murska Sobota', stevilka: '9000' }
     ]
     await knex('Posta').insert(posta)
         .then(() => console.log("Data inserted: Posta"))
@@ -210,32 +214,95 @@ async function create_database() {
         { ulica: 'Koroška cesta', stevilka: '46', idPosta: 1 },
         { ulica: 'Večna pot ', stevilka: '113', idPosta: 2 },
         { ulica: 'Titov trg', stevilka: '20a', idPosta: 3 },
-        { ulica: 'MNa Loko', stevilka: '2', idPosta: 4 },
+        { ulica: 'Na Loko', stevilka: '2', idPosta: 4 },
+        { ulica: 'Vrtna ulica', stevilka: '19', idPosta: 8 },
+        { ulica: 'Trubarjeva ulica', stevilka: '1', idPosta: 3 },
+        { ulica: 'Prečna ulica', stevilka: '13', idPosta: 2 },
+        { ulica: 'Kajuhova ulica', stevilka: '28', idPosta: 5 },
+        { ulica: 'Mladinska ulica', stevilka: '43', idPosta: 6 },
+        { ulica: 'Šolska ulica', stevilka: '19', idPosta: 7 },
     ]
     await knex('Naslov').insert(naslov)
         .then(() => console.log("Data inserted: Naslov"))
         .catch((err) => { console.log(err); throw err });
 
     const uporabnik = [
+        //Stranke:
         { ime: 'Janez', priimek: 'Novak', email: 'janez.novak@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 1 },
         { ime: 'Marko', priimek: 'Horvat', email: 'marko.horvat@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 4 },
         { ime: 'Irena', priimek: 'Kranjc', email: 'irena.kranjc@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2 },
         { ime: 'Barbara', priimek: 'Potocnik', email: 'barbara.potocnik@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3 },
+        { ime: 'Aleš', priimek: 'Kovačič', email: 'ales.kovacic@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 7 },
+        { ime: 'Nataša', priimek: 'Kovač', email: 'natasa.kovac@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5 },
+        { ime: 'Rok', priimek: 'Mlakar', email: 'rok.mlakar@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 8 },
+        { ime: 'Vesna', priimek: 'Kralj', email: 'vesna.kralj@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 4 },
+        { ime: 'Miha', priimek: 'Petek', email: 'miha.petek@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 6 },
+        { ime: 'Majda', priimek: 'Medved', email: 'majda.medved@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 1 },
+        { ime: 'Andrej', priimek: 'Cerar', email: 'andrej.cerar@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5},
+        { ime: 'Katarina', priimek: 'Kokalj', email: 'katarina.kokalj@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3 },
+        { ime: 'Ivan', priimek: 'Lešnik', email: 'ivan.lesnik@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 4 },
+        { ime: 'Martina', priimek: 'Kolenc', email: 'martina.kolenc@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 8 },
+        { ime: 'Anton', priimek: 'Jug', email: 'anton.jug@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2 },
+        //Podjetja
         {
             ime: 'Luka', priimek: 'Kos', email: 'prevozi123@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2,
-            naziv_podjetja: 'Prevozi123', davcna: 985673455, zacetek_delovanja: '2013-01-16', uspesnost_poslovanja: "EBITDA,ROA "
+            naziv_podjetja: 'Prevozi123', davcna: 98567345, zacetek_delovanja: '2013-01-16', uspesnost_poslovanja: "EBITDA,ROA"
         },
         {
             ime: 'Tomaz', priimek: 'Bizjak', email: 'mi.vozimo@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 1,
-            naziv_podjetja: 'Mi vozimo', davcna: 985673455, zacetek_delovanja: '2015-11-06', uspesnost_poslovanja: "ROE, ROR, EVA"
+            naziv_podjetja: 'Mi vozimo', davcna: 98567355, zacetek_delovanja: '2015-11-06', uspesnost_poslovanja: "ROE, ROR, EVA"
         },
         {
             ime: 'Petra', priimek: 'Kotnik', email: 'prevoz.nudim@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3,
-            naziv_podjetja: 'Prevoz nudim', davcna: 985673455, zacetek_delovanja: '2020-09-14', uspesnost_poslovanja: "EBITDA, EVA, ROR"
+            naziv_podjetja: 'Prevoz nudim', davcna: 98573455, zacetek_delovanja: '2020-09-14', uspesnost_poslovanja: "EBITDA, EVA, ROR"
         },
         {
-            ime: 'Eva', priimek: 'Oblak', email: 'smrtnik.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 4,
-            naziv_podjetja: 'Smrtnik prevozi', davcna: 985673455, zacetek_delovanja: '2019-08-30', uspesnost_poslovanja: "EBITDA, ROA, EVA"
+            ime: 'Eva', priimek: 'Zupanc', email: 'smrtnik.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 4,
+            naziv_podjetja: 'Smrtnik prevozi', davcna: 95673455, zacetek_delovanja: '2019-08-30', uspesnost_poslovanja: "EBITDA, ROA, EVA"
+        },
+        {
+            ime: 'Matjaž', priimek: 'Rupnik', email: 'najdi.prevoz@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 7,
+            naziv_podjetja: 'Najdi prevoz', davcna: 85673455, zacetek_delovanja: '2014-01-03', uspesnost_poslovanja: "EBITDA, ROA, EVA"
+        },
+        {
+            ime: 'Urška', priimek: 'Lesjak', email: 'lesjak.nudim@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 2,
+            naziv_podjetja: 'Ponudba prevoza Lesjak', davcna: 98567455, zacetek_delovanja: '2011-08-11', uspesnost_poslovanja: "EBITDA,ROA "
+        },
+        {
+            ime: 'Boris', priimek: 'Pušnik', email: 'prevoznistvo.pusnik@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 8,
+            naziv_podjetja: 'Prevozništvo Pušnik', davcna: 98673455, zacetek_delovanja: '2001-03-20', uspesnost_poslovanja: "ROE, ROR, EVA"
+        },
+        {
+            ime: 'Špela', priimek: 'Logar', email: 'logar.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 6,
+            naziv_podjetja: 'Prevozno podjetje Logar', davcna: 985673455, zacetek_delovanja: '2012-01-02', uspesnost_poslovanja: "EBITDA, ROA, EVA"
+        },
+        {
+            ime: 'Simon', priimek: 'Jelen', email: 'prevozništvo.simon@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5,
+            naziv_podjetja: 'Prevozništvo Simon', davcna: 98563425, zacetek_delovanja: '2017-05-01', uspesnost_poslovanja: "EBITDA,ROA "
+        },
+        {
+            ime: 'Vida', priimek: 'Hren', email: 'hren.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 1,
+            naziv_podjetja: 'Hren prevozi', davcna: 985653125, zacetek_delovanja: '2014-11-27', uspesnost_poslovanja: "ROE, ROR, EVA"
+        },
+        {
+            ime: 'Rok', priimek: 'Primožič', email: 'primozic.logistics@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3,
+            naziv_podjetja: 'Primožič logistics', davcna: 17652348, zacetek_delovanja: '2007-12-31', uspesnost_poslovanja: "EBITDA, ROA, EVA"
+        },
+        {
+            ime: 'Helena', priimek: 'Kocjančič', email: 'prevozi.koci@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 8,
+            naziv_podjetja: 'Prevozi Koci', davcna: 96528375, zacetek_delovanja: '2018-02-21', uspesnost_poslovanja: "EBITDA,ROA "
+        },
+        {
+            ime: 'Gregor', priimek: 'Ribič', email: 'riba.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3,
+            naziv_podjetja: 'Prevozi in storitve Riba', davcna: 91735824, zacetek_delovanja: '2009-09-15', uspesnost_poslovanja: "EBITDA, ROA, EVA"
+        },
+        {
+            ime: 'Dragica', priimek: 'Fras', email: 'avtoprevoznistvo.fras@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 6,
+            naziv_podjetja: 'Avtoprevoznistvo Fras', davcna: 54217652, zacetek_delovanja: '1999-05-12', uspesnost_poslovanja: "EBITDA,ROA "
+        },
+        {
+            ime: 'Jure', priimek: 'Dolinar', email: 'jurcek.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5,
+            naziv_podjetja: 'Jurček prevozi', davcna: 76513428, zacetek_delovanja: '2000-06-19', uspesnost_poslovanja: "ROE, ROR, EVA"
         }
     ]
     await knex('Uporabnik').insert(uporabnik)
