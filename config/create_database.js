@@ -571,10 +571,21 @@ async function create_database() {
 
 
     const cenik = [
-        { cena_na_km: 2.5, datum_od: "2019-08-30", idVozilo: 1 },
-        { cena_na_km: 4.5, datum_od: "2019-08-30", idVozilo: 2 },
-        { cena_na_km: 1.5, datum_od: "2019-08-30", idVozilo: 3 },
-        { cena_na_km: 2.2, datum_od: "2019-08-30", idVozilo: 4 },
+        { cena_na_km: 2.5, datum_od: "2020-08-30", idVozilo: 1 },
+        { cena_na_km: 4.5, datum_od: "2019-01-20", idVozilo: 2 },
+        { cena_na_km: 1.5, datum_od: "2015-04-28", idVozilo: 3 },
+        { cena_na_km: 2.2, datum_od: "2012-08-04", idVozilo: 4 },
+        { cena_na_km: 1.2, datum_od: "2011-06-08", idVozilo: 5 },
+        { cena_na_km: 3.2, datum_od: "2019-11-04", idVozilo: 6 },
+        { cena_na_km: 2.6, datum_od: "2014-08-08", idVozilo: 7 },
+        { cena_na_km: 2.1, datum_od: "2016-08-28", idVozilo: 8 },
+        { cena_na_km: 3.5, datum_od: "2017-12-21", idVozilo: 9 },
+        { cena_na_km: 1.2, datum_od: "2012-02-18", idVozilo: 10 },
+        { cena_na_km: 1.8, datum_od: "2017-05-17", idVozilo: 11 },
+        { cena_na_km: 2.6, datum_od: "2018-07-15", idVozilo: 12 },
+        { cena_na_km: 3.2, datum_od: "2014-09-14", idVozilo: 13 },
+        { cena_na_km: 1.7, datum_od: "2011-10-02", idVozilo: 14 },
+        { cena_na_km: 1.9, datum_od: "2012-04-07", idVozilo: 15 }
     ]
     await knex('Cenik').insert(cenik)
         .then(() => console.log("Data inserted: Cenik"))
