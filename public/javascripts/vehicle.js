@@ -188,7 +188,7 @@ function prenosPodatkov(id) {
                 $("#maks_dolzina_tovora-uredi").val(vozilo.maks_dolzina_tovora);
                 $("#maks_visina_tovora-uredi").val(vozilo.maks_visina_tovora);
                 $("#maks_sirina_tovora-uredi").val(vozilo.maks_sirina_tovora);
-                $("#cena-uredi").val(vozilo.cena_na_km);
+                $("#cena_na_km-uredi").val(vozilo.cena_na_km);
                 $("#model-uredi").val(vozilo.model);
                 M.updateTextFields();
                 $('select').formSelect();
