@@ -412,7 +412,7 @@ async function create_database() {
             idTip_vozila: 1,
             idZnamka: 10,
             idUporabnik: 19,
-            slika: "trago.jpeg"
+            slika: "trago.jpg"
         },
         {
             letnik: "2013",
@@ -442,7 +442,7 @@ async function create_database() {
             idTip_vozila: 1,
             idZnamka: 5,
             idUporabnik: 21,
-            slika: "zafira.jpeg"
+            slika: "zafira.jpg"
         },
         {
             letnik: "2019",
@@ -457,7 +457,7 @@ async function create_database() {
             idTip_vozila: 3,
             idZnamka: 6,
             idUporabnik: 22,
-            slika: "jumper.jpeg"
+            slika: "jumper.jpg"
         },
         {
             letnik: "2018",
@@ -472,7 +472,7 @@ async function create_database() {
             idTip_vozila: 2,
             idZnamka: 7,
             idUporabnik: 23,
-            slika: "FE.jpeg"
+            slika: "FE.jpg"
         },
         {
             letnik: "2015",
@@ -487,7 +487,7 @@ async function create_database() {
             idTip_vozila: 3,
             idZnamka: 8,
             idUporabnik: 24,
-            slika: "scania.jpeg"
+            slika: "scania.jpg"
         },
         {
             letnik: "2017",
@@ -502,7 +502,7 @@ async function create_database() {
             idTip_vozila: 2,
             idZnamka: 9,
             idUporabnik: 25,
-            slika: "trakker.jpeg"
+            slika: "trakker.jpg"
         },
         {
             letnik: "2019",
@@ -517,7 +517,7 @@ async function create_database() {
             idTip_vozila: 3,
             idZnamka: 1,
             idUporabnik: 26,
-            slika: "atego.jpeg"
+            slika: "atego.jpg"
         },
         {
             letnik: "2018",
@@ -532,7 +532,7 @@ async function create_database() {
             idTip_vozila: 3,
             idZnamka: 2,
             idUporabnik: 29,
-            slika: "tgm.jpeg"
+            slika: "tgm.jpg"
         },
         {
             letnik: "2008",
@@ -547,7 +547,7 @@ async function create_database() {
             idTip_vozila: 3,
             idZnamka: 4,
             idUporabnik: 26,
-            slika: "t380.jpeg"
+            slika: "t380.jpg"
         },
         {
             letnik: "2010",
@@ -562,7 +562,7 @@ async function create_database() {
             idTip_vozila: 4,
             idZnamka: 7,
             idUporabnik: 28,
-            slika: "volvo.jpeg"
+            slika: "volvo.jpg"
         }
     ]
     await knex('Vozilo').insert(vozilo)
