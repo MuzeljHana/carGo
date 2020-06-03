@@ -328,7 +328,14 @@ async function create_database() {
         { naziv: 'Mercedes' },
         { naziv: 'MAN' },
         { naziv: 'Volkswagen' },
-        { naziv: 'Renault' }
+        { naziv: 'Renault' },
+        { naziv: 'Opel' },
+        { naziv: 'Citroen' },
+        { naziv: 'Volvo' },
+        { naziv: 'Scania' },
+        { naziv: 'Iveco' },
+        { naziv: 'Hyundai' }
+
     ]
     await knex('Znamka').insert(znamka)
         .then(() => console.log("Data inserted: Znamka"))
@@ -347,7 +354,7 @@ async function create_database() {
             maks_st_palet: 2,
             idTip_vozila: 1,
             idZnamka: 3,
-            idUporabnik: 7,
+            idUporabnik: 16,
             slika: "transporter.jpg"
         },
         {
@@ -359,7 +366,7 @@ async function create_database() {
             maks_volumen_tovora: 200,
             idTip_vozila: 2,
             idZnamka: 4,
-            idUporabnik: 6,
+            idUporabnik: 16,
             slika: "t_high.jpg"
         },
         {
@@ -374,7 +381,7 @@ async function create_database() {
             maks_st_palet: 8,
             idTip_vozila: 3,
             idZnamka: 1,
-            idUporabnik: 5,
+            idUporabnik: 17,
             slika: "actros.jpg"
         },
         {
@@ -389,8 +396,173 @@ async function create_database() {
             maks_st_palet: 5,
             idTip_vozila: 3,
             idZnamka: 2,
-            idUporabnik: 5,
+            idUporabnik: 18,
             slika: "tgx.jpg"
+        },
+        {
+            letnik: "2013",
+            registerska: 'CE H5-3R1',
+            model: "Trago",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 1,
+            idZnamka: 10,
+            idUporabnik: 19,
+            slika: "trago.jpeg"
+        },
+        {
+            letnik: "2013",
+            registerska: 'KR EO-523',
+            model: "Econic",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 4,
+            idZnamka: 1,
+            idUporabnik: 20,
+            slika: "Econic.jpeg"
+        },
+        {
+            letnik: "2019",
+            registerska: 'MS OL-241',
+            model: "Zafira",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 1,
+            idZnamka: 5,
+            idUporabnik: 21,
+            slika: "zafira.jpeg"
+        },
+        {
+            letnik: "2019",
+            registerska: 'LJ AO-130',
+            model: "Jumper",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 3,
+            idZnamka: 6,
+            idUporabnik: 22,
+            slika: "jumper.jpeg"
+        },
+        {
+            letnik: "2018",
+            registerska: 'KO LA-351',
+            model: "Fe",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 2,
+            idZnamka: 7,
+            idUporabnik: 23,
+            slika: "FE.jpeg"
+        },
+        {
+            letnik: "2015",
+            registerska: 'NM KA-345',
+            model: "S540",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 3,
+            idZnamka: 8,
+            idUporabnik: 24,
+            slika: "scania.jpeg"
+        },
+        {
+            letnik: "2017",
+            registerska: 'CE PR-912',
+            model: "Trakker",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 2,
+            idZnamka: 9,
+            idUporabnik: 25,
+            slika: "trakker.jpeg"
+        },
+        {
+            letnik: "2019",
+            registerska: 'MB ZA-741',
+            model: "Atego",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 3,
+            idZnamka: 1,
+            idUporabnik: 26,
+            slika: "atego.jpeg"
+        },
+        {
+            letnik: "2018",
+            registerska: 'LJ KA-271',
+            model: "TGM",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 3,
+            idZnamka: 2,
+            idUporabnik: 29,
+            slika: "tgm.jpeg"
+        },
+        {
+            letnik: "2008",
+            registerska: 'NG ZA-141',
+            model: "T380",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 3,
+            idZnamka: 4,
+            idUporabnik: 26,
+            slika: "t380.jpeg"
+        },
+        {
+            letnik: "2010",
+            registerska: 'NG AP-121',
+            model: "FH16",
+            maks_teza_tovora: 3500,
+            potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
+            maks_dolzina_tovora: 2000,
+            maks_sirina_tovora: 1500,
+            maks_visina_tovora: 1800,
+            maks_st_palet: 2,
+            idTip_vozila: 4,
+            idZnamka: 7,
+            idUporabnik: 28,
+            slika: "volvo.jpeg"
         }
     ]
     await knex('Vozilo').insert(vozilo)
