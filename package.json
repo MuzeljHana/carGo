@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.1.7-alpha.3",
     "express-session": "^1.17.1",
+    "html2canvas": "^1.0.0-rc.5",
     "knex": "^0.21.1",
     "mysql": "^2.18.1",
     "nunjucks": "^3.2.1",
