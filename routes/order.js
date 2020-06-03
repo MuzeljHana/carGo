@@ -277,7 +277,7 @@ router.post('/', auth, async (req, res, next) => {
         data.teza_palet = req.body.teza_palete;
     }
 
-    knex.into('Ponudba as p')
+    knex.into('Ponudba')
         .insert([data])
         .then((id) => {
             if (req.body.izdelki) {

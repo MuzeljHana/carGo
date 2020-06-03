@@ -308,14 +308,14 @@ function getCardIskalec(ponudba) {
                 <h5>Status ponudbe: ` + status + `</h5>
             </div>
         </div>
-        <div class="row">
+        <div class="row" data-html2canvas-ignore="true">
             <div class="input-field col m3 offset-m7 s7">
                 <select id="formatChoice">
                     <option value="pdf" selected>PDF datoteka</option>
                     <option value="txt">Tekstovna datoteka</option>
                 </select>
             </div>
-            <div class="input-field col m2 s5">
+            <div class="input-field col m2 s5" data-html2canvas-ignore="true">
                 <a class="waves-effect waves-light btn"
                     style="text-transform: none;" onclick="exportConfirmation(${ponudba.id})">Izvoz potrdila</a>
             </div>
@@ -351,7 +351,7 @@ async function exportConfirmation(id) {
     switch (choice) {
         case "txt":
             content = "Podatki o naročilu\n\nStatus naročila: " + ponudba.status + "\nVozilo: " +
-                ponudba.vozilo.znamka + " " + ponudba.vozilo.model + " " + "\nPrice: " + ponudba.vozilo.cena_na_km +
+                ponudba.vozilo.znamka + " " + ponudba.vozilo.model + " " + "\nCena: " + ponudba.vozilo.cena_na_km +
                 "\nDatum nalaganja: " + datum_full + "\nDatum izvoza: " + datum;
 
             switch (ponudba.tip_tovora) {
@@ -386,10 +386,16 @@ async function exportConfirmation(id) {
             document.body.removeChild(element);
             break;
         case "pdf":
-            var doc = new jsPDF();
-            doc.setFont("Times", "Roman");
-            doc.fromHTML($("#orderCard").get(0), 20, 20);
-            doc.save("Izvoz naročila.pdf");
+            let doc = new jsPDF();
+            let orderCard = $('#orderCard');
+
+            html2canvas(orderCard).then(function(canvas) {
+                document.body.appendChild(canvas);
+                let imgData = canvas.toDataURL('image/png');
+                doc.addImage(imgData, 'PNG', 0, 0);
+                doc.save('Izvoz naročila.pdf');
+                document.body.removeChild(canvas);
+            });
             break;
     }
 }
