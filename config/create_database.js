@@ -672,7 +672,7 @@ async function create_database() {
         { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 3 },
         { teza: 2, dolzina: 20, visina: 30, sirina: 20, kolicina: 3, idPonudba: 4 },
         { teza: 6, dolzina: 60, visina: 30, sirina: 20, kolicina: 10, idPonudba: 4 },
-        { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 4 }
+        { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 4 },
         { teza: 2, dolzina: 20, visina: 30, sirina: 20, kolicina: 3, idPonudba: 3},
         { teza: 6, dolzina: 60, visina: 30, sirina: 10, kolicina: 10, idPonudba: 3},
         { teza: 4, dolzina: 10, visina: 60, sirina: 20, kolicina: 12, idPonudba: 3},
