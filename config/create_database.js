@@ -571,10 +571,10 @@ async function create_database() {
 
 
     const cenik = [
-        { cena_na_km: 2.5, datum_od: "2020-08-30", idVozilo: 1 },
-        { cena_na_km: 4.5, datum_od: "2019-01-20", idVozilo: 2 },
-        { cena_na_km: 1.5, datum_od: "2015-04-28", idVozilo: 3 },
-        { cena_na_km: 2.2, datum_od: "2012-08-04", idVozilo: 4 },
+        { cena_na_km: 2.5, datum_od: "2019-08-30", idVozilo: 1 },
+        { cena_na_km: 4.5, datum_od: "2019-08-30", idVozilo: 2 },
+        { cena_na_km: 1.5, datum_od: "2019-08-30", idVozilo: 3 },
+        { cena_na_km: 2.2, datum_od: "2019-08-30", idVozilo: 4 },
         { cena_na_km: 1.2, datum_od: "2011-06-08", idVozilo: 5 },
         { cena_na_km: 3.2, datum_od: "2019-11-04", idVozilo: 6 },
         { cena_na_km: 2.6, datum_od: "2014-08-08", idVozilo: 7 },
