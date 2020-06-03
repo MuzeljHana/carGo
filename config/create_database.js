@@ -221,6 +221,11 @@ async function create_database() {
         { ulica: 'Kajuhova ulica', stevilka: '28', idPosta: 5 },
         { ulica: 'Mladinska ulica', stevilka: '43', idPosta: 6 },
         { ulica: 'Šolska ulica', stevilka: '19', idPosta: 7 },
+        { ulica: 'Erjavčeva ulica', stevilka: '5', idPosta: 5 },
+        { ulica: 'Šmarješka cesta', stevilka: '42', idPosta: 7 },
+        { ulica: 'Obzidna ulica', stevilka: '2', idPosta: 6 },
+        { ulica: 'Čopova ulica', stevilka: '31', idPosta: 3 },
+        { ulica: 'Poštna ulica', stevilka: '53', idPosta: 4 },
     ]
     await knex('Naslov').insert(naslov)
         .then(() => console.log("Data inserted: Naslov"))
