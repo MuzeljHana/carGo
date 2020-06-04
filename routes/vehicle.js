@@ -44,7 +44,7 @@ router.post('/search', (req, res, next) => {
             query.andWhere("u.naziv_podjetja", "like", "%" + req.body.dodatno.prevoznik.trim() + "%");
         }
         if (req.body.dodatno.letnik) {
-            query.andWhere("v.letnik", "<=", req.body.dodatno.letnik);
+            query.andWhere("v.letnik", ">=", req.body.dodatno.letnik);
         }
         if (req.body.dodatno.tip) {
             query.andWhere("t.naziv", "=", req.body.dodatno.tip);

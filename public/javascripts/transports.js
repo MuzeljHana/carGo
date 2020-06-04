@@ -36,7 +36,7 @@ function genOmejitve() {
             omejitve.append(getPill("Prevoznik: " + search_data.dodatno.prevoznik));
         }
         if (search_data.dodatno.letnik) {
-            omejitve.append(getPill("Maksimalen letnik vozila: " + search_data.dodatno.letnik));
+            omejitve.append(getPill("Minimalen letnik vozila: " + search_data.dodatno.letnik));
         }
         if (search_data.dodatno.tip) {
             omejitve.append(getPill("Tip vozila: " + search_data.dodatno.tip));
