@@ -310,7 +310,7 @@ function getCardIskalec(ponudba) {
         </div>
         <div class="row" data-html2canvas-ignore="true">
             <div class="input-field col m3 offset-m7 s7">
-                <select id="formatChoice">
+                <select id="formatChoice${ponudba.id}">
                     <option value="pdf" selected>PDF datoteka</option>
                     <option value="txt">Tekstovna datoteka</option>
                 </select>
@@ -346,7 +346,7 @@ async function exportConfirmation(id) {
     let datum_full = new Date(ponudba.cas_nalozitve);
     let datum = datum_full.getHours() + ":" + datum_full.getMinutes() + " " + datum_full.getDate() + "." + datum_full.getMonth() + "." + datum_full.getFullYear();
 
-    var choice = document.getElementById("formatChoice").value;
+    var choice = document.getElementById('formatChoice'+id).value;
 
     switch (choice) {
         case "txt":
@@ -370,7 +370,7 @@ async function exportConfirmation(id) {
                     content += "\n\nTovor\nTeža: " + teza + "\nVolumen: " + volumen;
                     break;
                 case "razsut tovor":
-                    content += "\n\nTovor\nVolumen: " + izdelek.volumen_tovora + "\nTeža: " + izdelek.teza_tovora;
+                    content += "\n\nTovor\nVolumen: " + ponudba.volumen_tovora + "\nTeža: " + ponudba.teza_tovora;
                     break;
             }
 
