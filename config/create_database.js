@@ -303,7 +303,7 @@ async function create_database() {
         },
         {
             ime: 'Dragica', priimek: 'Fras', email: 'avtoprevoznistvo.fras@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 6,
-            naziv_podjetja: 'Avtoprevoznistvo Fras', davcna: 54217652, zacetek_delovanja: '1999-05-12', uspesnost_poslovanja: "EBITDA,ROA "
+            naziv_podjetja: 'Avtoprevozništvo Fras', davcna: 54217652, zacetek_delovanja: '1999-05-12', uspesnost_poslovanja: "EBITDA,ROA "
         },
         {
             ime: 'Jure', priimek: 'Dolinar', email: 'jurcek.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5,
