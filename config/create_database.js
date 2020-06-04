@@ -364,7 +364,7 @@ async function create_database() {
             maks_teza_tovora: 3500,
             potrdilo_izpravnosti: "Potrdilo o tehničnem pregledu vozila",
             maks_volumen_tovora: 200,
-            idTip_vozila: 2,
+            idTip_vozila: 3,
             idZnamka: 4,
             idUporabnik: 16,
             slika: "t_high.jpg"
