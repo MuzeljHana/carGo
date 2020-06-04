@@ -273,7 +273,7 @@ function getCardIskalec(ponudba) {
             break;
     }
 
-    return `<div class="row" id="orderCard" style="padding: 0 15px 0 15px;">
+    return `<div class="row" id="orderCard${ponudba.id}" style="padding: 0 15px 0 15px;">
     <div class="col s12 white rounded" style="padding: 15px;">
         <div class="row">
             <div class="col s10">
@@ -386,13 +386,17 @@ async function exportConfirmation(id) {
             document.body.removeChild(element);
             break;
         case "pdf":
-            let doc = new jsPDF();
-            let orderCard = $('#orderCard');
+            let doc = new jsPDF('p', 'mm');
+            let orderCard = $('#orderCard'+id);
 
-            html2canvas(orderCard).then(function(canvas) {
+            html2canvas(orderCard, {
+                scale: 0.5,
+                height: 500,
+                width: 900
+            }).then(function(canvas) {
                 document.body.appendChild(canvas);
                 let imgData = canvas.toDataURL('image/png');
-                doc.addImage(imgData, 'PNG', 0, 0);
+                doc.addImage(imgData, 'PNG', 0, 0, 200, 111);
                 doc.save('Izvoz naročila.pdf');
                 document.body.removeChild(canvas);
             });
