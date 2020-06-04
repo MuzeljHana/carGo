@@ -9,11 +9,27 @@ $.ajax({
             let vehicle_id = localStorage.getItem("details_vehicle");
             let vehicle = data.find((veh) => { return veh.id == Number(vehicle_id); });
 
+            let tip;
+            switch (vehicle.tip_vozila) {
+                case "kombi":
+                    tip = "Dostavni kombi";
+                    break;
+                case "tovornjak razsut tovor":
+                    tip = "Tovornjak za prevoz razsutega tovora";
+                    break;
+                case "tovornjak blago":
+                    tip = "Tovornjak za prevoz blaga";
+                    break;
+                case "izredni prevoz":
+                    tip = "Izredni prevoz";
+                    break;
+            }
+
             $("#img").attr("src", `/vehicle/${vehicle.id}/image`);
             $("#podjetje").text(vehicle.naziv_podjetja);
             $("#vozilo").text(`${vehicle.znamka} ${vehicle.model}`);
             $("#letnik").text(vehicle.letnik);
-            $("#tip").text(vehicle.tip_vozila);
+            $("#tip").text(tip);
             $("#cena_na_km").text(vehicle.cena_na_km);
 
             let omejitve_vozila = $("#omejitve");
