@@ -65,6 +65,21 @@ $.ajax({
 
 
 function getCard(vozilo) {
+    let tip;
+    switch (vozilo.tip_vozila) {
+        case "kombi":
+            tip = "Dostavni kombi";
+            break;
+        case "tovornjak razsut tovor":
+            tip = "Tovornjak za prevoz razsutega tovora";
+            break;
+        case "tovornjak blago":
+            tip = "Tovornjak za prevoz blaga";
+            break;
+        case "izredni prevoz":
+            tip = "Izredni prevoz";
+            break;
+    }
     return `<a href="#!" onclick="details(` + vozilo.id + `)" class="grey-text text-darken-4">
                 <div class="col s12 grey lighten-3 rounded" style="padding: 15px; margin-top: 10px;">
                     <div class="row" style="margin-bottom: 0;">
@@ -85,7 +100,7 @@ function getCard(vozilo) {
                                     <span>Vozilo: ` + vozilo.znamka + " " + vozilo.model + `</span>
                                 </div>
                                 <div class="col m4 s4">
-                                    <span>Tip vozila: ` + vozilo.tip_vozila + `</span>
+                                    <span>Tip vozila: ` + tip + `</span>
                                 </div>
                             </div>
                         </div>
