@@ -280,37 +280,7 @@ async function create_database() {
         {
             ime: 'Špela', priimek: 'Logar', email: 'logar.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 6,
             naziv_podjetja: 'Prevozno podjetje Logar', davcna: 985673455, zacetek_delovanja: '2012-01-02', uspesnost_poslovanja: "EBITDA, ROA, EVA"
-        },
-        /* Odvečna podjetja, za kasneje če še dodamo več vozil
-        {
-            ime: 'Simon', priimek: 'Jelen', email: 'prevozništvo.simon@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5,
-            naziv_podjetja: 'Prevozništvo Simon', davcna: 98563425, zacetek_delovanja: '2017-05-01', uspesnost_poslovanja: "EBITDA,ROA "
-        },
-        {
-            ime: 'Vida', priimek: 'Hren', email: 'hren.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 1,
-            naziv_podjetja: 'Hren prevozi', davcna: 985653125, zacetek_delovanja: '2014-11-27', uspesnost_poslovanja: "ROE, ROR, EVA"
-        },
-        {
-            ime: 'Rok', priimek: 'Primožič', email: 'primozic.logistics@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3,
-            naziv_podjetja: 'Primožič logistics', davcna: 17652348, zacetek_delovanja: '2007-12-31', uspesnost_poslovanja: "EBITDA, ROA, EVA"
-        },
-        {
-            ime: 'Helena', priimek: 'Kocjančič', email: 'prevozi.koci@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 8,
-            naziv_podjetja: 'Prevozi Koci', davcna: 96528375, zacetek_delovanja: '2018-02-21', uspesnost_poslovanja: "EBITDA,ROA "
-        },
-        {
-            ime: 'Gregor', priimek: 'Ribič', email: 'riba.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 3,
-            naziv_podjetja: 'Prevozi in storitve Riba', davcna: 91735824, zacetek_delovanja: '2009-09-15', uspesnost_poslovanja: "EBITDA, ROA, EVA"
-        },
-        {
-            ime: 'Dragica', priimek: 'Fras', email: 'avtoprevoznistvo.fras@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 6,
-            naziv_podjetja: 'Avtoprevozništvo Fras', davcna: 54217652, zacetek_delovanja: '1999-05-12', uspesnost_poslovanja: "EBITDA,ROA "
-        },
-        {
-            ime: 'Jure', priimek: 'Dolinar', email: 'jurcek.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5,
-            naziv_podjetja: 'Jurček prevozi', davcna: 76513428, zacetek_delovanja: '2000-06-19', uspesnost_poslovanja: "ROE, ROR, EVA"
         }
-        */
     ]
     await knex('Uporabnik').insert(uporabnik)
         .then(() => console.log("Data inserted: Uporabnik"))
