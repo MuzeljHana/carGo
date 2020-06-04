@@ -409,7 +409,7 @@ async function create_database() {
             maks_sirina_tovora: 2000,
             maks_visina_tovora: 1900,
             maks_st_palet: 4,
-            idTip_vozila: 1,
+            idTip_vozila: 2,
             idZnamka: 10,
             idUporabnik: 19,
             slika: "trago.jpg"
