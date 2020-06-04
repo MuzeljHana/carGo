@@ -352,7 +352,7 @@ async function exportConfirmation(id) {
         case "txt":
             content = "Podatki o naročilu\n\nStatus naročila: " + ponudba.status + "\nVozilo: " +
                 ponudba.vozilo.znamka + " " + ponudba.vozilo.model + " " + "\nCena: " + ponudba.vozilo.cena_na_km +
-                "\nDatum nalaganja: " + datum_full + "\nDatum izvoza: " + datum;
+                "\nDatum nalaganja: " + datum_full;
 
             switch (ponudba.tip_tovora) {
                 case "palete":
