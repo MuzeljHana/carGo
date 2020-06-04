@@ -200,7 +200,7 @@ router.get('/:id', auth, (req, res, next) => {
                             "sirina",
                             "kolicina"
                         ])
-                        .join("Ponudba as p", { 'p.id': 'i.idPonudba' })
+                        .where({ "i.idPonudba": order.id })
                     order.izdelki = izdelki;
                 }
             }
