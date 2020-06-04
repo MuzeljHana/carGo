@@ -55,6 +55,7 @@ $("#edit").click(function () {
         }
     }).then((response) => {
         updateData();
+        window.scrollTo(0, 0);
     });
 });
 
