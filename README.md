@@ -2,7 +2,7 @@
 <img src="public/images/logo_black.png" alt="carGo" title="carGo logo" />
 
 [![NodeJS Version](https://img.shields.io/badge/node-%3E%3Dv12.16.3-blue)](https://nodejs.org/)
-[![Version](https://img.shields.io/badge/version-0.1.0-green)](https://gitlab.com/tadejlahovnik/carGo)
+[![Version](https://img.shields.io/badge/version-1.0.0-green)](https://gitlab.com/tadejlahovnik/carGo)
 [![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
 **_Cargo transportation ordering service_**
