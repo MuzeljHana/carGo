@@ -17,6 +17,45 @@ p {
     font-family: 'Roboto';
 }
 
+nav {
+    height: 8rem;
+}
+
+footer {
+    margin-top: 50px;
+}
+
+nav .sidenav-trigger {
+    margin: 40px 0 0 30px;
+}
+
+.nav-logo {
+    height: 65px;
+    margin: 30px 0 0 70px;
+}
+
+.nav-logo-mobile {
+    height: 65px;
+}
+
+.brand-logo {
+    height: inherit;
+}
+
+.user-view {
+    padding-top: 32px;
+}
+
+.nav-left {
+    height: inherit;
+    margin-left: 18rem;
+}
+
+.nav-right {
+    height: inherit;
+    margin-right: 4rem;
+}
+
 .btn-large {
     text-transform: none;
     border-radius: 50px;
@@ -60,14 +99,11 @@ p {
 
 .tabs .tab a:focus.active {
     color: #26a69a;
-    /*Custom Text Color While Active*/
     background-color: rgba(38, 166, 154, 0.2);
-    /*Custom Background Color While Active*/
 }
 
 .tabs .indicator {
     background-color: #26a69a;
-    /*Custom Color Of Indicator*/
 }
 
 .card-image {
@@ -75,4 +111,9 @@ p {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+#map {
+    width: 100%;
+    height: 50vh;
 }

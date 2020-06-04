@@ -45,7 +45,7 @@ function genOmejitve() {
 }
 
 function getPill(text) {
-    return '<div class="chip" style="font-family: Roboto;">' + text + '</div>'
+    return '<div class="chip normal-text">' + text + '</div>'
 }
 
 $.ajax({
