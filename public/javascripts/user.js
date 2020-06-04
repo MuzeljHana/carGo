@@ -56,6 +56,7 @@ $("#edit").click(function () {
     }).then((response) => {
         updateData();
         window.scrollTo(0, 0);
+        document.getElementById('staro_geslo').value = '';
     });
 });
 
