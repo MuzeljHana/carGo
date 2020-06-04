@@ -281,6 +281,7 @@ async function create_database() {
             ime: 'Špela', priimek: 'Logar', email: 'logar.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 6,
             naziv_podjetja: 'Prevozno podjetje Logar', davcna: 985673455, zacetek_delovanja: '2012-01-02', uspesnost_poslovanja: "EBITDA, ROA, EVA"
         },
+        /* Odvečna podjetja, za kasneje če še dodamo več vozil
         {
             ime: 'Simon', priimek: 'Jelen', email: 'prevozništvo.simon@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5,
             naziv_podjetja: 'Prevozništvo Simon', davcna: 98563425, zacetek_delovanja: '2017-05-01', uspesnost_poslovanja: "EBITDA,ROA "
@@ -309,6 +310,7 @@ async function create_database() {
             ime: 'Jure', priimek: 'Dolinar', email: 'jurcek.prevozi@mail.com', geslo: bcrypt.hashSync("test123", 10), idNaslov: 5,
             naziv_podjetja: 'Jurček prevozi', davcna: 76513428, zacetek_delovanja: '2000-06-19', uspesnost_poslovanja: "ROE, ROR, EVA"
         }
+        */
     ]
     await knex('Uporabnik').insert(uporabnik)
         .then(() => console.log("Data inserted: Uporabnik"))
@@ -486,7 +488,7 @@ async function create_database() {
             maks_st_palet: 5,
             idTip_vozila: 3,
             idZnamka: 8,
-            idUporabnik: 24,
+            idUporabnik: 16,
             slika: "scania.jpg"
         },
         {
@@ -501,7 +503,7 @@ async function create_database() {
             maks_st_palet: 0,
             idTip_vozila: 2,
             idZnamka: 9,
-            idUporabnik: 25,
+            idUporabnik: 16,
             slika: "trakker.jpg"
         },
         {
@@ -516,7 +518,7 @@ async function create_database() {
             maks_st_palet: 8,
             idTip_vozila: 3,
             idZnamka: 1,
-            idUporabnik: 26,
+            idUporabnik: 17,
             slika: "atego.jpg"
         },
         {
@@ -531,7 +533,7 @@ async function create_database() {
             maks_st_palet: 7,
             idTip_vozila: 3,
             idZnamka: 2,
-            idUporabnik: 29,
+            idUporabnik: 18,
             slika: "tgm.jpg"
         },
         {
@@ -546,7 +548,7 @@ async function create_database() {
             maks_st_palet: 6,
             idTip_vozila: 3,
             idZnamka: 4,
-            idUporabnik: 26,
+            idUporabnik: 18,
             slika: "t380.jpg"
         },
         {
@@ -561,7 +563,7 @@ async function create_database() {
             maks_st_palet: 0,
             idTip_vozila: 4,
             idZnamka: 7,
-            idUporabnik: 28,
+            idUporabnik: 16,
             slika: "volvo.jpg"
         }
     ]
