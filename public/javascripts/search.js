@@ -158,41 +158,41 @@ $("#dodaj").click(function () {
 });
 
 function odstrani(id) {
-    $("#card_" + id).remove();
+    $(`#card_${id}`).remove();
 }
 
 var cardCount = 0
 function getCard() {
     let id = cardCount++;
-    return `<div id="card_` + id + `" class="row white rounded" style="padding: 10px;">
+    return `<div id="card_${id}" class="row white rounded" style="padding: 10px;">
                 <div class="row">
                     <div class="col s4">
                         <h5 style="font-weight: bold;">Izdelek</h5>
                     </div>
                     <div class="col s1 right" style="margin-top: 10px;">
-                        <a onclick="odstrani(` + id + `)" class="a btn-flat right grey-text text-darken-4"><i class="material-icons">close</i></a>
+                        <a onclick="odstrani(${id})" class="a btn-flat right grey-text text-darken-4"><i class="material-icons">close</i></a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col m2 offset-m1 s4">
-                        <input id="visina` + id + `" type="number" min="1" value="1">
-                        <label for="visina` + id + `">Višina v cm</label>
+                        <input id="visina${id}" type="number" min="1" value="1">
+                        <label for="visina${id}">Višina v cm</label>
                     </div>
                     <div class="input-field col m2 s4">
-                        <input id="dolzina` + id + `" type="number" min="1" value="1">
-                        <label for="dolzina` + id + `">Dolžina v cm</label>
+                        <input id="dolzina${id}" type="number" min="1" value="1">
+                        <label for="dolzina${id}">Dolžina v cm</label>
                     </div>
                     <div class="input-field col m2 s4">
-                        <input id="sirina` + id + `" type="number" min="1" value="1">
-                        <label for="sirina` + id + `">Širina v cm</label>
+                        <input id="sirina${id}" type="number" min="1" value="1">
+                        <label for="sirina${id}">Širina v cm</label>
                     </div>
                     <div class="input-field col m2 offset-s2 s4">
-                        <input id="teza` + id + `" type="number" min="1" value="1">
-                        <label for="teza` + id + `">Teža v kg</label>
+                        <input id="teza${id}" type="number" min="1" value="1">
+                        <label for="teza${id}">Teža v kg</label>
                     </div>
                     <div class="input-field col m2 s4">
-                        <input id="kolicina` + id + `" type="number" min="1" value="1">
-                        <label for="kolicina` + id + `">Količina</label>
+                        <input id="kolicina${id}" type="number" min="1" value="1">
+                        <label for="kolicina${id}">Količina</label>
                     </div>
                 </div>
             </div>`

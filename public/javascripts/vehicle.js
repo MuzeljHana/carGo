@@ -92,78 +92,78 @@ $("#search").change(function () {
 });
 
 function getCard(vozilo) {
-    let zasedenost, aktivnost, cena = '';
-    if (vozilo.aktivno == 1) { aktivnost = 'da' } else aktivnost = 'ne';
-    if (vozilo.zasedeno == 1) { zasedenost = 'da' } else zasedenost = 'ne';
-    if (vozilo.cena_na_km) { cena = vozilo.cena_na_km } else cena = '/';
+    let zasedenost = (vozilo.zasedeno == 1) ? 'da' : 'ne';
+    let aktivnost = (vozilo.aktivno == 1) ? 'da' : 'ne';
+    let cena = (vozilo.cena_na_km) ? vozilo.cena_na_km : '/';
+    let checked = (vozilo.aktivno) ? 'checked="checked"' : "";
 
     return `<div class="row" style="padding: 0 15px 0 15px;">
-<div class="col s12 white rounded" style="padding: 15px;">
-    <div class="col s12 m4">
-        <div class="card-image rounded" style="background-image: url(/vehicle/` + vozilo.id + `/image);"></div>
+    <div class="col s12 white rounded" style="padding: 15px;">
+        <div class="col s12 m4">
+            <div class="card-image rounded" style="background-image: url(/vehicle/${vozilo.id}/image);"></div>
+        </div>
+        <div class="col s12 m8">
+            <div class="row">
+                <div class="col s10">
+                    <h4>${vozilo.znamka} ${vozilo.model} ${vozilo.letnik}</h4>
+                </div>
+                <div class="col s2" style="margin-top: 25px;">
+                    <a class="waves-effect waves-light btn-flat right" name="brisi" onclick="deleteVehicle(${vozilo.id})"><i
+                            class="material-icons">close</i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col m4 s12">
+                    <span>Registerska: ${vozilo.registerska}</span>
+                </div>
+                <div class="col m4 s12">
+                    <span id="aktivnost">Aktivnost: ${aktivnost}</span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Zaseden: ${zasedenost}</span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Teza: ${vozilo.maks_teza_tovora} kg</span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Palete: ${vozilo.maks_st_palet}</span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Volumen: ${vozilo.maks_volumen_tovora} m<sup>3</sup><span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Dolžina: ${vozilo.maks_dolzina_tovora} cm</span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Širina: ${vozilo.maks_sirina_tovora} cm</span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Višina: ${vozilo.maks_visina_tovora} cm<span></span></span>
+                </div>
+                <div class="col m4 s12">
+                    <span >Cena: <span id="trenutnaCena">${cena}</span> €/km</span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Tip vozila: ${vozilo.tip_vozila} </span>
+                </div>
+                <div class="col m4 s12">
+                    <span>Potrdilo izpravnosti: ${vozilo.potrdilo_izpravnosti} </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col m3 s6 left">
+                    <label>
+                        <input type="checkbox" class="filled-in left" onchange="editActive(this, ${vozilo.id})" ${checked}" />
+                        <span>Aktiven</span>
+                    </label>
+                </div>
+                <div class="col m3 s6 right">
+                    <a class="waves-effect waves-light btn-flat right modal-trigger"
+                        style="text-transform: none;" href="#modal2" onclick="prenosPodatkov(${vozilo.id})">Uredi</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col s12 m8">
-        <div class="row">
-            <div class="col s10">
-                <h4>`+ vozilo.znamka + ' ' + vozilo.model + ' ' + vozilo.letnik + `</h4>
-            </div>
-            <div class="col s2" style="margin-top: 25px;">
-                <a class="waves-effect waves-light btn-flat right" name="brisi" onclick="deleteVehicle(`+ vozilo.id + `)"><i
-                        class="material-icons">close</i></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col m4 s12">
-                <span>Registerska: ` + vozilo.registerska + `</span>
-            </div>
-            <div class="col m4 s12">
-                <span id="aktivnost">Aktivnost: ` + aktivnost + `</span>
-            </div>
-            <div class="col m4 s12">
-                <span>Zaseden: ` + zasedenost + `</span>
-            </div>
-            <div class="col m4 s12">
-                <span>Teza: ` + vozilo.maks_teza_tovora + ` kg</span>
-            </div>
-            <div class="col m4 s12">
-                <span>Palete: ` + vozilo.maks_st_palet + `</span>
-            </div>
-            <div class="col m4 s12">
-                <span>Volumen: ` + vozilo.maks_volumen_tovora + ` m<sup>3</sup><span>
-            </div>
-            <div class="col m4 s12">
-                <span>Dolžina: ` + vozilo.maks_dolzina_tovora + ` cm</span>
-            </div>
-            <div class="col m4 s12">
-                <span>Širina: ` + vozilo.maks_sirina_tovora + ` cm</span>
-            </div>
-            <div class="col m4 s12">
-                <span>Višina: ` + vozilo.maks_visina_tovora + ` cm<span></span></span>
-            </div>
-            <div class="col m4 s12">
-                <span >Cena: <span id="trenutnaCena">` + cena + `</span> €/km</span>
-            </div>
-            <div class="col m4 s12">
-                <span>Tip vozila: ` + vozilo.tip_vozila + ` </span>
-            </div>
-            <div class="col m4 s12">
-                <span>Potrdilo izpravnosti: ` + vozilo.potrdilo_izpravnosti + ` </span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col m3 s6 left">
-                <label>
-                    <input type="checkbox" class="filled-in left" onchange="editActive(this, ` + vozilo.id + `)" ` + ((vozilo.aktivno) ? 'checked="checked"' : "") + `" />
-                    <span>Aktiven</span>
-                </label>
-            </div>
-            <div class="col m3 s6 right">
-                <a class="waves-effect waves-light btn-flat right modal-trigger"
-                    style="text-transform: none;" href="#modal2" onclick="prenosPodatkov(` + vozilo.id + `)">Uredi</a>
-            </div>
-        </div>
-    </div>
-</div>
 </div>`;
 }
 

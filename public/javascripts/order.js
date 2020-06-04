@@ -58,7 +58,7 @@ $("#search").change(function () {
 function potrdi(id) {
     $.ajax({
         method: "put",
-        url: "/order/" + id + "/status/potrjeno",
+        url: `/order/${id}/status/potrjeno`,
         dataType: "json"
     })
         .done(function (data) {
@@ -71,7 +71,7 @@ function potrdi(id) {
 function zavrni(id) {
     $.ajax({
         method: "put",
-        url: "/order/" + id + "/status/zavrnjeno",
+        url: `/order/${id}/status/zavrnjeno`,
         dataType: "json"
     })
         .done(function (data) {
@@ -84,7 +84,7 @@ function zavrni(id) {
 function zakljuci(id) {
     $.ajax({
         method: "put",
-        url: "/order/" + id + "/status/koncano",
+        url: `/order/${id}/status/koncano`,
         dataType: "json"
     })
         .done(function (data) {
@@ -103,7 +103,7 @@ function getCardPonudnik(ponudba) {
         pripombe = `<div class="row">
             <div class="col s12">
                 <h5>Pripombe</h5>
-                <p>` + ponudba.pripombe + `</p>
+                <p>${ponudba.pripombe}</p>
             </div>
         </div>`
     }
@@ -115,13 +115,13 @@ function getCardPonudnik(ponudba) {
                     <span>Tip: Standardne palete</span>
                 </div>
                 <div class="col s12">
-                    <span>Število palet: ` + ponudba.st_palet + `</span>
+                    <span>Število palet: ${ponudba.st_palet}</span>
                 </div>
                 <div class="col s12">
-                    <span>Teža palete: ` + ponudba.teza_palet + ` kg</span>
+                    <span>Teža palete: ${ponudba.teza_palet} kg</span>
                 </div>
                 <div class="col s12">
-                    <span>Skupna teža: ` + (ponudba.teza_palet * ponudba.st_palet) + ` kg</span>
+                    <span>Skupna teža: ${(ponudba.teza_palet * ponudba.st_palet)} kg</span>
                 </div>`;
             break;
         case "posamezni izdelki":
@@ -135,10 +135,10 @@ function getCardPonudnik(ponudba) {
                     <span>Tip: Posamezni izdelki</span>
                 </div>
                 <div class="col s12">
-                    <span>Skupen volumen izdelkov: ` + volumen + ` cm<sup>3</sup></span>
+                    <span>Skupen volumen izdelkov: ${volumen} cm<sup>3</sup></span>
                 </div>
                 <div class="col s12">
-                    <span>Skupna teža izdelkov: ` + teza + ` kg</span>
+                    <span>Skupna teža izdelkov: ${teza} kg</span>
                 </div>`;
             break;
         case "razsut tovor":
@@ -146,21 +146,21 @@ function getCardPonudnik(ponudba) {
                     <span>Tip: Razsut tovor</span>
                 </div>
                 <div class="col s12">
-                    <span>Volumen: ` + ponudba.volumen_tovora + ` m<sup>3</sup></span>
+                    <span>Volumen: ${ponudba.volumen_tovora} m<sup>3</sup></span>
                 </div>
                 <div class="col s12">
-                    <span>Teža: ` + ponudba.teza_tovora + ` kg</span>
+                    <span>Teža: ${ponudba.teza_tovora} kg</span>
                 </div>`;
             break;
     }
 
     controls = `<div class="col s12 center-align">
-        <a onclick="potrdi(` + ponudba.id + `)" class="waves-effect waves-light btn">Potrdi</a>
-        <a onclick="zavrni(` + ponudba.id + `)" class="waves-effect waves-dark btn red">Zavrni</a>
+        <a onclick="potrdi(${ponudba.id})" class="waves-effect waves-light btn">Potrdi</a>
+        <a onclick="zavrni(${ponudba.id})" class="waves-effect waves-dark btn red">Zavrni</a>
     </div>`;
     if (ponudba.status == "potrjeno") {
         controls = `<div class="col s12 center-align">
-            <a onclick="zakljuci(` + ponudba.id + `)" class="waves-effect waves-light btn">Zaključi</a>
+            <a onclick="zakljuci(${ponudba.id})" class="waves-effect waves-light btn">Zaključi</a>
         </div>`
     }
 
@@ -168,7 +168,7 @@ function getCardPonudnik(ponudba) {
     <div class="col s12 white rounded" style="padding: 15px;">
         <div class="row">
             <div class="col s10">
-                <h4>` + ponudba.vozilo.znamka + ` ` + ponudba.vozilo.model + `</h4>
+                <h4>${ponudba.vozilo.znamka} ${ponudba.vozilo.model}</h4>
             </div>
         </div>
         <div class="row">
@@ -176,32 +176,32 @@ function getCardPonudnik(ponudba) {
                 <h5>Lokacija</h5>
                 <div class="row normal-text">
                     <div class="col s12">
-                        <span>Cena na km: ` + ponudba.vozilo.cena_na_km + `€</span>
+                        <span>Cena na km: ${ponudba.vozilo.cena_na_km}€</span>
                     </div>
                     <div class="col s12">
-                        <span>Naložišče: ` + ponudba.nalozisce.ulica + ` ` + ponudba.nalozisce.stevilka + `, ` + ponudba.nalozisce.posta + ` ` + ponudba.nalozisce.kraj + `</span>
+                        <span>Naložišče: ${ponudba.nalozisce.ulica} ${ponudba.nalozisce.stevilka}, ${ponudba.nalozisce.posta} ${ponudba.nalozisce.kraj}</span>
                     </div>
                     <div class="col s12">
-                        <span>Čas naložitve: ` + datum + `</span>
+                        <span>Čas naložitve: ${datum}</span>
                     </div>
                     <div class="col s12">
-                        <span>Dostava: ` + ponudba.dostava.ulica + ` ` + ponudba.dostava.stevilka + `, ` + ponudba.dostava.posta + ` ` + ponudba.dostava.kraj + `</span>
+                        <span>Dostava: ${ponudba.dostava.ulica} ${ponudba.dostava.stevilka}, ${ponudba.dostava.posta} ${ponudba.dostava.kraj}</span>
                     </div>
                 </div>
             </div>
             <div class="col m5 s12">
                 <h5>Tovor</h5>
-                <div class="row normal-text">` + tovor + `</div>
+                <div class="row normal-text">${tovor}</div>
             </div>
         </div>
-        ` + pripombe + `
+        ${pripombe}
         <div class="row">
             <div class="col s12">
-                <h5>Naročnik: ` + ponudba.ime + ` ` + ponudba.priimek + `</h5>
+                <h5>Naročnik: ${ponudba.ime} ${ponudba.priimek}</h5>
             </div>
         </div>
         <div class="row">
-            ` + controls + `
+            ${controls}
         </div>
     </div>
 </div>`;
@@ -234,13 +234,13 @@ function getCardIskalec(ponudba) {
                     <span>Tip: Standardne palete</span>
                 </div>
                 <div class="col s12">
-                    <span>Število palet: ` + ponudba.st_palet + `</span>
+                    <span>Število palet: ${ponudba.st_palet}</span>
                 </div>
                 <div class="col s12">
-                    <span>Teža palete: ` + ponudba.teza_palet + ` kg</span>
+                    <span>Teža palete: ${ponudba.teza_palet} kg</span>
                 </div>
                 <div class="col s12">
-                    <span>Skupna teža: ` + (ponudba.teza_palet * ponudba.st_palet) + ` kg</span>
+                    <span>Skupna teža: ${(ponudba.teza_palet * ponudba.st_palet)} kg</span>
                 </div>`;
             break;
         case "posamezni izdelki":
@@ -254,10 +254,10 @@ function getCardIskalec(ponudba) {
                     <span>Tip: Posamezni izdelki</span>
                 </div>
                 <div class="col s12">
-                    <span>Skupen volumen izdelkov: ` + volumen + ` cm<sup>3</sup></span>
+                    <span>Skupen volumen izdelkov: ${volumen} cm<sup>3</sup></span>
                 </div>
                 <div class="col s12">
-                    <span>Skupna teža izdelkov: ` + teza + ` kg</span>
+                    <span>Skupna teža izdelkov: ${teza} kg</span>
                 </div>`;
             break;
         case "razsut tovor":
@@ -265,10 +265,10 @@ function getCardIskalec(ponudba) {
                     <span>Tip: Razsut tovor</span>
                 </div>
                 <div class="col s12">
-                    <span>Volumen: ` + ponudba.volumen_tovora + ` m<sup>3</sup></span>
+                    <span>Volumen: ${ponudba.volumen_tovora} m<sup>3</sup></span>
                 </div>
                 <div class="col s12">
-                    <span>Teža: ` + ponudba.teza_tovora + ` kg</span>
+                    <span>Teža: ${ponudba.teza_tovora} kg</span>
                 </div>`;
             break;
     }
@@ -277,7 +277,7 @@ function getCardIskalec(ponudba) {
     <div class="col s12 white rounded" style="padding: 15px;">
         <div class="row">
             <div class="col s10">
-                <h4>` + ponudba.vozilo.znamka + ` ` + ponudba.vozilo.model + `</h4>
+                <h4>${ponudba.vozilo.znamka} ${ponudba.vozilo.model}</h4>
             </div>
         </div>
         <div class="row">
@@ -285,27 +285,27 @@ function getCardIskalec(ponudba) {
                 <h5>Lokacija</h5>
                 <div class="row normal-text">
                     <div class="col s12">
-                        <span>Cena na km: ` + ponudba.vozilo.cena_na_km + `€</span>
+                        <span>Cena na km: ${ponudba.vozilo.cena_na_km}€</span>
                     </div>
                     <div class="col s12">
-                        <span>Naložišče: ` + ponudba.nalozisce.ulica + ` ` + ponudba.nalozisce.stevilka + `, ` + ponudba.nalozisce.posta + ` ` + ponudba.nalozisce.kraj + `</span>
+                        <span>Naložišče: ${ponudba.nalozisce.ulica} ${ponudba.nalozisce.stevilka}, ${ponudba.nalozisce.posta} ${ponudba.nalozisce.kraj}</span>
                     </div>
                     <div class="col s12">
-                        <span>Čas naložitve: ` + datum + `</span>
+                        <span>Čas naložitve: ${datum}</span>
                     </div>
                     <div class="col s12">
-                        <span>Dostava: ` + ponudba.dostava.ulica + ` ` + ponudba.dostava.stevilka + `, ` + ponudba.dostava.posta + ` ` + ponudba.dostava.kraj + `</span>
+                        <span>Dostava: ${ponudba.dostava.ulica} ${ponudba.dostava.stevilka}, ${ponudba.dostava.posta} ${ponudba.dostava.kraj}</span>
                     </div>
                 </div>
             </div>
             <div class="col m5 s12">
                 <h5>Tovor</h5>
-                <div class="row normal-text">` + tovor + `</div>
+                <div class="row normal-text">${tovor}</div>
             </div>
         </div>
         <div class="row">
             <div class="col s12 center-align">
-                <h5>Status ponudbe: ` + status + `</h5>
+                <h5>Status ponudbe: ${status}</h5>
             </div>
         </div>
         <div class="row" data-html2canvas-ignore="true">
