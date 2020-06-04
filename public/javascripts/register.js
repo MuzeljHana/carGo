@@ -31,6 +31,8 @@ $("#i_registracija").click(function () {
                     }
                 }
             });
+    } else {
+        $("#i_pgeslo").addClass("invalid");
     }
 });
 
